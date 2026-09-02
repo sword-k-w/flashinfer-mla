@@ -73,6 +73,7 @@ def plot_timing_matrix(document: dict, output_dir: Path) -> Path:
     localized_ms = np.full_like(speedups, np.nan)
     underfilled = np.zeros_like(speedups, dtype=bool)
     active_clusters = np.zeros_like(speedups, dtype=int)
+    seqlen_q = document["configuration"]["seqlen_q"]
     for row_index, seqlen_k in enumerate(seqlen_ks):
         for column_index, batch in enumerate(batches):
             row = by_shape[(seqlen_k, batch)]
@@ -107,7 +108,7 @@ def plot_timing_matrix(document: dict, output_dir: Path) -> Path:
         fontweight="bold",
     )
     axis.set_title(
-        "decode, Sq=1, BF16, H=128, D=512+64, page=64; "
+        f"decode, Sq={seqlen_q}, BF16, H=128, D=512+64, page=64; "
         "dashed light-blue = localized first-wave active clusters < 80%",
         fontsize=10.5,
         fontweight="bold",
@@ -177,11 +178,15 @@ def plot_timing_matrix(document: dict, output_dir: Path) -> Path:
 
 def plot_ltc(document: dict, output_dir: Path) -> tuple[Path, Path]:
     comparisons = document["comparisons"]
+    # Sq=1 reports produced before multi-token support did not record this
+    # top-level field.  Keep those reports re-plottable.
+    seqlen_q = document.get("seqlen_q", comparisons[0].get("seqlen_q", 1))
     fig, axes = plt.subplots(
         1, len(comparisons), figsize=(5 * len(comparisons), 5), squeeze=False
     )
     fig.suptitle(
-        "B300 FlashInfer MLA LTC Fabric Traffic: Standard vs Localized (B=64, Sq=1)",
+        "B300 FlashInfer MLA LTC Fabric Traffic: Standard vs Localized "
+        f"(B={document['batch_size']}, Sq={seqlen_q})",
         fontsize=14,
         fontweight="bold",
     )
@@ -243,7 +248,10 @@ def plot_ltc(document: dict, output_dir: Path) -> tuple[Path, Path]:
     axis.set_xscale("log", base=2)
     axis.set_xlabel("seqlen_k")
     axis.set_ylabel("LTC-fabric request reduction (%)")
-    axis.set_title("Localized MLA fabric-traffic reduction (NCU, B=64)")
+    axis.set_title(
+        "Localized MLA fabric-traffic reduction "
+        f"(NCU, B={document['batch_size']}, Sq={seqlen_q})"
+    )
     axis.grid(True, which="both", alpha=0.25)
     reduction_path = output_dir / "ltc_fabric_reduction.png"
     save_figure(fig, reduction_path)

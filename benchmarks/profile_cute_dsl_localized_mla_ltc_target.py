@@ -37,6 +37,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--device", type=int, default=0)
     parser.add_argument("--batch", type=int, required=True)
+    parser.add_argument("--seqlen-q", type=int, choices=range(1, 5), default=1)
     parser.add_argument("--seqlen-k", type=int, required=True)
     parser.add_argument("--mode", choices=("standard", "localized"), required=True)
     parser.add_argument("--warmups", type=int, default=3)
@@ -65,6 +66,7 @@ def main() -> None:
             cache = LocalizedMLAKVCache(
                 args.batch,
                 args.seqlen_k,
+                seq_len_q=args.seqlen_q,
                 page_size=PAGE_SIZE,
                 dtype=DTYPE,
                 device=device,
@@ -94,7 +96,7 @@ def main() -> None:
 
         query = torch.empty(
             args.batch,
-            1,
+            args.seqlen_q,
             HEADS,
             LATENT_DIM + ROPE_DIM,
             dtype=DTYPE,
@@ -107,7 +109,7 @@ def main() -> None:
         )
         split_kv, workspace_size = _get_split_kv_and_workspace_size(
             args.batch,
-            1,
+            args.seqlen_q,
             HEADS,
             LATENT_DIM,
             get_num_sm(device),
@@ -119,8 +121,21 @@ def main() -> None:
             if workspace_size == 0
             else torch.empty(workspace_size, dtype=torch.int8, device=device)
         )
-        out = torch.empty(args.batch, 1, HEADS, LATENT_DIM, dtype=DTYPE, device=device)
-        lse = torch.empty(args.batch, 1, HEADS, dtype=torch.float32, device=device)
+        out = torch.empty(
+            args.batch,
+            args.seqlen_q,
+            HEADS,
+            LATENT_DIM,
+            dtype=DTYPE,
+            device=device,
+        )
+        lse = torch.empty(
+            args.batch,
+            args.seqlen_q,
+            HEADS,
+            dtype=torch.float32,
+            device=device,
+        )
         kernel = compiled_kernel(
             partition_aware=args.mode == "localized",
             workspace_size_zero=workspace_size == 0,
@@ -153,7 +168,7 @@ def main() -> None:
         metadata = {
             "mode": args.mode,
             "batch_size": args.batch,
-            "seqlen_q": 1,
+            "seqlen_q": args.seqlen_q,
             "seqlen_k": args.seqlen_k,
             "split_kv": split_kv,
             "warmup_launches": args.warmups,
@@ -162,6 +177,14 @@ def main() -> None:
             "device": properties.name,
             "owner_work_counts": (
                 None if cache is None else [cache.work_p0, cache.work_p1]
+            ),
+            "owner_tile_counts": (
+                None
+                if cache is None
+                else [
+                    cache.work_p0 * args.seqlen_q,
+                    cache.work_p1 * args.seqlen_q,
+                ]
             ),
             "owner_page_counts": (
                 None if cache is None else list(cache.owner_page_counts)

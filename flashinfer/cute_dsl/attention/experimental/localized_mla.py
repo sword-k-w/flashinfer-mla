@@ -4,8 +4,8 @@
 """B200/B300 split-granular localized KV experiment for modular MLA decode.
 
 This module intentionally supports only the fixed-layout correctness and
-performance experiment: BF16, Sq=1, H=128, L/R=512/64, fixed sequence length,
-identity-contiguous pages, and two non-empty split-owner ranges.
+performance experiment: BF16, Sq=1..4, H=128, L/R=512/64, fixed sequence
+length, identity-contiguous pages, and two non-empty split-owner ranges.
 """
 
 from __future__ import annotations
@@ -133,19 +133,30 @@ def _recover_cluster_metadata(
 
 
 def _choose_work_cut(
-    total_work: int, partition_clusters: tuple[int, int] | list[int]
+    total_work: int,
+    partition_clusters: tuple[int, int] | list[int],
+    *,
+    tiles_per_work: int = 1,
 ) -> int:
-    """Choose a proportional prefix/suffix cut at split-work granularity."""
+    """Choose a proportional prefix/suffix cut at split-work granularity.
+
+    A split work unit owns all of its query tiles so that its KV interval has
+    exactly one physical owner.  ``tiles_per_work`` is therefore used only to
+    keep both owners within one persistent wave when that is possible.
+    """
     if total_work < 2:
         raise ValueError("split-granular placement requires at least two work units")
+    if tiles_per_work < 1:
+        raise ValueError("tiles_per_work must be positive")
     p0_clusters, p1_clusters = partition_clusters
     total_clusters = p0_clusters + p1_clusters
     target = round(total_work * p0_clusters / total_clusters)
-    if total_work <= total_clusters:
+    if total_work * tiles_per_work <= total_clusters:
         # If possible, keep both owners within one persistent wave.
-        lower = max(1, total_work - p1_clusters)
-        upper = min(total_work - 1, p0_clusters)
-        return min(upper, max(lower, target))
+        lower = max(1, total_work - p1_clusters // tiles_per_work)
+        upper = min(total_work - 1, p0_clusters // tiles_per_work)
+        if lower <= upper:
+            return min(upper, max(lower, target))
     return min(total_work - 1, max(1, target))
 
 
@@ -178,6 +189,7 @@ class LocalizedMLAKVCache:
         batch_size: int,
         seq_len: int,
         *,
+        seq_len_q: int = 1,
         page_size: int = 64,
         dtype: torch.dtype = torch.bfloat16,
         device: torch.device | str = "cuda",
@@ -187,6 +199,8 @@ class LocalizedMLAKVCache:
             raise ValueError("localized MLA requires a CUDA device")
         if batch_size < 2:
             raise ValueError("localized MLA requires at least two batches")
+        if not 1 <= seq_len_q <= 4:
+            raise ValueError("localized MLA requires 1 <= seq_len_q <= 4")
         if seq_len <= 0 or seq_len % page_size:
             raise ValueError("seq_len must be positive and page-aligned")
         if page_size != 64:
@@ -200,6 +214,7 @@ class LocalizedMLAKVCache:
         self.device = torch.device("cuda", self.device_id)
         self.batch_size = batch_size
         self.seq_len = seq_len
+        self.seq_len_q = seq_len_q
         self.page_size = page_size
         self.dtype = dtype
         self.pages_per_batch = seq_len // page_size
@@ -222,13 +237,17 @@ class LocalizedMLAKVCache:
 
         self.split_kv, _ = _get_split_kv_and_workspace_size(
             batch_size,
-            1,
+            seq_len_q,
             _HEADS,
             _LATENT_DIM,
             expected_sm_count,
         )
         self.total_work = batch_size * self.split_kv
-        self.work_p0 = _choose_work_cut(self.total_work, cluster_count_host)
+        self.work_p0 = _choose_work_cut(
+            self.total_work,
+            cluster_count_host,
+            tiles_per_work=seq_len_q,
+        )
         total_pages = batch_size * self.pages_per_batch
         while True:
             p0_pages = _prefix_page_count(
@@ -356,13 +375,14 @@ def localized_mla_decode(
         raise ValueError("query must be BF16 on the localized cache device")
     if tuple(query.shape) != (
         cache.batch_size,
-        1,
+        cache.seq_len_q,
         _HEADS,
         _LATENT_DIM + _ROPE_DIM,
     ):
         raise ValueError(
-            "localized MLA fixes query shape to "
-            f"({cache.batch_size}, 1, {_HEADS}, {_LATENT_DIM + _ROPE_DIM})"
+            "localized MLA requires query shape "
+            f"({cache.batch_size}, {cache.seq_len_q}, {_HEADS}, "
+            f"{_LATENT_DIM + _ROPE_DIM})"
         )
     if (
         seq_lens.dtype != torch.int32
@@ -374,7 +394,7 @@ def localized_mla_decode(
     workspace_buffer = _as_cute_dsl_workspace_i8(workspace_buffer)
     split_kv, workspace_size = _get_split_kv_and_workspace_size(
         cache.batch_size,
-        1,
+        cache.seq_len_q,
         _HEADS,
         _LATENT_DIM,
         get_num_sm(query.device),
@@ -390,12 +410,14 @@ def localized_mla_decode(
     workspace = None if workspace_size == 0 else workspace_buffer[:workspace_size]
     if out is None:
         out = torch.empty(
-            (cache.batch_size, 1, _HEADS, _LATENT_DIM),
+            (cache.batch_size, cache.seq_len_q, _HEADS, _LATENT_DIM),
             dtype=torch.bfloat16,
             device=query.device,
         )
     lse = torch.empty(
-        (cache.batch_size, 1, _HEADS), dtype=torch.float32, device=query.device
+        (cache.batch_size, cache.seq_len_q, _HEADS),
+        dtype=torch.float32,
+        device=query.device,
     )
 
     _check_can_implement(
@@ -403,7 +425,7 @@ def localized_mla_decode(
         torch_out_dtype=torch.bfloat16,
         page_size=cache.page_size,
         num_heads=_HEADS,
-        seq_len_q=1,
+        seq_len_q=cache.seq_len_q,
         kv_lora_rank=_LATENT_DIM,
         qk_rope_head_dim=_ROPE_DIM,
         is_persistent=True,

@@ -18,12 +18,6 @@ from pathlib import Path
 
 
 SCRIPT_DIR = Path(__file__).resolve().parent
-DEFAULT_REPORT_DIR = (
-    SCRIPT_DIR.parent
-    / "reports"
-    / "localized_mla_capacity_matrix"
-    / "iter_000_evaluation"
-)
 DEFAULT_SEQLEN_KS = (1024, 65536, 524288, 1754432)
 METRIC = "lts__t_requests_srcunit_ltcfabric.sum"
 
@@ -32,12 +26,13 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--device", type=int, default=0)
     parser.add_argument("--batch", type=int, default=64)
+    parser.add_argument("--seqlen-q", type=int, choices=range(1, 5), default=1)
     parser.add_argument(
         "--seqlen-ks", type=int, nargs="+", default=list(DEFAULT_SEQLEN_KS)
     )
     parser.add_argument("--python", type=Path, default=Path(sys.executable))
     parser.add_argument("--ncu", type=Path)
-    parser.add_argument("--report-dir", type=Path, default=DEFAULT_REPORT_DIR)
+    parser.add_argument("--report-dir", type=Path)
     parser.add_argument("--resume", action="store_true")
     args = parser.parse_args()
     if args.ncu is None:
@@ -48,6 +43,15 @@ def parse_args() -> argparse.Namespace:
                 parser.error("ncu was not found; pass --ncu")
             resolved = str(candidate)
         args.ncu = Path(resolved)
+    if args.report_dir is None:
+        report_name = (
+            "localized_mla_capacity_matrix"
+            if args.seqlen_q == 1
+            else f"localized_mla_sq{args.seqlen_q}_capacity_matrix"
+        )
+        args.report_dir = (
+            SCRIPT_DIR.parent / "reports" / report_name / "iter_000_evaluation"
+        )
     return args
 
 
@@ -135,6 +139,8 @@ def profile_one(
         mode,
         "--batch",
         str(args.batch),
+        "--seqlen-q",
+        str(args.seqlen_q),
         "--seqlen-k",
         str(seqlen_k),
         "--device",
@@ -174,7 +180,7 @@ def profile_one(
     return {
         "mode": mode,
         "batch_size": args.batch,
-        "seqlen_q": 1,
+        "seqlen_q": args.seqlen_q,
         "seqlen_k": seqlen_k,
         "metric": METRIC,
         "metric_value": metric_value,
@@ -205,6 +211,7 @@ def main() -> None:
         "metric": METRIC,
         "metric_description": "# of LTS requests from LTC Fabric",
         "batch_size": args.batch,
+        "seqlen_q": args.seqlen_q,
         "seqlen_ks": args.seqlen_ks,
         "isolation": "one fresh process and one profiled launch per mode and shape",
         "results": [],
@@ -215,6 +222,9 @@ def main() -> None:
             raise ValueError("resume file batch differs from command line")
         if document["seqlen_ks"] != args.seqlen_ks:
             raise ValueError("resume file seqlen axis differs from command line")
+        if document.get("seqlen_q", 1) != args.seqlen_q:
+            raise ValueError("resume file seqlen_q differs from command line")
+        document["seqlen_q"] = args.seqlen_q
         document["status"] = "running"
         document.pop("error", None)
         document.pop("finished_at", None)
@@ -246,6 +256,7 @@ def main() -> None:
         comparisons.append(
             {
                 "batch_size": args.batch,
+                "seqlen_q": args.seqlen_q,
                 "seqlen_k": seqlen_k,
                 "standard_requests": standard,
                 "localized_requests": localized,

@@ -74,6 +74,7 @@ def compiled_kernel(*, partition_aware: bool, workspace_size_zero: bool):
 @dataclass(frozen=True)
 class SchedulerGeometry:
     split_kv: int
+    seq_len_q: int
     owner_work_counts: tuple[int, int]
     resident_partition_clusters: tuple[int, int]
     standard_active_clusters: int
@@ -82,6 +83,10 @@ class SchedulerGeometry:
     @property
     def total_resident_clusters(self) -> int:
         return sum(self.resident_partition_clusters)
+
+    @property
+    def owner_tile_counts(self) -> tuple[int, int]:
+        return tuple(count * self.seq_len_q for count in self.owner_work_counts)
 
     @property
     def localized_active_fraction(self) -> float:
@@ -97,6 +102,7 @@ class PreparedMLACase:
         seqlen_k: int,
         *,
         device: torch.device,
+        seq_len_q: int = 1,
         initialize_for_correctness: bool = False,
         seed: int = 42,
     ) -> None:
@@ -104,14 +110,17 @@ class PreparedMLACase:
             raise ValueError("localized MLA benchmark requires B >= 2")
         if seqlen_k <= 0 or seqlen_k % PAGE_SIZE:
             raise ValueError("seqlen_k must be a positive multiple of page size")
+        if not 1 <= seq_len_q <= 4:
+            raise ValueError("localized MLA benchmark requires 1 <= seq_len_q <= 4")
         self.batch_size = batch_size
         self.seqlen_k = seqlen_k
+        self.seq_len_q = seq_len_q
         self.device = device
         self._closed = False
         self.softmax_scale = deepseek_v3_effective_softmax_scale()
         self.split_kv, workspace_size = _get_split_kv_and_workspace_size(
             batch_size,
-            1,
+            seq_len_q,
             HEADS,
             LATENT_DIM,
             get_num_sm(device),
@@ -123,6 +132,7 @@ class PreparedMLACase:
         self.localized_cache = LocalizedMLAKVCache(
             batch_size,
             seqlen_k,
+            seq_len_q=seq_len_q,
             page_size=PAGE_SIZE,
             dtype=DTYPE,
             device=device,
@@ -143,7 +153,7 @@ class PreparedMLACase:
             self.localized_cache.scatter_from(self.standard_kv)
             self.query = torch.randn(
                 batch_size,
-                1,
+                seq_len_q,
                 HEADS,
                 LATENT_DIM + ROPE_DIM,
                 dtype=DTYPE,
@@ -161,7 +171,7 @@ class PreparedMLACase:
             )
             self.query = torch.empty(
                 batch_size,
-                1,
+                seq_len_q,
                 HEADS,
                 LATENT_DIM + ROPE_DIM,
                 dtype=DTYPE,
@@ -179,8 +189,8 @@ class PreparedMLACase:
             if workspace_size == 0
             else torch.empty(workspace_size, dtype=torch.int8, device=device)
         )
-        output_shape = (batch_size, 1, HEADS, LATENT_DIM)
-        lse_shape = (batch_size, 1, HEADS)
+        output_shape = (batch_size, seq_len_q, HEADS, LATENT_DIM)
+        lse_shape = (batch_size, seq_len_q, HEADS)
         self.standard_out = torch.empty(output_shape, dtype=DTYPE, device=device)
         self.localized_out = torch.empty_like(self.standard_out)
         self.standard_lse = torch.empty(lse_shape, dtype=torch.float32, device=device)
@@ -259,15 +269,18 @@ class PreparedMLACase:
         )
         owner_work = (cache.work_p0, cache.work_p1)
         total_clusters = sum(partition_clusters)
-        standard_active = min(self.batch_size * self.split_kv, total_clusters)
+        standard_active = min(
+            self.batch_size * self.split_kv * self.seq_len_q, total_clusters
+        )
         localized_active = sum(
-            min(work_count, cluster_count)
+            min(work_count * self.seq_len_q, cluster_count)
             for work_count, cluster_count in zip(
                 owner_work, partition_clusters, strict=True
             )
         )
         return SchedulerGeometry(
             split_kv=self.split_kv,
+            seq_len_q=self.seq_len_q,
             owner_work_counts=owner_work,
             resident_partition_clusters=partition_clusters,
             standard_active_clusters=standard_active,

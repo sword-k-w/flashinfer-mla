@@ -29,7 +29,10 @@ def _skip_if_unsupported() -> None:
 
 @pytest.mark.parametrize("batch_size", [2, 3, 4, 8, 16, 32, 64])
 @pytest.mark.parametrize("seq_len", [128, 512])
-def test_localized_mla_matches_modular(batch_size: int, seq_len: int) -> None:
+@pytest.mark.parametrize("seq_len_q", [1, 2, 3, 4])
+def test_localized_mla_matches_modular(
+    batch_size: int, seq_len: int, seq_len_q: int
+) -> None:
     _skip_if_unsupported()
     torch.manual_seed(42)
 
@@ -43,7 +46,7 @@ def test_localized_mla_matches_modular(batch_size: int, seq_len: int) -> None:
 
     query = torch.randn(
         batch_size,
-        1,
+        seq_len_q,
         num_heads,
         latent_dim + rope_dim,
         dtype=torch.bfloat16,
@@ -78,7 +81,11 @@ def test_localized_mla_matches_modular(batch_size: int, seq_len: int) -> None:
     )
 
     with LocalizedMLAKVCache(
-        batch_size, seq_len, page_size=page_size, device=device
+        batch_size,
+        seq_len,
+        seq_len_q=seq_len_q,
+        page_size=page_size,
+        device=device,
     ) as localized_cache:
         localized_cache.scatter_from(kv_cache)
         p0_pages, p1_pages = localized_cache.owner_page_counts

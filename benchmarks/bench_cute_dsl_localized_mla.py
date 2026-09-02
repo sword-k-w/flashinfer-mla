@@ -31,13 +31,6 @@ from localized_mla_benchmark import (
 
 
 SCRIPT_DIR = Path(__file__).resolve().parent
-DEFAULT_OUTPUT = (
-    SCRIPT_DIR.parent
-    / "reports"
-    / "localized_mla_capacity_matrix"
-    / "iter_000_evaluation"
-    / "post_flops.json"
-)
 TIMING_POLICY = "paired-cold-l2-v2"
 BALANCED_BLOCK_ORDER = (
     ("standard", "localized"),
@@ -50,6 +43,7 @@ BALANCED_BLOCK_ORDER = (
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--device", type=int, default=0)
+    parser.add_argument("--seqlen-q", type=int, choices=range(1, 5), default=1)
     parser.add_argument(
         "--batch-sizes", type=int, nargs="+", default=list(DEFAULT_BATCH_SIZES)
     )
@@ -61,7 +55,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--timing-repeat-ms", type=int, default=100)
     parser.add_argument("--timing-blocks", type=int, default=4)
     parser.add_argument("--timing-min-samples", type=int, default=20)
-    parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
+    parser.add_argument("--output", type=Path)
     parser.add_argument("--resume", action="store_true")
     parser.add_argument("--plan-only", action="store_true")
     parser.add_argument("--smoke", action="store_true")
@@ -83,6 +77,19 @@ def parse_args() -> argparse.Namespace:
         parser.error("seqlen_k values must not contain duplicates")
     if args.timing_blocks <= 0 or args.timing_blocks % 4:
         parser.error("--timing-blocks must be a positive multiple of four")
+    if args.output is None:
+        report_name = (
+            "localized_mla_capacity_matrix"
+            if args.seqlen_q == 1
+            else f"localized_mla_sq{args.seqlen_q}_capacity_matrix"
+        )
+        args.output = (
+            SCRIPT_DIR.parent
+            / "reports"
+            / report_name
+            / "iter_000_evaluation"
+            / "post_flops.json"
+        )
     return args
 
 
@@ -203,7 +210,7 @@ def make_document(args: argparse.Namespace, device: torch.device) -> dict:
         "seqlen_ks": args.seqlen_ks,
         "configuration": {
             "workload": "decode",
-            "seqlen_q": 1,
+            "seqlen_q": args.seqlen_q,
             "num_heads": HEADS,
             "latent_dim": LATENT_DIM,
             "rope_dim": ROPE_DIM,
@@ -248,6 +255,8 @@ def load_or_make_document(args: argparse.Namespace, device: torch.device) -> dic
             raise ValueError("resume file batch axis differs from command line")
         if document["seqlen_ks"] != args.seqlen_ks:
             raise ValueError("resume file seqlen axis differs from command line")
+        if document["configuration"]["seqlen_q"] != args.seqlen_q:
+            raise ValueError("resume file seqlen_q differs from command line")
         document["status"] = "running"
         document.pop("error", None)
         document.pop("finished_at", None)
@@ -263,7 +272,7 @@ def run_case(
 ) -> dict:
     free_before, total_bytes = torch.cuda.mem_get_info(device)
     started = time.monotonic()
-    case = PreparedMLACase(batch_size, seqlen_k, device=device)
+    case = PreparedMLACase(batch_size, seqlen_k, device=device, seq_len_q=args.seqlen_q)
     try:
         geometry = case.scheduler_geometry()
         mapped_bytes = tuple(case.localized_cache.mapped_bytes)
@@ -272,7 +281,7 @@ def run_case(
         torch.cuda.synchronize(device)
         return {
             "batch_size": batch_size,
-            "seqlen_q": 1,
+            "seqlen_q": args.seqlen_q,
             "seqlen_k": seqlen_k,
             "kv_bytes_per_layout": kv_bytes(batch_size, seqlen_k),
             "kv_gib_per_layout": kv_bytes(batch_size, seqlen_k) / 2**30,
@@ -280,6 +289,7 @@ def run_case(
             "localized_mapped_gib": sum(mapped_bytes) / 2**30,
             "split_kv": geometry.split_kv,
             "owner_work_counts": list(geometry.owner_work_counts),
+            "owner_tile_counts": list(geometry.owner_tile_counts),
             "owner_page_counts": list(case.localized_cache.owner_page_counts),
             "resident_partition_clusters": list(geometry.resident_partition_clusters),
             "standard_theoretical_active_clusters": geometry.standard_active_clusters,
@@ -324,7 +334,10 @@ def main() -> None:
             for batch_size in args.batch_sizes:
                 if (batch_size, seqlen_k) in completed:
                     continue
-                print(f"START B={batch_size} Sk={seqlen_k:,}", flush=True)
+                print(
+                    f"START B={batch_size} Sq={args.seqlen_q} Sk={seqlen_k:,}",
+                    flush=True,
+                )
                 row = run_case(batch_size, seqlen_k, device, args)
                 document["results"].append(row)
                 write_json_atomic(args.output, document)

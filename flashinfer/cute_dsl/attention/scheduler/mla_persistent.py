@@ -98,6 +98,119 @@ class MLAStaticTileSchedulerParams:
         )
 
 
+class MLAPartitionTileSchedulerParams:
+    """Device-local parameters for the experimental split-owner scheduler.
+
+    ``partition`` and the two cluster-rank fields are derived from ``%smid``
+    once at kernel entry.  Keeping them as scalars here lets every warp role
+    instantiate an identical scheduler without carrying topology tensors
+    through the scheduler object.
+    """
+
+    def __init__(
+        self,
+        problem_shape_b: cute.Int32,
+        problem_shape_s: cute.Int32,
+        cluster_shape_mnk: cute.Shape,
+        split_kv: cutlass.Int32,
+        work_p0: cutlass.Int32,
+        partition: cutlass.Int32,
+        partition_cluster_rank: cutlass.Int32,
+        partition_cluster_count: cutlass.Int32,
+        *,
+        problem_shape_s_fdd: cute.FastDivmodDivisor = None,
+        split_kv_fdd: cute.FastDivmodDivisor = None,
+        loc=None,
+        ip=None,
+    ):
+        self.is_persistent = True
+        self.problem_shape_b = problem_shape_b
+        self.problem_shape_s = problem_shape_s
+        self.cluster_shape_mnk = cluster_shape_mnk
+        self.split_kv = split_kv
+        self.work_p0 = work_p0
+        self.partition = partition
+        self.partition_cluster_rank = partition_cluster_rank
+        self.partition_cluster_count = partition_cluster_count
+        self.problem_shape_s_fdd = problem_shape_s_fdd
+        self.split_kv_fdd = split_kv_fdd
+        if cutlass.const_expr(problem_shape_s_fdd is None):
+            self.problem_shape_s_fdd = cute.fast_divmod_create_divisor(
+                problem_shape_s, loc=loc, ip=ip
+            )
+        if cutlass.const_expr(split_kv_fdd is None):
+            self.split_kv_fdd = cute.fast_divmod_create_divisor(
+                split_kv, loc=loc, ip=ip
+            )
+        self.loc = loc
+        self.ip = ip
+
+    def __extract_mlir_values__(self):
+        values = cutlass.extract_mlir_values(self.problem_shape_b)
+        values += cutlass.extract_mlir_values(self.problem_shape_s)
+        values += cutlass.extract_mlir_values(self.split_kv)
+        values += cutlass.extract_mlir_values(self.work_p0)
+        values += cutlass.extract_mlir_values(self.partition)
+        values += cutlass.extract_mlir_values(self.partition_cluster_rank)
+        values += cutlass.extract_mlir_values(self.partition_cluster_count)
+        values += cutlass.extract_mlir_values(self.problem_shape_s_fdd)
+        values += cutlass.extract_mlir_values(self.split_kv_fdd)
+        return values
+
+    def __new_from_mlir_values__(self, values):
+        problem_shape_b = cutlass.new_from_mlir_values(
+            self.problem_shape_b, (values[0],)
+        )
+        problem_shape_s = cutlass.new_from_mlir_values(
+            self.problem_shape_s, (values[1],)
+        )
+        split_kv = cutlass.new_from_mlir_values(self.split_kv, (values[2],))
+        work_p0 = cutlass.new_from_mlir_values(self.work_p0, (values[3],))
+        partition = cutlass.new_from_mlir_values(self.partition, (values[4],))
+        partition_cluster_rank = cutlass.new_from_mlir_values(
+            self.partition_cluster_rank, (values[5],)
+        )
+        partition_cluster_count = cutlass.new_from_mlir_values(
+            self.partition_cluster_count, (values[6],)
+        )
+        problem_shape_s_fdd = cutlass.new_from_mlir_values(
+            self.problem_shape_s_fdd, (values[7],)
+        )
+        split_kv_fdd = cutlass.new_from_mlir_values(self.split_kv_fdd, (values[8],))
+        return MLAPartitionTileSchedulerParams(
+            problem_shape_b,
+            problem_shape_s,
+            self.cluster_shape_mnk,
+            split_kv,
+            work_p0,
+            partition,
+            partition_cluster_rank,
+            partition_cluster_count,
+            problem_shape_s_fdd=problem_shape_s_fdd,
+            split_kv_fdd=split_kv_fdd,
+            loc=self.loc,
+        )
+
+
+def create_mla_partition_tile_scheduler_params(
+    base: MLAStaticTileSchedulerParams,
+    work_p0: cutlass.Int32,
+    partition: cutlass.Int32,
+    partition_cluster_rank: cutlass.Int32,
+    partition_cluster_count: cutlass.Int32,
+) -> MLAPartitionTileSchedulerParams:
+    return MLAPartitionTileSchedulerParams(
+        base.problem_shape_b,
+        base.problem_shape_s,
+        base.cluster_shape_mnk,
+        base.split_kv,
+        work_p0,
+        partition,
+        partition_cluster_rank,
+        partition_cluster_count,
+    )
+
+
 def create_mla_static_tile_scheduler_params(
     is_persistent: bool,
     problem_shape_b: cute.Int32,
@@ -249,11 +362,78 @@ class MLAStaticTileScheduler:
         )
 
 
+class MLAPartitionTileScheduler:
+    """Persistent scheduler whose physical clusters stay with one split owner.
+
+    ``(batch, split_kv)`` work units are flattened in batch-major order. P0
+    owns the prefix ``[0, work_p0)`` and P1 owns the remaining suffix. Query
+    tiles stay inside their owning work unit. Each physical cluster walks its
+    owner's range with a partition-local static stride, with no queue or
+    atomics.
+    """
+
+    def __init__(
+        self,
+        params: MLAPartitionTileSchedulerParams,
+        grid_shape: cute.Shape,
+        *,
+        loc=None,
+        ip=None,
+    ):
+        self.params = params
+        self.grid_shape = grid_shape
+        self.current_work_cluster_idx = params.partition_cluster_rank
+        total_work_units = params.problem_shape_b * params.split_kv
+        self.local_work_unit_count = params.work_p0 + params.partition * (
+            total_work_units - 2 * params.work_p0
+        )
+        self.num_blocks = self.local_work_unit_count * params.problem_shape_s
+        self.loc = loc
+        self.ip = ip
+
+    def get_current_work(self, *, loc=None, ip=None) -> WorkTileInfo:
+        is_valid = self.current_work_cluster_idx < self.num_blocks
+        local_work_unit, s_idx = divmod(
+            self.current_work_cluster_idx, self.params.problem_shape_s_fdd
+        )
+        global_work_unit = local_work_unit + self.params.partition * self.params.work_p0
+        b_idx, split_kv_idx = divmod(global_work_unit, self.params.split_kv_fdd)
+        cluster_idx = cute.arch.block_idx_in_cluster()
+        blk_coord = (cluster_idx, s_idx, b_idx, split_kv_idx)
+        return WorkTileInfo(blk_coord, is_valid)
+
+    def initial_work_tile_info(self, *, loc=None, ip=None):
+        return self.get_current_work(loc=loc, ip=ip)
+
+    def advance_to_next_work(self, *, advance_count=1, loc=None, ip=None):
+        self.current_work_cluster_idx += (
+            advance_count * self.params.partition_cluster_count
+        )
+
+    def __extract_mlir_values__(self):
+        values = cutlass.extract_mlir_values(self.params)
+        values += cutlass.extract_mlir_values(self.current_work_cluster_idx)
+        values += cutlass.extract_mlir_values(self.grid_shape)
+        return values
+
+    def __new_from_mlir_values__(self, values):
+        new_params = cutlass.new_from_mlir_values(self.params, values[0:9])
+        new_current_work_cluster_idx = cutlass.new_from_mlir_values(
+            self.current_work_cluster_idx, [values[9]]
+        )
+        new_grid_shape = cutlass.new_from_mlir_values(self.grid_shape, values[10:])
+        scheduler = MLAPartitionTileScheduler(new_params, new_grid_shape)
+        scheduler.current_work_cluster_idx = new_current_work_cluster_idx
+        return scheduler
+
+
 def create_mla_static_tile_scheduler(
-    params: MLAStaticTileSchedulerParams,
+    params: MLAStaticTileSchedulerParams | MLAPartitionTileSchedulerParams,
     blk_coord: cute.Coord,
     grid_shape: cute.Shape,
-) -> MLAStaticTileScheduler:
+) -> MLAStaticTileScheduler | MLAPartitionTileScheduler:
+    if cutlass.const_expr(isinstance(params, MLAPartitionTileSchedulerParams)):
+        return MLAPartitionTileScheduler(params, grid_shape)
     return MLAStaticTileScheduler(params, blk_coord[0], blk_coord, grid_shape)
 
 

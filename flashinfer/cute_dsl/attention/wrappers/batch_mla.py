@@ -116,6 +116,7 @@ def _make_mla_fake_tensors(
     cutlass_out_dtype,
     is_workspace_size_zero: bool,
     is_var_split_kv: bool,
+    partition_aware: bool = False,
 ):
     """Create fake tensors for MLA kernel compilation (shared by all paths)."""
     sym_heads = cute.sym_int()
@@ -124,6 +125,7 @@ def _make_mla_fake_tensors(
     sym_rope = cute.sym_int(divisibility=16)
     sym_batch = cute.sym_int()
     sym_kv_batch = cute.sym_int()
+    sym_kv_batch_p1 = cute.sym_int()
     sym_seq_kv = cute.sym_int()
     sym_page_count = cute.sym_int()
     sym_workspace_size = cute.sym_int()
@@ -152,6 +154,34 @@ def _make_mla_fake_tensors(
         stride=(cute.sym_int(), cute.sym_int(), 1),
         assumed_align=16,
     )
+    c_latent_p1_fake = None
+    c_rope_p1_fake = None
+    sm_partition_map_fake = None
+    sm_cluster_rank_fake = None
+    partition_cluster_count_fake = None
+    if partition_aware:
+        c_latent_p1_fake = cute.runtime.make_fake_tensor(
+            cutlass_dtype,
+            (sym_kv_batch_p1, sym_seq_kv, sym_latent),
+            stride=(cute.sym_int(), cute.sym_int(), 1),
+            assumed_align=16,
+        )
+        c_rope_p1_fake = cute.runtime.make_fake_tensor(
+            cutlass_dtype,
+            (sym_kv_batch_p1, sym_seq_kv, sym_rope),
+            stride=(cute.sym_int(), cute.sym_int(), 1),
+            assumed_align=16,
+        )
+        sym_sm_count = cute.sym_int()
+        sm_partition_map_fake = cute.runtime.make_fake_compact_tensor(
+            cutlass.Int32, (sym_sm_count,), assumed_align=16
+        )
+        sm_cluster_rank_fake = cute.runtime.make_fake_compact_tensor(
+            cutlass.Int32, (sym_sm_count,), assumed_align=16
+        )
+        partition_cluster_count_fake = cute.runtime.make_fake_compact_tensor(
+            cutlass.Int32, (2,), assumed_align=8
+        )
     page_table_fake = cute.runtime.make_fake_compact_tensor(
         cutlass.Int32,
         (sym_batch, sym_page_count),
@@ -197,12 +227,17 @@ def _make_mla_fake_tensors(
         q_rope_fake,
         c_latent_fake,
         c_rope_fake,
+        c_latent_p1_fake,
+        c_rope_p1_fake,
         page_table_fake,
         o_fake,
         lse_fake,
         workspace_fake,
         cache_seqs_fake,
         block_split_kvs_fake,
+        sm_partition_map_fake,
+        sm_cluster_rank_fake,
+        partition_cluster_count_fake,
     )
 
 
@@ -255,6 +290,7 @@ def _compile_mla_kernel(
     enable_pdl: bool = False,
     variant: Optional[AttentionVariant] = None,
     params_shape: Optional[tuple] = None,
+    partition_aware: bool = False,
 ) -> Callable:
     """Compile and cache an MLA decode kernel (standard or variant).
 
@@ -297,7 +333,9 @@ def _compile_mla_kernel(
     kernel_obj = (
         BlackwellMultiLatentAttentionForwardFP8(config, fusion=fusion)
         if is_fp8
-        else BlackwellMultiLatentAttentionForward(config, fusion=fusion)
+        else BlackwellMultiLatentAttentionForward(
+            config, fusion=fusion, partition_aware=partition_aware
+        )
     )
 
     fakes = _make_mla_fake_tensors(
@@ -305,18 +343,24 @@ def _compile_mla_kernel(
         cutlass_out_dtype,
         is_workspace_size_zero,
         is_var_split_kv,
+        partition_aware,
     )
     (
         q_latent_fake,
         q_rope_fake,
         c_latent_fake,
         c_rope_fake,
+        c_latent_p1_fake,
+        c_rope_p1_fake,
         page_table_fake,
         o_fake,
         lse_fake,
         workspace_fake,
         cache_seqs_fake,
         block_split_kvs_fake,
+        sm_partition_map_fake,
+        sm_cluster_rank_fake,
+        partition_cluster_count_fake,
     ) = fakes
 
     params_fake = None
@@ -338,6 +382,8 @@ def _compile_mla_kernel(
         q_rope_fake,
         c_latent_fake,
         c_rope_fake,
+        c_latent_p1_fake,
+        c_rope_p1_fake,
         page_table_fake,
         o_fake,
         lse_fake,
@@ -345,6 +391,10 @@ def _compile_mla_kernel(
         Int32(1),  # split_kv placeholder
         cache_seqs_fake,
         block_split_kvs_fake,
+        sm_partition_map_fake,
+        sm_cluster_rank_fake,
+        partition_cluster_count_fake,
+        Int32(1),  # work_p0 placeholder
         Float32(1.0),  # softmax_scale placeholder
         Float32(1.0),  # output_scale placeholder
         params_fake,
@@ -664,6 +714,8 @@ class BatchMLADecodeCuteDSLWrapper:
             q_rope_k,
             c_latent_k,
             c_rope_k,
+            None,
+            None,
             page_table_k,
             o_k,
             lse_k,
@@ -671,6 +723,10 @@ class BatchMLADecodeCuteDSLWrapper:
             Int32(split_kv),
             cache_seqs,
             block_split_kvs,
+            None,
+            None,
+            None,
+            Int32(0),
             Float32(softmax_scale),
             Float32(output_scale),
             self._params_torch if self._has_params else None,
@@ -938,6 +994,8 @@ def cute_dsl_mla_decode(
         q_rope_k,
         c_latent_k,
         c_rope_k,
+        None,
+        None,
         page_table_k,
         o_k,
         lse_k,
@@ -945,6 +1003,10 @@ def cute_dsl_mla_decode(
         Int32(split_kv),
         cache_seqs,
         block_split_kvs,
+        None,
+        None,
+        None,
+        Int32(0),
         Float32(softmax_scale),
         Float32(output_scale),
         params_torch,  # variant params tensor (None when no variant)

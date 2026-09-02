@@ -1,0 +1,5 @@
+==PROF== Connected to process 101288 (/usr/bin/python3.12)
+TARGET_METADATA {"batch_size": 64, "device": "NVIDIA B300 SXM6 AC", "localized_mapped_bytes": [2491416576, 2340421632], "mode": "localized", "owner_page_counts": [33792, 31744], "owner_work_counts": [33, 31], "profiled_launches": 1, "resident_partition_clusters": [38, 36], "seqlen_k": 65536, "seqlen_q": 1, "split_kv": 1, "total_sm_count": 148, "warmup_launches": 3}
+==PROF== Profiling "kernel_cutlass_split_kv_kerne..." - 0 (1/1): 0%....50%....100% - 1 pass
+==PROF== Disconnected from process 101288
+==PROF== Report: /workspace/flashinfer-mla/reports/localized_mla_capacity_matrix/iter_000_evaluation/ncu_ltc/b64_sk65536/localized.ncu-rep

@@ -18,6 +18,8 @@ import cutlass.cute.nvgpu.cpasync as cpasync
 import cutlass.utils as utils
 import cutlass.pipeline as pipeline
 from cutlass.pipeline import pipeline_init_arrive, pipeline_init_wait
+from cutlass.cutlass_dsl import T
+from cutlass._mlir.dialects import llvm
 
 from .mla_config import MLAConfig
 from .config import AttentionFusion
@@ -34,11 +36,28 @@ from .scheduler.mla_persistent import (
     MAX_SPLITS,
     MLAStaticTileScheduler,
     MLAStaticTileSchedulerParams,
+    create_mla_partition_tile_scheduler_params,
     create_mla_static_tile_scheduler_params,
     mla_get_split_kv,
     mla_get_split_kv_simplified,
     mla_get_workspace_size,
 )
+
+
+@cute.jit
+def _smid():
+    return cutlass.Int32(
+        llvm.inline_asm(
+            T.i32(),
+            [],
+            "mov.u32 $0, %smid;",
+            "=r",
+            has_side_effects=False,
+            is_align_stack=False,
+            asm_dialect=llvm.AsmDialect.AD_ATT,
+        )
+    )
+
 
 import warnings
 
@@ -69,10 +88,12 @@ class BlackwellMultiLatentAttentionForward:
         config: MLAConfig,
         fusion: AttentionFusion | None = None,
         schedule: MLAWarpSchedule | None = None,
+        partition_aware: bool = False,
     ):
         self.config = config
         self.fusion = fusion if fusion is not None else AttentionFusion()
         self.schedule = schedule if schedule is not None else MLA_DECODE_SCHEDULE
+        self.partition_aware = partition_aware
         self.mainloop = make_mla_mainloop_spec(config, self.schedule)
         (
             self.tmem_ptr_sync_bar,
@@ -88,6 +109,8 @@ class BlackwellMultiLatentAttentionForward:
         q_rope: cute.Tensor,
         c_latent: cute.Tensor,
         c_rope: cute.Tensor,
+        c_latent_p1: Optional[cute.Tensor],
+        c_rope_p1: Optional[cute.Tensor],
         page_table: cute.Tensor,
         o: cute.Tensor,
         lse: cute.Tensor,
@@ -95,6 +118,10 @@ class BlackwellMultiLatentAttentionForward:
         split_kv: cutlass.Int32,
         cache_seqs: Optional[cute.Tensor],
         block_split_kvs: Optional[cute.Tensor],
+        sm_partition_map: Optional[cute.Tensor],
+        sm_cluster_rank: Optional[cute.Tensor],
+        partition_cluster_count: Optional[cute.Tensor],
+        work_p0: cutlass.Int32,
         softmax_scale: cutlass.Float32,
         output_scale: cutlass.Float32,
         params_in: Optional[cute.Tensor],
@@ -139,6 +166,9 @@ class BlackwellMultiLatentAttentionForward:
 
         c_latent = _reinterpret_3d_kv(c_latent)
         c_rope = _reinterpret_3d_kv(c_rope)
+        if cutlass.const_expr(self.partition_aware):
+            c_latent_p1 = _reinterpret_3d_kv(c_latent_p1)
+            c_rope_p1 = _reinterpret_3d_kv(c_rope_p1)
 
         # Reinterpret contiguous [B, page_count] as [page_count, B]
         page_table = cute.make_tensor(
@@ -172,6 +202,14 @@ class BlackwellMultiLatentAttentionForward:
         c_latent_transpose = cute.make_tensor(
             c_latent.iterator, c_latent_transpose_layout
         )
+        c_latent_transpose_p1 = None
+        if cutlass.const_expr(self.partition_aware):
+            c_latent_transpose_layout_p1 = cute.select(
+                c_latent_p1.layout, mode=[1, 0, 2]
+            )
+            c_latent_transpose_p1 = cute.make_tensor(
+                c_latent_p1.iterator, c_latent_transpose_layout_p1
+            )
 
         self.mainloop = self.mainloop.resolve(self.q_dtype.width)
 
@@ -220,6 +258,28 @@ class BlackwellMultiLatentAttentionForward:
             self.v_dtype,
             self.o_dtype,
         )
+        lp_p1 = None
+        if cutlass.const_expr(self.partition_aware):
+            # Q/output layouts are identical in both builds.  The second build
+            # is used only for the three KV tensor maps rooted at the P1 pool.
+            lp_p1 = build_mla_launch_params(
+                self.mainloop,
+                self.schedule,
+                q_latent,
+                q_rope,
+                c_latent_p1,
+                c_rope_p1,
+                c_latent_transpose_p1,
+                page_table,
+                o,
+                lse,
+                acc_o,
+                acc_lse,
+                self.q_dtype,
+                self.k_dtype,
+                self.v_dtype,
+                self.o_dtype,
+            )
         self.shared_storage = lp.SharedStorage
         self.tma_copy_q_bytes = lp.tma_copy_q_bytes
         self.tma_copy_kc_bytes = lp.tma_copy_kc_bytes
@@ -230,6 +290,7 @@ class BlackwellMultiLatentAttentionForward:
             self.config.cluster_shape_mnk,
             self.config.max_active_clusters,
             self.config.is_persistent,
+            self.partition_aware,
         )
 
         softmax_scale_log2 = softmax_scale * LOG2_E
@@ -246,6 +307,12 @@ class BlackwellMultiLatentAttentionForward:
             lp.tma_tensor_c_rope,
             lp.tma_atom_c_latent_transpose,
             lp.tma_tensor_c_latent_transpose,
+            lp_p1.tma_atom_c_latent if self.partition_aware else None,
+            lp_p1.tma_tensor_c_latent if self.partition_aware else None,
+            lp_p1.tma_atom_c_rope if self.partition_aware else None,
+            lp_p1.tma_tensor_c_rope if self.partition_aware else None,
+            lp_p1.tma_atom_c_latent_transpose if self.partition_aware else None,
+            lp_p1.tma_tensor_c_latent_transpose if self.partition_aware else None,
             page_table,
             o,
             lse,
@@ -254,6 +321,10 @@ class BlackwellMultiLatentAttentionForward:
             split_kv,
             cache_seqs,
             block_split_kvs,
+            sm_partition_map,
+            sm_cluster_rank,
+            partition_cluster_count,
+            work_p0,
             softmax_scale_log2,
             output_scale,
             lp.q_latent_smem_layout_staged,
@@ -332,6 +403,12 @@ class BlackwellMultiLatentAttentionForward:
         mKR: cute.Tensor,
         tma_atom_c_latent_transpose: Optional[cute.CopyAtom],
         mCLT: cute.Tensor,
+        tma_atom_c_latent_p1: Optional[cute.CopyAtom],
+        mCL_p1: Optional[cute.Tensor],
+        tma_atom_c_rope_p1: Optional[cute.CopyAtom],
+        mKR_p1: Optional[cute.Tensor],
+        tma_atom_c_latent_transpose_p1: Optional[cute.CopyAtom],
+        mCLT_p1: Optional[cute.Tensor],
         mPT: cute.Tensor,
         mO: Optional[cute.Tensor],
         mLSE: Optional[cute.Tensor],
@@ -340,6 +417,10 @@ class BlackwellMultiLatentAttentionForward:
         split_kv: cutlass.Int32,
         cache_seqs: cute.Tensor,
         block_split_kvs: cute.Tensor,
+        sm_partition_map: Optional[cute.Tensor],
+        sm_cluster_rank: Optional[cute.Tensor],
+        partition_cluster_count: Optional[cute.Tensor],
+        work_p0: cutlass.Int32,
         softmax_scale_log2: cutlass.Float32,
         output_scale: cutlass.Float32,
         q_latent_smem_layout_staged: cute.ComposedLayout,
@@ -360,12 +441,37 @@ class BlackwellMultiLatentAttentionForward:
         mma_tile_coord_v = bidx % cute.size(tiled_mma_qk.thr_id.shape)
         is_leader_cta = mma_tile_coord_v == 0
 
+        if cutlass.const_expr(self.partition_aware):
+            smid = cute.arch.make_warp_uniform(_smid())
+            partition = cute.arch.make_warp_uniform(sm_partition_map[smid])
+            partition_rank = cute.arch.make_warp_uniform(sm_cluster_rank[smid])
+            partition_count = cute.arch.make_warp_uniform(
+                partition_cluster_count[partition]
+            )
+            tile_sched_params = create_mla_partition_tile_scheduler_params(
+                tile_sched_params,
+                work_p0,
+                partition,
+                partition_rank,
+                partition_count,
+            )
+
         if warp_idx == self.schedule.mma_warp_id:
             cpasync.prefetch_descriptor(tma_atom_q_latent)
             cpasync.prefetch_descriptor(tma_atom_q_rope)
-            cpasync.prefetch_descriptor(tma_atom_c_latent)
-            cpasync.prefetch_descriptor(tma_atom_c_rope)
-            cpasync.prefetch_descriptor(tma_atom_c_latent_transpose)
+            if cutlass.const_expr(self.partition_aware):
+                if partition == 1:
+                    cpasync.prefetch_descriptor(tma_atom_c_latent_p1)
+                    cpasync.prefetch_descriptor(tma_atom_c_rope_p1)
+                    cpasync.prefetch_descriptor(tma_atom_c_latent_transpose_p1)
+                else:
+                    cpasync.prefetch_descriptor(tma_atom_c_latent)
+                    cpasync.prefetch_descriptor(tma_atom_c_rope)
+                    cpasync.prefetch_descriptor(tma_atom_c_latent_transpose)
+            else:
+                cpasync.prefetch_descriptor(tma_atom_c_latent)
+                cpasync.prefetch_descriptor(tma_atom_c_rope)
+                cpasync.prefetch_descriptor(tma_atom_c_latent_transpose)
 
         smem = utils.SmemAllocator()
         storage = smem.allocate(SharedStorage)
@@ -493,18 +599,74 @@ class BlackwellMultiLatentAttentionForward:
                 mCLT=mCLT,
                 sVC=sVC_for_tma,
             )
-            self.loader_role.run(
-                tma_common_params,
-                tma_qk_params,
-                tma_v_params,
-                split_kv,
-                cache_seqs,
-                block_split_kvs,
-                load_q_prod,
-                load_kv_prod,
-                load_pt_cons,
-                tile_sched_params,
-            )
+            tma_qk_params_p1 = None
+            tma_v_params_p1 = None
+            if cutlass.const_expr(self.partition_aware):
+                tma_qk_params_p1 = SimpleNamespace(
+                    tiled_mma_qk=tiled_mma_qk,
+                    tma_atom_q_latent=tma_atom_q_latent,
+                    tma_atom_q_rope=tma_atom_q_rope,
+                    tma_atom_c_latent=tma_atom_c_latent_p1,
+                    tma_atom_c_rope=tma_atom_c_rope_p1,
+                    mQL=mQL,
+                    mQR=mQR,
+                    mCL=mCL_p1,
+                    mKR=mKR_p1,
+                    sQ=sQ,
+                    sQ_rope=sQ_rope,
+                    sKC=sKC_for_tma,
+                )
+                tma_v_params_p1 = SimpleNamespace(
+                    tiled_mma_pv=tiled_mma_pv,
+                    tma_atom_c_latent_transpose=tma_atom_c_latent_transpose_p1,
+                    mCL=mCL_p1,
+                    mKR=mKR_p1,
+                    mCLT=mCLT_p1,
+                    sVC=sVC_for_tma,
+                )
+            if cutlass.const_expr(self.partition_aware):
+                # Select the localized tensor maps once per CTA. Passing only
+                # the selected set keeps the per-K-tile TMA path identical to
+                # the standard loader, without an owner branch on every copy.
+                if partition == 1:
+                    self.loader_role.run(
+                        tma_common_params,
+                        tma_qk_params_p1,
+                        tma_v_params_p1,
+                        split_kv,
+                        cache_seqs,
+                        block_split_kvs,
+                        load_q_prod,
+                        load_kv_prod,
+                        load_pt_cons,
+                        tile_sched_params,
+                    )
+                else:
+                    self.loader_role.run(
+                        tma_common_params,
+                        tma_qk_params,
+                        tma_v_params,
+                        split_kv,
+                        cache_seqs,
+                        block_split_kvs,
+                        load_q_prod,
+                        load_kv_prod,
+                        load_pt_cons,
+                        tile_sched_params,
+                    )
+            else:
+                self.loader_role.run(
+                    tma_common_params,
+                    tma_qk_params,
+                    tma_v_params,
+                    split_kv,
+                    cache_seqs,
+                    block_split_kvs,
+                    load_q_prod,
+                    load_kv_prod,
+                    load_pt_cons,
+                    tile_sched_params,
+                )
 
         # /////////////////////////////////////////////////////////////////////
         #  MMA warp
@@ -719,6 +881,7 @@ class BlackwellMultiLatentAttentionForward:
         cluster_shape_mnk: Tuple[int, int, int],
         max_active_clusters: int,
         is_persistent: bool,
+        partition_aware: bool = False,
     ) -> Tuple[MLAStaticTileSchedulerParams, Tuple[int, int, int]]:
         o_shape = o.shape
         tile_sched_params = create_mla_static_tile_scheduler_params(
@@ -728,8 +891,12 @@ class BlackwellMultiLatentAttentionForward:
             cluster_shape_mnk,
             split_kv,
         )
-        grid = MLAStaticTileScheduler.get_grid_shape(
-            tile_sched_params, max_active_clusters
+        grid = (
+            (max_active_clusters * cute.size(cluster_shape_mnk), 1, 1)
+            if partition_aware
+            else MLAStaticTileScheduler.get_grid_shape(
+                tile_sched_params, max_active_clusters
+            )
         )
         return tile_sched_params, grid
 

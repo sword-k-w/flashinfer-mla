@@ -15,6 +15,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 import torch
+from triton import runtime as triton_runtime
 from triton.testing import do_bench
 
 from localized_mla_benchmark import (
@@ -32,6 +33,7 @@ from localized_mla_benchmark import (
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 TIMING_POLICY = "paired-cold-l2-v2"
+INTERLEAVED_TIMING_POLICY = "paired-cold-l2-interleaved-events-v1"
 BALANCED_BLOCK_ORDER = (
     ("standard", "localized"),
     ("localized", "standard"),
@@ -55,6 +57,24 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--timing-repeat-ms", type=int, default=100)
     parser.add_argument("--timing-blocks", type=int, default=4)
     parser.add_argument("--timing-min-samples", type=int, default=20)
+    parser.add_argument(
+        "--timing-method",
+        choices=("blocked-do-bench", "interleaved-events"),
+        default="blocked-do-bench",
+        help=(
+            "Use the historical per-mode Triton blocks or alternate standard and "
+            "localized CUDA-event samples to control power/clock drift."
+        ),
+    )
+    parser.add_argument(
+        "--data-initialization",
+        choices=("empty", "random"),
+        default="empty",
+        help=(
+            "Initialize query/KV with deterministic random BF16 values or retain "
+            "the historical uninitialized access-pattern benchmark."
+        ),
+    )
     parser.add_argument("--output", type=Path)
     parser.add_argument("--resume", action="store_true")
     parser.add_argument("--plan-only", action="store_true")
@@ -138,6 +158,80 @@ def benchmark_cold_l2_block(fn, args: argparse.Namespace) -> dict:
     }
 
 
+def benchmark_cold_l2_interleaved_block(
+    calls: dict,
+    base_order: tuple[str, str],
+    args: argparse.Namespace,
+    cache,
+) -> dict:
+    device_interface = triton_runtime.driver.active.get_device_interface()
+
+    estimate_samples = {"standard": [], "localized": []}
+    for sample_index in range(5):
+        order = base_order if sample_index % 2 == 0 else base_order[::-1]
+        for mode in order:
+            triton_runtime.driver.active.clear_cache(cache)
+            start = device_interface.Event(enable_timing=True)
+            end = device_interface.Event(enable_timing=True)
+            start.record()
+            calls[mode]()
+            end.record()
+            estimate_samples[mode].append((start, end))
+    device_interface.synchronize()
+    estimates = {
+        mode: statistics.median(start.elapsed_time(end) for start, end in events)
+        for mode, events in estimate_samples.items()
+    }
+    pair_estimate_ms = estimates["standard"] + estimates["localized"]
+    n_warmup = max(1, math.ceil(args.timing_warmup_ms / pair_estimate_ms))
+    n_repeat = max(
+        args.timing_min_samples,
+        math.ceil(args.timing_repeat_ms / min(estimates.values())),
+    )
+
+    for sample_index in range(n_warmup):
+        order = base_order if sample_index % 2 == 0 else base_order[::-1]
+        for mode in order:
+            calls[mode]()
+    device_interface.synchronize()
+
+    start_events = {
+        mode: [device_interface.Event(enable_timing=True) for _ in range(n_repeat)]
+        for mode in calls
+    }
+    end_events = {
+        mode: [device_interface.Event(enable_timing=True) for _ in range(n_repeat)]
+        for mode in calls
+    }
+    for sample_index in range(n_repeat):
+        order = base_order if sample_index % 2 == 0 else base_order[::-1]
+        for mode in order:
+            triton_runtime.driver.active.clear_cache(cache)
+            start_events[mode][sample_index].record()
+            calls[mode]()
+            end_events[mode][sample_index].record()
+    device_interface.synchronize()
+
+    results = {"sampling_order": "per-sample AB/BA alternation"}
+    for mode in calls:
+        samples = [
+            start.elapsed_time(end)
+            for start, end in zip(start_events[mode], end_events[mode], strict=True)
+        ]
+        results[mode] = {
+            "median_ms": statistics.median(samples),
+            "min_ms": min(samples),
+            "p20_ms": percentile(samples, 0.20),
+            "p80_ms": percentile(samples, 0.80),
+            "max_ms": max(samples),
+            "sample_count": len(samples),
+            "requested_repeat_ms": args.timing_repeat_ms,
+            "effective_repeat_ms": sum(samples),
+            "attempted_sample_counts": [len(samples)],
+        }
+    return results
+
+
 def paired_timing(case: PreparedMLACase, args: argparse.Namespace) -> dict:
     calls = {"standard": case.standard_call, "localized": case.localized_call}
     for warmup_index in range(args.paired_warmups):
@@ -153,10 +247,22 @@ def paired_timing(case: PreparedMLACase, args: argparse.Namespace) -> dict:
     blocks = []
     mode_medians = {"standard": [], "localized": []}
     orders = list(BALANCED_BLOCK_ORDER) * (args.timing_blocks // 4)
+    cache = (
+        triton_runtime.driver.active.get_empty_cache_for_benchmark()
+        if args.timing_method == "interleaved-events"
+        else None
+    )
     for block_index, order in enumerate(orders):
         block = {"block": block_index, "order": list(order)}
+        if args.timing_method == "interleaved-events":
+            measurements = benchmark_cold_l2_interleaved_block(
+                calls, order, args, cache
+            )
+            block.update(measurements)
+        else:
+            for mode in order:
+                block[mode] = benchmark_cold_l2_block(calls[mode], args)
         for mode in order:
-            block[mode] = benchmark_cold_l2_block(calls[mode], args)
             mode_medians[mode].append(block[mode]["median_ms"])
         block["paired_speedup"] = (
             block["standard"]["median_ms"] / block["localized"]["median_ms"]
@@ -194,11 +300,20 @@ def make_document(args: argparse.Namespace, device: torch.device) -> dict:
     properties = torch.cuda.get_device_properties(device)
     free_bytes, total_bytes = torch.cuda.mem_get_info(device)
     maximum_shape_kv_bytes = kv_bytes(max(args.batch_sizes), max(args.seqlen_ks))
+    capacity_axis_source = (
+        "vllm-fa B300 128-GiB localized arena capacity boundary"
+        if tuple(args.seqlen_ks) == DEFAULT_SEQLEN_KS
+        else "explicit command-line --seqlen-ks axis"
+    )
     return {
         "schema_version": 1,
         "status": "running",
         "started_at": datetime.now(timezone.utc).isoformat(),
-        "timing_policy": TIMING_POLICY,
+        "timing_policy": (
+            INTERLEAVED_TIMING_POLICY
+            if args.timing_method == "interleaved-events"
+            else TIMING_POLICY
+        ),
         "comparison": {
             "standard": "modular MLA static persistent scheduler + ordinary cudaMalloc KV",
             "localized": (
@@ -216,15 +331,19 @@ def make_document(args: argparse.Namespace, device: torch.device) -> dict:
             "rope_dim": ROPE_DIM,
             "page_size": PAGE_SIZE,
             "dtype": "bfloat16",
+            "data_initialization": args.data_initialization,
+            "data_seed": 42 if args.data_initialization == "random" else None,
+            "identical_kv_values_between_layouts": (
+                args.data_initialization == "random"
+            ),
             "fixed_page_table": True,
             "enable_pdl": False,
             "maximum_shape_one_kv_bytes": maximum_shape_kv_bytes,
             "maximum_shape_two_kv_gib": 2 * maximum_shape_kv_bytes / 2**30,
-            "capacity_axis_source": (
-                "vllm-fa B300 128-GiB localized arena capacity boundary"
-            ),
+            "capacity_axis_source": capacity_axis_source,
         },
         "timing": {
+            "method": args.timing_method,
             "paired_warmups": args.paired_warmups,
             "warmup_ms": args.timing_warmup_ms,
             "repeat_ms": args.timing_repeat_ms,
@@ -257,6 +376,12 @@ def load_or_make_document(args: argparse.Namespace, device: torch.device) -> dic
             raise ValueError("resume file seqlen axis differs from command line")
         if document["configuration"]["seqlen_q"] != args.seqlen_q:
             raise ValueError("resume file seqlen_q differs from command line")
+        if document["configuration"].get("data_initialization", "empty") != (
+            args.data_initialization
+        ):
+            raise ValueError(
+                "resume file data initialization differs from command line"
+            )
         document["status"] = "running"
         document.pop("error", None)
         document.pop("finished_at", None)
@@ -272,7 +397,13 @@ def run_case(
 ) -> dict:
     free_before, total_bytes = torch.cuda.mem_get_info(device)
     started = time.monotonic()
-    case = PreparedMLACase(batch_size, seqlen_k, device=device, seq_len_q=args.seqlen_q)
+    case = PreparedMLACase(
+        batch_size,
+        seqlen_k,
+        device=device,
+        seq_len_q=args.seqlen_q,
+        initialize_for_correctness=args.data_initialization == "random",
+    )
     try:
         geometry = case.scheduler_geometry()
         mapped_bytes = tuple(case.localized_cache.mapped_bytes)

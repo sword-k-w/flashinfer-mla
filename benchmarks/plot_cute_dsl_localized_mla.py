@@ -25,6 +25,7 @@ DEFAULT_REPORT_DIR = (
     / "iter_000_evaluation"
 )
 UNDERFILL_COLOR = "#79C7E3"
+WAVE_IMBALANCE_COLOR = "#7B2CBF"
 
 
 def parse_args() -> argparse.Namespace:
@@ -38,6 +39,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--output-dir", type=Path, default=DEFAULT_REPORT_DIR / "figures"
     )
+    parser.add_argument(
+        "--timing-only",
+        action="store_true",
+        help="Generate only the timing matrix without requiring an NCU document.",
+    )
     return parser.parse_args()
 
 
@@ -50,6 +56,18 @@ def load_completed(path: Path) -> dict:
 
 def geometric_mean(values: list[float]) -> float:
     return math.exp(sum(math.log(value) for value in values) / len(values))
+
+
+def timing_device_name(document: dict) -> str:
+    return document.get("environment", {}).get("device", "GPU")
+
+
+def profile_device_name(document: dict) -> str:
+    for row in document.get("results", []):
+        device = row.get("target_metadata", {}).get("device")
+        if device:
+            return device
+    return "GPU"
 
 
 def save_figure(fig, path: Path, *, tight_rect=None) -> None:
@@ -72,7 +90,9 @@ def plot_timing_matrix(document: dict, output_dir: Path) -> Path:
     standard_ms = np.full_like(speedups, np.nan)
     localized_ms = np.full_like(speedups, np.nan)
     underfilled = np.zeros_like(speedups, dtype=bool)
+    wave_imbalanced = np.zeros_like(speedups, dtype=bool)
     active_clusters = np.zeros_like(speedups, dtype=int)
+    owner_waves = np.zeros((*speedups.shape, 2), dtype=int)
     seqlen_q = document["configuration"]["seqlen_q"]
     for row_index, seqlen_k in enumerate(seqlen_ks):
         for column_index, batch in enumerate(batches):
@@ -85,6 +105,18 @@ def plot_timing_matrix(document: dict, output_dir: Path) -> Path:
             active_clusters[row_index, column_index] = row[
                 "localized_theoretical_active_clusters"
             ]
+            tile_counts = row.get("owner_tile_counts")
+            if tile_counts is None:
+                tile_counts = [
+                    work_count * seqlen_q for work_count in row["owner_work_counts"]
+                ]
+            cluster_counts = row["resident_partition_clusters"]
+            waves = [
+                math.ceil(tiles / clusters)
+                for tiles, clusters in zip(tile_counts, cluster_counts, strict=True)
+            ]
+            owner_waves[row_index, column_index] = waves
+            wave_imbalanced[row_index, column_index] = waves[0] != waves[1]
 
     figure_height = max(8.0, 0.72 * len(seqlen_ks) + 3.2)
     fig, axis = plt.subplots(figsize=(13.5, figure_height))
@@ -103,13 +135,14 @@ def plot_timing_matrix(document: dict, output_dir: Path) -> Path:
     axis.set_xlabel("Batch size")
     axis.set_ylabel("seqlen_k")
     fig.suptitle(
-        "B300 FlashInfer Modular MLA: Standard / Localized Speedup",
+        f"{timing_device_name(document)} FlashInfer Modular MLA: "
+        "Standard / Localized Speedup",
         fontsize=13,
         fontweight="bold",
     )
     axis.set_title(
         f"decode, Sq={seqlen_q}, BF16, H=128, D=512+64, page=64; "
-        "dashed light-blue = localized first-wave active clusters < 80%",
+        "cyan dashed = active clusters < 80%; purple dotted = owner wave mismatch",
         fontsize=10.5,
         fontweight="bold",
         pad=8,
@@ -130,6 +163,18 @@ def plot_timing_matrix(document: dict, output_dir: Path) -> Path:
                         linewidth=2.2,
                     )
                 )
+            if wave_imbalanced[row_index, column_index]:
+                axis.add_patch(
+                    Rectangle(
+                        (column_index - 0.43, row_index - 0.43),
+                        0.86,
+                        0.86,
+                        fill=False,
+                        edgecolor=WAVE_IMBALANCE_COLOR,
+                        linestyle=":",
+                        linewidth=2.2,
+                    )
+                )
             label = (
                 f"{speedup:.3f}x\n"
                 f"{standard_ms[row_index, column_index]:.3f}/"
@@ -140,6 +185,9 @@ def plot_timing_matrix(document: dict, output_dir: Path) -> Path:
                     f"\nlocal {active_clusters[row_index, column_index]}/"
                     f"{total_clusters} clusters"
                 )
+            if wave_imbalanced[row_index, column_index]:
+                waves = owner_waves[row_index, column_index]
+                label += f"\nowner waves {waves[0]}/{waves[1]}"
             text_color = "white" if abs(speedup - 1.0) >= 0.65 * span else "black"
             axis.text(
                 column_index,
@@ -160,7 +208,14 @@ def plot_timing_matrix(document: dict, output_dir: Path) -> Path:
                 linestyle="--",
                 linewidth=2.2,
                 label="Source-derived localized first-wave underfill",
-            )
+            ),
+            Patch(
+                facecolor="none",
+                edgecolor=WAVE_IMBALANCE_COLOR,
+                linestyle=":",
+                linewidth=2.2,
+                label="Partition owner wave-count mismatch",
+            ),
         ],
         loc="upper center",
         bbox_to_anchor=(0.5, -0.08),
@@ -185,7 +240,8 @@ def plot_ltc(document: dict, output_dir: Path) -> tuple[Path, Path]:
         1, len(comparisons), figsize=(5 * len(comparisons), 5), squeeze=False
     )
     fig.suptitle(
-        "B300 FlashInfer MLA LTC Fabric Traffic: Standard vs Localized "
+        f"{profile_device_name(document)} FlashInfer MLA LTC Fabric Traffic: "
+        "Standard vs Localized "
         f"(B={document['batch_size']}, Sq={seqlen_q})",
         fontsize=14,
         fontweight="bold",
@@ -261,9 +317,11 @@ def plot_ltc(document: dict, output_dir: Path) -> tuple[Path, Path]:
 def main() -> None:
     args = parse_args()
     timing = load_completed(args.timing)
-    ncu = load_completed(args.ncu)
     args.output_dir.mkdir(parents=True, exist_ok=True)
     plot_timing_matrix(timing, args.output_dir)
+    if args.timing_only:
+        return
+    ncu = load_completed(args.ncu)
     plot_ltc(ncu, args.output_dir)
 
 

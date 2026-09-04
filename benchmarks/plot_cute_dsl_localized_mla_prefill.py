@@ -119,12 +119,15 @@ def plot_speedup_heatmaps(document: dict, output_dir: Path) -> Path:
     norm = TwoSlopeNorm(vmin=1.0 - span, vcenter=1.0, vmax=1.0 + span)
     color_map = plt.get_cmap("RdYlGn").copy()
 
-    columns = 2
+    columns = min(2, len(seqlen_qs))
     panel_rows = math.ceil(len(seqlen_qs) / columns)
     fig, axes = plt.subplots(
         panel_rows,
         columns,
-        figsize=(15.5, max(7.0, panel_rows * (0.72 * len(seqlen_ks) + 2.0))),
+        figsize=(
+            9.5 if columns == 1 else 15.5,
+            max(7.0, panel_rows * (0.72 * len(seqlen_ks) + 2.0)),
+        ),
         squeeze=False,
     )
     image = None
@@ -240,12 +243,12 @@ def plot_speedup_trends(document: dict, output_dir: Path) -> Path:
         (row["seqlen_q"], row["seqlen_k"], row["batch_size"]): row
         for row in rows
     }
-    columns = 2
+    columns = min(2, len(seqlen_qs))
     panel_rows = math.ceil(len(seqlen_qs) / columns)
     fig, axes = plt.subplots(
         panel_rows,
         columns,
-        figsize=(14.5, 4.2 * panel_rows),
+        figsize=(8.5 if columns == 1 else 14.5, 4.2 * panel_rows),
         squeeze=False,
         sharex=True,
     )

@@ -72,7 +72,8 @@ import cutlass.pipeline as pipeline
 from cutlass.pipeline import pipeline_init_arrive, pipeline_init_wait
 import cutlass.utils.blackwell_helpers as sm100_utils
 from cutlass.base_dsl.arch import Arch
-from cutlass.cutlass_dsl import BaseDSL
+from cutlass.cutlass_dsl import BaseDSL, T
+from cutlass._mlir.dialects import llvm
 
 # ``Arch.sm_107*`` only exists in CuTe DSL >= 4.8; requirements.txt allows 4.7,
 # where a bare attribute access raises AttributeError as soon as this branch is
@@ -89,10 +90,26 @@ from .mla_helpers import (
     LOG2_E,
     MLAStaticTileScheduler,
     MLAStaticTileSchedulerParams,
+    create_mla_partition_tile_scheduler_params,
     create_mla_static_tile_scheduler,
     create_mla_static_tile_scheduler_params,
     get_variable_query_tile_info,
 )
+
+
+@cute.jit
+def _smid():
+    return cutlass.Int32(
+        llvm.inline_asm(
+            T.i32(),
+            [],
+            "mov.u32 $0, %smid;",
+            "=r",
+            has_side_effects=False,
+            is_align_stack=False,
+            asm_dialect=llvm.AsmDialect.AD_ATT,
+        )
+    )
 
 """
 A Multi-Head Latent Attention (MLA) example with FP16 data type for the NVIDIA Blackwell SM100 architecture using CUTE DSL
@@ -155,6 +172,7 @@ class BlackwellMultiHeadLatentAttentionForwardFP16:
         reducer_max_splits: int = MAX_SPLITS,
         enable_dcp: bool = False,
         cp_world: int = 1,
+        partition_aware: bool = False,
     ):
         """Initializes the configuration for a Blackwell Multi-Head Latent Attention (MLA) kernel.
 
@@ -229,6 +247,7 @@ class BlackwellMultiHeadLatentAttentionForwardFP16:
             )
         self.reducer_max_splits = reducer_max_splits
         self.enable_pdl = enable_pdl
+        self.partition_aware = partition_aware
         # ``seq_len_q`` is the compile-time query capacity.  Fixed-query
         # specializations use it as the request length; variable-query
         # specializations obtain each request's actual length from its indptr.
@@ -349,6 +368,8 @@ class BlackwellMultiHeadLatentAttentionForwardFP16:
         q_rope: cute.Tensor,
         c_latent: cute.Tensor,
         c_rope: cute.Tensor,
+        c_latent_p1: Optional[cute.Tensor],
+        c_rope_p1: Optional[cute.Tensor],
         page_table: cute.Tensor,
         o: cute.Tensor,
         lse: cute.Tensor,
@@ -359,6 +380,11 @@ class BlackwellMultiHeadLatentAttentionForwardFP16:
         causal_seqlens_kv_global: Optional[cute.Tensor],
         cp_rank: cutlass.Int32,
         block_split_kvs: Optional[cute.Tensor],
+        sm_partition_map: Optional[cute.Tensor],
+        sm_cluster_rank: Optional[cute.Tensor],
+        partition_cluster_count: Optional[cute.Tensor],
+        total_resident_clusters: cutlass.Int32,
+        batch_p0: cutlass.Int32,
         softmax_scale: cutlass.Float32,
         output_scale: cutlass.Float32,
         stream: cuda.CUstream,
@@ -519,6 +545,9 @@ class BlackwellMultiHeadLatentAttentionForwardFP16:
 
         c_latent = _reinterpret_3d_kv(c_latent)
         c_rope = _reinterpret_3d_kv(c_rope)
+        if cutlass.const_expr(self.partition_aware):
+            c_latent_p1 = _reinterpret_3d_kv(c_latent_p1)
+            c_rope_p1 = _reinterpret_3d_kv(c_rope_p1)
 
         # Reinterpret contiguous [B, page_count] as [page_count, B]
         page_table = cute.make_tensor(
@@ -621,6 +650,14 @@ class BlackwellMultiHeadLatentAttentionForwardFP16:
         c_latent_transpose = cute.make_tensor(
             c_latent.iterator, c_latent_tranpose_layout
         )
+        c_latent_transpose_p1 = None
+        if cutlass.const_expr(self.partition_aware):
+            c_latent_transpose_layout_p1 = cute.select(
+                c_latent_p1.layout, mode=[1, 0, 2]
+            )
+            c_latent_transpose_p1 = cute.make_tensor(
+                c_latent_p1.iterator, c_latent_transpose_layout_p1
+            )
 
         self.q_major_mode = tcgen05.OperandMajorMode.K
         self.k_major_mode = tcgen05.OperandMajorMode.K
@@ -773,6 +810,43 @@ class BlackwellMultiHeadLatentAttentionForwardFP16:
                 is_k_load=False,
             )
         )
+        tma_atom_c_latent_p1 = None
+        tma_tensor_c_latent_p1 = None
+        tma_atom_c_rope_p1 = None
+        tma_tensor_c_rope_p1 = None
+        tma_atom_c_latent_transpose_p1 = None
+        tma_tensor_c_latent_transpose_p1 = None
+        if cutlass.const_expr(self.partition_aware):
+            tma_atom_c_latent_p1, tma_tensor_c_latent_p1 = (
+                self.make_paged_tiled_tma_atom(
+                    tma_load_op,
+                    c_latent_p1,
+                    kc_smem_layout,
+                    (self.mma_qk_tiler[1], self.mma_qk_tiler[2]),
+                    qk_tiled_mma,
+                    is_k_load=True,
+                )
+            )
+            tma_atom_c_rope_p1, tma_tensor_c_rope_p1 = (
+                self.make_paged_tiled_tma_atom(
+                    tma_load_op,
+                    c_rope_p1,
+                    kc_smem_layout,
+                    (self.mma_qk_tiler[1], self.mma_qk_tiler[2]),
+                    qk_tiled_mma,
+                    is_k_load=True,
+                )
+            )
+            tma_atom_c_latent_transpose_p1, tma_tensor_c_latent_transpose_p1 = (
+                self.make_paged_tiled_tma_atom(
+                    tma_load_op,
+                    c_latent_transpose_p1,
+                    vc_smem_layout,
+                    (self.mma_pv_tiler[1], self.mma_pv_tiler[2]),
+                    pv_tiled_mma,
+                    is_k_load=False,
+                )
+            )
 
         q_latent_copy_size = (
             cute.size_in_bytes(self.q_dtype, q_latent_smem_layout)
@@ -805,6 +879,8 @@ class BlackwellMultiHeadLatentAttentionForwardFP16:
             self.cluster_shape_mnk,
             self.max_active_clusters,
             self.is_persistent,
+            self.partition_aware,
+            total_resident_clusters,
         )
 
         @cute.struct
@@ -871,6 +947,12 @@ class BlackwellMultiHeadLatentAttentionForwardFP16:
             tma_tensor_c_rope,
             tma_atom_c_latent_transpose,
             tma_tensor_c_latent_transpose,
+            tma_atom_c_latent_p1,
+            tma_tensor_c_latent_p1,
+            tma_atom_c_rope_p1,
+            tma_tensor_c_rope_p1,
+            tma_atom_c_latent_transpose_p1,
+            tma_tensor_c_latent_transpose_p1,
             page_table,
             o,
             lse,
@@ -882,6 +964,10 @@ class BlackwellMultiHeadLatentAttentionForwardFP16:
             causal_seqlens_kv_global,
             cp_rank,
             block_split_kvs,
+            sm_partition_map,
+            sm_cluster_rank,
+            partition_cluster_count,
+            batch_p0,
             softmax_scale_log2,
             output_scale,
             q_latent_smem_layout_staged,
@@ -979,6 +1065,12 @@ class BlackwellMultiHeadLatentAttentionForwardFP16:
         mKR: cute.Tensor,
         tma_atom_c_latent_transpose: Optional[cute.CopyAtom],
         mCLT: cute.Tensor,
+        tma_atom_c_latent_p1: Optional[cute.CopyAtom],
+        mCL_p1: Optional[cute.Tensor],
+        tma_atom_c_rope_p1: Optional[cute.CopyAtom],
+        mKR_p1: Optional[cute.Tensor],
+        tma_atom_c_latent_transpose_p1: Optional[cute.CopyAtom],
+        mCLT_p1: Optional[cute.Tensor],
         mPT: cute.Tensor,
         mO: Optional[cute.Tensor],
         mLSE: Optional[cute.Tensor],
@@ -990,6 +1082,10 @@ class BlackwellMultiHeadLatentAttentionForwardFP16:
         causal_seqlens_kv_global: Optional[cute.Tensor],
         cp_rank: cutlass.Int32,
         block_split_kvs: cute.Tensor,
+        sm_partition_map: Optional[cute.Tensor],
+        sm_cluster_rank: Optional[cute.Tensor],
+        partition_cluster_count: Optional[cute.Tensor],
+        batch_p0: cutlass.Int32,
         softmax_scale_log2: cutlass.Float32,
         output_scale: cutlass.Float32,
         q_latent_smem_layout_staged: cute.ComposedLayout,
@@ -1093,13 +1189,38 @@ class BlackwellMultiHeadLatentAttentionForwardFP16:
         mma_tile_coord_v = bidx % cute.size(tiled_mma_qk.thr_id.shape)
         is_leader_cta = mma_tile_coord_v == 0
 
+        if cutlass.const_expr(self.partition_aware):
+            smid = cute.arch.make_warp_uniform(_smid())
+            partition = cute.arch.make_warp_uniform(sm_partition_map[smid])
+            partition_rank = cute.arch.make_warp_uniform(sm_cluster_rank[smid])
+            partition_count = cute.arch.make_warp_uniform(
+                partition_cluster_count[partition]
+            )
+            tile_sched_params = create_mla_partition_tile_scheduler_params(
+                tile_sched_params,
+                batch_p0,
+                partition,
+                partition_rank,
+                partition_count,
+            )
+
         # Prefetch tma descriptor
         if warp_idx == self.mma_warp_id:
             cpasync.prefetch_descriptor(tma_atom_q_latent)
             cpasync.prefetch_descriptor(tma_atom_q_rope)
-            cpasync.prefetch_descriptor(tma_atom_c_latent)
-            cpasync.prefetch_descriptor(tma_atom_c_rope)
-            cpasync.prefetch_descriptor(tma_atom_c_latent_transpose)
+            if cutlass.const_expr(self.partition_aware):
+                if partition == 1:
+                    cpasync.prefetch_descriptor(tma_atom_c_latent_p1)
+                    cpasync.prefetch_descriptor(tma_atom_c_rope_p1)
+                    cpasync.prefetch_descriptor(tma_atom_c_latent_transpose_p1)
+                else:
+                    cpasync.prefetch_descriptor(tma_atom_c_latent)
+                    cpasync.prefetch_descriptor(tma_atom_c_rope)
+                    cpasync.prefetch_descriptor(tma_atom_c_latent_transpose)
+            else:
+                cpasync.prefetch_descriptor(tma_atom_c_latent)
+                cpasync.prefetch_descriptor(tma_atom_c_rope)
+                cpasync.prefetch_descriptor(tma_atom_c_latent_transpose)
 
         # Alloc
         smem = utils.SmemAllocator()
@@ -1240,94 +1361,91 @@ class BlackwellMultiHeadLatentAttentionForwardFP16:
             load_pt_pipeline.producer_tail(load_pt_producer_state)
         if warp_idx == self.load_tma_warp_id:
             _setmaxregister_decrease(self.other_reg_num)
-            load_q_producer_state = pipeline.make_pipeline_state(
-                pipeline.PipelineUserType.Producer, self.load_q_stage
+            tma_common_params = SimpleNamespace(
+                load_q_pipeline=load_q_pipeline,
+                load_kv_pipeline=load_kv_pipeline,
+                mPT=mPT,
+                sPT=sPT,
+                load_pt_pipeline=load_pt_pipeline,
             )
-            load_kv_producer_state = pipeline.make_pipeline_state(
-                pipeline.PipelineUserType.Producer, self.load_kv_stage
+            tma_qk_params = SimpleNamespace(
+                tiled_mma_qk=tiled_mma_qk,
+                tma_atom_q_latent=tma_atom_q_latent,
+                tma_atom_q_rope=tma_atom_q_rope,
+                tma_atom_c_latent=tma_atom_c_latent,
+                tma_atom_c_rope=tma_atom_c_rope,
+                mQL=mQL,
+                mQR=mQR,
+                mCL=mCL,
+                mKR=mKR,
+                sQ=sQ,
+                sQ_rope=sQ_rope,
+                sKC=sKC_for_tma,
             )
-            load_pt_consumer_state = pipeline.make_pipeline_state(
-                pipeline.PipelineUserType.Consumer, self.load_pt_stage
+            tma_pv_params = SimpleNamespace(
+                tiled_mma_pv=tiled_mma_pv,
+                tma_atom_c_latent_transpose=tma_atom_c_latent_transpose,
+                mCL=mCL,
+                mKR=mKR,
+                mCLT=mCLT,
+                sVC=sVC_for_tma,
             )
-            load_pt_release_state = pipeline.make_pipeline_state(
-                pipeline.PipelineUserType.Consumer, self.load_pt_stage
-            )
-            tile_sched = create_mla_static_tile_scheduler(
-                tile_sched_params, cute.arch.block_idx(), cute.arch.grid_dim()
-            )
-            work_tile = tile_sched.initial_work_tile_info()
-            while work_tile.is_valid_tile:
-                blk_coord = work_tile.tile_idx
-                (
-                    k_index,
-                    k_tile_count,
-                    local_split_kv,
-                    q_begin,
-                    _,
-                    _,
-                ) = self.get_k_tile_count(
+            if cutlass.const_expr(self.partition_aware):
+                tma_qk_params_p1 = SimpleNamespace(
+                    tiled_mma_qk=tiled_mma_qk,
+                    tma_atom_q_latent=tma_atom_q_latent,
+                    tma_atom_q_rope=tma_atom_q_rope,
+                    tma_atom_c_latent=tma_atom_c_latent_p1,
+                    tma_atom_c_rope=tma_atom_c_rope_p1,
+                    mQL=mQL,
+                    mQR=mQR,
+                    mCL=mCL_p1,
+                    mKR=mKR_p1,
+                    sQ=sQ,
+                    sQ_rope=sQ_rope,
+                    sKC=sKC_for_tma,
+                )
+                tma_pv_params_p1 = SimpleNamespace(
+                    tiled_mma_pv=tiled_mma_pv,
+                    tma_atom_c_latent_transpose=tma_atom_c_latent_transpose_p1,
+                    mCL=mCL_p1,
+                    mKR=mKR_p1,
+                    mCLT=mCLT_p1,
+                    sVC=sVC_for_tma,
+                )
+                if partition == 1:
+                    self.run_tma_load_warp(
+                        tma_common_params,
+                        tma_qk_params_p1,
+                        tma_pv_params_p1,
+                        split_kv,
+                        cache_seqs,
+                        cum_seq_lens_q,
+                        block_split_kvs,
+                        tile_sched_params,
+                    )
+                else:
+                    self.run_tma_load_warp(
+                        tma_common_params,
+                        tma_qk_params,
+                        tma_pv_params,
+                        split_kv,
+                        cache_seqs,
+                        cum_seq_lens_q,
+                        block_split_kvs,
+                        tile_sched_params,
+                    )
+            else:
+                self.run_tma_load_warp(
+                    tma_common_params,
+                    tma_qk_params,
+                    tma_pv_params,
                     split_kv,
                     cache_seqs,
                     cum_seq_lens_q,
                     block_split_kvs,
-                    blk_coord,
+                    tile_sched_params,
                 )
-                if k_tile_count > 0:
-                    # Construct fixed common/tma_qk/tma_pv params for load_tma
-                    tma_common_params = SimpleNamespace(
-                        blk_coord=blk_coord,
-                        local_split_kv=local_split_kv,
-                        q_begin=q_begin,
-                        load_q_pipeline=load_q_pipeline,
-                        load_kv_pipeline=load_kv_pipeline,
-                        mPT=mPT,
-                        sPT=sPT,
-                        load_pt_pipeline=load_pt_pipeline,
-                    )
-                    tma_qk_params = SimpleNamespace(
-                        tiled_mma_qk=tiled_mma_qk,
-                        tma_atom_q_latent=tma_atom_q_latent,
-                        tma_atom_q_rope=tma_atom_q_rope,
-                        tma_atom_c_latent=tma_atom_c_latent,
-                        tma_atom_c_rope=tma_atom_c_rope,
-                        mQL=mQL,
-                        mQR=mQR,
-                        mCL=mCL,
-                        mKR=mKR,
-                        sQ=sQ,
-                        sQ_rope=sQ_rope,
-                        sKC=sKC_for_tma,
-                    )
-                    tma_pv_params = SimpleNamespace(
-                        tiled_mma_pv=tiled_mma_pv,
-                        tma_atom_c_latent_transpose=tma_atom_c_latent_transpose,
-                        mCL=mCL,
-                        mKR=mKR,
-                        mCLT=mCLT,
-                        sVC=sVC_for_tma,
-                    )
-                    # Load tma
-                    (
-                        load_q_producer_state,
-                        load_kv_producer_state,
-                        load_pt_consumer_state,
-                        load_pt_release_state,
-                    ) = self.load_tma(
-                        tma_common_params,
-                        tma_qk_params,
-                        tma_pv_params,
-                        k_index,
-                        k_tile_count,
-                        load_q_producer_state,
-                        load_kv_producer_state,
-                        load_pt_consumer_state,
-                        load_pt_release_state,
-                    )
-                tile_sched.advance_to_next_work()
-                work_tile = tile_sched.get_current_work()
-
-            load_q_pipeline.producer_tail(load_q_producer_state)
-            load_kv_pipeline.producer_tail(load_kv_producer_state)
 
         # ///////////////////////////////////////////////////////////////////////////////
         #  MMA warp
@@ -2020,6 +2138,84 @@ class BlackwellMultiHeadLatentAttentionForwardFP16:
             k_tile_count -= 1
 
         return load_pt_producer_state
+
+    @cute.jit
+    def run_tma_load_warp(
+        self,
+        common_params: SimpleNamespace,
+        qk_params: SimpleNamespace,
+        pv_params: SimpleNamespace,
+        split_kv: cutlass.Int32,
+        cache_seqs: cute.Tensor,
+        cum_seq_lens_q: Optional[cute.Tensor],
+        block_split_kvs: cute.Tensor,
+        tile_sched_params: MLAStaticTileSchedulerParams,
+    ):
+        """Run the TMA warp with one owner-selected KV descriptor set."""
+        load_q_producer_state = pipeline.make_pipeline_state(
+            pipeline.PipelineUserType.Producer, self.load_q_stage
+        )
+        load_kv_producer_state = pipeline.make_pipeline_state(
+            pipeline.PipelineUserType.Producer, self.load_kv_stage
+        )
+        load_pt_consumer_state = pipeline.make_pipeline_state(
+            pipeline.PipelineUserType.Consumer, self.load_pt_stage
+        )
+        load_pt_release_state = pipeline.make_pipeline_state(
+            pipeline.PipelineUserType.Consumer, self.load_pt_stage
+        )
+        tile_sched = create_mla_static_tile_scheduler(
+            tile_sched_params, cute.arch.block_idx(), cute.arch.grid_dim()
+        )
+        work_tile = tile_sched.initial_work_tile_info()
+        while work_tile.is_valid_tile:
+            blk_coord = work_tile.tile_idx
+            (
+                k_index,
+                k_tile_count,
+                local_split_kv,
+                q_begin,
+                _,
+                _,
+            ) = self.get_k_tile_count(
+                split_kv,
+                cache_seqs,
+                cum_seq_lens_q,
+                block_split_kvs,
+                blk_coord,
+            )
+            if k_tile_count > 0:
+                tile_params = SimpleNamespace(
+                    blk_coord=blk_coord,
+                    local_split_kv=local_split_kv,
+                    q_begin=q_begin,
+                    load_q_pipeline=common_params.load_q_pipeline,
+                    load_kv_pipeline=common_params.load_kv_pipeline,
+                    mPT=common_params.mPT,
+                    sPT=common_params.sPT,
+                    load_pt_pipeline=common_params.load_pt_pipeline,
+                )
+                (
+                    load_q_producer_state,
+                    load_kv_producer_state,
+                    load_pt_consumer_state,
+                    load_pt_release_state,
+                ) = self.load_tma(
+                    tile_params,
+                    qk_params,
+                    pv_params,
+                    k_index,
+                    k_tile_count,
+                    load_q_producer_state,
+                    load_kv_producer_state,
+                    load_pt_consumer_state,
+                    load_pt_release_state,
+                )
+            tile_sched.advance_to_next_work()
+            work_tile = tile_sched.get_current_work()
+
+        common_params.load_q_pipeline.producer_tail(load_q_producer_state)
+        common_params.load_kv_pipeline.producer_tail(load_kv_producer_state)
 
     @cute.jit
     def load_tma(
@@ -4033,6 +4229,8 @@ class BlackwellMultiHeadLatentAttentionForwardFP16:
         cluster_shape_mnk: Tuple[int, int, int],
         max_active_clusters: int,
         is_persistent: bool,
+        partition_aware: bool = False,
+        total_resident_clusters: cutlass.Int32 = cutlass.Int32(0),
     ) -> Tuple[MLAStaticTileSchedulerParams, Tuple[int, int, int]]:
         """Compute grid shape for the output tensor C.
 
@@ -4053,8 +4251,12 @@ class BlackwellMultiHeadLatentAttentionForwardFP16:
             cluster_shape_mnk,
             split_kv,
         )
-        grid = MLAStaticTileScheduler.get_grid_shape(
-            tile_sched_params, max_active_clusters
+        grid = (
+            (total_resident_clusters * cute.size(cluster_shape_mnk), 1, 1)
+            if partition_aware
+            else MLAStaticTileScheduler.get_grid_shape(
+                tile_sched_params, max_active_clusters
+            )
         )
 
         return tile_sched_params, grid

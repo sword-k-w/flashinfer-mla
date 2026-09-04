@@ -30,6 +30,12 @@
 import cutlass
 import cutlass.cute as cute
 
+from ..scheduler.mla_persistent import (
+    MLAPartitionTileScheduler,
+    MLAPartitionTileSchedulerParams,
+    create_mla_partition_tile_scheduler_params,
+)
+
 
 class MLAStaticTileSchedulerParams:
     def __init__(
@@ -288,10 +294,12 @@ class MLAStaticTileScheduler:
 
 
 def create_mla_static_tile_scheduler(
-    params: MLAStaticTileSchedulerParams,
+    params: MLAStaticTileSchedulerParams | MLAPartitionTileSchedulerParams,
     blk_coord: cute.Coord,
     grid_shape: cute.Shape,
-) -> MLAStaticTileScheduler:
+) -> MLAStaticTileScheduler | MLAPartitionTileScheduler:
+    if cutlass.const_expr(isinstance(params, MLAPartitionTileSchedulerParams)):
+        return MLAPartitionTileScheduler(params, grid_shape)
     return MLAStaticTileScheduler(params, blk_coord[0], blk_coord, grid_shape)
 
 

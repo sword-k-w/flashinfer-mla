@@ -227,13 +227,16 @@ def _get_compiled_mla_kernel(
     enable_pdl: bool = False,
     enable_dcp: bool = False,
     cp_world: int = 1,
+    partition_aware: bool = False,
 ) -> Callable:
     """Compile and cache an MLA decode kernel.
 
     Returns a callable that accepts (q_latent, q_rope, c_latent, c_rope,
-    page_table, o, lse, workspace, split_kv_scalar, cache_seqs,
+    c_latent_p1, c_rope_p1, page_table, o, lse, workspace, split_kv_scalar, cache_seqs,
     cum_seq_lens_q, causal_seqlens_kv_global, cp_rank_scalar,
-    block_split_kvs, softmax_scale_scalar, output_scale_scalar).
+    block_split_kvs, sm_partition_map, sm_cluster_rank,
+    partition_cluster_count, total_resident_clusters, batch_p0,
+    softmax_scale_scalar, output_scale_scalar).
 
     All scalar arguments must be pre-wrapped as Int32/Float32.
     """
@@ -245,6 +248,22 @@ def _get_compiled_mla_kernel(
     cluster_shape_mnk = (2, 1, 1)
 
     is_fp8 = torch_dtype == torch.float8_e4m3fn
+    if partition_aware and (
+        is_fp8
+        or torch_dtype != torch.bfloat16
+        or torch_out_dtype != torch.bfloat16
+        or not is_persistent
+        or is_var_seq
+        or is_var_q
+        or is_var_split_kv
+        or not is_workspace_size_zero
+        or enable_dcp
+        or cp_world != 1
+    ):
+        raise ValueError(
+            "partition-aware monolithic MLA requires BF16 input/output, "
+            "persistent fixed Q/KV, split_kv=1 (zero workspace), and DCP disabled"
+        )
     KernelClass = (
         BlackwellMultiHeadLatentAttentionForwardFP8
         if is_fp8
@@ -274,6 +293,7 @@ def _get_compiled_mla_kernel(
         reducer_max_splits=reducer_max_splits,
         enable_dcp=enable_dcp,
         cp_world=cp_world,
+        **({"partition_aware": partition_aware} if not is_fp8 else {}),
     )
 
     # All dimensions as sym_int — this matches the original kernel's use of
@@ -285,6 +305,7 @@ def _get_compiled_mla_kernel(
     sym_rope = cute.sym_int(divisibility=16)
     sym_batch = cute.sym_int()  # query/output batch dimension
     sym_kv_batch = cute.sym_int()  # KV cache batch dim (flat pool, =1 in paged mode)
+    sym_kv_batch_p1 = cute.sym_int()
     sym_seq_kv = cute.sym_int()
     sym_page_count = cute.sym_int()
     sym_workspace_size = cute.sym_int()
@@ -341,6 +362,34 @@ def _get_compiled_mla_kernel(
         stride=(cute.sym_int(), cute.sym_int(), 1),
         assumed_align=16,
     )
+    c_latent_p1_fake = None
+    c_rope_p1_fake = None
+    sm_partition_map_fake = None
+    sm_cluster_rank_fake = None
+    partition_cluster_count_fake = None
+    if partition_aware:
+        c_latent_p1_fake = cute.runtime.make_fake_tensor(
+            cutlass_dtype,
+            (sym_kv_batch_p1, sym_seq_kv, sym_latent),
+            stride=(cute.sym_int(), cute.sym_int(), 1),
+            assumed_align=16,
+        )
+        c_rope_p1_fake = cute.runtime.make_fake_tensor(
+            cutlass_dtype,
+            (sym_kv_batch_p1, sym_seq_kv, sym_rope),
+            stride=(cute.sym_int(), cute.sym_int(), 1),
+            assumed_align=16,
+        )
+        sym_sm_count = cute.sym_int()
+        sm_partition_map_fake = cute.runtime.make_fake_compact_tensor(
+            cutlass.Int32, (sym_sm_count,), assumed_align=16
+        )
+        sm_cluster_rank_fake = cute.runtime.make_fake_compact_tensor(
+            cutlass.Int32, (sym_sm_count,), assumed_align=16
+        )
+        partition_cluster_count_fake = cute.runtime.make_fake_compact_tensor(
+            cutlass.Int32, (2,), assumed_align=8
+        )
     # page_table: [batch_size, page_count] — contiguous
     page_table_fake = cute.runtime.make_fake_compact_tensor(
         cutlass.Int32,
@@ -423,25 +472,54 @@ def _get_compiled_mla_kernel(
 
     stream_fake = cute.runtime.make_fake_stream(use_tvm_ffi_env_stream=True)
 
-    compiled_kernel = cute.compile(
-        kernel_obj,
+    common_compile_args = (
         q_latent_fake,
         q_rope_fake,
         c_latent_fake,
         c_rope_fake,
-        page_table_fake,
-        o_fake,
-        lse_fake,
-        workspace_fake,
-        Int32(1),  # split_kv placeholder
-        cache_seqs_fake,
-        cum_seq_lens_q_fake,
-        causal_seqlens_kv_global_fake,
-        Int32(0),  # cp_rank placeholder (runtime-uniform, not a JIT key)
-        block_split_kvs_fake,
-        Float32(1.0),  # softmax_scale placeholder
-        Float32(1.0),  # output_scale placeholder
-        stream_fake,
+    )
+    if is_fp8:
+        compile_args = common_compile_args + (
+            page_table_fake,
+            o_fake,
+            lse_fake,
+            workspace_fake,
+            Int32(1),
+            cache_seqs_fake,
+            cum_seq_lens_q_fake,
+            causal_seqlens_kv_global_fake,
+            Int32(0),
+            block_split_kvs_fake,
+            Float32(1.0),
+            Float32(1.0),
+            stream_fake,
+        )
+    else:
+        compile_args = common_compile_args + (
+            c_latent_p1_fake,
+            c_rope_p1_fake,
+            page_table_fake,
+            o_fake,
+            lse_fake,
+            workspace_fake,
+            Int32(1),
+            cache_seqs_fake,
+            cum_seq_lens_q_fake,
+            causal_seqlens_kv_global_fake,
+            Int32(0),
+            block_split_kvs_fake,
+            sm_partition_map_fake,
+            sm_cluster_rank_fake,
+            partition_cluster_count_fake,
+            Int32(1),
+            Int32(1),
+            Float32(1.0),
+            Float32(1.0),
+            stream_fake,
+        )
+    compiled_kernel = cute.compile(
+        kernel_obj,
+        *compile_args,
         options="--enable-tvm-ffi --opt-level 2",
     )
 
@@ -844,24 +922,45 @@ def cute_dsl_mla_decode(
     )
 
     # Call the kernel
-    compiled_kernel(
-        q_latent_k,
-        q_rope_k,
-        c_latent_k,
-        c_rope_k,
-        page_table_k,
-        o_k,
-        lse_k,
-        workspace_bytes,
-        Int32(split_kv),
-        cache_seqs,
-        cum_seq_lens_q,
-        causal_seqlens_kv_global,
-        Int32(cp_rank),
-        block_split_kvs,
-        Float32(softmax_scale),
-        Float32(output_scale),
-    )
+    common_runtime_args = (q_latent_k, q_rope_k, c_latent_k, c_rope_k)
+    if q_dtype == torch.float8_e4m3fn:
+        runtime_args = common_runtime_args + (
+            page_table_k,
+            o_k,
+            lse_k,
+            workspace_bytes,
+            Int32(split_kv),
+            cache_seqs,
+            cum_seq_lens_q,
+            causal_seqlens_kv_global,
+            Int32(cp_rank),
+            block_split_kvs,
+            Float32(softmax_scale),
+            Float32(output_scale),
+        )
+    else:
+        runtime_args = common_runtime_args + (
+            None,
+            None,
+            page_table_k,
+            o_k,
+            lse_k,
+            workspace_bytes,
+            Int32(split_kv),
+            cache_seqs,
+            cum_seq_lens_q,
+            causal_seqlens_kv_global,
+            Int32(cp_rank),
+            block_split_kvs,
+            None,
+            None,
+            None,
+            Int32(0),
+            Int32(0),
+            Float32(softmax_scale),
+            Float32(output_scale),
+        )
+    compiled_kernel(*runtime_args)
 
     if return_lse:
         # Return the lse tensor in the shape the caller supplied. For fixed Q,

@@ -23,6 +23,9 @@ flashinfer/trtllm/batched_gemm/trtllmGen_bmm_export
 microbenchmark/
 flashinfer/cute_dsl/benchmark_gated_delta_rule.py
 
+# Nsight Compute binary reports
+*.ncu-rep
+
 # vscode
 .vscode/
 

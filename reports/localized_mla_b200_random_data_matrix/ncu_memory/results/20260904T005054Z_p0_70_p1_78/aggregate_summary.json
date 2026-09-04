@@ -1,0 +1,38 @@
+{
+  "schema": "flashinfer-localized-mla-ncu-memory-aggregate-v1",
+  "overall": {
+    "config_count": 144,
+    "median_standard_l2_hit_rate_pct": 58.0,
+    "median_localized_l2_hit_rate_pct": 66.475,
+    "median_l2_delta_pp": 9.735000000000007,
+    "l2_higher_count": 144,
+    "localized_to_standard_hbm_bandwidth_ratio_geomean": 0.8685521282044851,
+    "localized_hbm_bandwidth_higher_count": 46,
+    "localized_to_standard_hbm_total_bytes_ratio_geomean": 0.9113507689057584,
+    "standard_to_localized_ncu_duration_ratio_geomean": 0.9530382349348749
+  },
+  "groups": {
+    "sq1": {
+      "config_count": 72,
+      "median_standard_l2_hit_rate_pct": 37.894999999999996,
+      "median_localized_l2_hit_rate_pct": 47.905,
+      "median_l2_delta_pp": 9.854999999999997,
+      "l2_higher_count": 72,
+      "localized_to_standard_hbm_bandwidth_ratio_geomean": 0.9647448705767454,
+      "localized_hbm_bandwidth_higher_count": 36,
+      "localized_to_standard_hbm_total_bytes_ratio_geomean": 0.9976677340309202,
+      "standard_to_localized_ncu_duration_ratio_geomean": 0.9670001721703917
+    },
+    "sq4": {
+      "config_count": 72,
+      "median_standard_l2_hit_rate_pct": 72.9,
+      "median_localized_l2_hit_rate_pct": 84.945,
+      "median_l2_delta_pp": 9.505000000000003,
+      "l2_higher_count": 72,
+      "localized_to_standard_hbm_bandwidth_ratio_geomean": 0.7819505678818007,
+      "localized_hbm_bandwidth_higher_count": 10,
+      "localized_to_standard_hbm_total_bytes_ratio_geomean": 0.832501839695034,
+      "standard_to_localized_ncu_duration_ratio_geomean": 0.9392778857620894
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "batch_size": 4,
+  "data_initialization": "random",
+  "data_seed": 42,
+  "device": "NVIDIA B200",
+  "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+  "localized_mapped_bytes": [
+    6291456,
+    6291456
+  ],
+  "mode": "localized",
+  "owner_page_counts": [
+    64,
+    64
+  ],
+  "owner_tile_counts": [
+    34,
+    38
+  ],
+  "owner_work_counts": [
+    34,
+    38
+  ],
+  "partition_sm_counts": [
+    70,
+    78
+  ],
+  "profiled_launches": 1,
+  "resident_partition_clusters": [
+    35,
+    39
+  ],
+  "seqlen_k": 2048,
+  "seqlen_q": 1,
+  "split_kv": 18,
+  "total_sm_count": 148,
+  "warmup_launches": 3
+}

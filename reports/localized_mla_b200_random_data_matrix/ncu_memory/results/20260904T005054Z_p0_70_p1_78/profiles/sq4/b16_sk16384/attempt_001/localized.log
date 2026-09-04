@@ -1,0 +1,5 @@
+==PROF== Connected to process 55066 (/usr/bin/python3.12)
+TARGET_METADATA {"batch_size": 16, "data_initialization": "random", "data_seed": 42, "device": "NVIDIA B200", "l2_cache_policy": "triton_clear_cache_before_each_attention_launch", "localized_mapped_bytes": [150994944, 150994944], "mode": "localized", "owner_page_counts": [2048, 2048], "owner_tile_counts": [32, 32], "owner_work_counts": [8, 8], "partition_sm_counts": [70, 78], "profiled_launches": 1, "resident_partition_clusters": [35, 39], "seqlen_k": 16384, "seqlen_q": 4, "split_kv": 1, "total_sm_count": 148, "warmup_launches": 3}
+==PROF== Profiling "kernel_cutlass_split_kv_kerne..." - 0 (1/1): 0%....50%....100% - 4 passes
+==PROF== Disconnected from process 55066
+==PROF== Report: /workspace/flashinfer-mla/reports/localized_mla_b200_random_data_matrix/ncu_memory/results/20260904T005054Z_p0_70_p1_78/profiles/sq4/b16_sk16384/attempt_001/localized.ncu-rep

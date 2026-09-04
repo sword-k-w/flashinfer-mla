@@ -14,6 +14,7 @@ if str(SCRIPT_DIR) not in sys.path:
 
 import torch
 from cutlass import Float32, Int32
+from triton import runtime as triton_runtime
 
 from flashinfer.cute_dsl.attention.experimental.localized_mla import (
     LocalizedMLAKVCache,
@@ -41,6 +42,17 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--seqlen-k", type=int, required=True)
     parser.add_argument("--mode", choices=("standard", "localized"), required=True)
     parser.add_argument("--warmups", type=int, default=3)
+    parser.add_argument(
+        "--data-initialization",
+        choices=("empty", "random"),
+        default="empty",
+    )
+    parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument(
+        "--cold-l2",
+        action="store_true",
+        help="Clear Triton's benchmark cache before every attention launch.",
+    )
     args = parser.parse_args()
     if args.batch < 2:
         parser.error("--batch must be >= 2")
@@ -58,6 +70,8 @@ def main() -> None:
     num_pages = args.batch * pages_per_batch
     softmax_scale = deepseek_v3_effective_softmax_scale()
     cache = None
+    standard_kv = None
+    initialization_source = None
 
     try:
         # NCU profiles the layouts in isolated processes, matching the prior
@@ -76,7 +90,6 @@ def main() -> None:
             c_latent_p1 = cache.kv_p1[..., :LATENT_DIM]
             c_rope_p1 = cache.kv_p1[..., LATENT_DIM:]
             page_table = cache.page_table
-            standard_kv = None
         else:
             cache = None
             standard_kv = torch.empty(
@@ -94,6 +107,24 @@ def main() -> None:
                 num_pages, dtype=torch.int32, device=device
             ).reshape(args.batch, pages_per_batch)
 
+        if args.data_initialization == "random":
+            torch.manual_seed(args.seed)
+            if cache is None:
+                standard_kv.normal_()
+            else:
+                # Generate the same logical KV values as the standard process,
+                # scatter them into owner-local storage, then release the large
+                # temporary before NCU creates any kernel-replay backing state.
+                initialization_source = torch.empty(
+                    num_pages,
+                    PAGE_SIZE,
+                    LATENT_DIM + ROPE_DIM,
+                    dtype=DTYPE,
+                    device=device,
+                )
+                initialization_source.normal_()
+                cache.scatter_from(initialization_source)
+
         query = torch.empty(
             args.batch,
             args.seqlen_q,
@@ -102,6 +133,12 @@ def main() -> None:
             dtype=DTYPE,
             device=device,
         )
+        if args.data_initialization == "random":
+            query.normal_()
+            if initialization_source is not None:
+                torch.cuda.synchronize(device)
+                initialization_source = None
+                torch.cuda.empty_cache()
         q_latent = query[..., :LATENT_DIM]
         q_rope = query[..., LATENT_DIM:]
         seq_lens = torch.full(
@@ -165,6 +202,17 @@ def main() -> None:
                 None,
             )
 
+        l2_flush_cache = (
+            triton_runtime.driver.active.get_empty_cache_for_benchmark()
+            if args.cold_l2
+            else None
+        )
+
+        def warmup_call():
+            if l2_flush_cache is not None:
+                triton_runtime.driver.active.clear_cache(l2_flush_cache)
+            target_call()
+
         metadata = {
             "mode": args.mode,
             "batch_size": args.batch,
@@ -173,8 +221,23 @@ def main() -> None:
             "split_kv": split_kv,
             "warmup_launches": args.warmups,
             "profiled_launches": 1,
+            "data_initialization": args.data_initialization,
+            "data_seed": args.seed if args.data_initialization == "random" else None,
+            "l2_cache_policy": (
+                "triton_clear_cache_before_each_attention_launch"
+                if args.cold_l2
+                else "unchanged_after_warmups"
+            ),
             "total_sm_count": properties.multi_processor_count,
             "device": properties.name,
+            "partition_sm_counts": (
+                None
+                if cache is None
+                else [
+                    int((cache.sm_partition_map == 0).sum().item()),
+                    int((cache.sm_partition_map == 1).sum().item()),
+                ]
+            ),
             "owner_work_counts": (
                 None if cache is None else [cache.work_p0, cache.work_p1]
             ),
@@ -198,12 +261,17 @@ def main() -> None:
         }
         print("TARGET_METADATA " + json.dumps(metadata, sort_keys=True), flush=True)
         for _ in range(args.warmups):
-            target_call()
+            warmup_call()
         torch.cuda.synchronize(device)
 
         # NCU is invoked with --profile-from-start off.  This restricts
         # collection to the one decode launch below, independent of JIT/setup
         # kernel counts and without relying on a fragile mangled-name regex.
+        # Clear and synchronize before enabling collection so the cache-clear
+        # operation itself cannot consume --launch-count=1.
+        if l2_flush_cache is not None:
+            triton_runtime.driver.active.clear_cache(l2_flush_cache)
+            torch.cuda.synchronize(device)
         torch.cuda.cudart().cudaProfilerStart()
         target_call()
         torch.cuda.synchronize(device)
@@ -214,6 +282,7 @@ def main() -> None:
             c_rope_p0 = None
             c_latent_p1 = None
             c_rope_p1 = None
+            initialization_source = None
             cache.close()
         torch.cuda.empty_cache()
 

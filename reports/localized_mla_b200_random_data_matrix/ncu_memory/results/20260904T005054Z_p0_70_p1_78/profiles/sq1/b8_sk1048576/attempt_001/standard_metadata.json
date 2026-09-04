@@ -1,0 +1,20 @@
+{
+  "batch_size": 8,
+  "data_initialization": "random",
+  "data_seed": 42,
+  "device": "NVIDIA B200",
+  "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+  "localized_mapped_bytes": null,
+  "mode": "standard",
+  "owner_page_counts": null,
+  "owner_tile_counts": null,
+  "owner_work_counts": null,
+  "partition_sm_counts": null,
+  "profiled_launches": 1,
+  "resident_partition_clusters": null,
+  "seqlen_k": 1048576,
+  "seqlen_q": 1,
+  "split_kv": 9,
+  "total_sm_count": 148,
+  "warmup_launches": 3
+}

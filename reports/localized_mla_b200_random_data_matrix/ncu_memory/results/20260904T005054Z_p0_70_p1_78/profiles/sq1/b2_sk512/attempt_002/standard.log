@@ -1,0 +1,7 @@
+==PROF== Connected to process 23711 (/usr/bin/python3.12)
+Traceback (most recent call last):
+  File "/workspace/flashinfer-mla/benchmarks/profile_cute_dsl_localized_mla_ltc_target.py", line 19, in <module>
+    from flashinfer.cute_dsl.attention.experimental.localized_mla import (
+ModuleNotFoundError: No module named 'flashinfer'
+==PROF== Disconnected from process 23711
+==ERROR== The application returned an error code (1).

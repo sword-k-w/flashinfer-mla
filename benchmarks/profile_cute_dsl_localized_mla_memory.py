@@ -162,7 +162,9 @@ def ncu_version(ncu: Path) -> str:
     return run_text([str(ncu), "--version"]).stdout.strip()
 
 
-def validate_metrics(ncu: Path, device: int) -> None:
+def validate_metrics(
+    ncu: Path, device: int, metrics: tuple[str, ...] = MEMORY_METRICS
+) -> None:
     output = run_text(
         [str(ncu), "--query-metrics-mode", "all", "--devices", str(device)]
     ).stdout
@@ -171,7 +173,7 @@ def validate_metrics(ncu: Path, device: int) -> None:
         for line in output.splitlines()
         if line and not line[0].isspace() and "__" in line
     }
-    missing = [name for name in MEMORY_METRICS if name not in available]
+    missing = [name for name in metrics if name not in available]
     if missing:
         raise RuntimeError("unsupported NCU metrics: " + ", ".join(missing))
 
@@ -363,7 +365,12 @@ def parse_number(value: str, name: str) -> float:
         raise RuntimeError(f"invalid NCU value for {name}: {value!r}") from error
 
 
-def parse_ncu_report(ncu: Path, report: Path, raw_csv: Path) -> dict[str, Any]:
+def parse_ncu_report(
+    ncu: Path,
+    report: Path,
+    raw_csv: Path,
+    metrics: tuple[str, ...] = MEMORY_METRICS,
+) -> dict[str, Any]:
     completed = run_text(
         [
             str(ncu),
@@ -382,7 +389,7 @@ def parse_ncu_report(ncu: Path, report: Path, raw_csv: Path) -> dict[str, Any]:
     for index, row in enumerate(rows):
         if not row or row[0] != "ID" or index + 2 >= len(rows):
             continue
-        if any(metric not in row for metric in MEMORY_METRICS):
+        if any(metric not in row for metric in metrics):
             continue
         header = row
         units = dict(zip(header, rows[index + 1], strict=True))
@@ -392,9 +399,9 @@ def parse_ncu_report(ncu: Path, report: Path, raw_csv: Path) -> dict[str, Any]:
     if len(matches) != 1:
         raise RuntimeError(f"expected exactly one NCU kernel row, found {len(matches)}")
     record, units = matches[0]
-    metrics = {
+    metric_records = {
         name: {"value": parse_number(record[name], name), "unit": units.get(name, "")}
-        for name in MEMORY_METRICS
+        for name in metrics
     }
     passes = parse_number(record.get("profiler__replayer_passes", "1"), "replay passes")
     return {
@@ -402,7 +409,7 @@ def parse_ncu_report(ncu: Path, report: Path, raw_csv: Path) -> dict[str, Any]:
         "raw_csv": str(raw_csv),
         "kernel_name": record["Kernel Name"],
         "ncu_replay_passes": int(passes),
-        "metrics": metrics,
+        "metrics": metric_records,
     }
 
 
@@ -413,7 +420,9 @@ def metric_value(profile: dict[str, Any], name: str) -> float:
     return value
 
 
-def derive_metrics(profile: dict[str, Any]) -> None:
+def derive_metrics(
+    profile: dict[str, Any], *, allow_inconsistent_l2: bool = False
+) -> None:
     duration = metric_value(profile, DURATION_METRIC)
     read_bytes = metric_value(profile, HBM_READ_BYTES_METRIC)
     write_bytes = metric_value(profile, HBM_WRITE_BYTES_METRIC)
@@ -436,8 +445,19 @@ def derive_metrics(profile: dict[str, Any]) -> None:
     if any(value < 0 for value in values):
         raise RuntimeError("NCU returned a negative duration/traffic/count metric")
     lookup = hits + misses
-    if not 0.0 <= hit_rate <= 100.0 or lookup <= 0:
+    if lookup <= 0 or total_sectors <= 0:
         raise RuntimeError(f"invalid L2 counters: hit_rate={hit_rate}, lookup={lookup}")
+    hit_rate_in_range = 0.0 <= hit_rate <= 100.0
+    if not hit_rate_in_range and not allow_inconsistent_l2:
+        raise RuntimeError(f"invalid L2 counters: hit_rate={hit_rate}, lookup={lookup}")
+    # Replay passes can observe different traffic. Keep every raw value, rather
+    # than clamping the percentage or treating hit/(hit+miss) as a repair.
+    counter_error = lookup / total_sectors - 1.0
+    l2_warnings = []
+    if not hit_rate_in_range:
+        l2_warnings.append("reported L2 hit rate lies outside [0, 100]%")
+    if abs(counter_error) > 0.05:
+        l2_warnings.append("L2 hit+miss differs from total sectors by more than 5%")
     profile["hbm"] = {
         "read_bytes": read_bytes,
         "write_bytes": write_bytes,
@@ -455,6 +475,10 @@ def derive_metrics(profile: dict[str, Any]) -> None:
         "lookup_hit_sectors": hits,
         "lookup_miss_sectors": misses,
         "duration_ns": duration,
+        "reported_hit_rate_in_range": hit_rate_in_range,
+        "counter_sum_relative_error": counter_error,
+        "hit_rate_usable": not l2_warnings,
+        "validation_warnings": l2_warnings,
     }
 
 

@@ -1,0 +1,81 @@
+{
+  "source_file": "resource_samples.jsonl",
+  "source_sha256": "abc7b45aedef23a6d6615641594ff5e548ea515846421922e004e12be8441491",
+  "sample_count": 127,
+  "resource_sample_count": 127,
+  "additional_events": [],
+  "first_sample": {
+    "time": "2026-09-05T12:09:52.899125+00:00",
+    "load": [
+      0.9228515625,
+      0.43798828125,
+      0.52490234375
+    ],
+    "host_available_bytes": 231650541568,
+    "disk_free_bytes": 53444952064,
+    "aggregate_process_rss_bytes": 3050848256,
+    "gpu_used_mib": 2000.0,
+    "gpu_free_mib": 180625.0,
+    "gpu_util_pct": 100.0,
+    "gpu_power_w": 982.52,
+    "gpu_temperature_c": 60.0,
+    "gpu_clock_mhz": 1477.0
+  },
+  "last_sample": {
+    "time": "2026-09-05T13:12:26.152733+00:00",
+    "load": [
+      0.7802734375,
+      1.318359375,
+      1.265625
+    ],
+    "host_available_bytes": 232102748160,
+    "disk_free_bytes": 53419454464,
+    "aggregate_process_rss_bytes": 1854488576,
+    "gpu_used_mib": 0.0,
+    "gpu_free_mib": 182625.0,
+    "gpu_util_pct": 0.0,
+    "gpu_power_w": 136.57,
+    "gpu_temperature_c": 33.0,
+    "gpu_clock_mhz": 120.0
+  },
+  "extrema": {
+    "aggregate_process_rss_bytes": {
+      "min": 1854488576,
+      "max": 3721240576
+    },
+    "disk_free_bytes": {
+      "min": 53419454464,
+      "max": 53444952064
+    },
+    "gpu_clock_mhz": {
+      "min": 120.0,
+      "max": 1965.0
+    },
+    "gpu_free_mib": {
+      "min": 14699.0,
+      "max": 182625.0
+    },
+    "gpu_power_w": {
+      "min": 136.57,
+      "max": 1006.44
+    },
+    "gpu_temperature_c": {
+      "min": 33.0,
+      "max": 71.0
+    },
+    "gpu_used_mib": {
+      "min": 0.0,
+      "max": 167926.0
+    },
+    "gpu_util_pct": {
+      "min": 0.0,
+      "max": 100.0
+    },
+    "host_available_bytes": {
+      "min": 230678065152,
+      "max": 232233029632
+    }
+  },
+  "max_load_1m": 1.8857421875,
+  "caveat": "Only sampled extrema and endpoints are retained; this is not a complete timeline or a guarantee about unsampled resource peaks. First experiment did not record aggregate RSS consistently."
+}

@@ -1,0 +1,234 @@
+{
+  "date_utc": "2026-09-05",
+  "deleted_files": [
+    {
+      "path": "ncu_boundary/profiles/decode/sq1_b64_sk512/attempt_001/standard_metadata.json",
+      "bytes": 541,
+      "sha256": "ab894f89fd4b51c44b383f24a07e99be3fb6d1068aa0b80b0a6918270dce1e1f",
+      "reason": "exact JSON duplicate of matrix_summary.configs[].profiles[mode].target_metadata"
+    },
+    {
+      "path": "ncu_boundary/profiles/decode/sq1_b64_sk512/attempt_001/localized_metadata.json",
+      "bytes": 652,
+      "sha256": "140a262d77989edae2ac5dda4a5dd1c759cf258ab72aebc3c471969d716ff662",
+      "reason": "exact JSON duplicate of matrix_summary.configs[].profiles[mode].target_metadata"
+    },
+    {
+      "path": "ncu_boundary/profiles/decode/sq1_b64_sk65536/attempt_001/localized_metadata.json",
+      "bytes": 662,
+      "sha256": "a8c9a0fe34c5cb8d84c8403f11841d61fa03009b981f5d279f93a6c8ce5fc283",
+      "reason": "exact JSON duplicate of matrix_summary.configs[].profiles[mode].target_metadata"
+    },
+    {
+      "path": "ncu_boundary/profiles/decode/sq1_b64_sk65536/attempt_001/standard_metadata.json",
+      "bytes": 543,
+      "sha256": "a1ef327e7119d6888a06b568409f4c8c641e7ecfdea5a422fc4519e30125f116",
+      "reason": "exact JSON duplicate of matrix_summary.configs[].profiles[mode].target_metadata"
+    },
+    {
+      "path": "ncu_boundary/profiles/decode/sq1_b64_sk524288/attempt_001/standard_metadata.json",
+      "bytes": 544,
+      "sha256": "999343aa9205e507718d2848ecdae575757a9913ef0af5bddc34a3f0abd2f987",
+      "reason": "exact JSON duplicate of matrix_summary.configs[].profiles[mode].target_metadata"
+    },
+    {
+      "path": "ncu_boundary/profiles/decode/sq1_b64_sk524288/attempt_001/localized_metadata.json",
+      "bytes": 667,
+      "sha256": "299e2bf829e3fe7df979642e26dc7bba3d143d0a04846d39070f90eae76a1f8c",
+      "reason": "exact JSON duplicate of matrix_summary.configs[].profiles[mode].target_metadata"
+    },
+    {
+      "path": "ncu_boundary/profiles/decode/sq1_b64_sk1048576/attempt_001/localized_metadata.json",
+      "bytes": 668,
+      "sha256": "bb953fa9143fead4efbd5ffe425b475a6fb94d58fffaa29e78c6a5818b72f681",
+      "reason": "exact JSON duplicate of matrix_summary.configs[].profiles[mode].target_metadata"
+    },
+    {
+      "path": "ncu_boundary/profiles/decode/sq1_b64_sk1048576/attempt_001/standard_metadata.json",
+      "bytes": 545,
+      "sha256": "ce7fb0a8df0032abfc4cc21411355c068a92bb76784200493ac3762ea2ef98b1",
+      "reason": "exact JSON duplicate of matrix_summary.configs[].profiles[mode].target_metadata"
+    },
+    {
+      "path": "ncu_boundary/profiles/decode/sq1_b2_sk1048576/attempt_001/standard_metadata.json",
+      "bytes": 545,
+      "sha256": "44c21cc98dfa723fc5fbdc079761a6291c834fe2861c0199480c607ecf8bcb86",
+      "reason": "exact JSON duplicate of matrix_summary.configs[].profiles[mode].target_metadata"
+    },
+    {
+      "path": "ncu_boundary/profiles/decode/sq1_b2_sk1048576/attempt_001/localized_metadata.json",
+      "bytes": 664,
+      "sha256": "daea24a6b951cd16b99a4edb7d2d48dce17c147d1e59fa840519d251d177d116",
+      "reason": "exact JSON duplicate of matrix_summary.configs[].profiles[mode].target_metadata"
+    },
+    {
+      "path": "ncu_boundary/profiles/decode/sq1_b16_sk1048576/attempt_001/localized_metadata.json",
+      "bytes": 666,
+      "sha256": "91b2b53d8aa340c14c2b0754baf04e3b62c19bcaea51712e1d53a9071d4c06ba",
+      "reason": "exact JSON duplicate of matrix_summary.configs[].profiles[mode].target_metadata"
+    },
+    {
+      "path": "ncu_boundary/profiles/decode/sq1_b16_sk1048576/attempt_001/standard_metadata.json",
+      "bytes": 545,
+      "sha256": "69927685bf7117f40a44472f25b0dae38e195ade7f707edede7a54461b12a589",
+      "reason": "exact JSON duplicate of matrix_summary.configs[].profiles[mode].target_metadata"
+    },
+    {
+      "path": "ncu_boundary/profiles/decode/sq4_b64_sk512/attempt_001/standard_metadata.json",
+      "bytes": 541,
+      "sha256": "f297ecf7a01f3504ed5d0d3c397ee9a47a1076b404a7374971eecb1a7044c68f",
+      "reason": "exact JSON duplicate of matrix_summary.configs[].profiles[mode].target_metadata"
+    },
+    {
+      "path": "ncu_boundary/profiles/decode/sq4_b64_sk512/attempt_001/localized_metadata.json",
+      "bytes": 654,
+      "sha256": "2c6586f4b1f5b24daf2ac221eb9f083140a2acabcb26e4559e296fac166719a1",
+      "reason": "exact JSON duplicate of matrix_summary.configs[].profiles[mode].target_metadata"
+    },
+    {
+      "path": "ncu_boundary/profiles/decode/sq4_b64_sk65536/attempt_001/localized_metadata.json",
+      "bytes": 664,
+      "sha256": "b0d5c8ff82c141a63fe0136f5cdbebb66946704b707407bdd8dd7682de1c254b",
+      "reason": "exact JSON duplicate of matrix_summary.configs[].profiles[mode].target_metadata"
+    },
+    {
+      "path": "ncu_boundary/profiles/decode/sq4_b64_sk65536/attempt_001/standard_metadata.json",
+      "bytes": 543,
+      "sha256": "3383ec504ed96f339eddbb6ce80034eda2b9244ffe58b2cfe208b60d5e202337",
+      "reason": "exact JSON duplicate of matrix_summary.configs[].profiles[mode].target_metadata"
+    },
+    {
+      "path": "ncu_boundary/profiles/decode/sq4_b64_sk524288/attempt_001/standard_metadata.json",
+      "bytes": 544,
+      "sha256": "7d90ddd8cba84a3390f101c88c7718adcaa8dde89de67887d4c0d63c7cc0912e",
+      "reason": "exact JSON duplicate of matrix_summary.configs[].profiles[mode].target_metadata"
+    },
+    {
+      "path": "ncu_boundary/profiles/decode/sq4_b64_sk524288/attempt_001/localized_metadata.json",
+      "bytes": 669,
+      "sha256": "ec4814c5e263ef9c647de79bf9b6bfeae7c17d5a03951267ce3cb2028991f074",
+      "reason": "exact JSON duplicate of matrix_summary.configs[].profiles[mode].target_metadata"
+    },
+    {
+      "path": "ncu_boundary/profiles/decode/sq4_b64_sk1048576/attempt_001/localized_metadata.json",
+      "bytes": 670,
+      "sha256": "b02316906b0c7805ce0cd95587056484dcd14dc1abb62bc78a60c643dbad42e3",
+      "reason": "exact JSON duplicate of matrix_summary.configs[].profiles[mode].target_metadata"
+    },
+    {
+      "path": "ncu_boundary/profiles/decode/sq4_b64_sk1048576/attempt_001/standard_metadata.json",
+      "bytes": 545,
+      "sha256": "d66c401e7df1c85fd613bb3d9f1ff7f223010351b5b1a15bf1f9052fd677e1d6",
+      "reason": "exact JSON duplicate of matrix_summary.configs[].profiles[mode].target_metadata"
+    },
+    {
+      "path": "ncu_boundary/profiles/decode/sq4_b2_sk1048576/attempt_001/standard_metadata.json",
+      "bytes": 544,
+      "sha256": "3362f0773f32d39e051691cb84c75a1e954dd5e8c86cf5fff1fdbe4157621442",
+      "reason": "exact JSON duplicate of matrix_summary.configs[].profiles[mode].target_metadata"
+    },
+    {
+      "path": "ncu_boundary/profiles/decode/sq4_b2_sk1048576/attempt_001/localized_metadata.json",
+      "bytes": 661,
+      "sha256": "acf414ae260bd160d9598e018f43a018444c75f273adcc1bf2ac180a62b43f65",
+      "reason": "exact JSON duplicate of matrix_summary.configs[].profiles[mode].target_metadata"
+    },
+    {
+      "path": "ncu_boundary/profiles/decode/sq4_b16_sk1048576/attempt_001/localized_metadata.json",
+      "bytes": 664,
+      "sha256": "b98290d73874e287c753f9a493f1f0d82e0782f40365abe9c11169379ee857be",
+      "reason": "exact JSON duplicate of matrix_summary.configs[].profiles[mode].target_metadata"
+    },
+    {
+      "path": "ncu_boundary/profiles/decode/sq4_b16_sk1048576/attempt_001/standard_metadata.json",
+      "bytes": 545,
+      "sha256": "d214c22a1c9b07a28de22e66965b9b5f7910d8b36df1ee98c682a0e768b40d8e",
+      "reason": "exact JSON duplicate of matrix_summary.configs[].profiles[mode].target_metadata"
+    },
+    {
+      "path": "ncu_boundary/profiles/prefill/sq128_b64_sk512/attempt_001/standard_metadata.json",
+      "bytes": 544,
+      "sha256": "7917fc78bfbca4284c0be8385dd1659f8f47daa043cfeadf8a72526191e3ac2f",
+      "reason": "exact JSON duplicate of matrix_summary.configs[].profiles[mode].target_metadata"
+    },
+    {
+      "path": "ncu_boundary/profiles/prefill/sq128_b64_sk512/attempt_001/localized_metadata.json",
+      "bytes": 659,
+      "sha256": "4146af6e3845990aee761206b827df4f6229acae04c28ba79752307f0e4f2749",
+      "reason": "exact JSON duplicate of matrix_summary.configs[].profiles[mode].target_metadata"
+    },
+    {
+      "path": "ncu_boundary/profiles/prefill/sq128_b64_sk65536/attempt_002/localized_metadata.json",
+      "bytes": 669,
+      "sha256": "6a81d283205ff6383ba52f5fbf44e1c4f679bf996bd1d2b5e232bdff6abaf9b7",
+      "reason": "exact JSON duplicate of matrix_summary.configs[].profiles[mode].target_metadata"
+    },
+    {
+      "path": "ncu_boundary/profiles/prefill/sq128_b64_sk65536/attempt_002/standard_metadata.json",
+      "bytes": 546,
+      "sha256": "84a0084bc225f9c2ec69e071648c30576a805f85347d011ceb913be0e24e4f34",
+      "reason": "exact JSON duplicate of matrix_summary.configs[].profiles[mode].target_metadata"
+    },
+    {
+      "path": "ncu_boundary/profiles/prefill/sq128_b64_sk524288/attempt_001/standard_metadata.json",
+      "bytes": 547,
+      "sha256": "eee70f4ee11d35d5e519b92adeace3437b79232d587d2e85a7e15ca2e0d63f80",
+      "reason": "exact JSON duplicate of matrix_summary.configs[].profiles[mode].target_metadata"
+    },
+    {
+      "path": "ncu_boundary/profiles/prefill/sq128_b64_sk524288/attempt_001/localized_metadata.json",
+      "bytes": 674,
+      "sha256": "0d8b18fa14c300629dd12c5b90f63cd320e16eb64ea9c9497b7a4a36a0123a87",
+      "reason": "exact JSON duplicate of matrix_summary.configs[].profiles[mode].target_metadata"
+    },
+    {
+      "path": "ncu_boundary/profiles/prefill/sq128_b64_sk1008576/attempt_001/localized_metadata.json",
+      "bytes": 675,
+      "sha256": "6da2ff600e280a94ab5cc9f5963a437cd26be74d04d1c6dc54fba6541d44d0b2",
+      "reason": "exact JSON duplicate of matrix_summary.configs[].profiles[mode].target_metadata"
+    },
+    {
+      "path": "ncu_boundary/profiles/prefill/sq128_b64_sk1008576/attempt_001/standard_metadata.json",
+      "bytes": 548,
+      "sha256": "a4a3a1916ff2e744fa29f6a5d733e500589e8fbd01ffe348d4b26030328d47ae",
+      "reason": "exact JSON duplicate of matrix_summary.configs[].profiles[mode].target_metadata"
+    },
+    {
+      "path": "ncu_boundary/profiles/prefill/sq128_b2_sk1008576/attempt_001/standard_metadata.json",
+      "bytes": 547,
+      "sha256": "8709d9d63aa2e425dbb22630e77f3b39b9f4909788888ad0f8225fb97a0aed70",
+      "reason": "exact JSON duplicate of matrix_summary.configs[].profiles[mode].target_metadata"
+    },
+    {
+      "path": "ncu_boundary/profiles/prefill/sq128_b2_sk1008576/attempt_001/localized_metadata.json",
+      "bytes": 666,
+      "sha256": "734b2ca6c6a2b40cef136e6fe90af91427471bc17966afc709bdc34dcda58e13",
+      "reason": "exact JSON duplicate of matrix_summary.configs[].profiles[mode].target_metadata"
+    },
+    {
+      "path": "ncu_boundary/profiles/prefill/sq128_b16_sk1008576/attempt_001/localized_metadata.json",
+      "bytes": 671,
+      "sha256": "9be1812eaf9a2d3ddd67f6429bd5a3d58c9fffb8b0797332a873f3bf2158f0f4",
+      "reason": "exact JSON duplicate of matrix_summary.configs[].profiles[mode].target_metadata"
+    },
+    {
+      "path": "ncu_boundary/profiles/prefill/sq128_b16_sk1008576/attempt_001/standard_metadata.json",
+      "bytes": 548,
+      "sha256": "0c240eed0e67e7152f7c1e13345aa994fb2221205343bfe872318f2c95204417",
+      "reason": "exact JSON duplicate of matrix_summary.configs[].profiles[mode].target_metadata"
+    },
+    {
+      "path": "resource_samples.jsonl",
+      "bytes": 254821,
+      "sha256": "40c0b3d539d3f052649d8e8ea064e4290130957c8e12e4df938e57d852f004fe",
+      "reason": "replaced verbose OS snapshots with resource_summary.json endpoints and sampled extrema"
+    }
+  ],
+  "deleted_file_count": 37,
+  "deleted_bytes": 276601,
+  "bytes_before_cleanup": 11300061,
+  "retention": "All NCU reports, raw CSV, profiler logs, exact commands, timing JSON, main summaries, figures, correctness results, first failed attempt and diagnostic remeasurements retained. No abnormal measurement was removed for being abnormal.",
+  "metadata_location": "<experiment>/matrix_summary.json -> configs[].profiles[mode].target_metadata; also in TARGET_METADATA lines of profiler logs.",
+  "resource_location": "resource_summary.json",
+  "external_followups": "Baseline single-metric raw reports remain outside the repository in /tmp. Deleted localized repeat artifacts were not restored."
+}

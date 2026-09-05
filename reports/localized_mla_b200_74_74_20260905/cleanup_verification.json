@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "date_utc": "2026-09-05",
+  "deleted_files_match_manifest": 37,
+  "original_measurement_files_hash_unchanged": 182,
+  "main_profiles_reverified_against_raw_csv_and_logs": 36,
+  "retained_ncu_reports": 41,
+  "all_local_markdown_links_resolve": true,
+  "report_python_syntax_valid": true,
+  "original_numeric_results_unchanged": true,
+  "scope": "Offline organization only; no GPU experiments rerun. All original raw CSV, NCU reports and diagnostic evidence retained. Localized repeat artifacts deleted previously remain deleted."
+}

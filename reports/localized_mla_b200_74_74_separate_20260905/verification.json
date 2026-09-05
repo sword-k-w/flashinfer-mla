@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "prefill_protocol_matches_old": true,
+  "prefill_topologies_74_74": 72,
+  "prefill_output_and_lse_bitwise_equal_pairs": 72,
+  "all_prefill_blocks_have_at_least_20_samples_per_mode": true,
+  "distinct_main_reports": 72,
+  "all_metric_values_match_raw_csv": true,
+  "same_boundary_shapes_in_both_experiments": true,
+  "ltc_and_memory_metrics_separate": true,
+  "changed_scripts_since_initial_snapshot": [
+    "benchmarks/profile_cute_dsl_localized_mla_ltc_target.py"
+  ],
+  "changed_kernel_sources_since_snapshot": [],
+  "caveat": "Raw-data integrity checks do not establish accuracy of anomalous L2 metrics."
+}

@@ -1,0 +1,51 @@
+{
+  "started_at": "2026-09-05T12:09:52.875382+00:00",
+  "initial_resource_sample": {
+    "time": "2026-09-05T12:09:52.899125+00:00",
+    "logical_cpus": 20,
+    "load": [
+      0.9228515625,
+      0.43798828125,
+      0.52490234375
+    ],
+    "mem_available_kib": 226221232,
+    "aggregate_process_rss_kib": 2979344,
+    "cpu_jiffies": "cpu  176030 0 85693 7635579 12628 0 555 133 0 0",
+    "tmp_disk_free_bytes": 53444952064,
+    "gpu": "GPU-831fae2c-f9be-da45-6749-cf96b741d59b, NVIDIA B200, 100 %, 2000 MiB, 180625 MiB, 982.52 W, 60, 1477 MHz"
+  },
+  "scripts_sha256": {
+    "benchmarks/bench_cute_dsl_localized_mla_prefill.py": "53450a2096f9c29a945080c2684c08049a2f729c6b4657dce0b678cacbe5c85f",
+    "benchmarks/bench_cute_dsl_localized_mla.py": "b8d75b63ca269cf087c99af663a5133e6dffe4df39f72ed2b8bd86336a89ed8d",
+    "benchmarks/localized_mla_prefill_benchmark.py": "fc898f82755a75c042c3db1c14ed7b1fb281e7f0209956e45004c75d51337ce2",
+    "benchmarks/profile_cute_dsl_localized_mla_separate.py": "a2b6a6f3a7edfeee35353e3d57179ff77877dc4147d84c4f6f80b4f88a563c85",
+    "benchmarks/profile_cute_dsl_localized_mla_ltc_target.py": "903bb0688b5f9baaf53bbdd576b6349321a6332579c56955b0358e2bf34e0aa2",
+    "benchmarks/profile_cute_dsl_localized_mla_memory.py": "13443827135f75ebdd5652bc97cd81538eac4a18fe812b7af31782feb006b1ea",
+    "benchmarks/profile_cute_dsl_localized_mla_boundary.py": "4ff9017550bbb9ef414e9c9a663974bf49c705432b2b97eaad211230495c974e"
+  },
+  "prefill_reference": {
+    "path": "/workspace/flashinfer-mla/reports/localized_mla_prefill_sq128_dense/iter_000_evaluation/timing.json",
+    "sha256": "8faedca7d9c1a700e5bed7096ddd38934f98c4f63b75ff9ddcbdfb22c0938c17"
+  },
+  "environment": {
+    "MAX_JOBS": "5",
+    "FLASHINFER_NVCC_THREADS": "1",
+    "OMP_NUM_THREADS": "5",
+    "PYTHONPATH": "/workspace/flashinfer-mla"
+  },
+  "finished_at": "2026-09-05T13:12:26.128868+00:00",
+  "final_resource_sample": {
+    "time": "2026-09-05T13:12:26.152733+00:00",
+    "logical_cpus": 20,
+    "load": [
+      0.7802734375,
+      1.318359375,
+      1.265625
+    ],
+    "mem_available_kib": 226662840,
+    "aggregate_process_rss_kib": 1811024,
+    "cpu_jiffies": "cpu  547277 0 134903 14710145 13201 0 2427 299 0 0",
+    "tmp_disk_free_bytes": 53419454464,
+    "gpu": "GPU-831fae2c-f9be-da45-6749-cf96b741d59b, NVIDIA B200, 0 %, 0 MiB, 182625 MiB, 136.57 W, 33, 120 MHz"
+  }
+}

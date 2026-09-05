@@ -1,0 +1,204 @@
+{
+  "prefill_performance": {
+    "points": 72,
+    "started_at": "2026-09-05T12:08:09.715222+00:00",
+    "finished_at": "2026-09-05T13:01:18.328955+00:00",
+    "speedup_geomean": 0.9925375428721159,
+    "speedup_median": 0.9915566452320543,
+    "localized_wins": 12,
+    "speedup_min": 0.9640523184149256,
+    "speedup_max": 1.0366027637823343,
+    "max_block_speedup_spread_pct": 2.35176361377587,
+    "points_with_block_spread_above_10pct": 0,
+    "old_74_74_speedup_geomean": 0.9914948356179701
+  },
+  "experiments": {
+    "ltc": {
+      "pairs": 18,
+      "reports": 36,
+      "metrics": [
+        "lts__t_requests_srcunit_ltcfabric.sum"
+      ],
+      "replay_pass_counts": [
+        1
+      ],
+      "quality_warnings": []
+    },
+    "memory": {
+      "pairs": 18,
+      "reports": 36,
+      "metrics": [
+        "dram__bytes_read.sum",
+        "dram__bytes_read.sum.per_second",
+        "dram__bytes_write.sum",
+        "dram__bytes_write.sum.per_second",
+        "dram__throughput.avg.pct_of_peak_sustained_elapsed",
+        "gpu__time_duration.avg",
+        "lts__t_sector_hit_rate.pct",
+        "lts__t_sectors.sum",
+        "lts__t_sectors_lookup_hit.sum",
+        "lts__t_sectors_lookup_miss.sum"
+      ],
+      "replay_pass_counts": [
+        4
+      ],
+      "quality_warnings": [
+        {
+          "workload": "prefill",
+          "shape": "sq128_b64_sk65536",
+          "mode": "localized",
+          "l2": {
+            "hit_rate_pct": 108.47,
+            "hit_rate_from_lookup_counts_pct": 96.77273762051799,
+            "total_sectors": 25233132772.0,
+            "lookup_hit_sectors": 27369891487.0,
+            "lookup_miss_sectors": 912755217.0,
+            "duration_ns": 93413088.0,
+            "reported_hit_rate_in_range": false,
+            "counter_sum_relative_error": 0.12085356025962413,
+            "hit_rate_usable": false,
+            "validation_warnings": [
+              "reported L2 hit rate lies outside [0, 100]%",
+              "L2 hit+miss differs from total sectors by more than 5%"
+            ]
+          }
+        },
+        {
+          "workload": "prefill",
+          "shape": "sq128_b64_sk65536",
+          "mode": "standard",
+          "l2": {
+            "hit_rate_pct": 81.69,
+            "hit_rate_from_lookup_counts_pct": 94.1242037491031,
+            "total_sectors": 17702955352.0,
+            "lookup_hit_sectors": 14461784618.0,
+            "lookup_miss_sectors": 902791168.0,
+            "duration_ns": 90008128.0,
+            "reported_hit_rate_in_range": true,
+            "counter_sum_relative_error": -0.13208978498247304,
+            "hit_rate_usable": false,
+            "validation_warnings": [
+              "L2 hit+miss differs from total sectors by more than 5%"
+            ]
+          }
+        },
+        {
+          "workload": "prefill",
+          "shape": "sq128_b64_sk524288",
+          "mode": "standard",
+          "l2": {
+            "hit_rate_pct": 74.07,
+            "hit_rate_from_lookup_counts_pct": 80.92199179080995,
+            "total_sectors": 153001522276.0,
+            "lookup_hit_sectors": 113333166965.0,
+            "lookup_miss_sectors": 26719202554.0,
+            "duration_ns": 796923840.0,
+            "reported_hit_rate_in_range": true,
+            "counter_sum_relative_error": -0.08463414327107788,
+            "hit_rate_usable": false,
+            "validation_warnings": [
+              "L2 hit+miss differs from total sectors by more than 5%"
+            ]
+          }
+        },
+        {
+          "workload": "prefill",
+          "shape": "sq128_b64_sk524288",
+          "mode": "localized",
+          "l2": {
+            "hit_rate_pct": 86.05,
+            "hit_rate_from_lookup_counts_pct": 92.55302977750047,
+            "total_sectors": 173684169894.0,
+            "lookup_hit_sectors": 149458575067.0,
+            "lookup_miss_sectors": 12025684742.0,
+            "duration_ns": 787899392.0,
+            "reported_hit_rate_in_range": true,
+            "counter_sum_relative_error": -0.07024192298265086,
+            "hit_rate_usable": false,
+            "validation_warnings": [
+              "L2 hit+miss differs from total sectors by more than 5%"
+            ]
+          }
+        },
+        {
+          "workload": "prefill",
+          "shape": "sq128_b64_sk1008576",
+          "mode": "standard",
+          "l2": {
+            "hit_rate_pct": 85.67,
+            "hit_rate_from_lookup_counts_pct": 78.74516717546467,
+            "total_sectors": 265845081832.0,
+            "lookup_hit_sectors": 227742581391.0,
+            "lookup_miss_sectors": 61472096233.0,
+            "duration_ns": 1610197344.0,
+            "reported_hit_rate_in_range": true,
+            "counter_sum_relative_error": 0.08790682013357065,
+            "hit_rate_usable": false,
+            "validation_warnings": [
+              "L2 hit+miss differs from total sectors by more than 5%"
+            ]
+          }
+        },
+        {
+          "workload": "prefill",
+          "shape": "sq128_b2_sk1008576",
+          "mode": "standard",
+          "l2": {
+            "hit_rate_pct": 82.07,
+            "hit_rate_from_lookup_counts_pct": 94.37281430711138,
+            "total_sectors": 7495877311.0,
+            "lookup_hit_sectors": 6151802934.0,
+            "lookup_miss_sectors": 366814720.0,
+            "duration_ns": 48121408.0,
+            "reported_hit_rate_in_range": true,
+            "counter_sum_relative_error": -0.13037295255165093,
+            "hit_rate_usable": false,
+            "validation_warnings": [
+              "L2 hit+miss differs from total sectors by more than 5%"
+            ]
+          }
+        },
+        {
+          "workload": "prefill",
+          "shape": "sq128_b2_sk1008576",
+          "mode": "localized",
+          "l2": {
+            "hit_rate_pct": 107.26,
+            "hit_rate_from_lookup_counts_pct": 97.4056806097785,
+            "total_sectors": 10296203318.0,
+            "lookup_hit_sectors": 11043429643.0,
+            "lookup_miss_sectors": 294132575.0,
+            "duration_ns": 48995136.0,
+            "reported_hit_rate_in_range": false,
+            "counter_sum_relative_error": 0.10114008706291555,
+            "hit_rate_usable": false,
+            "validation_warnings": [
+              "reported L2 hit rate lies outside [0, 100]%",
+              "L2 hit+miss differs from total sectors by more than 5%"
+            ]
+          }
+        },
+        {
+          "workload": "prefill",
+          "shape": "sq128_b16_sk1008576",
+          "mode": "standard",
+          "l2": {
+            "hit_rate_pct": 102.53,
+            "hit_rate_from_lookup_counts_pct": 91.78956952818392,
+            "total_sectors": 57089236070.0,
+            "lookup_hit_sectors": 58536040473.0,
+            "lookup_miss_sectors": 5235955380.0,
+            "duration_ns": 368513984.0,
+            "reported_hit_rate_in_range": false,
+            "counter_sum_relative_error": 0.11705813990584724,
+            "hit_rate_usable": false,
+            "validation_warnings": [
+              "reported L2 hit rate lies outside [0, 100]%",
+              "L2 hit+miss differs from total sectors by more than 5%"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "source_file": "resource_samples.jsonl",
+  "source_sha256": "40c0b3d539d3f052649d8e8ea064e4290130957c8e12e4df938e57d852f004fe",
+  "sample_count": 112,
+  "resource_sample_count": 111,
+  "additional_events": [
+    {
+      "time": "2026-09-05T11:22:48.643179+00:00",
+      "clock_event_snapshot": "Active, Not Active, 1000.00 W, 1350 MHz"
+    }
+  ],
+  "first_sample": {
+    "time": "2026-09-05T11:18:54.710047+00:00",
+    "load": [
+      0.97021484375,
+      0.5322265625,
+      0.26025390625
+    ],
+    "host_available_bytes": 232885641216,
+    "disk_free_bytes": 53464444928,
+    "gpu_used_mib": 1092.0,
+    "gpu_free_mib": 181533.0,
+    "gpu_util_pct": 98.0,
+    "gpu_power_w": 553.4,
+    "gpu_temperature_c": 47.0,
+    "gpu_clock_mhz": 1965.0
+  },
+  "last_sample": {
+    "time": "2026-09-05T11:54:46.706518+00:00",
+    "load": [
+      1.29345703125,
+      0.978515625,
+      0.95849609375
+    ],
+    "host_available_bytes": 232417148928,
+    "disk_free_bytes": 53449502720,
+    "gpu_used_mib": 19054.0,
+    "gpu_free_mib": 163571.0,
+    "gpu_util_pct": 0.0,
+    "gpu_power_w": 196.59,
+    "gpu_temperature_c": 40.0,
+    "gpu_clock_mhz": 1965.0
+  },
+  "extrema": {
+    "disk_free_bytes": {
+      "min": 53429051392,
+      "max": 53468495872
+    },
+    "gpu_clock_mhz": {
+      "min": 120.0,
+      "max": 1965.0
+    },
+    "gpu_free_mib": {
+      "min": 9995.0,
+      "max": 182625.0
+    },
+    "gpu_power_w": {
+      "min": 135.99,
+      "max": 1007.41
+    },
+    "gpu_temperature_c": {
+      "min": 34.0,
+      "max": 69.0
+    },
+    "gpu_used_mib": {
+      "min": 0.0,
+      "max": 172630.0
+    },
+    "gpu_util_pct": {
+      "min": 0.0,
+      "max": 100.0
+    },
+    "host_available_bytes": {
+      "min": 231740887040,
+      "max": 233462829056
+    }
+  },
+  "max_load_1m": 1.779296875,
+  "caveat": "Only sampled extrema and endpoints are retained; this is not a complete timeline or a guarantee about unsampled resource peaks. First experiment did not record aggregate RSS consistently."
+}

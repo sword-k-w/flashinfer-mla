@@ -1,0 +1,162 @@
+{
+  "status": "complete",
+  "partition_sm_counts": [
+    74,
+    74
+  ],
+  "timings": {
+    "decode_sq1": {
+      "source": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_20260905/decode/sq1/post_flops.json",
+      "started_at": "2026-09-05T11:15:40.032613+00:00",
+      "finished_at": "2026-09-05T11:29:11.269600+00:00",
+      "count": 72,
+      "wins": 54,
+      "geomean": 1.0382102919053873,
+      "median": 1.0536408113319529,
+      "min": 0.8908145390019051,
+      "max": 1.127572539451365,
+      "long_sk_geomean": 1.0859922117729377,
+      "b2_geomean": 1.0105466413072792,
+      "max_paired_block_spread_pct": 3.132701017821593,
+      "cells_with_paired_block_spread_above_10_pct": 0,
+      "min_free_hbm_gib": 10.8385009765625,
+      "capacity": {
+        "batch_size": 64,
+        "seqlen_k": 1048576,
+        "standard_ms": 18.47145652770996,
+        "localized_ms": 16.826256275177002,
+        "speedup": 1.0977757752899584
+      }
+    },
+    "decode_sq4": {
+      "source": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_20260905/decode/sq4/post_flops.json",
+      "started_at": "2026-09-05T11:30:13.434041+00:00",
+      "finished_at": "2026-09-05T11:44:34.863062+00:00",
+      "count": 72,
+      "wins": 57,
+      "geomean": 1.0285450912083829,
+      "median": 1.0337240373231826,
+      "min": 0.9163089615895238,
+      "max": 1.136074582527645,
+      "long_sk_geomean": 1.0558180786788305,
+      "b2_geomean": 1.0054430054621897,
+      "max_paired_block_spread_pct": 5.098065068196922,
+      "cells_with_paired_block_spread_above_10_pct": 0,
+      "min_free_hbm_gib": 10.0103759765625,
+      "capacity": {
+        "batch_size": 64,
+        "seqlen_k": 1048576,
+        "standard_ms": 69.92961502075195,
+        "localized_ms": 61.99535942077637,
+        "speedup": 1.127981443677486
+      }
+    },
+    "prefill_sq128_reused": {
+      "source": "/workspace/flashinfer-mla/reports/localized_mla_prefill_sq128_dense/iter_000_evaluation/timing.json",
+      "started_at": "2026-09-04T15:04:06.676613+00:00",
+      "finished_at": "2026-09-04T15:58:06.968325+00:00",
+      "count": 72,
+      "wins": 12,
+      "geomean": 0.9914948356179701,
+      "median": 0.9932220205070909,
+      "min": 0.9624428663869962,
+      "max": 1.0151079037309165,
+      "long_sk_geomean": 0.9900202396507917,
+      "b2_geomean": 0.9876444472263964,
+      "max_paired_block_spread_pct": 4.31656217953027,
+      "cells_with_paired_block_spread_above_10_pct": 0,
+      "min_free_hbm_gib": 16.7916259765625,
+      "capacity": {
+        "batch_size": 64,
+        "seqlen_k": 1008576,
+        "standard_ms": 1580.4696655273438,
+        "localized_ms": 1560.08251953125,
+        "speedup": 1.0130679920714831
+      }
+    }
+  },
+  "counter_config_count": 18,
+  "ncu_report_count": 36,
+  "ncu_replay_passes": [
+    4
+  ],
+  "counter_started_at": "2026-09-05T11:44:52.717526+00:00",
+  "counter_finished_at": "2026-09-05T11:54:51.738828+00:00",
+  "validation_status": "passed",
+  "metric_quality_warnings": [
+    {
+      "workload": "decode",
+      "shape": "sq4_b64_sk1048576",
+      "mode": "standard",
+      "warnings": [
+        "L2 hit+miss differs from total sectors by more than 5%"
+      ],
+      "raw_hit_rate_pct": 60.37,
+      "counter_sum_relative_error": 0.15292241808649498
+    },
+    {
+      "workload": "prefill",
+      "shape": "sq128_b64_sk65536",
+      "mode": "localized",
+      "warnings": [
+        "reported L2 hit rate lies outside [0, 100]%",
+        "L2 hit+miss differs from total sectors by more than 5%"
+      ],
+      "raw_hit_rate_pct": 102.2,
+      "counter_sum_relative_error": 0.05542621698554839
+    },
+    {
+      "workload": "prefill",
+      "shape": "sq128_b64_sk524288",
+      "mode": "localized",
+      "warnings": [
+        "reported L2 hit rate lies outside [0, 100]%",
+        "L2 hit+miss differs from total sectors by more than 5%"
+      ],
+      "raw_hit_rate_pct": 106.56,
+      "counter_sum_relative_error": 0.14831950944946315
+    },
+    {
+      "workload": "prefill",
+      "shape": "sq128_b2_sk1008576",
+      "mode": "standard",
+      "warnings": [
+        "reported L2 hit rate lies outside [0, 100]%",
+        "L2 hit+miss differs from total sectors by more than 5%"
+      ],
+      "raw_hit_rate_pct": 114.64,
+      "counter_sum_relative_error": 0.20301336844026663
+    },
+    {
+      "workload": "prefill",
+      "shape": "sq128_b2_sk1008576",
+      "mode": "localized",
+      "warnings": [
+        "reported L2 hit rate lies outside [0, 100]%",
+        "L2 hit+miss differs from total sectors by more than 5%"
+      ],
+      "raw_hit_rate_pct": 107.74,
+      "counter_sum_relative_error": 0.10715872280621741
+    },
+    {
+      "workload": "prefill",
+      "shape": "sq128_b16_sk1008576",
+      "mode": "localized",
+      "warnings": [
+        "L2 hit+miss differs from total sectors by more than 5%"
+      ],
+      "raw_hit_rate_pct": 78.86,
+      "counter_sum_relative_error": -0.162819668481074
+    },
+    {
+      "workload": "prefill",
+      "shape": "sq128_b16_sk1008576",
+      "mode": "standard",
+      "warnings": [
+        "L2 hit+miss differs from total sectors by more than 5%"
+      ],
+      "raw_hit_rate_pct": 82.61,
+      "counter_sum_relative_error": -0.11249474262765513
+    }
+  ]
+}

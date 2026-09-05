@@ -1,0 +1,56 @@
+{
+  "recorded_at": "2026-09-05T11:18:05.105574+00:00",
+  "logical_cpus": 20,
+  "load_average": [
+    0.9267578125,
+    0.4443359375,
+    0.21630859375
+  ],
+  "gpu": "NVIDIA B200, GPU-831fae2c-f9be-da45-6749-cf96b741d59b, 595.45.04, 183359 MiB",
+  "meminfo": "MemTotal:       230894128 kB\nMemFree:        227000104 kB\nMemAvailable:   227446764 kB\nBuffers:           72588 kB\nCached:          2086792 kB\nSwapCached:            0 kB\nActive:          2620464 kB\nInactive:         431256 kB\nActive(anon):     915812 kB\nInactive(anon):        0 kB\nActive(file):    1704652 kB\nInactive(file):   431256 kB\nUnevictable:       41264 kB\nMlocked:           41264 kB\nSwapTotal:             0 kB\nSwapFree:              0 kB\nZswap:                 0 kB\nZswapped:              0 kB\nDirty:               752 kB\nWriteback:             0 kB\nAnonPages:        933700 kB\nMapped:          1165956 kB\nShmem:             12360 kB\nKReclaimable:      95460 kB\nSlab:             247292 kB\nSReclaimable:      95460 kB\nSUnreclaim:       151832 kB\nKernelStack:        9376 kB\nPageTables:        11180 kB\nSecPageTables:         0 kB\nNFS_Unstable:          0 kB\nBounce:                0 kB\nWritebackTmp:          0 kB\nCommitLimit:    115447064 kB\nCommitted_AS:    4172296 kB\nVmallocTotal:   13743895347199 kB\nVmallocUsed:      104704 kB\nVmallocChunk:          0 kB\nPercpu:            10160 kB\nHardwareCorrupted:     0 kB\nAnonHugePages:         0 kB\nShmemHugePages:        0 kB\nShmemPmdMapped:        0 kB\nFileHugePages:         0 kB\nFilePmdMapped:         0 kB\nUnaccepted:            0 kB\nHugePages_Total:       0\nHugePages_Free:        0\nHugePages_Rsvd:        0\nHugePages_Surp:        0\nHugepagesize:       2048 kB\nHugetlb:               0 kB\nDirectMap4k:      421748 kB\nDirectMap2M:     6918144 kB\nDirectMap1G:    229638144 kB\n",
+  "disk": "Filesystem      Size  Used Avail Use% Mounted on\noverlay         116G   66G   50G  57% /\n/dev/vda1       116G   66G   50G  57% /workspace\n",
+  "build_environment": {
+    "MAX_JOBS": "5",
+    "FLASHINFER_NVCC_THREADS": "1",
+    "OMP_NUM_THREADS": "5"
+  },
+  "observed_partition_sm_counts": [
+    74,
+    74
+  ],
+  "observed_partition_clusters": [
+    37,
+    37
+  ],
+  "git_revision": "db8d4165c6c726c8b8b8d77acee337e197665224",
+  "packages": {
+    "torch": "2.12.1+cu132",
+    "triton": "3.7.1",
+    "nvidia-cutlass-dsl": "4.7.1",
+    "apache-tvm-ffi": "0.1.13.post3",
+    "matplotlib": "3.11.1",
+    "numpy": "2.5.2"
+  },
+  "script_sha256": {
+    "benchmarks/bench_cute_dsl_localized_mla.py": "b8d75b63ca269cf087c99af663a5133e6dffe4df39f72ed2b8bd86336a89ed8d",
+    "benchmarks/profile_cute_dsl_localized_mla_ltc_target.py": "903bb0688b5f9baaf53bbdd576b6349321a6332579c56955b0358e2bf34e0aa2",
+    "benchmarks/profile_cute_dsl_localized_mla_memory.py": "7c22af876e317bea0e7aa2b9b782288ee4c0945f56c315b8c0bc6fd26d89b64a",
+    "benchmarks/profile_cute_dsl_localized_mla_boundary.py": "c4ec725393a37f54fd10b1662466413357a02b227f24a738cf91aa3c041cf480",
+    "benchmarks/validate_cute_dsl_localized_mla_profile_target.py": "dfbb953ec456b226fc0b7b67e91fa7922ca965122961c6d39f376b8092237f63"
+  },
+  "reused_prefill_timing": {
+    "path": "reports/localized_mla_prefill_sq128_dense/iter_000_evaluation/timing.json",
+    "sha256": "8faedca7d9c1a700e5bed7096ddd38934f98c4f63b75ff9ddcbdfb22c0938c17",
+    "topology_sm_counts": [
+      74,
+      74
+    ]
+  },
+  "final_script_sha256": {
+    "benchmarks/bench_cute_dsl_localized_mla.py": "b8d75b63ca269cf087c99af663a5133e6dffe4df39f72ed2b8bd86336a89ed8d",
+    "benchmarks/profile_cute_dsl_localized_mla_ltc_target.py": "903bb0688b5f9baaf53bbdd576b6349321a6332579c56955b0358e2bf34e0aa2",
+    "benchmarks/profile_cute_dsl_localized_mla_memory.py": "13443827135f75ebdd5652bc97cd81538eac4a18fe812b7af31782feb006b1ea",
+    "benchmarks/profile_cute_dsl_localized_mla_boundary.py": "4ff9017550bbb9ef414e9c9a663974bf49c705432b2b97eaad211230495c974e",
+    "benchmarks/validate_cute_dsl_localized_mla_profile_target.py": "dfbb953ec456b226fc0b7b67e91fa7922ca965122961c6d39f376b8092237f63"
+  }
+}

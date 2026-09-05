@@ -51,6 +51,7 @@ DEFAULT_OUTPUT = (
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--device", type=int, default=0)
+    parser.add_argument("--expected-partition-sm-counts", type=int, nargs=2)
     parser.add_argument(
         "--batch-sizes", type=int, nargs="+", default=list(DEFAULT_BATCH_SIZES)
     )
@@ -157,9 +158,7 @@ def choose_capacity_seqlen_k(
     reserve_bytes = int(free_bytes * (1.0 - args.hbm_utilization))
     usable_bytes = free_bytes - reserve_bytes - fixed_bytes
     bytes_per_k_token_for_pair = 2 * kv_bytes(max_batch, 1)
-    upper_seqlen_k = (
-        usable_bytes // bytes_per_k_token_for_pair // PAGE_SIZE * PAGE_SIZE
-    )
+    upper_seqlen_k = usable_bytes // bytes_per_k_token_for_pair // PAGE_SIZE * PAGE_SIZE
     if upper_seqlen_k < PAGE_SIZE:
         raise RuntimeError("not enough free HBM for the requested benchmark matrix")
 
@@ -187,9 +186,7 @@ def choose_capacity_seqlen_k(
         try:
             free_after_localized, _ = torch.cuda.mem_get_info(device)
             standard_kv_bytes = kv_bytes(max_batch, midpoint)
-            projected_remaining = (
-                free_after_localized - standard_kv_bytes - fixed_bytes
-            )
+            projected_remaining = free_after_localized - standard_kv_bytes - fixed_bytes
             safe = projected_remaining >= reserve_bytes
             probe = {
                 "seqlen_k": midpoint,
@@ -320,11 +317,18 @@ def run_case(
 ) -> dict:
     free_before, total_bytes = torch.cuda.mem_get_info(device)
     started = time.monotonic()
-    case = PreparedMLAPrefillCase(
-        batch_size, seqlen_q, seqlen_k, device=device
-    )
+    case = PreparedMLAPrefillCase(batch_size, seqlen_q, seqlen_k, device=device)
     try:
         geometry = case.scheduler_geometry()
+        observed_sm_counts = [2 * n for n in geometry.resident_partition_clusters]
+        if (
+            args.expected_partition_sm_counts is not None
+            and observed_sm_counts != args.expected_partition_sm_counts
+        ):
+            raise RuntimeError(
+                f"partition SM counts {observed_sm_counts} != expected "
+                f"{args.expected_partition_sm_counts}"
+            )
         mapped_bytes = tuple(case.localized_cache.mapped_bytes)
         free_after_alloc, _ = torch.cuda.mem_get_info(device)
         correctness = case.check_exact()
@@ -344,9 +348,7 @@ def run_case(
             "owner_tile_counts": list(geometry.owner_tile_counts),
             "owner_wave_counts": list(geometry.owner_wave_counts),
             "owner_page_counts": list(case.localized_cache.owner_page_counts),
-            "resident_partition_clusters": list(
-                geometry.resident_partition_clusters
-            ),
+            "resident_partition_clusters": list(geometry.resident_partition_clusters),
             "standard_grid_clusters": geometry.standard_active_clusters,
             "localized_grid_clusters": geometry.total_resident_clusters,
             "standard_theoretical_active_clusters": geometry.standard_active_clusters,
@@ -427,9 +429,7 @@ def main() -> None:
                         f"START B={batch_size} Sq={seqlen_q} Sk={seqlen_k:,}",
                         flush=True,
                     )
-                    row = run_case(
-                        batch_size, seqlen_q, seqlen_k, device, args
-                    )
+                    row = run_case(batch_size, seqlen_q, seqlen_k, device, args)
                     document["results"].append(row)
                     write_json_atomic(args.output, document)
                     write_csv(args.output, document["results"])

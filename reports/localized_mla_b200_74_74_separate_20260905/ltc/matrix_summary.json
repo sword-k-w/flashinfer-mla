@@ -1,0 +1,3872 @@
+{
+  "schema": "flashinfer-localized-mla-separate-profile-v1",
+  "created_at": "2026-09-05T13:01:34.363244+00:00",
+  "settings": {
+    "experiment": "ltc",
+    "metrics": [
+      "lts__t_requests_srcunit_ltcfabric.sum"
+    ],
+    "sources": [
+      {
+        "path": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_20260905/decode/sq1/post_flops.json",
+        "sha256": "fe85a743bf679da6ee3a74464651d15637c0e0f4f88998c54593194d735a17f7",
+        "workload": "decode",
+        "seqlen_q": 1,
+        "role": "shape_and_split_kv_manifest_only"
+      },
+      {
+        "path": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_20260905/decode/sq4/post_flops.json",
+        "sha256": "94d1571b2761d4267bae2ce84536b9ca403c2aa309dbf5cd5ddc109a98377324",
+        "workload": "decode",
+        "seqlen_q": 4,
+        "role": "shape_and_split_kv_manifest_only"
+      },
+      {
+        "path": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/prefill/timing.json",
+        "sha256": "ffc07c219aa9c8c5bb0a01a66ca8325a4cc1094c5e8e7846a058e25b59789226",
+        "workload": "prefill",
+        "seqlen_q": 128,
+        "role": "shape_and_split_kv_manifest_only"
+      }
+    ],
+    "data_initialization": "random",
+    "seed": 42,
+    "cold_l2": true,
+    "warmup_launches": 3,
+    "profiled_launches": 1,
+    "cache_control": "all",
+    "clock_control": "boost",
+    "replay_mode": "kernel",
+    "expected_partition_sm_counts": [
+      74,
+      74
+    ],
+    "device": 0,
+    "timing_values_used": false
+  },
+  "configs": [
+    {
+      "workload": "decode",
+      "seqlen_q": 1,
+      "batch_size": 64,
+      "seqlen_k": 512,
+      "split_kv": 1,
+      "source": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_20260905/decode/sq1/post_flops.json",
+      "status": "complete",
+      "attempts": [
+        {
+          "started_at": "2026-09-05T13:01:34.402795+00:00",
+          "mode_order": [
+            "standard",
+            "localized"
+          ],
+          "directory": "profiles/decode/sq1_b64_sk512/attempt_001",
+          "status": "complete",
+          "finished_at": "2026-09-05T13:01:48.110697+00:00"
+        }
+      ],
+      "profiles": {
+        "standard": {
+          "report": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq1_b64_sk512/attempt_001/standard.ncu-rep",
+          "raw_csv": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq1_b64_sk512/attempt_001/standard.csv",
+          "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmla_decodeBlackwellMultiLatentAttentionForward_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____MMAAtom_ThrID21_ShapeM_0",
+          "ncu_replay_passes": 1,
+          "metrics": {
+            "lts__t_requests_srcunit_ltcfabric.sum": {
+              "value": 459303.0,
+              "unit": "request"
+            }
+          },
+          "ltc_fabric_requests": 459303.0,
+          "target_metadata": {
+            "batch_size": 64,
+            "data_initialization": "random",
+            "data_seed": 42,
+            "device": "NVIDIA B200",
+            "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+            "localized_mapped_bytes": null,
+            "mode": "standard",
+            "owner_page_counts": null,
+            "owner_tile_counts": null,
+            "owner_work_counts": null,
+            "partition_sm_counts": null,
+            "profiled_launches": 1,
+            "resident_partition_clusters": null,
+            "seqlen_k": 512,
+            "seqlen_q": 1,
+            "split_kv": 1,
+            "total_sm_count": 148,
+            "warmup_launches": 3,
+            "workload": "decode"
+          },
+          "command": [
+            "/usr/local/cuda-13.2/bin/ncu",
+            "--force-overwrite",
+            "--export",
+            "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq1_b64_sk512/attempt_001/standard",
+            "--devices",
+            "0",
+            "--profile-from-start",
+            "off",
+            "--launch-count",
+            "1",
+            "--kernel-name-base",
+            "demangled",
+            "--cache-control",
+            "all",
+            "--clock-control",
+            "boost",
+            "--replay-mode",
+            "kernel",
+            "--metrics",
+            "lts__t_requests_srcunit_ltcfabric.sum",
+            "/workspace/flashinfer-mla/.venv/bin/python",
+            "-P",
+            "/workspace/flashinfer-mla/benchmarks/profile_cute_dsl_localized_mla_ltc_target.py",
+            "--mode",
+            "standard",
+            "--batch",
+            "64",
+            "--seqlen-q",
+            "1",
+            "--seqlen-k",
+            "512",
+            "--device",
+            "0",
+            "--warmups",
+            "3",
+            "--data-initialization",
+            "random",
+            "--seed",
+            "42",
+            "--cold-l2",
+            "--workload",
+            "decode",
+            "--expected-partition-sm-counts",
+            "74",
+            "74"
+          ],
+          "log": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq1_b64_sk512/attempt_001/standard.log",
+          "wall_seconds": 6.501927417999468
+        },
+        "localized": {
+          "report": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq1_b64_sk512/attempt_001/localized.ncu-rep",
+          "raw_csv": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq1_b64_sk512/attempt_001/localized.csv",
+          "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmla_decodeBlackwellMultiLatentAttentionForward_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____MMAAtom_ThrID21_ShapeM_0",
+          "ncu_replay_passes": 1,
+          "metrics": {
+            "lts__t_requests_srcunit_ltcfabric.sum": {
+              "value": 310600.0,
+              "unit": "request"
+            }
+          },
+          "ltc_fabric_requests": 310600.0,
+          "target_metadata": {
+            "batch_size": 64,
+            "data_initialization": "random",
+            "data_seed": 42,
+            "device": "NVIDIA B200",
+            "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+            "localized_mapped_bytes": [
+              18874368,
+              18874368
+            ],
+            "mode": "localized",
+            "owner_page_counts": [
+              256,
+              256
+            ],
+            "owner_tile_counts": [
+              32,
+              32
+            ],
+            "owner_work_counts": [
+              32,
+              32
+            ],
+            "partition_sm_counts": [
+              74,
+              74
+            ],
+            "profiled_launches": 1,
+            "resident_partition_clusters": [
+              37,
+              37
+            ],
+            "seqlen_k": 512,
+            "seqlen_q": 1,
+            "split_kv": 1,
+            "total_sm_count": 148,
+            "warmup_launches": 3,
+            "workload": "decode"
+          },
+          "command": [
+            "/usr/local/cuda-13.2/bin/ncu",
+            "--force-overwrite",
+            "--export",
+            "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq1_b64_sk512/attempt_001/localized",
+            "--devices",
+            "0",
+            "--profile-from-start",
+            "off",
+            "--launch-count",
+            "1",
+            "--kernel-name-base",
+            "demangled",
+            "--cache-control",
+            "all",
+            "--clock-control",
+            "boost",
+            "--replay-mode",
+            "kernel",
+            "--metrics",
+            "lts__t_requests_srcunit_ltcfabric.sum",
+            "/workspace/flashinfer-mla/.venv/bin/python",
+            "-P",
+            "/workspace/flashinfer-mla/benchmarks/profile_cute_dsl_localized_mla_ltc_target.py",
+            "--mode",
+            "localized",
+            "--batch",
+            "64",
+            "--seqlen-q",
+            "1",
+            "--seqlen-k",
+            "512",
+            "--device",
+            "0",
+            "--warmups",
+            "3",
+            "--data-initialization",
+            "random",
+            "--seed",
+            "42",
+            "--cold-l2",
+            "--workload",
+            "decode",
+            "--expected-partition-sm-counts",
+            "74",
+            "74"
+          ],
+          "log": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq1_b64_sk512/attempt_001/localized.log",
+          "wall_seconds": 7.204998423999314
+        }
+      },
+      "comparison": {
+        "ltc_reduction_pct": 32.37579549883193
+      }
+    },
+    {
+      "workload": "decode",
+      "seqlen_q": 1,
+      "batch_size": 64,
+      "seqlen_k": 65536,
+      "split_kv": 1,
+      "source": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_20260905/decode/sq1/post_flops.json",
+      "status": "complete",
+      "attempts": [
+        {
+          "started_at": "2026-09-05T13:01:48.111560+00:00",
+          "mode_order": [
+            "localized",
+            "standard"
+          ],
+          "directory": "profiles/decode/sq1_b64_sk65536/attempt_001",
+          "status": "complete",
+          "finished_at": "2026-09-05T13:02:02.040924+00:00"
+        }
+      ],
+      "profiles": {
+        "localized": {
+          "report": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq1_b64_sk65536/attempt_001/localized.ncu-rep",
+          "raw_csv": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq1_b64_sk65536/attempt_001/localized.csv",
+          "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmla_decodeBlackwellMultiLatentAttentionForward_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____MMAAtom_ThrID21_ShapeM_0",
+          "ncu_replay_passes": 1,
+          "metrics": {
+            "lts__t_requests_srcunit_ltcfabric.sum": {
+              "value": 354347.0,
+              "unit": "request"
+            }
+          },
+          "ltc_fabric_requests": 354347.0,
+          "target_metadata": {
+            "batch_size": 64,
+            "data_initialization": "random",
+            "data_seed": 42,
+            "device": "NVIDIA B200",
+            "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+            "localized_mapped_bytes": [
+              2415919104,
+              2415919104
+            ],
+            "mode": "localized",
+            "owner_page_counts": [
+              32768,
+              32768
+            ],
+            "owner_tile_counts": [
+              32,
+              32
+            ],
+            "owner_work_counts": [
+              32,
+              32
+            ],
+            "partition_sm_counts": [
+              74,
+              74
+            ],
+            "profiled_launches": 1,
+            "resident_partition_clusters": [
+              37,
+              37
+            ],
+            "seqlen_k": 65536,
+            "seqlen_q": 1,
+            "split_kv": 1,
+            "total_sm_count": 148,
+            "warmup_launches": 3,
+            "workload": "decode"
+          },
+          "command": [
+            "/usr/local/cuda-13.2/bin/ncu",
+            "--force-overwrite",
+            "--export",
+            "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq1_b64_sk65536/attempt_001/localized",
+            "--devices",
+            "0",
+            "--profile-from-start",
+            "off",
+            "--launch-count",
+            "1",
+            "--kernel-name-base",
+            "demangled",
+            "--cache-control",
+            "all",
+            "--clock-control",
+            "boost",
+            "--replay-mode",
+            "kernel",
+            "--metrics",
+            "lts__t_requests_srcunit_ltcfabric.sum",
+            "/workspace/flashinfer-mla/.venv/bin/python",
+            "-P",
+            "/workspace/flashinfer-mla/benchmarks/profile_cute_dsl_localized_mla_ltc_target.py",
+            "--mode",
+            "localized",
+            "--batch",
+            "64",
+            "--seqlen-q",
+            "1",
+            "--seqlen-k",
+            "65536",
+            "--device",
+            "0",
+            "--warmups",
+            "3",
+            "--data-initialization",
+            "random",
+            "--seed",
+            "42",
+            "--cold-l2",
+            "--workload",
+            "decode",
+            "--expected-partition-sm-counts",
+            "74",
+            "74"
+          ],
+          "log": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq1_b64_sk65536/attempt_001/localized.log",
+          "wall_seconds": 7.262458705000427
+        },
+        "standard": {
+          "report": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq1_b64_sk65536/attempt_001/standard.ncu-rep",
+          "raw_csv": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq1_b64_sk65536/attempt_001/standard.csv",
+          "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmla_decodeBlackwellMultiLatentAttentionForward_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____MMAAtom_ThrID21_ShapeM_0",
+          "ncu_replay_passes": 1,
+          "metrics": {
+            "lts__t_requests_srcunit_ltcfabric.sum": {
+              "value": 37810503.0,
+              "unit": "request"
+            }
+          },
+          "ltc_fabric_requests": 37810503.0,
+          "target_metadata": {
+            "batch_size": 64,
+            "data_initialization": "random",
+            "data_seed": 42,
+            "device": "NVIDIA B200",
+            "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+            "localized_mapped_bytes": null,
+            "mode": "standard",
+            "owner_page_counts": null,
+            "owner_tile_counts": null,
+            "owner_work_counts": null,
+            "partition_sm_counts": null,
+            "profiled_launches": 1,
+            "resident_partition_clusters": null,
+            "seqlen_k": 65536,
+            "seqlen_q": 1,
+            "split_kv": 1,
+            "total_sm_count": 148,
+            "warmup_launches": 3,
+            "workload": "decode"
+          },
+          "command": [
+            "/usr/local/cuda-13.2/bin/ncu",
+            "--force-overwrite",
+            "--export",
+            "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq1_b64_sk65536/attempt_001/standard",
+            "--devices",
+            "0",
+            "--profile-from-start",
+            "off",
+            "--launch-count",
+            "1",
+            "--kernel-name-base",
+            "demangled",
+            "--cache-control",
+            "all",
+            "--clock-control",
+            "boost",
+            "--replay-mode",
+            "kernel",
+            "--metrics",
+            "lts__t_requests_srcunit_ltcfabric.sum",
+            "/workspace/flashinfer-mla/.venv/bin/python",
+            "-P",
+            "/workspace/flashinfer-mla/benchmarks/profile_cute_dsl_localized_mla_ltc_target.py",
+            "--mode",
+            "standard",
+            "--batch",
+            "64",
+            "--seqlen-q",
+            "1",
+            "--seqlen-k",
+            "65536",
+            "--device",
+            "0",
+            "--warmups",
+            "3",
+            "--data-initialization",
+            "random",
+            "--seed",
+            "42",
+            "--cold-l2",
+            "--workload",
+            "decode",
+            "--expected-partition-sm-counts",
+            "74",
+            "74"
+          ],
+          "log": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq1_b64_sk65536/attempt_001/standard.log",
+          "wall_seconds": 6.664802213999792
+        }
+      },
+      "comparison": {
+        "ltc_reduction_pct": 99.06283447221001
+      }
+    },
+    {
+      "workload": "decode",
+      "seqlen_q": 1,
+      "batch_size": 64,
+      "seqlen_k": 524288,
+      "split_kv": 1,
+      "source": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_20260905/decode/sq1/post_flops.json",
+      "status": "complete",
+      "attempts": [
+        {
+          "started_at": "2026-09-05T13:02:02.041965+00:00",
+          "mode_order": [
+            "standard",
+            "localized"
+          ],
+          "directory": "profiles/decode/sq1_b64_sk524288/attempt_001",
+          "status": "complete",
+          "finished_at": "2026-09-05T13:02:16.651502+00:00"
+        }
+      ],
+      "profiles": {
+        "standard": {
+          "report": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq1_b64_sk524288/attempt_001/standard.ncu-rep",
+          "raw_csv": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq1_b64_sk524288/attempt_001/standard.csv",
+          "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmla_decodeBlackwellMultiLatentAttentionForward_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____MMAAtom_ThrID21_ShapeM_0",
+          "ncu_replay_passes": 1,
+          "metrics": {
+            "lts__t_requests_srcunit_ltcfabric.sum": {
+              "value": 302384132.0,
+              "unit": "request"
+            }
+          },
+          "ltc_fabric_requests": 302384132.0,
+          "target_metadata": {
+            "batch_size": 64,
+            "data_initialization": "random",
+            "data_seed": 42,
+            "device": "NVIDIA B200",
+            "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+            "localized_mapped_bytes": null,
+            "mode": "standard",
+            "owner_page_counts": null,
+            "owner_tile_counts": null,
+            "owner_work_counts": null,
+            "partition_sm_counts": null,
+            "profiled_launches": 1,
+            "resident_partition_clusters": null,
+            "seqlen_k": 524288,
+            "seqlen_q": 1,
+            "split_kv": 1,
+            "total_sm_count": 148,
+            "warmup_launches": 3,
+            "workload": "decode"
+          },
+          "command": [
+            "/usr/local/cuda-13.2/bin/ncu",
+            "--force-overwrite",
+            "--export",
+            "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq1_b64_sk524288/attempt_001/standard",
+            "--devices",
+            "0",
+            "--profile-from-start",
+            "off",
+            "--launch-count",
+            "1",
+            "--kernel-name-base",
+            "demangled",
+            "--cache-control",
+            "all",
+            "--clock-control",
+            "boost",
+            "--replay-mode",
+            "kernel",
+            "--metrics",
+            "lts__t_requests_srcunit_ltcfabric.sum",
+            "/workspace/flashinfer-mla/.venv/bin/python",
+            "-P",
+            "/workspace/flashinfer-mla/benchmarks/profile_cute_dsl_localized_mla_ltc_target.py",
+            "--mode",
+            "standard",
+            "--batch",
+            "64",
+            "--seqlen-q",
+            "1",
+            "--seqlen-k",
+            "524288",
+            "--device",
+            "0",
+            "--warmups",
+            "3",
+            "--data-initialization",
+            "random",
+            "--seed",
+            "42",
+            "--cold-l2",
+            "--workload",
+            "decode",
+            "--expected-partition-sm-counts",
+            "74",
+            "74"
+          ],
+          "log": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq1_b64_sk524288/attempt_001/standard.log",
+          "wall_seconds": 6.6233940259999144
+        },
+        "localized": {
+          "report": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq1_b64_sk524288/attempt_001/localized.ncu-rep",
+          "raw_csv": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq1_b64_sk524288/attempt_001/localized.csv",
+          "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmla_decodeBlackwellMultiLatentAttentionForward_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____MMAAtom_ThrID21_ShapeM_0",
+          "ncu_replay_passes": 1,
+          "metrics": {
+            "lts__t_requests_srcunit_ltcfabric.sum": {
+              "value": 369111.0,
+              "unit": "request"
+            }
+          },
+          "ltc_fabric_requests": 369111.0,
+          "target_metadata": {
+            "batch_size": 64,
+            "data_initialization": "random",
+            "data_seed": 42,
+            "device": "NVIDIA B200",
+            "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+            "localized_mapped_bytes": [
+              19327352832,
+              19327352832
+            ],
+            "mode": "localized",
+            "owner_page_counts": [
+              262144,
+              262144
+            ],
+            "owner_tile_counts": [
+              32,
+              32
+            ],
+            "owner_work_counts": [
+              32,
+              32
+            ],
+            "partition_sm_counts": [
+              74,
+              74
+            ],
+            "profiled_launches": 1,
+            "resident_partition_clusters": [
+              37,
+              37
+            ],
+            "seqlen_k": 524288,
+            "seqlen_q": 1,
+            "split_kv": 1,
+            "total_sm_count": 148,
+            "warmup_launches": 3,
+            "workload": "decode"
+          },
+          "command": [
+            "/usr/local/cuda-13.2/bin/ncu",
+            "--force-overwrite",
+            "--export",
+            "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq1_b64_sk524288/attempt_001/localized",
+            "--devices",
+            "0",
+            "--profile-from-start",
+            "off",
+            "--launch-count",
+            "1",
+            "--kernel-name-base",
+            "demangled",
+            "--cache-control",
+            "all",
+            "--clock-control",
+            "boost",
+            "--replay-mode",
+            "kernel",
+            "--metrics",
+            "lts__t_requests_srcunit_ltcfabric.sum",
+            "/workspace/flashinfer-mla/.venv/bin/python",
+            "-P",
+            "/workspace/flashinfer-mla/benchmarks/profile_cute_dsl_localized_mla_ltc_target.py",
+            "--mode",
+            "localized",
+            "--batch",
+            "64",
+            "--seqlen-q",
+            "1",
+            "--seqlen-k",
+            "524288",
+            "--device",
+            "0",
+            "--warmups",
+            "3",
+            "--data-initialization",
+            "random",
+            "--seed",
+            "42",
+            "--cold-l2",
+            "--workload",
+            "decode",
+            "--expected-partition-sm-counts",
+            "74",
+            "74"
+          ],
+          "log": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq1_b64_sk524288/attempt_001/localized.log",
+          "wall_seconds": 7.983920738000052
+        }
+      },
+      "comparison": {
+        "ltc_reduction_pct": 99.8779330788429
+      }
+    },
+    {
+      "workload": "decode",
+      "seqlen_q": 1,
+      "batch_size": 64,
+      "seqlen_k": 1048576,
+      "split_kv": 1,
+      "source": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_20260905/decode/sq1/post_flops.json",
+      "status": "complete",
+      "attempts": [
+        {
+          "started_at": "2026-09-05T13:02:16.652679+00:00",
+          "mode_order": [
+            "localized",
+            "standard"
+          ],
+          "directory": "profiles/decode/sq1_b64_sk1048576/attempt_001",
+          "status": "complete",
+          "finished_at": "2026-09-05T13:02:31.929560+00:00"
+        }
+      ],
+      "profiles": {
+        "localized": {
+          "report": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq1_b64_sk1048576/attempt_001/localized.ncu-rep",
+          "raw_csv": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq1_b64_sk1048576/attempt_001/localized.csv",
+          "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmla_decodeBlackwellMultiLatentAttentionForward_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____MMAAtom_ThrID21_ShapeM_0",
+          "ncu_replay_passes": 1,
+          "metrics": {
+            "lts__t_requests_srcunit_ltcfabric.sum": {
+              "value": 386209.0,
+              "unit": "request"
+            }
+          },
+          "ltc_fabric_requests": 386209.0,
+          "target_metadata": {
+            "batch_size": 64,
+            "data_initialization": "random",
+            "data_seed": 42,
+            "device": "NVIDIA B200",
+            "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+            "localized_mapped_bytes": [
+              38654705664,
+              38654705664
+            ],
+            "mode": "localized",
+            "owner_page_counts": [
+              524288,
+              524288
+            ],
+            "owner_tile_counts": [
+              32,
+              32
+            ],
+            "owner_work_counts": [
+              32,
+              32
+            ],
+            "partition_sm_counts": [
+              74,
+              74
+            ],
+            "profiled_launches": 1,
+            "resident_partition_clusters": [
+              37,
+              37
+            ],
+            "seqlen_k": 1048576,
+            "seqlen_q": 1,
+            "split_kv": 1,
+            "total_sm_count": 148,
+            "warmup_launches": 3,
+            "workload": "decode"
+          },
+          "command": [
+            "/usr/local/cuda-13.2/bin/ncu",
+            "--force-overwrite",
+            "--export",
+            "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq1_b64_sk1048576/attempt_001/localized",
+            "--devices",
+            "0",
+            "--profile-from-start",
+            "off",
+            "--launch-count",
+            "1",
+            "--kernel-name-base",
+            "demangled",
+            "--cache-control",
+            "all",
+            "--clock-control",
+            "boost",
+            "--replay-mode",
+            "kernel",
+            "--metrics",
+            "lts__t_requests_srcunit_ltcfabric.sum",
+            "/workspace/flashinfer-mla/.venv/bin/python",
+            "-P",
+            "/workspace/flashinfer-mla/benchmarks/profile_cute_dsl_localized_mla_ltc_target.py",
+            "--mode",
+            "localized",
+            "--batch",
+            "64",
+            "--seqlen-q",
+            "1",
+            "--seqlen-k",
+            "1048576",
+            "--device",
+            "0",
+            "--warmups",
+            "3",
+            "--data-initialization",
+            "random",
+            "--seed",
+            "42",
+            "--cold-l2",
+            "--workload",
+            "decode",
+            "--expected-partition-sm-counts",
+            "74",
+            "74"
+          ],
+          "log": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq1_b64_sk1048576/attempt_001/localized.log",
+          "wall_seconds": 8.58445344700067
+        },
+        "standard": {
+          "report": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq1_b64_sk1048576/attempt_001/standard.ncu-rep",
+          "raw_csv": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq1_b64_sk1048576/attempt_001/standard.csv",
+          "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmla_decodeBlackwellMultiLatentAttentionForward_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____MMAAtom_ThrID21_ShapeM_0",
+          "ncu_replay_passes": 1,
+          "metrics": {
+            "lts__t_requests_srcunit_ltcfabric.sum": {
+              "value": 604424102.0,
+              "unit": "request"
+            }
+          },
+          "ltc_fabric_requests": 604424102.0,
+          "target_metadata": {
+            "batch_size": 64,
+            "data_initialization": "random",
+            "data_seed": 42,
+            "device": "NVIDIA B200",
+            "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+            "localized_mapped_bytes": null,
+            "mode": "standard",
+            "owner_page_counts": null,
+            "owner_tile_counts": null,
+            "owner_work_counts": null,
+            "partition_sm_counts": null,
+            "profiled_launches": 1,
+            "resident_partition_clusters": null,
+            "seqlen_k": 1048576,
+            "seqlen_q": 1,
+            "split_kv": 1,
+            "total_sm_count": 148,
+            "warmup_launches": 3,
+            "workload": "decode"
+          },
+          "command": [
+            "/usr/local/cuda-13.2/bin/ncu",
+            "--force-overwrite",
+            "--export",
+            "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq1_b64_sk1048576/attempt_001/standard",
+            "--devices",
+            "0",
+            "--profile-from-start",
+            "off",
+            "--launch-count",
+            "1",
+            "--kernel-name-base",
+            "demangled",
+            "--cache-control",
+            "all",
+            "--clock-control",
+            "boost",
+            "--replay-mode",
+            "kernel",
+            "--metrics",
+            "lts__t_requests_srcunit_ltcfabric.sum",
+            "/workspace/flashinfer-mla/.venv/bin/python",
+            "-P",
+            "/workspace/flashinfer-mla/benchmarks/profile_cute_dsl_localized_mla_ltc_target.py",
+            "--mode",
+            "standard",
+            "--batch",
+            "64",
+            "--seqlen-q",
+            "1",
+            "--seqlen-k",
+            "1048576",
+            "--device",
+            "0",
+            "--warmups",
+            "3",
+            "--data-initialization",
+            "random",
+            "--seed",
+            "42",
+            "--cold-l2",
+            "--workload",
+            "decode",
+            "--expected-partition-sm-counts",
+            "74",
+            "74"
+          ],
+          "log": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq1_b64_sk1048576/attempt_001/standard.log",
+          "wall_seconds": 6.690962650000074
+        }
+      },
+      "comparison": {
+        "ltc_reduction_pct": 99.93610297823629
+      }
+    },
+    {
+      "workload": "decode",
+      "seqlen_q": 1,
+      "batch_size": 2,
+      "seqlen_k": 1048576,
+      "split_kv": 32,
+      "source": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_20260905/decode/sq1/post_flops.json",
+      "status": "complete",
+      "attempts": [
+        {
+          "started_at": "2026-09-05T13:02:31.930871+00:00",
+          "mode_order": [
+            "standard",
+            "localized"
+          ],
+          "directory": "profiles/decode/sq1_b2_sk1048576/attempt_001",
+          "status": "complete",
+          "finished_at": "2026-09-05T13:02:46.052774+00:00"
+        }
+      ],
+      "profiles": {
+        "standard": {
+          "report": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq1_b2_sk1048576/attempt_001/standard.ncu-rep",
+          "raw_csv": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq1_b2_sk1048576/attempt_001/standard.csv",
+          "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmla_decodeBlackwellMultiLatentAttentionForward_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____MMAAtom_ThrID21_ShapeM_0",
+          "ncu_replay_passes": 1,
+          "metrics": {
+            "lts__t_requests_srcunit_ltcfabric.sum": {
+              "value": 18936340.0,
+              "unit": "request"
+            }
+          },
+          "ltc_fabric_requests": 18936340.0,
+          "target_metadata": {
+            "batch_size": 2,
+            "data_initialization": "random",
+            "data_seed": 42,
+            "device": "NVIDIA B200",
+            "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+            "localized_mapped_bytes": null,
+            "mode": "standard",
+            "owner_page_counts": null,
+            "owner_tile_counts": null,
+            "owner_work_counts": null,
+            "partition_sm_counts": null,
+            "profiled_launches": 1,
+            "resident_partition_clusters": null,
+            "seqlen_k": 1048576,
+            "seqlen_q": 1,
+            "split_kv": 32,
+            "total_sm_count": 148,
+            "warmup_launches": 3,
+            "workload": "decode"
+          },
+          "command": [
+            "/usr/local/cuda-13.2/bin/ncu",
+            "--force-overwrite",
+            "--export",
+            "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq1_b2_sk1048576/attempt_001/standard",
+            "--devices",
+            "0",
+            "--profile-from-start",
+            "off",
+            "--launch-count",
+            "1",
+            "--kernel-name-base",
+            "demangled",
+            "--cache-control",
+            "all",
+            "--clock-control",
+            "boost",
+            "--replay-mode",
+            "kernel",
+            "--metrics",
+            "lts__t_requests_srcunit_ltcfabric.sum",
+            "/workspace/flashinfer-mla/.venv/bin/python",
+            "-P",
+            "/workspace/flashinfer-mla/benchmarks/profile_cute_dsl_localized_mla_ltc_target.py",
+            "--mode",
+            "standard",
+            "--batch",
+            "2",
+            "--seqlen-q",
+            "1",
+            "--seqlen-k",
+            "1048576",
+            "--device",
+            "0",
+            "--warmups",
+            "3",
+            "--data-initialization",
+            "random",
+            "--seed",
+            "42",
+            "--cold-l2",
+            "--workload",
+            "decode",
+            "--expected-partition-sm-counts",
+            "74",
+            "74"
+          ],
+          "log": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq1_b2_sk1048576/attempt_001/standard.log",
+          "wall_seconds": 6.705112622999877
+        },
+        "localized": {
+          "report": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq1_b2_sk1048576/attempt_001/localized.ncu-rep",
+          "raw_csv": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq1_b2_sk1048576/attempt_001/localized.csv",
+          "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmla_decodeBlackwellMultiLatentAttentionForward_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____MMAAtom_ThrID21_ShapeM_0",
+          "ncu_replay_passes": 1,
+          "metrics": {
+            "lts__t_requests_srcunit_ltcfabric.sum": {
+              "value": 298649.0,
+              "unit": "request"
+            }
+          },
+          "ltc_fabric_requests": 298649.0,
+          "target_metadata": {
+            "batch_size": 2,
+            "data_initialization": "random",
+            "data_seed": 42,
+            "device": "NVIDIA B200",
+            "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+            "localized_mapped_bytes": [
+              1207959552,
+              1207959552
+            ],
+            "mode": "localized",
+            "owner_page_counts": [
+              16384,
+              16384
+            ],
+            "owner_tile_counts": [
+              32,
+              32
+            ],
+            "owner_work_counts": [
+              32,
+              32
+            ],
+            "partition_sm_counts": [
+              74,
+              74
+            ],
+            "profiled_launches": 1,
+            "resident_partition_clusters": [
+              37,
+              37
+            ],
+            "seqlen_k": 1048576,
+            "seqlen_q": 1,
+            "split_kv": 32,
+            "total_sm_count": 148,
+            "warmup_launches": 3,
+            "workload": "decode"
+          },
+          "command": [
+            "/usr/local/cuda-13.2/bin/ncu",
+            "--force-overwrite",
+            "--export",
+            "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq1_b2_sk1048576/attempt_001/localized",
+            "--devices",
+            "0",
+            "--profile-from-start",
+            "off",
+            "--launch-count",
+            "1",
+            "--kernel-name-base",
+            "demangled",
+            "--cache-control",
+            "all",
+            "--clock-control",
+            "boost",
+            "--replay-mode",
+            "kernel",
+            "--metrics",
+            "lts__t_requests_srcunit_ltcfabric.sum",
+            "/workspace/flashinfer-mla/.venv/bin/python",
+            "-P",
+            "/workspace/flashinfer-mla/benchmarks/profile_cute_dsl_localized_mla_ltc_target.py",
+            "--mode",
+            "localized",
+            "--batch",
+            "2",
+            "--seqlen-q",
+            "1",
+            "--seqlen-k",
+            "1048576",
+            "--device",
+            "0",
+            "--warmups",
+            "3",
+            "--data-initialization",
+            "random",
+            "--seed",
+            "42",
+            "--cold-l2",
+            "--workload",
+            "decode",
+            "--expected-partition-sm-counts",
+            "74",
+            "74"
+          ],
+          "log": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq1_b2_sk1048576/attempt_001/localized.log",
+          "wall_seconds": 7.414431064999917
+        }
+      },
+      "comparison": {
+        "ltc_reduction_pct": 98.42287897238855
+      }
+    },
+    {
+      "workload": "decode",
+      "seqlen_q": 1,
+      "batch_size": 16,
+      "seqlen_k": 1048576,
+      "split_kv": 4,
+      "source": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_20260905/decode/sq1/post_flops.json",
+      "status": "complete",
+      "attempts": [
+        {
+          "started_at": "2026-09-05T13:02:46.054212+00:00",
+          "mode_order": [
+            "localized",
+            "standard"
+          ],
+          "directory": "profiles/decode/sq1_b16_sk1048576/attempt_001",
+          "status": "complete",
+          "finished_at": "2026-09-05T13:03:00.544352+00:00"
+        }
+      ],
+      "profiles": {
+        "localized": {
+          "report": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq1_b16_sk1048576/attempt_001/localized.ncu-rep",
+          "raw_csv": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq1_b16_sk1048576/attempt_001/localized.csv",
+          "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmla_decodeBlackwellMultiLatentAttentionForward_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____MMAAtom_ThrID21_ShapeM_0",
+          "ncu_replay_passes": 1,
+          "metrics": {
+            "lts__t_requests_srcunit_ltcfabric.sum": {
+              "value": 307511.0,
+              "unit": "request"
+            }
+          },
+          "ltc_fabric_requests": 307511.0,
+          "target_metadata": {
+            "batch_size": 16,
+            "data_initialization": "random",
+            "data_seed": 42,
+            "device": "NVIDIA B200",
+            "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+            "localized_mapped_bytes": [
+              9663676416,
+              9663676416
+            ],
+            "mode": "localized",
+            "owner_page_counts": [
+              131072,
+              131072
+            ],
+            "owner_tile_counts": [
+              32,
+              32
+            ],
+            "owner_work_counts": [
+              32,
+              32
+            ],
+            "partition_sm_counts": [
+              74,
+              74
+            ],
+            "profiled_launches": 1,
+            "resident_partition_clusters": [
+              37,
+              37
+            ],
+            "seqlen_k": 1048576,
+            "seqlen_q": 1,
+            "split_kv": 4,
+            "total_sm_count": 148,
+            "warmup_launches": 3,
+            "workload": "decode"
+          },
+          "command": [
+            "/usr/local/cuda-13.2/bin/ncu",
+            "--force-overwrite",
+            "--export",
+            "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq1_b16_sk1048576/attempt_001/localized",
+            "--devices",
+            "0",
+            "--profile-from-start",
+            "off",
+            "--launch-count",
+            "1",
+            "--kernel-name-base",
+            "demangled",
+            "--cache-control",
+            "all",
+            "--clock-control",
+            "boost",
+            "--replay-mode",
+            "kernel",
+            "--metrics",
+            "lts__t_requests_srcunit_ltcfabric.sum",
+            "/workspace/flashinfer-mla/.venv/bin/python",
+            "-P",
+            "/workspace/flashinfer-mla/benchmarks/profile_cute_dsl_localized_mla_ltc_target.py",
+            "--mode",
+            "localized",
+            "--batch",
+            "16",
+            "--seqlen-q",
+            "1",
+            "--seqlen-k",
+            "1048576",
+            "--device",
+            "0",
+            "--warmups",
+            "3",
+            "--data-initialization",
+            "random",
+            "--seed",
+            "42",
+            "--cold-l2",
+            "--workload",
+            "decode",
+            "--expected-partition-sm-counts",
+            "74",
+            "74"
+          ],
+          "log": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq1_b16_sk1048576/attempt_001/localized.log",
+          "wall_seconds": 7.7081850089998625
+        },
+        "standard": {
+          "report": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq1_b16_sk1048576/attempt_001/standard.ncu-rep",
+          "raw_csv": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq1_b16_sk1048576/attempt_001/standard.csv",
+          "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmla_decodeBlackwellMultiLatentAttentionForward_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____MMAAtom_ThrID21_ShapeM_0",
+          "ncu_replay_passes": 1,
+          "metrics": {
+            "lts__t_requests_srcunit_ltcfabric.sum": {
+              "value": 151210910.0,
+              "unit": "request"
+            }
+          },
+          "ltc_fabric_requests": 151210910.0,
+          "target_metadata": {
+            "batch_size": 16,
+            "data_initialization": "random",
+            "data_seed": 42,
+            "device": "NVIDIA B200",
+            "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+            "localized_mapped_bytes": null,
+            "mode": "standard",
+            "owner_page_counts": null,
+            "owner_tile_counts": null,
+            "owner_work_counts": null,
+            "partition_sm_counts": null,
+            "profiled_launches": 1,
+            "resident_partition_clusters": null,
+            "seqlen_k": 1048576,
+            "seqlen_q": 1,
+            "split_kv": 4,
+            "total_sm_count": 148,
+            "warmup_launches": 3,
+            "workload": "decode"
+          },
+          "command": [
+            "/usr/local/cuda-13.2/bin/ncu",
+            "--force-overwrite",
+            "--export",
+            "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq1_b16_sk1048576/attempt_001/standard",
+            "--devices",
+            "0",
+            "--profile-from-start",
+            "off",
+            "--launch-count",
+            "1",
+            "--kernel-name-base",
+            "demangled",
+            "--cache-control",
+            "all",
+            "--clock-control",
+            "boost",
+            "--replay-mode",
+            "kernel",
+            "--metrics",
+            "lts__t_requests_srcunit_ltcfabric.sum",
+            "/workspace/flashinfer-mla/.venv/bin/python",
+            "-P",
+            "/workspace/flashinfer-mla/benchmarks/profile_cute_dsl_localized_mla_ltc_target.py",
+            "--mode",
+            "standard",
+            "--batch",
+            "16",
+            "--seqlen-q",
+            "1",
+            "--seqlen-k",
+            "1048576",
+            "--device",
+            "0",
+            "--warmups",
+            "3",
+            "--data-initialization",
+            "random",
+            "--seed",
+            "42",
+            "--cold-l2",
+            "--workload",
+            "decode",
+            "--expected-partition-sm-counts",
+            "74",
+            "74"
+          ],
+          "log": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq1_b16_sk1048576/attempt_001/standard.log",
+          "wall_seconds": 6.779698536000069
+        }
+      },
+      "comparison": {
+        "ltc_reduction_pct": 99.79663438306137
+      }
+    },
+    {
+      "workload": "decode",
+      "seqlen_q": 4,
+      "batch_size": 64,
+      "seqlen_k": 512,
+      "split_kv": 1,
+      "source": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_20260905/decode/sq4/post_flops.json",
+      "status": "complete",
+      "attempts": [
+        {
+          "started_at": "2026-09-05T13:03:00.545980+00:00",
+          "mode_order": [
+            "standard",
+            "localized"
+          ],
+          "directory": "profiles/decode/sq4_b64_sk512/attempt_001",
+          "status": "complete",
+          "finished_at": "2026-09-05T13:03:14.276015+00:00"
+        }
+      ],
+      "profiles": {
+        "standard": {
+          "report": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq4_b64_sk512/attempt_001/standard.ncu-rep",
+          "raw_csv": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq4_b64_sk512/attempt_001/standard.csv",
+          "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmla_decodeBlackwellMultiLatentAttentionForward_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____MMAAtom_ThrID21_ShapeM_0",
+          "ncu_replay_passes": 1,
+          "metrics": {
+            "lts__t_requests_srcunit_ltcfabric.sum": {
+              "value": 1622930.0,
+              "unit": "request"
+            }
+          },
+          "ltc_fabric_requests": 1622930.0,
+          "target_metadata": {
+            "batch_size": 64,
+            "data_initialization": "random",
+            "data_seed": 42,
+            "device": "NVIDIA B200",
+            "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+            "localized_mapped_bytes": null,
+            "mode": "standard",
+            "owner_page_counts": null,
+            "owner_tile_counts": null,
+            "owner_work_counts": null,
+            "partition_sm_counts": null,
+            "profiled_launches": 1,
+            "resident_partition_clusters": null,
+            "seqlen_k": 512,
+            "seqlen_q": 4,
+            "split_kv": 1,
+            "total_sm_count": 148,
+            "warmup_launches": 3,
+            "workload": "decode"
+          },
+          "command": [
+            "/usr/local/cuda-13.2/bin/ncu",
+            "--force-overwrite",
+            "--export",
+            "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq4_b64_sk512/attempt_001/standard",
+            "--devices",
+            "0",
+            "--profile-from-start",
+            "off",
+            "--launch-count",
+            "1",
+            "--kernel-name-base",
+            "demangled",
+            "--cache-control",
+            "all",
+            "--clock-control",
+            "boost",
+            "--replay-mode",
+            "kernel",
+            "--metrics",
+            "lts__t_requests_srcunit_ltcfabric.sum",
+            "/workspace/flashinfer-mla/.venv/bin/python",
+            "-P",
+            "/workspace/flashinfer-mla/benchmarks/profile_cute_dsl_localized_mla_ltc_target.py",
+            "--mode",
+            "standard",
+            "--batch",
+            "64",
+            "--seqlen-q",
+            "4",
+            "--seqlen-k",
+            "512",
+            "--device",
+            "0",
+            "--warmups",
+            "3",
+            "--data-initialization",
+            "random",
+            "--seed",
+            "42",
+            "--cold-l2",
+            "--workload",
+            "decode",
+            "--expected-partition-sm-counts",
+            "74",
+            "74"
+          ],
+          "log": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq4_b64_sk512/attempt_001/standard.log",
+          "wall_seconds": 6.6075759910008856
+        },
+        "localized": {
+          "report": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq4_b64_sk512/attempt_001/localized.ncu-rep",
+          "raw_csv": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq4_b64_sk512/attempt_001/localized.csv",
+          "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmla_decodeBlackwellMultiLatentAttentionForward_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____MMAAtom_ThrID21_ShapeM_0",
+          "ncu_replay_passes": 1,
+          "metrics": {
+            "lts__t_requests_srcunit_ltcfabric.sum": {
+              "value": 1229094.0,
+              "unit": "request"
+            }
+          },
+          "ltc_fabric_requests": 1229094.0,
+          "target_metadata": {
+            "batch_size": 64,
+            "data_initialization": "random",
+            "data_seed": 42,
+            "device": "NVIDIA B200",
+            "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+            "localized_mapped_bytes": [
+              18874368,
+              18874368
+            ],
+            "mode": "localized",
+            "owner_page_counts": [
+              256,
+              256
+            ],
+            "owner_tile_counts": [
+              128,
+              128
+            ],
+            "owner_work_counts": [
+              32,
+              32
+            ],
+            "partition_sm_counts": [
+              74,
+              74
+            ],
+            "profiled_launches": 1,
+            "resident_partition_clusters": [
+              37,
+              37
+            ],
+            "seqlen_k": 512,
+            "seqlen_q": 4,
+            "split_kv": 1,
+            "total_sm_count": 148,
+            "warmup_launches": 3,
+            "workload": "decode"
+          },
+          "command": [
+            "/usr/local/cuda-13.2/bin/ncu",
+            "--force-overwrite",
+            "--export",
+            "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq4_b64_sk512/attempt_001/localized",
+            "--devices",
+            "0",
+            "--profile-from-start",
+            "off",
+            "--launch-count",
+            "1",
+            "--kernel-name-base",
+            "demangled",
+            "--cache-control",
+            "all",
+            "--clock-control",
+            "boost",
+            "--replay-mode",
+            "kernel",
+            "--metrics",
+            "lts__t_requests_srcunit_ltcfabric.sum",
+            "/workspace/flashinfer-mla/.venv/bin/python",
+            "-P",
+            "/workspace/flashinfer-mla/benchmarks/profile_cute_dsl_localized_mla_ltc_target.py",
+            "--mode",
+            "localized",
+            "--batch",
+            "64",
+            "--seqlen-q",
+            "4",
+            "--seqlen-k",
+            "512",
+            "--device",
+            "0",
+            "--warmups",
+            "3",
+            "--data-initialization",
+            "random",
+            "--seed",
+            "42",
+            "--cold-l2",
+            "--workload",
+            "decode",
+            "--expected-partition-sm-counts",
+            "74",
+            "74"
+          ],
+          "log": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq4_b64_sk512/attempt_001/localized.log",
+          "wall_seconds": 7.120599625999603
+        }
+      },
+      "comparison": {
+        "ltc_reduction_pct": 24.266973929867586
+      }
+    },
+    {
+      "workload": "decode",
+      "seqlen_q": 4,
+      "batch_size": 64,
+      "seqlen_k": 65536,
+      "split_kv": 1,
+      "source": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_20260905/decode/sq4/post_flops.json",
+      "status": "complete",
+      "attempts": [
+        {
+          "started_at": "2026-09-05T13:03:14.278217+00:00",
+          "mode_order": [
+            "localized",
+            "standard"
+          ],
+          "directory": "profiles/decode/sq4_b64_sk65536/attempt_001",
+          "status": "complete",
+          "finished_at": "2026-09-05T13:03:28.133375+00:00"
+        }
+      ],
+      "profiles": {
+        "localized": {
+          "report": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq4_b64_sk65536/attempt_001/localized.ncu-rep",
+          "raw_csv": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq4_b64_sk65536/attempt_001/localized.csv",
+          "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmla_decodeBlackwellMultiLatentAttentionForward_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____MMAAtom_ThrID21_ShapeM_0",
+          "ncu_replay_passes": 1,
+          "metrics": {
+            "lts__t_requests_srcunit_ltcfabric.sum": {
+              "value": 1367208.0,
+              "unit": "request"
+            }
+          },
+          "ltc_fabric_requests": 1367208.0,
+          "target_metadata": {
+            "batch_size": 64,
+            "data_initialization": "random",
+            "data_seed": 42,
+            "device": "NVIDIA B200",
+            "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+            "localized_mapped_bytes": [
+              2415919104,
+              2415919104
+            ],
+            "mode": "localized",
+            "owner_page_counts": [
+              32768,
+              32768
+            ],
+            "owner_tile_counts": [
+              128,
+              128
+            ],
+            "owner_work_counts": [
+              32,
+              32
+            ],
+            "partition_sm_counts": [
+              74,
+              74
+            ],
+            "profiled_launches": 1,
+            "resident_partition_clusters": [
+              37,
+              37
+            ],
+            "seqlen_k": 65536,
+            "seqlen_q": 4,
+            "split_kv": 1,
+            "total_sm_count": 148,
+            "warmup_launches": 3,
+            "workload": "decode"
+          },
+          "command": [
+            "/usr/local/cuda-13.2/bin/ncu",
+            "--force-overwrite",
+            "--export",
+            "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq4_b64_sk65536/attempt_001/localized",
+            "--devices",
+            "0",
+            "--profile-from-start",
+            "off",
+            "--launch-count",
+            "1",
+            "--kernel-name-base",
+            "demangled",
+            "--cache-control",
+            "all",
+            "--clock-control",
+            "boost",
+            "--replay-mode",
+            "kernel",
+            "--metrics",
+            "lts__t_requests_srcunit_ltcfabric.sum",
+            "/workspace/flashinfer-mla/.venv/bin/python",
+            "-P",
+            "/workspace/flashinfer-mla/benchmarks/profile_cute_dsl_localized_mla_ltc_target.py",
+            "--mode",
+            "localized",
+            "--batch",
+            "64",
+            "--seqlen-q",
+            "4",
+            "--seqlen-k",
+            "65536",
+            "--device",
+            "0",
+            "--warmups",
+            "3",
+            "--data-initialization",
+            "random",
+            "--seed",
+            "42",
+            "--cold-l2",
+            "--workload",
+            "decode",
+            "--expected-partition-sm-counts",
+            "74",
+            "74"
+          ],
+          "log": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq4_b64_sk65536/attempt_001/localized.log",
+          "wall_seconds": 7.256036007000148
+        },
+        "standard": {
+          "report": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq4_b64_sk65536/attempt_001/standard.ncu-rep",
+          "raw_csv": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq4_b64_sk65536/attempt_001/standard.csv",
+          "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmla_decodeBlackwellMultiLatentAttentionForward_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____MMAAtom_ThrID21_ShapeM_0",
+          "ncu_replay_passes": 1,
+          "metrics": {
+            "lts__t_requests_srcunit_ltcfabric.sum": {
+              "value": 79776986.0,
+              "unit": "request"
+            }
+          },
+          "ltc_fabric_requests": 79776986.0,
+          "target_metadata": {
+            "batch_size": 64,
+            "data_initialization": "random",
+            "data_seed": 42,
+            "device": "NVIDIA B200",
+            "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+            "localized_mapped_bytes": null,
+            "mode": "standard",
+            "owner_page_counts": null,
+            "owner_tile_counts": null,
+            "owner_work_counts": null,
+            "partition_sm_counts": null,
+            "profiled_launches": 1,
+            "resident_partition_clusters": null,
+            "seqlen_k": 65536,
+            "seqlen_q": 4,
+            "split_kv": 1,
+            "total_sm_count": 148,
+            "warmup_launches": 3,
+            "workload": "decode"
+          },
+          "command": [
+            "/usr/local/cuda-13.2/bin/ncu",
+            "--force-overwrite",
+            "--export",
+            "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq4_b64_sk65536/attempt_001/standard",
+            "--devices",
+            "0",
+            "--profile-from-start",
+            "off",
+            "--launch-count",
+            "1",
+            "--kernel-name-base",
+            "demangled",
+            "--cache-control",
+            "all",
+            "--clock-control",
+            "boost",
+            "--replay-mode",
+            "kernel",
+            "--metrics",
+            "lts__t_requests_srcunit_ltcfabric.sum",
+            "/workspace/flashinfer-mla/.venv/bin/python",
+            "-P",
+            "/workspace/flashinfer-mla/benchmarks/profile_cute_dsl_localized_mla_ltc_target.py",
+            "--mode",
+            "standard",
+            "--batch",
+            "64",
+            "--seqlen-q",
+            "4",
+            "--seqlen-k",
+            "65536",
+            "--device",
+            "0",
+            "--warmups",
+            "3",
+            "--data-initialization",
+            "random",
+            "--seed",
+            "42",
+            "--cold-l2",
+            "--workload",
+            "decode",
+            "--expected-partition-sm-counts",
+            "74",
+            "74"
+          ],
+          "log": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq4_b64_sk65536/attempt_001/standard.log",
+          "wall_seconds": 6.596881335999569
+        }
+      },
+      "comparison": {
+        "ltc_reduction_pct": 98.28621251747967
+      }
+    },
+    {
+      "workload": "decode",
+      "seqlen_q": 4,
+      "batch_size": 64,
+      "seqlen_k": 524288,
+      "split_kv": 1,
+      "source": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_20260905/decode/sq4/post_flops.json",
+      "status": "complete",
+      "attempts": [
+        {
+          "started_at": "2026-09-05T13:03:28.135219+00:00",
+          "mode_order": [
+            "standard",
+            "localized"
+          ],
+          "directory": "profiles/decode/sq4_b64_sk524288/attempt_001",
+          "status": "complete",
+          "finished_at": "2026-09-05T13:03:42.854672+00:00"
+        }
+      ],
+      "profiles": {
+        "standard": {
+          "report": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq4_b64_sk524288/attempt_001/standard.ncu-rep",
+          "raw_csv": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq4_b64_sk524288/attempt_001/standard.csv",
+          "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmla_decodeBlackwellMultiLatentAttentionForward_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____MMAAtom_ThrID21_ShapeM_0",
+          "ncu_replay_passes": 1,
+          "metrics": {
+            "lts__t_requests_srcunit_ltcfabric.sum": {
+              "value": 657272439.0,
+              "unit": "request"
+            }
+          },
+          "ltc_fabric_requests": 657272439.0,
+          "target_metadata": {
+            "batch_size": 64,
+            "data_initialization": "random",
+            "data_seed": 42,
+            "device": "NVIDIA B200",
+            "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+            "localized_mapped_bytes": null,
+            "mode": "standard",
+            "owner_page_counts": null,
+            "owner_tile_counts": null,
+            "owner_work_counts": null,
+            "partition_sm_counts": null,
+            "profiled_launches": 1,
+            "resident_partition_clusters": null,
+            "seqlen_k": 524288,
+            "seqlen_q": 4,
+            "split_kv": 1,
+            "total_sm_count": 148,
+            "warmup_launches": 3,
+            "workload": "decode"
+          },
+          "command": [
+            "/usr/local/cuda-13.2/bin/ncu",
+            "--force-overwrite",
+            "--export",
+            "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq4_b64_sk524288/attempt_001/standard",
+            "--devices",
+            "0",
+            "--profile-from-start",
+            "off",
+            "--launch-count",
+            "1",
+            "--kernel-name-base",
+            "demangled",
+            "--cache-control",
+            "all",
+            "--clock-control",
+            "boost",
+            "--replay-mode",
+            "kernel",
+            "--metrics",
+            "lts__t_requests_srcunit_ltcfabric.sum",
+            "/workspace/flashinfer-mla/.venv/bin/python",
+            "-P",
+            "/workspace/flashinfer-mla/benchmarks/profile_cute_dsl_localized_mla_ltc_target.py",
+            "--mode",
+            "standard",
+            "--batch",
+            "64",
+            "--seqlen-q",
+            "4",
+            "--seqlen-k",
+            "524288",
+            "--device",
+            "0",
+            "--warmups",
+            "3",
+            "--data-initialization",
+            "random",
+            "--seed",
+            "42",
+            "--cold-l2",
+            "--workload",
+            "decode",
+            "--expected-partition-sm-counts",
+            "74",
+            "74"
+          ],
+          "log": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq4_b64_sk524288/attempt_001/standard.log",
+          "wall_seconds": 6.636150600999827
+        },
+        "localized": {
+          "report": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq4_b64_sk524288/attempt_001/localized.ncu-rep",
+          "raw_csv": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq4_b64_sk524288/attempt_001/localized.csv",
+          "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmla_decodeBlackwellMultiLatentAttentionForward_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____MMAAtom_ThrID21_ShapeM_0",
+          "ncu_replay_passes": 1,
+          "metrics": {
+            "lts__t_requests_srcunit_ltcfabric.sum": {
+              "value": 1384008.0,
+              "unit": "request"
+            }
+          },
+          "ltc_fabric_requests": 1384008.0,
+          "target_metadata": {
+            "batch_size": 64,
+            "data_initialization": "random",
+            "data_seed": 42,
+            "device": "NVIDIA B200",
+            "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+            "localized_mapped_bytes": [
+              19327352832,
+              19327352832
+            ],
+            "mode": "localized",
+            "owner_page_counts": [
+              262144,
+              262144
+            ],
+            "owner_tile_counts": [
+              128,
+              128
+            ],
+            "owner_work_counts": [
+              32,
+              32
+            ],
+            "partition_sm_counts": [
+              74,
+              74
+            ],
+            "profiled_launches": 1,
+            "resident_partition_clusters": [
+              37,
+              37
+            ],
+            "seqlen_k": 524288,
+            "seqlen_q": 4,
+            "split_kv": 1,
+            "total_sm_count": 148,
+            "warmup_launches": 3,
+            "workload": "decode"
+          },
+          "command": [
+            "/usr/local/cuda-13.2/bin/ncu",
+            "--force-overwrite",
+            "--export",
+            "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq4_b64_sk524288/attempt_001/localized",
+            "--devices",
+            "0",
+            "--profile-from-start",
+            "off",
+            "--launch-count",
+            "1",
+            "--kernel-name-base",
+            "demangled",
+            "--cache-control",
+            "all",
+            "--clock-control",
+            "boost",
+            "--replay-mode",
+            "kernel",
+            "--metrics",
+            "lts__t_requests_srcunit_ltcfabric.sum",
+            "/workspace/flashinfer-mla/.venv/bin/python",
+            "-P",
+            "/workspace/flashinfer-mla/benchmarks/profile_cute_dsl_localized_mla_ltc_target.py",
+            "--mode",
+            "localized",
+            "--batch",
+            "64",
+            "--seqlen-q",
+            "4",
+            "--seqlen-k",
+            "524288",
+            "--device",
+            "0",
+            "--warmups",
+            "3",
+            "--data-initialization",
+            "random",
+            "--seed",
+            "42",
+            "--cold-l2",
+            "--workload",
+            "decode",
+            "--expected-partition-sm-counts",
+            "74",
+            "74"
+          ],
+          "log": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq4_b64_sk524288/attempt_001/localized.log",
+          "wall_seconds": 8.081115791999764
+        }
+      },
+      "comparison": {
+        "ltc_reduction_pct": 99.78943160889179
+      }
+    },
+    {
+      "workload": "decode",
+      "seqlen_q": 4,
+      "batch_size": 64,
+      "seqlen_k": 1048576,
+      "split_kv": 1,
+      "source": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_20260905/decode/sq4/post_flops.json",
+      "status": "complete",
+      "attempts": [
+        {
+          "started_at": "2026-09-05T13:03:42.856678+00:00",
+          "mode_order": [
+            "localized",
+            "standard"
+          ],
+          "directory": "profiles/decode/sq4_b64_sk1048576/attempt_001",
+          "status": "complete",
+          "finished_at": "2026-09-05T13:03:58.524404+00:00"
+        }
+      ],
+      "profiles": {
+        "localized": {
+          "report": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq4_b64_sk1048576/attempt_001/localized.ncu-rep",
+          "raw_csv": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq4_b64_sk1048576/attempt_001/localized.csv",
+          "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmla_decodeBlackwellMultiLatentAttentionForward_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____MMAAtom_ThrID21_ShapeM_0",
+          "ncu_replay_passes": 1,
+          "metrics": {
+            "lts__t_requests_srcunit_ltcfabric.sum": {
+              "value": 1415256.0,
+              "unit": "request"
+            }
+          },
+          "ltc_fabric_requests": 1415256.0,
+          "target_metadata": {
+            "batch_size": 64,
+            "data_initialization": "random",
+            "data_seed": 42,
+            "device": "NVIDIA B200",
+            "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+            "localized_mapped_bytes": [
+              38654705664,
+              38654705664
+            ],
+            "mode": "localized",
+            "owner_page_counts": [
+              524288,
+              524288
+            ],
+            "owner_tile_counts": [
+              128,
+              128
+            ],
+            "owner_work_counts": [
+              32,
+              32
+            ],
+            "partition_sm_counts": [
+              74,
+              74
+            ],
+            "profiled_launches": 1,
+            "resident_partition_clusters": [
+              37,
+              37
+            ],
+            "seqlen_k": 1048576,
+            "seqlen_q": 4,
+            "split_kv": 1,
+            "total_sm_count": 148,
+            "warmup_launches": 3,
+            "workload": "decode"
+          },
+          "command": [
+            "/usr/local/cuda-13.2/bin/ncu",
+            "--force-overwrite",
+            "--export",
+            "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq4_b64_sk1048576/attempt_001/localized",
+            "--devices",
+            "0",
+            "--profile-from-start",
+            "off",
+            "--launch-count",
+            "1",
+            "--kernel-name-base",
+            "demangled",
+            "--cache-control",
+            "all",
+            "--clock-control",
+            "boost",
+            "--replay-mode",
+            "kernel",
+            "--metrics",
+            "lts__t_requests_srcunit_ltcfabric.sum",
+            "/workspace/flashinfer-mla/.venv/bin/python",
+            "-P",
+            "/workspace/flashinfer-mla/benchmarks/profile_cute_dsl_localized_mla_ltc_target.py",
+            "--mode",
+            "localized",
+            "--batch",
+            "64",
+            "--seqlen-q",
+            "4",
+            "--seqlen-k",
+            "1048576",
+            "--device",
+            "0",
+            "--warmups",
+            "3",
+            "--data-initialization",
+            "random",
+            "--seed",
+            "42",
+            "--cold-l2",
+            "--workload",
+            "decode",
+            "--expected-partition-sm-counts",
+            "74",
+            "74"
+          ],
+          "log": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq4_b64_sk1048576/attempt_001/localized.log",
+          "wall_seconds": 8.833237404999636
+        },
+        "standard": {
+          "report": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq4_b64_sk1048576/attempt_001/standard.ncu-rep",
+          "raw_csv": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq4_b64_sk1048576/attempt_001/standard.csv",
+          "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmla_decodeBlackwellMultiLatentAttentionForward_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____MMAAtom_ThrID21_ShapeM_0",
+          "ncu_replay_passes": 1,
+          "metrics": {
+            "lts__t_requests_srcunit_ltcfabric.sum": {
+              "value": 1499014980.0,
+              "unit": "request"
+            }
+          },
+          "ltc_fabric_requests": 1499014980.0,
+          "target_metadata": {
+            "batch_size": 64,
+            "data_initialization": "random",
+            "data_seed": 42,
+            "device": "NVIDIA B200",
+            "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+            "localized_mapped_bytes": null,
+            "mode": "standard",
+            "owner_page_counts": null,
+            "owner_tile_counts": null,
+            "owner_work_counts": null,
+            "partition_sm_counts": null,
+            "profiled_launches": 1,
+            "resident_partition_clusters": null,
+            "seqlen_k": 1048576,
+            "seqlen_q": 4,
+            "split_kv": 1,
+            "total_sm_count": 148,
+            "warmup_launches": 3,
+            "workload": "decode"
+          },
+          "command": [
+            "/usr/local/cuda-13.2/bin/ncu",
+            "--force-overwrite",
+            "--export",
+            "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq4_b64_sk1048576/attempt_001/standard",
+            "--devices",
+            "0",
+            "--profile-from-start",
+            "off",
+            "--launch-count",
+            "1",
+            "--kernel-name-base",
+            "demangled",
+            "--cache-control",
+            "all",
+            "--clock-control",
+            "boost",
+            "--replay-mode",
+            "kernel",
+            "--metrics",
+            "lts__t_requests_srcunit_ltcfabric.sum",
+            "/workspace/flashinfer-mla/.venv/bin/python",
+            "-P",
+            "/workspace/flashinfer-mla/benchmarks/profile_cute_dsl_localized_mla_ltc_target.py",
+            "--mode",
+            "standard",
+            "--batch",
+            "64",
+            "--seqlen-q",
+            "4",
+            "--seqlen-k",
+            "1048576",
+            "--device",
+            "0",
+            "--warmups",
+            "3",
+            "--data-initialization",
+            "random",
+            "--seed",
+            "42",
+            "--cold-l2",
+            "--workload",
+            "decode",
+            "--expected-partition-sm-counts",
+            "74",
+            "74"
+          ],
+          "log": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq4_b64_sk1048576/attempt_001/standard.log",
+          "wall_seconds": 6.832364869999765
+        }
+      },
+      "comparison": {
+        "ltc_reduction_pct": 99.905587601266
+      }
+    },
+    {
+      "workload": "decode",
+      "seqlen_q": 4,
+      "batch_size": 2,
+      "seqlen_k": 1048576,
+      "split_kv": 9,
+      "source": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_20260905/decode/sq4/post_flops.json",
+      "status": "complete",
+      "attempts": [
+        {
+          "started_at": "2026-09-05T13:03:58.526557+00:00",
+          "mode_order": [
+            "standard",
+            "localized"
+          ],
+          "directory": "profiles/decode/sq4_b2_sk1048576/attempt_001",
+          "status": "complete",
+          "finished_at": "2026-09-05T13:04:12.719783+00:00"
+        }
+      ],
+      "profiles": {
+        "standard": {
+          "report": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq4_b2_sk1048576/attempt_001/standard.ncu-rep",
+          "raw_csv": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq4_b2_sk1048576/attempt_001/standard.csv",
+          "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmla_decodeBlackwellMultiLatentAttentionForward_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____MMAAtom_ThrID21_ShapeM_0",
+          "ncu_replay_passes": 1,
+          "metrics": {
+            "lts__t_requests_srcunit_ltcfabric.sum": {
+              "value": 37449005.0,
+              "unit": "request"
+            }
+          },
+          "ltc_fabric_requests": 37449005.0,
+          "target_metadata": {
+            "batch_size": 2,
+            "data_initialization": "random",
+            "data_seed": 42,
+            "device": "NVIDIA B200",
+            "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+            "localized_mapped_bytes": null,
+            "mode": "standard",
+            "owner_page_counts": null,
+            "owner_tile_counts": null,
+            "owner_work_counts": null,
+            "partition_sm_counts": null,
+            "profiled_launches": 1,
+            "resident_partition_clusters": null,
+            "seqlen_k": 1048576,
+            "seqlen_q": 4,
+            "split_kv": 9,
+            "total_sm_count": 148,
+            "warmup_launches": 3,
+            "workload": "decode"
+          },
+          "command": [
+            "/usr/local/cuda-13.2/bin/ncu",
+            "--force-overwrite",
+            "--export",
+            "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq4_b2_sk1048576/attempt_001/standard",
+            "--devices",
+            "0",
+            "--profile-from-start",
+            "off",
+            "--launch-count",
+            "1",
+            "--kernel-name-base",
+            "demangled",
+            "--cache-control",
+            "all",
+            "--clock-control",
+            "boost",
+            "--replay-mode",
+            "kernel",
+            "--metrics",
+            "lts__t_requests_srcunit_ltcfabric.sum",
+            "/workspace/flashinfer-mla/.venv/bin/python",
+            "-P",
+            "/workspace/flashinfer-mla/benchmarks/profile_cute_dsl_localized_mla_ltc_target.py",
+            "--mode",
+            "standard",
+            "--batch",
+            "2",
+            "--seqlen-q",
+            "4",
+            "--seqlen-k",
+            "1048576",
+            "--device",
+            "0",
+            "--warmups",
+            "3",
+            "--data-initialization",
+            "random",
+            "--seed",
+            "42",
+            "--cold-l2",
+            "--workload",
+            "decode",
+            "--expected-partition-sm-counts",
+            "74",
+            "74"
+          ],
+          "log": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq4_b2_sk1048576/attempt_001/standard.log",
+          "wall_seconds": 6.766671221999786
+        },
+        "localized": {
+          "report": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq4_b2_sk1048576/attempt_001/localized.ncu-rep",
+          "raw_csv": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq4_b2_sk1048576/attempt_001/localized.csv",
+          "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmla_decodeBlackwellMultiLatentAttentionForward_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____MMAAtom_ThrID21_ShapeM_0",
+          "ncu_replay_passes": 1,
+          "metrics": {
+            "lts__t_requests_srcunit_ltcfabric.sum": {
+              "value": 327063.0,
+              "unit": "request"
+            }
+          },
+          "ltc_fabric_requests": 327063.0,
+          "target_metadata": {
+            "batch_size": 2,
+            "data_initialization": "random",
+            "data_seed": 42,
+            "device": "NVIDIA B200",
+            "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+            "localized_mapped_bytes": [
+              1207959552,
+              1207959552
+            ],
+            "mode": "localized",
+            "owner_page_counts": [
+              16384,
+              16384
+            ],
+            "owner_tile_counts": [
+              36,
+              36
+            ],
+            "owner_work_counts": [
+              9,
+              9
+            ],
+            "partition_sm_counts": [
+              74,
+              74
+            ],
+            "profiled_launches": 1,
+            "resident_partition_clusters": [
+              37,
+              37
+            ],
+            "seqlen_k": 1048576,
+            "seqlen_q": 4,
+            "split_kv": 9,
+            "total_sm_count": 148,
+            "warmup_launches": 3,
+            "workload": "decode"
+          },
+          "command": [
+            "/usr/local/cuda-13.2/bin/ncu",
+            "--force-overwrite",
+            "--export",
+            "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq4_b2_sk1048576/attempt_001/localized",
+            "--devices",
+            "0",
+            "--profile-from-start",
+            "off",
+            "--launch-count",
+            "1",
+            "--kernel-name-base",
+            "demangled",
+            "--cache-control",
+            "all",
+            "--clock-control",
+            "boost",
+            "--replay-mode",
+            "kernel",
+            "--metrics",
+            "lts__t_requests_srcunit_ltcfabric.sum",
+            "/workspace/flashinfer-mla/.venv/bin/python",
+            "-P",
+            "/workspace/flashinfer-mla/benchmarks/profile_cute_dsl_localized_mla_ltc_target.py",
+            "--mode",
+            "localized",
+            "--batch",
+            "2",
+            "--seqlen-q",
+            "4",
+            "--seqlen-k",
+            "1048576",
+            "--device",
+            "0",
+            "--warmups",
+            "3",
+            "--data-initialization",
+            "random",
+            "--seed",
+            "42",
+            "--cold-l2",
+            "--workload",
+            "decode",
+            "--expected-partition-sm-counts",
+            "74",
+            "74"
+          ],
+          "log": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq4_b2_sk1048576/attempt_001/localized.log",
+          "wall_seconds": 7.424298128000373
+        }
+      },
+      "comparison": {
+        "ltc_reduction_pct": 99.12664435276717
+      }
+    },
+    {
+      "workload": "decode",
+      "seqlen_q": 4,
+      "batch_size": 16,
+      "seqlen_k": 1048576,
+      "split_kv": 1,
+      "source": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_20260905/decode/sq4/post_flops.json",
+      "status": "complete",
+      "attempts": [
+        {
+          "started_at": "2026-09-05T13:04:12.722136+00:00",
+          "mode_order": [
+            "localized",
+            "standard"
+          ],
+          "directory": "profiles/decode/sq4_b16_sk1048576/attempt_001",
+          "status": "complete",
+          "finished_at": "2026-09-05T13:04:27.042814+00:00"
+        }
+      ],
+      "profiles": {
+        "localized": {
+          "report": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq4_b16_sk1048576/attempt_001/localized.ncu-rep",
+          "raw_csv": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq4_b16_sk1048576/attempt_001/localized.csv",
+          "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmla_decodeBlackwellMultiLatentAttentionForward_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____MMAAtom_ThrID21_ShapeM_0",
+          "ncu_replay_passes": 1,
+          "metrics": {
+            "lts__t_requests_srcunit_ltcfabric.sum": {
+              "value": 361331.0,
+              "unit": "request"
+            }
+          },
+          "ltc_fabric_requests": 361331.0,
+          "target_metadata": {
+            "batch_size": 16,
+            "data_initialization": "random",
+            "data_seed": 42,
+            "device": "NVIDIA B200",
+            "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+            "localized_mapped_bytes": [
+              9663676416,
+              9663676416
+            ],
+            "mode": "localized",
+            "owner_page_counts": [
+              131072,
+              131072
+            ],
+            "owner_tile_counts": [
+              32,
+              32
+            ],
+            "owner_work_counts": [
+              8,
+              8
+            ],
+            "partition_sm_counts": [
+              74,
+              74
+            ],
+            "profiled_launches": 1,
+            "resident_partition_clusters": [
+              37,
+              37
+            ],
+            "seqlen_k": 1048576,
+            "seqlen_q": 4,
+            "split_kv": 1,
+            "total_sm_count": 148,
+            "warmup_launches": 3,
+            "workload": "decode"
+          },
+          "command": [
+            "/usr/local/cuda-13.2/bin/ncu",
+            "--force-overwrite",
+            "--export",
+            "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq4_b16_sk1048576/attempt_001/localized",
+            "--devices",
+            "0",
+            "--profile-from-start",
+            "off",
+            "--launch-count",
+            "1",
+            "--kernel-name-base",
+            "demangled",
+            "--cache-control",
+            "all",
+            "--clock-control",
+            "boost",
+            "--replay-mode",
+            "kernel",
+            "--metrics",
+            "lts__t_requests_srcunit_ltcfabric.sum",
+            "/workspace/flashinfer-mla/.venv/bin/python",
+            "-P",
+            "/workspace/flashinfer-mla/benchmarks/profile_cute_dsl_localized_mla_ltc_target.py",
+            "--mode",
+            "localized",
+            "--batch",
+            "16",
+            "--seqlen-q",
+            "4",
+            "--seqlen-k",
+            "1048576",
+            "--device",
+            "0",
+            "--warmups",
+            "3",
+            "--data-initialization",
+            "random",
+            "--seed",
+            "42",
+            "--cold-l2",
+            "--workload",
+            "decode",
+            "--expected-partition-sm-counts",
+            "74",
+            "74"
+          ],
+          "log": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq4_b16_sk1048576/attempt_001/localized.log",
+          "wall_seconds": 7.6536605569999665
+        },
+        "standard": {
+          "report": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq4_b16_sk1048576/attempt_001/standard.ncu-rep",
+          "raw_csv": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq4_b16_sk1048576/attempt_001/standard.csv",
+          "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmla_decodeBlackwellMultiLatentAttentionForward_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____MMAAtom_ThrID21_ShapeM_0",
+          "ncu_replay_passes": 1,
+          "metrics": {
+            "lts__t_requests_srcunit_ltcfabric.sum": {
+              "value": 295964791.0,
+              "unit": "request"
+            }
+          },
+          "ltc_fabric_requests": 295964791.0,
+          "target_metadata": {
+            "batch_size": 16,
+            "data_initialization": "random",
+            "data_seed": 42,
+            "device": "NVIDIA B200",
+            "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+            "localized_mapped_bytes": null,
+            "mode": "standard",
+            "owner_page_counts": null,
+            "owner_tile_counts": null,
+            "owner_work_counts": null,
+            "partition_sm_counts": null,
+            "profiled_launches": 1,
+            "resident_partition_clusters": null,
+            "seqlen_k": 1048576,
+            "seqlen_q": 4,
+            "split_kv": 1,
+            "total_sm_count": 148,
+            "warmup_launches": 3,
+            "workload": "decode"
+          },
+          "command": [
+            "/usr/local/cuda-13.2/bin/ncu",
+            "--force-overwrite",
+            "--export",
+            "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq4_b16_sk1048576/attempt_001/standard",
+            "--devices",
+            "0",
+            "--profile-from-start",
+            "off",
+            "--launch-count",
+            "1",
+            "--kernel-name-base",
+            "demangled",
+            "--cache-control",
+            "all",
+            "--clock-control",
+            "boost",
+            "--replay-mode",
+            "kernel",
+            "--metrics",
+            "lts__t_requests_srcunit_ltcfabric.sum",
+            "/workspace/flashinfer-mla/.venv/bin/python",
+            "-P",
+            "/workspace/flashinfer-mla/benchmarks/profile_cute_dsl_localized_mla_ltc_target.py",
+            "--mode",
+            "standard",
+            "--batch",
+            "16",
+            "--seqlen-q",
+            "4",
+            "--seqlen-k",
+            "1048576",
+            "--device",
+            "0",
+            "--warmups",
+            "3",
+            "--data-initialization",
+            "random",
+            "--seed",
+            "42",
+            "--cold-l2",
+            "--workload",
+            "decode",
+            "--expected-partition-sm-counts",
+            "74",
+            "74"
+          ],
+          "log": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/decode/sq4_b16_sk1048576/attempt_001/standard.log",
+          "wall_seconds": 6.664629056000194
+        }
+      },
+      "comparison": {
+        "ltc_reduction_pct": 99.8779141941921
+      }
+    },
+    {
+      "workload": "prefill",
+      "seqlen_q": 128,
+      "batch_size": 64,
+      "seqlen_k": 512,
+      "split_kv": 1,
+      "source": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/prefill/timing.json",
+      "status": "complete",
+      "attempts": [
+        {
+          "started_at": "2026-09-05T13:04:27.045270+00:00",
+          "mode_order": [
+            "standard",
+            "localized"
+          ],
+          "directory": "profiles/prefill/sq128_b64_sk512/attempt_001",
+          "status": "complete",
+          "finished_at": "2026-09-05T13:04:41.531483+00:00"
+        }
+      ],
+      "profiles": {
+        "standard": {
+          "report": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/prefill/sq128_b64_sk512/attempt_001/standard.ncu-rep",
+          "raw_csv": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/prefill/sq128_b64_sk512/attempt_001/standard.csv",
+          "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmonolithicmla_decode_fp16BlackwellMultiHeadLatentAttentionForwardFP16_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____0",
+          "ncu_replay_passes": 1,
+          "metrics": {
+            "lts__t_requests_srcunit_ltcfabric.sum": {
+              "value": 43459826.0,
+              "unit": "request"
+            }
+          },
+          "ltc_fabric_requests": 43459826.0,
+          "target_metadata": {
+            "batch_size": 64,
+            "data_initialization": "random",
+            "data_seed": 42,
+            "device": "NVIDIA B200",
+            "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+            "localized_mapped_bytes": null,
+            "mode": "standard",
+            "owner_page_counts": null,
+            "owner_tile_counts": null,
+            "owner_work_counts": null,
+            "partition_sm_counts": null,
+            "profiled_launches": 1,
+            "resident_partition_clusters": null,
+            "seqlen_k": 512,
+            "seqlen_q": 128,
+            "split_kv": 1,
+            "total_sm_count": 148,
+            "warmup_launches": 3,
+            "workload": "prefill"
+          },
+          "command": [
+            "/usr/local/cuda-13.2/bin/ncu",
+            "--force-overwrite",
+            "--export",
+            "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/prefill/sq128_b64_sk512/attempt_001/standard",
+            "--devices",
+            "0",
+            "--profile-from-start",
+            "off",
+            "--launch-count",
+            "1",
+            "--kernel-name-base",
+            "demangled",
+            "--cache-control",
+            "all",
+            "--clock-control",
+            "boost",
+            "--replay-mode",
+            "kernel",
+            "--metrics",
+            "lts__t_requests_srcunit_ltcfabric.sum",
+            "/workspace/flashinfer-mla/.venv/bin/python",
+            "-P",
+            "/workspace/flashinfer-mla/benchmarks/profile_cute_dsl_localized_mla_ltc_target.py",
+            "--mode",
+            "standard",
+            "--batch",
+            "64",
+            "--seqlen-q",
+            "128",
+            "--seqlen-k",
+            "512",
+            "--device",
+            "0",
+            "--warmups",
+            "3",
+            "--data-initialization",
+            "random",
+            "--seed",
+            "42",
+            "--cold-l2",
+            "--workload",
+            "prefill",
+            "--expected-partition-sm-counts",
+            "74",
+            "74"
+          ],
+          "log": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/prefill/sq128_b64_sk512/attempt_001/standard.log",
+          "wall_seconds": 7.012661187000049
+        },
+        "localized": {
+          "report": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/prefill/sq128_b64_sk512/attempt_001/localized.ncu-rep",
+          "raw_csv": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/prefill/sq128_b64_sk512/attempt_001/localized.csv",
+          "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmonolithicmla_decode_fp16BlackwellMultiHeadLatentAttentionForwardFP16_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____0",
+          "ncu_replay_passes": 1,
+          "metrics": {
+            "lts__t_requests_srcunit_ltcfabric.sum": {
+              "value": 42906265.0,
+              "unit": "request"
+            }
+          },
+          "ltc_fabric_requests": 42906265.0,
+          "target_metadata": {
+            "batch_size": 64,
+            "data_initialization": "random",
+            "data_seed": 42,
+            "device": "NVIDIA B200",
+            "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+            "localized_mapped_bytes": [
+              18874368,
+              18874368
+            ],
+            "mode": "localized",
+            "owner_page_counts": [
+              256,
+              256
+            ],
+            "owner_tile_counts": [
+              4096,
+              4096
+            ],
+            "owner_work_counts": [
+              32,
+              32
+            ],
+            "partition_sm_counts": [
+              74,
+              74
+            ],
+            "profiled_launches": 1,
+            "resident_partition_clusters": [
+              37,
+              37
+            ],
+            "seqlen_k": 512,
+            "seqlen_q": 128,
+            "split_kv": 1,
+            "total_sm_count": 148,
+            "warmup_launches": 3,
+            "workload": "prefill"
+          },
+          "command": [
+            "/usr/local/cuda-13.2/bin/ncu",
+            "--force-overwrite",
+            "--export",
+            "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/prefill/sq128_b64_sk512/attempt_001/localized",
+            "--devices",
+            "0",
+            "--profile-from-start",
+            "off",
+            "--launch-count",
+            "1",
+            "--kernel-name-base",
+            "demangled",
+            "--cache-control",
+            "all",
+            "--clock-control",
+            "boost",
+            "--replay-mode",
+            "kernel",
+            "--metrics",
+            "lts__t_requests_srcunit_ltcfabric.sum",
+            "/workspace/flashinfer-mla/.venv/bin/python",
+            "-P",
+            "/workspace/flashinfer-mla/benchmarks/profile_cute_dsl_localized_mla_ltc_target.py",
+            "--mode",
+            "localized",
+            "--batch",
+            "64",
+            "--seqlen-q",
+            "128",
+            "--seqlen-k",
+            "512",
+            "--device",
+            "0",
+            "--warmups",
+            "3",
+            "--data-initialization",
+            "random",
+            "--seed",
+            "42",
+            "--cold-l2",
+            "--workload",
+            "prefill",
+            "--expected-partition-sm-counts",
+            "74",
+            "74"
+          ],
+          "log": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/prefill/sq128_b64_sk512/attempt_001/localized.log",
+          "wall_seconds": 7.471055792000698
+        }
+      },
+      "comparison": {
+        "ltc_reduction_pct": 1.2737303642218922
+      }
+    },
+    {
+      "workload": "prefill",
+      "seqlen_q": 128,
+      "batch_size": 64,
+      "seqlen_k": 65536,
+      "split_kv": 1,
+      "source": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/prefill/timing.json",
+      "status": "complete",
+      "attempts": [
+        {
+          "started_at": "2026-09-05T13:04:41.534047+00:00",
+          "mode_order": [
+            "localized",
+            "standard"
+          ],
+          "directory": "profiles/prefill/sq128_b64_sk65536/attempt_001",
+          "status": "complete",
+          "finished_at": "2026-09-05T13:04:56.685666+00:00"
+        }
+      ],
+      "profiles": {
+        "localized": {
+          "report": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/prefill/sq128_b64_sk65536/attempt_001/localized.ncu-rep",
+          "raw_csv": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/prefill/sq128_b64_sk65536/attempt_001/localized.csv",
+          "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmonolithicmla_decode_fp16BlackwellMultiHeadLatentAttentionForwardFP16_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____0",
+          "ncu_replay_passes": 1,
+          "metrics": {
+            "lts__t_requests_srcunit_ltcfabric.sum": {
+              "value": 43088663.0,
+              "unit": "request"
+            }
+          },
+          "ltc_fabric_requests": 43088663.0,
+          "target_metadata": {
+            "batch_size": 64,
+            "data_initialization": "random",
+            "data_seed": 42,
+            "device": "NVIDIA B200",
+            "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+            "localized_mapped_bytes": [
+              2415919104,
+              2415919104
+            ],
+            "mode": "localized",
+            "owner_page_counts": [
+              32768,
+              32768
+            ],
+            "owner_tile_counts": [
+              4096,
+              4096
+            ],
+            "owner_work_counts": [
+              32,
+              32
+            ],
+            "partition_sm_counts": [
+              74,
+              74
+            ],
+            "profiled_launches": 1,
+            "resident_partition_clusters": [
+              37,
+              37
+            ],
+            "seqlen_k": 65536,
+            "seqlen_q": 128,
+            "split_kv": 1,
+            "total_sm_count": 148,
+            "warmup_launches": 3,
+            "workload": "prefill"
+          },
+          "command": [
+            "/usr/local/cuda-13.2/bin/ncu",
+            "--force-overwrite",
+            "--export",
+            "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/prefill/sq128_b64_sk65536/attempt_001/localized",
+            "--devices",
+            "0",
+            "--profile-from-start",
+            "off",
+            "--launch-count",
+            "1",
+            "--kernel-name-base",
+            "demangled",
+            "--cache-control",
+            "all",
+            "--clock-control",
+            "boost",
+            "--replay-mode",
+            "kernel",
+            "--metrics",
+            "lts__t_requests_srcunit_ltcfabric.sum",
+            "/workspace/flashinfer-mla/.venv/bin/python",
+            "-P",
+            "/workspace/flashinfer-mla/benchmarks/profile_cute_dsl_localized_mla_ltc_target.py",
+            "--mode",
+            "localized",
+            "--batch",
+            "64",
+            "--seqlen-q",
+            "128",
+            "--seqlen-k",
+            "65536",
+            "--device",
+            "0",
+            "--warmups",
+            "3",
+            "--data-initialization",
+            "random",
+            "--seed",
+            "42",
+            "--cold-l2",
+            "--workload",
+            "prefill",
+            "--expected-partition-sm-counts",
+            "74",
+            "74"
+          ],
+          "log": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/prefill/sq128_b64_sk65536/attempt_001/localized.log",
+          "wall_seconds": 7.9338258660000065
+        },
+        "standard": {
+          "report": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/prefill/sq128_b64_sk65536/attempt_001/standard.ncu-rep",
+          "raw_csv": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/prefill/sq128_b64_sk65536/attempt_001/standard.csv",
+          "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmonolithicmla_decode_fp16BlackwellMultiHeadLatentAttentionForwardFP16_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____0",
+          "ncu_replay_passes": 1,
+          "metrics": {
+            "lts__t_requests_srcunit_ltcfabric.sum": {
+              "value": 241538627.0,
+              "unit": "request"
+            }
+          },
+          "ltc_fabric_requests": 241538627.0,
+          "target_metadata": {
+            "batch_size": 64,
+            "data_initialization": "random",
+            "data_seed": 42,
+            "device": "NVIDIA B200",
+            "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+            "localized_mapped_bytes": null,
+            "mode": "standard",
+            "owner_page_counts": null,
+            "owner_tile_counts": null,
+            "owner_work_counts": null,
+            "partition_sm_counts": null,
+            "profiled_launches": 1,
+            "resident_partition_clusters": null,
+            "seqlen_k": 65536,
+            "seqlen_q": 128,
+            "split_kv": 1,
+            "total_sm_count": 148,
+            "warmup_launches": 3,
+            "workload": "prefill"
+          },
+          "command": [
+            "/usr/local/cuda-13.2/bin/ncu",
+            "--force-overwrite",
+            "--export",
+            "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/prefill/sq128_b64_sk65536/attempt_001/standard",
+            "--devices",
+            "0",
+            "--profile-from-start",
+            "off",
+            "--launch-count",
+            "1",
+            "--kernel-name-base",
+            "demangled",
+            "--cache-control",
+            "all",
+            "--clock-control",
+            "boost",
+            "--replay-mode",
+            "kernel",
+            "--metrics",
+            "lts__t_requests_srcunit_ltcfabric.sum",
+            "/workspace/flashinfer-mla/.venv/bin/python",
+            "-P",
+            "/workspace/flashinfer-mla/benchmarks/profile_cute_dsl_localized_mla_ltc_target.py",
+            "--mode",
+            "standard",
+            "--batch",
+            "64",
+            "--seqlen-q",
+            "128",
+            "--seqlen-k",
+            "65536",
+            "--device",
+            "0",
+            "--warmups",
+            "3",
+            "--data-initialization",
+            "random",
+            "--seed",
+            "42",
+            "--cold-l2",
+            "--workload",
+            "prefill",
+            "--expected-partition-sm-counts",
+            "74",
+            "74"
+          ],
+          "log": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/prefill/sq128_b64_sk65536/attempt_001/standard.log",
+          "wall_seconds": 7.2151153589993555
+        }
+      },
+      "comparison": {
+        "ltc_reduction_pct": 82.16075683828409
+      }
+    },
+    {
+      "workload": "prefill",
+      "seqlen_q": 128,
+      "batch_size": 64,
+      "seqlen_k": 524288,
+      "split_kv": 1,
+      "source": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/prefill/timing.json",
+      "status": "complete",
+      "attempts": [
+        {
+          "started_at": "2026-09-05T13:04:56.688515+00:00",
+          "mode_order": [
+            "standard",
+            "localized"
+          ],
+          "directory": "profiles/prefill/sq128_b64_sk524288/attempt_001",
+          "status": "complete",
+          "finished_at": "2026-09-05T13:05:18.067430+00:00"
+        }
+      ],
+      "profiles": {
+        "standard": {
+          "report": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/prefill/sq128_b64_sk524288/attempt_001/standard.ncu-rep",
+          "raw_csv": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/prefill/sq128_b64_sk524288/attempt_001/standard.csv",
+          "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmonolithicmla_decode_fp16BlackwellMultiHeadLatentAttentionForwardFP16_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____0",
+          "ncu_replay_passes": 1,
+          "metrics": {
+            "lts__t_requests_srcunit_ltcfabric.sum": {
+              "value": 3681123298.0,
+              "unit": "request"
+            }
+          },
+          "ltc_fabric_requests": 3681123298.0,
+          "target_metadata": {
+            "batch_size": 64,
+            "data_initialization": "random",
+            "data_seed": 42,
+            "device": "NVIDIA B200",
+            "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+            "localized_mapped_bytes": null,
+            "mode": "standard",
+            "owner_page_counts": null,
+            "owner_tile_counts": null,
+            "owner_work_counts": null,
+            "partition_sm_counts": null,
+            "profiled_launches": 1,
+            "resident_partition_clusters": null,
+            "seqlen_k": 524288,
+            "seqlen_q": 128,
+            "split_kv": 1,
+            "total_sm_count": 148,
+            "warmup_launches": 3,
+            "workload": "prefill"
+          },
+          "command": [
+            "/usr/local/cuda-13.2/bin/ncu",
+            "--force-overwrite",
+            "--export",
+            "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/prefill/sq128_b64_sk524288/attempt_001/standard",
+            "--devices",
+            "0",
+            "--profile-from-start",
+            "off",
+            "--launch-count",
+            "1",
+            "--kernel-name-base",
+            "demangled",
+            "--cache-control",
+            "all",
+            "--clock-control",
+            "boost",
+            "--replay-mode",
+            "kernel",
+            "--metrics",
+            "lts__t_requests_srcunit_ltcfabric.sum",
+            "/workspace/flashinfer-mla/.venv/bin/python",
+            "-P",
+            "/workspace/flashinfer-mla/benchmarks/profile_cute_dsl_localized_mla_ltc_target.py",
+            "--mode",
+            "standard",
+            "--batch",
+            "64",
+            "--seqlen-q",
+            "128",
+            "--seqlen-k",
+            "524288",
+            "--device",
+            "0",
+            "--warmups",
+            "3",
+            "--data-initialization",
+            "random",
+            "--seed",
+            "42",
+            "--cold-l2",
+            "--workload",
+            "prefill",
+            "--expected-partition-sm-counts",
+            "74",
+            "74"
+          ],
+          "log": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/prefill/sq128_b64_sk524288/attempt_001/standard.log",
+          "wall_seconds": 10.042438530000254
+        },
+        "localized": {
+          "report": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/prefill/sq128_b64_sk524288/attempt_001/localized.ncu-rep",
+          "raw_csv": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/prefill/sq128_b64_sk524288/attempt_001/localized.csv",
+          "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmonolithicmla_decode_fp16BlackwellMultiHeadLatentAttentionForwardFP16_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____0",
+          "ncu_replay_passes": 1,
+          "metrics": {
+            "lts__t_requests_srcunit_ltcfabric.sum": {
+              "value": 43229453.0,
+              "unit": "request"
+            }
+          },
+          "ltc_fabric_requests": 43229453.0,
+          "target_metadata": {
+            "batch_size": 64,
+            "data_initialization": "random",
+            "data_seed": 42,
+            "device": "NVIDIA B200",
+            "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+            "localized_mapped_bytes": [
+              19327352832,
+              19327352832
+            ],
+            "mode": "localized",
+            "owner_page_counts": [
+              262144,
+              262144
+            ],
+            "owner_tile_counts": [
+              4096,
+              4096
+            ],
+            "owner_work_counts": [
+              32,
+              32
+            ],
+            "partition_sm_counts": [
+              74,
+              74
+            ],
+            "profiled_launches": 1,
+            "resident_partition_clusters": [
+              37,
+              37
+            ],
+            "seqlen_k": 524288,
+            "seqlen_q": 128,
+            "split_kv": 1,
+            "total_sm_count": 148,
+            "warmup_launches": 3,
+            "workload": "prefill"
+          },
+          "command": [
+            "/usr/local/cuda-13.2/bin/ncu",
+            "--force-overwrite",
+            "--export",
+            "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/prefill/sq128_b64_sk524288/attempt_001/localized",
+            "--devices",
+            "0",
+            "--profile-from-start",
+            "off",
+            "--launch-count",
+            "1",
+            "--kernel-name-base",
+            "demangled",
+            "--cache-control",
+            "all",
+            "--clock-control",
+            "boost",
+            "--replay-mode",
+            "kernel",
+            "--metrics",
+            "lts__t_requests_srcunit_ltcfabric.sum",
+            "/workspace/flashinfer-mla/.venv/bin/python",
+            "-P",
+            "/workspace/flashinfer-mla/benchmarks/profile_cute_dsl_localized_mla_ltc_target.py",
+            "--mode",
+            "localized",
+            "--batch",
+            "64",
+            "--seqlen-q",
+            "128",
+            "--seqlen-k",
+            "524288",
+            "--device",
+            "0",
+            "--warmups",
+            "3",
+            "--data-initialization",
+            "random",
+            "--seed",
+            "42",
+            "--cold-l2",
+            "--workload",
+            "prefill",
+            "--expected-partition-sm-counts",
+            "74",
+            "74"
+          ],
+          "log": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/prefill/sq128_b64_sk524288/attempt_001/localized.log",
+          "wall_seconds": 11.333647201000531
+        }
+      },
+      "comparison": {
+        "ltc_reduction_pct": 98.82564506808323
+      }
+    },
+    {
+      "workload": "prefill",
+      "seqlen_q": 128,
+      "batch_size": 64,
+      "seqlen_k": 1008576,
+      "split_kv": 1,
+      "source": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/prefill/timing.json",
+      "status": "complete",
+      "attempts": [
+        {
+          "started_at": "2026-09-05T13:05:18.070314+00:00",
+          "mode_order": [
+            "localized",
+            "standard"
+          ],
+          "directory": "profiles/prefill/sq128_b64_sk1008576/attempt_001",
+          "status": "complete",
+          "finished_at": "2026-09-05T13:05:46.325325+00:00"
+        }
+      ],
+      "profiles": {
+        "localized": {
+          "report": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/prefill/sq128_b64_sk1008576/attempt_001/localized.ncu-rep",
+          "raw_csv": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/prefill/sq128_b64_sk1008576/attempt_001/localized.csv",
+          "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmonolithicmla_decode_fp16BlackwellMultiHeadLatentAttentionForwardFP16_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____0",
+          "ncu_replay_passes": 1,
+          "metrics": {
+            "lts__t_requests_srcunit_ltcfabric.sum": {
+              "value": 43396076.0,
+              "unit": "request"
+            }
+          },
+          "ltc_fabric_requests": 43396076.0,
+          "target_metadata": {
+            "batch_size": 64,
+            "data_initialization": "random",
+            "data_seed": 42,
+            "device": "NVIDIA B200",
+            "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+            "localized_mapped_bytes": [
+              37180407808,
+              37180407808
+            ],
+            "mode": "localized",
+            "owner_page_counts": [
+              504288,
+              504288
+            ],
+            "owner_tile_counts": [
+              4096,
+              4096
+            ],
+            "owner_work_counts": [
+              32,
+              32
+            ],
+            "partition_sm_counts": [
+              74,
+              74
+            ],
+            "profiled_launches": 1,
+            "resident_partition_clusters": [
+              37,
+              37
+            ],
+            "seqlen_k": 1008576,
+            "seqlen_q": 128,
+            "split_kv": 1,
+            "total_sm_count": 148,
+            "warmup_launches": 3,
+            "workload": "prefill"
+          },
+          "command": [
+            "/usr/local/cuda-13.2/bin/ncu",
+            "--force-overwrite",
+            "--export",
+            "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/prefill/sq128_b64_sk1008576/attempt_001/localized",
+            "--devices",
+            "0",
+            "--profile-from-start",
+            "off",
+            "--launch-count",
+            "1",
+            "--kernel-name-base",
+            "demangled",
+            "--cache-control",
+            "all",
+            "--clock-control",
+            "boost",
+            "--replay-mode",
+            "kernel",
+            "--metrics",
+            "lts__t_requests_srcunit_ltcfabric.sum",
+            "/workspace/flashinfer-mla/.venv/bin/python",
+            "-P",
+            "/workspace/flashinfer-mla/benchmarks/profile_cute_dsl_localized_mla_ltc_target.py",
+            "--mode",
+            "localized",
+            "--batch",
+            "64",
+            "--seqlen-q",
+            "128",
+            "--seqlen-k",
+            "1008576",
+            "--device",
+            "0",
+            "--warmups",
+            "3",
+            "--data-initialization",
+            "random",
+            "--seed",
+            "42",
+            "--cold-l2",
+            "--workload",
+            "prefill",
+            "--expected-partition-sm-counts",
+            "74",
+            "74"
+          ],
+          "log": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/prefill/sq128_b64_sk1008576/attempt_001/localized.log",
+          "wall_seconds": 14.95800672400037
+        },
+        "standard": {
+          "report": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/prefill/sq128_b64_sk1008576/attempt_001/standard.ncu-rep",
+          "raw_csv": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/prefill/sq128_b64_sk1008576/attempt_001/standard.csv",
+          "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmonolithicmla_decode_fp16BlackwellMultiHeadLatentAttentionForwardFP16_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____0",
+          "ncu_replay_passes": 1,
+          "metrics": {
+            "lts__t_requests_srcunit_ltcfabric.sum": {
+              "value": 11721181623.0,
+              "unit": "request"
+            }
+          },
+          "ltc_fabric_requests": 11721181623.0,
+          "target_metadata": {
+            "batch_size": 64,
+            "data_initialization": "random",
+            "data_seed": 42,
+            "device": "NVIDIA B200",
+            "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+            "localized_mapped_bytes": null,
+            "mode": "standard",
+            "owner_page_counts": null,
+            "owner_tile_counts": null,
+            "owner_work_counts": null,
+            "partition_sm_counts": null,
+            "profiled_launches": 1,
+            "resident_partition_clusters": null,
+            "seqlen_k": 1008576,
+            "seqlen_q": 128,
+            "split_kv": 1,
+            "total_sm_count": 148,
+            "warmup_launches": 3,
+            "workload": "prefill"
+          },
+          "command": [
+            "/usr/local/cuda-13.2/bin/ncu",
+            "--force-overwrite",
+            "--export",
+            "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/prefill/sq128_b64_sk1008576/attempt_001/standard",
+            "--devices",
+            "0",
+            "--profile-from-start",
+            "off",
+            "--launch-count",
+            "1",
+            "--kernel-name-base",
+            "demangled",
+            "--cache-control",
+            "all",
+            "--clock-control",
+            "boost",
+            "--replay-mode",
+            "kernel",
+            "--metrics",
+            "lts__t_requests_srcunit_ltcfabric.sum",
+            "/workspace/flashinfer-mla/.venv/bin/python",
+            "-P",
+            "/workspace/flashinfer-mla/benchmarks/profile_cute_dsl_localized_mla_ltc_target.py",
+            "--mode",
+            "standard",
+            "--batch",
+            "64",
+            "--seqlen-q",
+            "128",
+            "--seqlen-k",
+            "1008576",
+            "--device",
+            "0",
+            "--warmups",
+            "3",
+            "--data-initialization",
+            "random",
+            "--seed",
+            "42",
+            "--cold-l2",
+            "--workload",
+            "prefill",
+            "--expected-partition-sm-counts",
+            "74",
+            "74"
+          ],
+          "log": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/prefill/sq128_b64_sk1008576/attempt_001/standard.log",
+          "wall_seconds": 13.294146690999696
+        }
+      },
+      "comparison": {
+        "ltc_reduction_pct": 99.62976364162085
+      }
+    },
+    {
+      "workload": "prefill",
+      "seqlen_q": 128,
+      "batch_size": 2,
+      "seqlen_k": 1008576,
+      "split_kv": 1,
+      "source": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/prefill/timing.json",
+      "status": "complete",
+      "attempts": [
+        {
+          "started_at": "2026-09-05T13:05:46.328330+00:00",
+          "mode_order": [
+            "standard",
+            "localized"
+          ],
+          "directory": "profiles/prefill/sq128_b2_sk1008576/attempt_001",
+          "status": "complete",
+          "finished_at": "2026-09-05T13:06:01.286364+00:00"
+        }
+      ],
+      "profiles": {
+        "standard": {
+          "report": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/prefill/sq128_b2_sk1008576/attempt_001/standard.ncu-rep",
+          "raw_csv": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/prefill/sq128_b2_sk1008576/attempt_001/standard.csv",
+          "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmonolithicmla_decode_fp16BlackwellMultiHeadLatentAttentionForwardFP16_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____0",
+          "ncu_replay_passes": 1,
+          "metrics": {
+            "lts__t_requests_srcunit_ltcfabric.sum": {
+              "value": 91649919.0,
+              "unit": "request"
+            }
+          },
+          "ltc_fabric_requests": 91649919.0,
+          "target_metadata": {
+            "batch_size": 2,
+            "data_initialization": "random",
+            "data_seed": 42,
+            "device": "NVIDIA B200",
+            "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+            "localized_mapped_bytes": null,
+            "mode": "standard",
+            "owner_page_counts": null,
+            "owner_tile_counts": null,
+            "owner_work_counts": null,
+            "partition_sm_counts": null,
+            "profiled_launches": 1,
+            "resident_partition_clusters": null,
+            "seqlen_k": 1008576,
+            "seqlen_q": 128,
+            "split_kv": 1,
+            "total_sm_count": 148,
+            "warmup_launches": 3,
+            "workload": "prefill"
+          },
+          "command": [
+            "/usr/local/cuda-13.2/bin/ncu",
+            "--force-overwrite",
+            "--export",
+            "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/prefill/sq128_b2_sk1008576/attempt_001/standard",
+            "--devices",
+            "0",
+            "--profile-from-start",
+            "off",
+            "--launch-count",
+            "1",
+            "--kernel-name-base",
+            "demangled",
+            "--cache-control",
+            "all",
+            "--clock-control",
+            "boost",
+            "--replay-mode",
+            "kernel",
+            "--metrics",
+            "lts__t_requests_srcunit_ltcfabric.sum",
+            "/workspace/flashinfer-mla/.venv/bin/python",
+            "-P",
+            "/workspace/flashinfer-mla/benchmarks/profile_cute_dsl_localized_mla_ltc_target.py",
+            "--mode",
+            "standard",
+            "--batch",
+            "2",
+            "--seqlen-q",
+            "128",
+            "--seqlen-k",
+            "1008576",
+            "--device",
+            "0",
+            "--warmups",
+            "3",
+            "--data-initialization",
+            "random",
+            "--seed",
+            "42",
+            "--cold-l2",
+            "--workload",
+            "prefill",
+            "--expected-partition-sm-counts",
+            "74",
+            "74"
+          ],
+          "log": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/prefill/sq128_b2_sk1008576/attempt_001/standard.log",
+          "wall_seconds": 7.17967434000002
+        },
+        "localized": {
+          "report": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/prefill/sq128_b2_sk1008576/attempt_001/localized.ncu-rep",
+          "raw_csv": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/prefill/sq128_b2_sk1008576/attempt_001/localized.csv",
+          "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmonolithicmla_decode_fp16BlackwellMultiHeadLatentAttentionForwardFP16_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____0",
+          "ncu_replay_passes": 1,
+          "metrics": {
+            "lts__t_requests_srcunit_ltcfabric.sum": {
+              "value": 1368910.0,
+              "unit": "request"
+            }
+          },
+          "ltc_fabric_requests": 1368910.0,
+          "target_metadata": {
+            "batch_size": 2,
+            "data_initialization": "random",
+            "data_seed": 42,
+            "device": "NVIDIA B200",
+            "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+            "localized_mapped_bytes": [
+              1163919360,
+              1163919360
+            ],
+            "mode": "localized",
+            "owner_page_counts": [
+              15759,
+              15759
+            ],
+            "owner_tile_counts": [
+              128,
+              128
+            ],
+            "owner_work_counts": [
+              1,
+              1
+            ],
+            "partition_sm_counts": [
+              74,
+              74
+            ],
+            "profiled_launches": 1,
+            "resident_partition_clusters": [
+              37,
+              37
+            ],
+            "seqlen_k": 1008576,
+            "seqlen_q": 128,
+            "split_kv": 1,
+            "total_sm_count": 148,
+            "warmup_launches": 3,
+            "workload": "prefill"
+          },
+          "command": [
+            "/usr/local/cuda-13.2/bin/ncu",
+            "--force-overwrite",
+            "--export",
+            "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/prefill/sq128_b2_sk1008576/attempt_001/localized",
+            "--devices",
+            "0",
+            "--profile-from-start",
+            "off",
+            "--launch-count",
+            "1",
+            "--kernel-name-base",
+            "demangled",
+            "--cache-control",
+            "all",
+            "--clock-control",
+            "boost",
+            "--replay-mode",
+            "kernel",
+            "--metrics",
+            "lts__t_requests_srcunit_ltcfabric.sum",
+            "/workspace/flashinfer-mla/.venv/bin/python",
+            "-P",
+            "/workspace/flashinfer-mla/benchmarks/profile_cute_dsl_localized_mla_ltc_target.py",
+            "--mode",
+            "localized",
+            "--batch",
+            "2",
+            "--seqlen-q",
+            "128",
+            "--seqlen-k",
+            "1008576",
+            "--device",
+            "0",
+            "--warmups",
+            "3",
+            "--data-initialization",
+            "random",
+            "--seed",
+            "42",
+            "--cold-l2",
+            "--workload",
+            "prefill",
+            "--expected-partition-sm-counts",
+            "74",
+            "74"
+          ],
+          "log": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/prefill/sq128_b2_sk1008576/attempt_001/localized.log",
+          "wall_seconds": 7.775374238999575
+        }
+      },
+      "comparison": {
+        "ltc_reduction_pct": 98.50637074758353
+      }
+    },
+    {
+      "workload": "prefill",
+      "seqlen_q": 128,
+      "batch_size": 16,
+      "seqlen_k": 1008576,
+      "split_kv": 1,
+      "source": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/prefill/timing.json",
+      "status": "complete",
+      "attempts": [
+        {
+          "started_at": "2026-09-05T13:06:01.289511+00:00",
+          "mode_order": [
+            "localized",
+            "standard"
+          ],
+          "directory": "profiles/prefill/sq128_b16_sk1008576/attempt_001",
+          "status": "complete",
+          "finished_at": "2026-09-05T13:06:19.108503+00:00"
+        }
+      ],
+      "profiles": {
+        "localized": {
+          "report": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/prefill/sq128_b16_sk1008576/attempt_001/localized.ncu-rep",
+          "raw_csv": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/prefill/sq128_b16_sk1008576/attempt_001/localized.csv",
+          "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmonolithicmla_decode_fp16BlackwellMultiHeadLatentAttentionForwardFP16_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____0",
+          "ncu_replay_passes": 1,
+          "metrics": {
+            "lts__t_requests_srcunit_ltcfabric.sum": {
+              "value": 10846867.0,
+              "unit": "request"
+            }
+          },
+          "ltc_fabric_requests": 10846867.0,
+          "target_metadata": {
+            "batch_size": 16,
+            "data_initialization": "random",
+            "data_seed": 42,
+            "device": "NVIDIA B200",
+            "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+            "localized_mapped_bytes": [
+              9296674816,
+              9296674816
+            ],
+            "mode": "localized",
+            "owner_page_counts": [
+              126072,
+              126072
+            ],
+            "owner_tile_counts": [
+              1024,
+              1024
+            ],
+            "owner_work_counts": [
+              8,
+              8
+            ],
+            "partition_sm_counts": [
+              74,
+              74
+            ],
+            "profiled_launches": 1,
+            "resident_partition_clusters": [
+              37,
+              37
+            ],
+            "seqlen_k": 1008576,
+            "seqlen_q": 128,
+            "split_kv": 1,
+            "total_sm_count": 148,
+            "warmup_launches": 3,
+            "workload": "prefill"
+          },
+          "command": [
+            "/usr/local/cuda-13.2/bin/ncu",
+            "--force-overwrite",
+            "--export",
+            "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/prefill/sq128_b16_sk1008576/attempt_001/localized",
+            "--devices",
+            "0",
+            "--profile-from-start",
+            "off",
+            "--launch-count",
+            "1",
+            "--kernel-name-base",
+            "demangled",
+            "--cache-control",
+            "all",
+            "--clock-control",
+            "boost",
+            "--replay-mode",
+            "kernel",
+            "--metrics",
+            "lts__t_requests_srcunit_ltcfabric.sum",
+            "/workspace/flashinfer-mla/.venv/bin/python",
+            "-P",
+            "/workspace/flashinfer-mla/benchmarks/profile_cute_dsl_localized_mla_ltc_target.py",
+            "--mode",
+            "localized",
+            "--batch",
+            "16",
+            "--seqlen-q",
+            "128",
+            "--seqlen-k",
+            "1008576",
+            "--device",
+            "0",
+            "--warmups",
+            "3",
+            "--data-initialization",
+            "random",
+            "--seed",
+            "42",
+            "--cold-l2",
+            "--workload",
+            "prefill",
+            "--expected-partition-sm-counts",
+            "74",
+            "74"
+          ],
+          "log": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/prefill/sq128_b16_sk1008576/attempt_001/localized.log",
+          "wall_seconds": 9.342448559000331
+        },
+        "standard": {
+          "report": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/prefill/sq128_b16_sk1008576/attempt_001/standard.ncu-rep",
+          "raw_csv": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/prefill/sq128_b16_sk1008576/attempt_001/standard.csv",
+          "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmonolithicmla_decode_fp16BlackwellMultiHeadLatentAttentionForwardFP16_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____0",
+          "ncu_replay_passes": 1,
+          "metrics": {
+            "lts__t_requests_srcunit_ltcfabric.sum": {
+              "value": 911687980.0,
+              "unit": "request"
+            }
+          },
+          "ltc_fabric_requests": 911687980.0,
+          "target_metadata": {
+            "batch_size": 16,
+            "data_initialization": "random",
+            "data_seed": 42,
+            "device": "NVIDIA B200",
+            "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+            "localized_mapped_bytes": null,
+            "mode": "standard",
+            "owner_page_counts": null,
+            "owner_tile_counts": null,
+            "owner_work_counts": null,
+            "partition_sm_counts": null,
+            "profiled_launches": 1,
+            "resident_partition_clusters": null,
+            "seqlen_k": 1008576,
+            "seqlen_q": 128,
+            "split_kv": 1,
+            "total_sm_count": 148,
+            "warmup_launches": 3,
+            "workload": "prefill"
+          },
+          "command": [
+            "/usr/local/cuda-13.2/bin/ncu",
+            "--force-overwrite",
+            "--export",
+            "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/prefill/sq128_b16_sk1008576/attempt_001/standard",
+            "--devices",
+            "0",
+            "--profile-from-start",
+            "off",
+            "--launch-count",
+            "1",
+            "--kernel-name-base",
+            "demangled",
+            "--cache-control",
+            "all",
+            "--clock-control",
+            "boost",
+            "--replay-mode",
+            "kernel",
+            "--metrics",
+            "lts__t_requests_srcunit_ltcfabric.sum",
+            "/workspace/flashinfer-mla/.venv/bin/python",
+            "-P",
+            "/workspace/flashinfer-mla/benchmarks/profile_cute_dsl_localized_mla_ltc_target.py",
+            "--mode",
+            "standard",
+            "--batch",
+            "16",
+            "--seqlen-q",
+            "128",
+            "--seqlen-k",
+            "1008576",
+            "--device",
+            "0",
+            "--warmups",
+            "3",
+            "--data-initialization",
+            "random",
+            "--seed",
+            "42",
+            "--cold-l2",
+            "--workload",
+            "prefill",
+            "--expected-partition-sm-counts",
+            "74",
+            "74"
+          ],
+          "log": "/workspace/flashinfer-mla/reports/localized_mla_b200_74_74_separate_20260905/ltc/profiles/prefill/sq128_b16_sk1008576/attempt_001/standard.log",
+          "wall_seconds": 8.473235489999752
+        }
+      },
+      "comparison": {
+        "ltc_reduction_pct": 98.810243500194
+      }
+    }
+  ],
+  "environment": {
+    "git_revision": "db8d4165c6c726c8b8b8d77acee337e197665224",
+    "ncu_version": "NVIDIA (R) Nsight Compute Command Line Profiler\nCopyright (c) 2018-2026 NVIDIA Corporation\nVersion 2026.1.1.0 (build 37634170) (public-release)",
+    "gpu_initial": {
+      "index": "0",
+      "name": "NVIDIA B200",
+      "uuid": "GPU-831fae2c-f9be-da45-6749-cf96b741d59b",
+      "pstate": "P0",
+      "memory_total_mib": "183359",
+      "memory_used_mib": "0",
+      "memory_free_mib": "182625",
+      "utilization_pct": "0",
+      "sm_clock_mhz": "120",
+      "memory_clock_mhz": "3996",
+      "temperature_c": "38",
+      "power_w": "139.74"
+    },
+    "scripts": {
+      "benchmarks/profile_cute_dsl_localized_mla_separate.py": "a2b6a6f3a7edfeee35353e3d57179ff77877dc4147d84c4f6f80b4f88a563c85",
+      "benchmarks/profile_cute_dsl_localized_mla_ltc_target.py": "903bb0688b5f9baaf53bbdd576b6349321a6332579c56955b0358e2bf34e0aa2",
+      "benchmarks/profile_cute_dsl_localized_mla_memory.py": "13443827135f75ebdd5652bc97cd81538eac4a18fe812b7af31782feb006b1ea",
+      "benchmarks/profile_cute_dsl_localized_mla_boundary.py": "4ff9017550bbb9ef414e9c9a663974bf49c705432b2b97eaad211230495c974e"
+    },
+    "gpu_final": {
+      "index": "0",
+      "name": "NVIDIA B200",
+      "uuid": "GPU-831fae2c-f9be-da45-6749-cf96b741d59b",
+      "pstate": "P0",
+      "memory_total_mib": "183359",
+      "memory_used_mib": "0",
+      "memory_free_mib": "182625",
+      "utilization_pct": "0",
+      "sm_clock_mhz": "1965",
+      "memory_clock_mhz": "3996",
+      "temperature_c": "40",
+      "power_w": "254.91"
+    }
+  },
+  "status": "complete",
+  "metric_quality_warnings": [],
+  "measurement_validity": "no automated quality flags",
+  "quality_policy": "Raw L2 rate outside [0,100] or abs((hits+misses)/total-1)>5% is flagged, never repaired. 5% is an experimental QA heuristic, not an NVIDIA specification.",
+  "finished_at": "2026-09-05T13:06:19.111775+00:00"
+}

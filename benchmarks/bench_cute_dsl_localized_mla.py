@@ -45,6 +45,7 @@ BALANCED_BLOCK_ORDER = (
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--device", type=int, default=0)
+    parser.add_argument("--expected-partition-sm-counts", type=int, nargs=2)
     parser.add_argument("--seqlen-q", type=int, choices=range(1, 5), default=1)
     parser.add_argument(
         "--batch-sizes", type=int, nargs="+", default=list(DEFAULT_BATCH_SIZES)
@@ -406,6 +407,15 @@ def run_case(
     )
     try:
         geometry = case.scheduler_geometry()
+        observed_sm_counts = [2 * n for n in geometry.resident_partition_clusters]
+        if (
+            args.expected_partition_sm_counts is not None
+            and observed_sm_counts != args.expected_partition_sm_counts
+        ):
+            raise RuntimeError(
+                f"partition SM counts {observed_sm_counts} != expected "
+                f"{args.expected_partition_sm_counts}"
+            )
         mapped_bytes = tuple(case.localized_cache.mapped_bytes)
         free_after_alloc, _ = torch.cuda.mem_get_info(device)
         timing = paired_timing(case, args)

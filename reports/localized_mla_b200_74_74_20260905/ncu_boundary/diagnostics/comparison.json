@@ -1,0 +1,52 @@
+[
+  {
+    "experiment": "first_combined",
+    "raw_l2_hit_rate_pct": 105.68,
+    "hits": 29032678451.0,
+    "misses": 857330107.0,
+    "total": 27471842878.0,
+    "counter_sum_error_pct": 8.80234242289044,
+    "replay_passes": 4.0,
+    "csv": "reports/localized_mla_b200_74_74_20260905/ncu_boundary/profiles/prefill/sq128_b64_sk65536/attempt_001/localized.csv"
+  },
+  {
+    "experiment": "application_replay",
+    "raw_l2_hit_rate_pct": 103.56,
+    "hits": 27470144051.0,
+    "misses": 882228927.0,
+    "total": 26525569431.0,
+    "counter_sum_error_pct": 6.886953178336097,
+    "replay_passes": 4.0,
+    "csv": "reports/localized_mla_b200_74_74_20260905/ncu_boundary/diagnostics/prefill_sq128_b64_sk65536/application_replay.csv"
+  },
+  {
+    "experiment": "l2_hit_miss",
+    "raw_l2_hit_rate_pct": null,
+    "hits": 27159498116.0,
+    "misses": 862387542.0,
+    "total": null,
+    "counter_sum_error_pct": null,
+    "replay_passes": 3.0,
+    "csv": "reports/localized_mla_b200_74_74_20260905/ncu_boundary/diagnostics/prefill_sq128_b64_sk65536/l2_hit_miss.csv"
+  },
+  {
+    "experiment": "l2_only",
+    "raw_l2_hit_rate_pct": 102.59,
+    "hits": 28400562995.0,
+    "misses": 895727476.0,
+    "total": 27684681765.0,
+    "counter_sum_error_pct": 5.821301179042115,
+    "replay_passes": 4.0,
+    "csv": "reports/localized_mla_b200_74_74_20260905/ncu_boundary/diagnostics/prefill_sq128_b64_sk65536/l2_only.csv"
+  },
+  {
+    "experiment": "repeat_combined",
+    "raw_l2_hit_rate_pct": 113.08,
+    "hits": 28592323850.0,
+    "misses": 804625636.0,
+    "total": 25286061735.0,
+    "counter_sum_error_pct": 16.257524774250886,
+    "replay_passes": 4.0,
+    "csv": "reports/localized_mla_b200_74_74_20260905/ncu_boundary/diagnostics/prefill_sq128_b64_sk65536/repeat_combined.csv"
+  }
+]

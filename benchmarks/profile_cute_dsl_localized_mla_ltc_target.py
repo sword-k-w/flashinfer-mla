@@ -37,8 +37,15 @@ from localized_mla_benchmark import (
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--device", type=int, default=0)
+    parser.add_argument("--workload", choices=("decode", "prefill"), default="decode")
+    parser.add_argument("--expected-partition-sm-counts", type=int, nargs=2)
+    parser.add_argument(
+        "--output-tensors",
+        type=Path,
+        help="Save output/LSE after profiling, for small-case validation only.",
+    )
     parser.add_argument("--batch", type=int, required=True)
-    parser.add_argument("--seqlen-q", type=int, choices=range(1, 5), default=1)
+    parser.add_argument("--seqlen-q", type=int, default=1)
     parser.add_argument("--seqlen-k", type=int, required=True)
     parser.add_argument("--mode", choices=("standard", "localized"), required=True)
     parser.add_argument("--warmups", type=int, default=3)
@@ -54,6 +61,10 @@ def parse_args() -> argparse.Namespace:
         help="Clear Triton's benchmark cache before every attention launch.",
     )
     args = parser.parse_args()
+    if args.workload == "decode" and args.seqlen_q not in range(1, 5):
+        parser.error("decode requires Sq in 1..4")
+    if args.workload == "prefill" and args.seqlen_q != 128:
+        parser.error("this prefill profiling experiment supports Sq=128")
     if args.batch < 2:
         parser.error("--batch must be >= 2")
     if args.seqlen_k <= 0 or args.seqlen_k % PAGE_SIZE:
@@ -69,6 +80,16 @@ def main() -> None:
     pages_per_batch = args.seqlen_k // PAGE_SIZE
     num_pages = args.batch * pages_per_batch
     softmax_scale = deepseek_v3_effective_softmax_scale()
+    cache_type = LocalizedMLAKVCache
+    if args.workload == "prefill":
+        from localized_mla_prefill_benchmark import (
+            LocalizedMLAPrefillKVCache,
+            compiled_kernel as prefill_compiled_kernel,
+            softmax_scale as prefill_softmax_scale,
+        )
+
+        cache_type = LocalizedMLAPrefillKVCache
+        softmax_scale = prefill_softmax_scale()
     cache = None
     standard_kv = None
     initialization_source = None
@@ -77,7 +98,7 @@ def main() -> None:
         # NCU profiles the layouts in isolated processes, matching the prior
         # vllm-fa LTC experiment and leaving profiler headroom at capacity.
         if args.mode == "localized":
-            cache = LocalizedMLAKVCache(
+            cache = cache_type(
                 args.batch,
                 args.seqlen_k,
                 seq_len_q=args.seqlen_q,
@@ -144,14 +165,18 @@ def main() -> None:
         seq_lens = torch.full(
             (args.batch,), args.seqlen_k, dtype=torch.int32, device=device
         )
-        split_kv, workspace_size = _get_split_kv_and_workspace_size(
-            args.batch,
-            args.seqlen_q,
-            HEADS,
-            LATENT_DIM,
-            get_num_sm(device),
+        split_kv, workspace_size = (
+            (1, 0)
+            if args.workload == "prefill"
+            else _get_split_kv_and_workspace_size(
+                args.batch, args.seqlen_q, HEADS, LATENT_DIM, get_num_sm(device)
+            )
         )
-        if cache is not None and cache.split_kv != split_kv:
+        if (
+            cache is not None
+            and args.workload == "decode"
+            and cache.split_kv != split_kv
+        ):
             raise RuntimeError("localized cache and kernel split_kv disagree")
         workspace = (
             None
@@ -173,12 +198,53 @@ def main() -> None:
             dtype=torch.float32,
             device=device,
         )
-        kernel = compiled_kernel(
-            partition_aware=args.mode == "localized",
-            workspace_size_zero=workspace_size == 0,
+        kernel = (
+            prefill_compiled_kernel(
+                seq_len_q=args.seqlen_q, partition_aware=args.mode == "localized"
+            )
+            if args.workload == "prefill"
+            else compiled_kernel(
+                partition_aware=args.mode == "localized",
+                workspace_size_zero=workspace_size == 0,
+            )
+        )
+        owner_counts = (
+            None
+            if cache is None
+            else (
+                [cache.batch_p0, cache.batch_p1]
+                if args.workload == "prefill"
+                else [cache.work_p0, cache.work_p1]
+            )
         )
 
         def target_call():
+            if args.workload == "prefill":
+                return kernel(
+                    q_latent,
+                    q_rope,
+                    c_latent_p0,
+                    c_rope_p0,
+                    c_latent_p1,
+                    c_rope_p1,
+                    page_table,
+                    out,
+                    lse,
+                    None,
+                    Int32(1),
+                    seq_lens,
+                    None,
+                    None,
+                    Int32(0),
+                    None,
+                    None if cache is None else cache.sm_partition_map,
+                    None if cache is None else cache.sm_cluster_rank,
+                    None if cache is None else cache.partition_cluster_count,
+                    Int32(0 if cache is None else cache.total_resident_clusters),
+                    Int32(0 if cache is None else cache.batch_p0),
+                    Float32(softmax_scale),
+                    Float32(1.0),
+                )
             return kernel(
                 q_latent,
                 q_rope,
@@ -214,6 +280,7 @@ def main() -> None:
             target_call()
 
         metadata = {
+            "workload": args.workload,
             "mode": args.mode,
             "batch_size": args.batch,
             "seqlen_q": args.seqlen_q,
@@ -238,15 +305,13 @@ def main() -> None:
                     int((cache.sm_partition_map == 1).sum().item()),
                 ]
             ),
-            "owner_work_counts": (
-                None if cache is None else [cache.work_p0, cache.work_p1]
-            ),
+            "owner_work_counts": owner_counts,
             "owner_tile_counts": (
                 None
                 if cache is None
                 else [
-                    cache.work_p0 * args.seqlen_q,
-                    cache.work_p1 * args.seqlen_q,
+                    owner_counts[0] * args.seqlen_q,
+                    owner_counts[1] * args.seqlen_q,
                 ]
             ),
             "owner_page_counts": (
@@ -259,6 +324,15 @@ def main() -> None:
                 None if cache is None else list(cache.mapped_bytes)
             ),
         }
+        if (
+            cache is not None
+            and args.expected_partition_sm_counts is not None
+            and metadata["partition_sm_counts"] != args.expected_partition_sm_counts
+        ):
+            raise RuntimeError(
+                f"partition SM counts {metadata['partition_sm_counts']} != expected "
+                f"{args.expected_partition_sm_counts}"
+            )
         print("TARGET_METADATA " + json.dumps(metadata, sort_keys=True), flush=True)
         for _ in range(args.warmups):
             warmup_call()
@@ -276,6 +350,8 @@ def main() -> None:
         target_call()
         torch.cuda.synchronize(device)
         torch.cuda.cudart().cudaProfilerStop()
+        if args.output_tensors is not None:
+            torch.save({"output": out.cpu(), "lse": lse.cpu()}, args.output_tensors)
     finally:
         if cache is not None:
             c_latent_p0 = None

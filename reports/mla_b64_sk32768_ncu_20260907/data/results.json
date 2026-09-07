@@ -1,0 +1,3177 @@
+{
+  "status": "complete",
+  "started_at": "2026-09-07T08:39:35.592326+00:00",
+  "commit": "954d72f50d06611f9c201222dc7fd285a69e3b48",
+  "invocation": [
+    "reports/mla_b64_sk32768_ncu_20260907/run.py",
+    "--output-root",
+    "reports/mla_b64_sk32768_ncu_20260907/data",
+    "--trials",
+    "3",
+    "--expected-partition-sm-counts",
+    "74",
+    "74"
+  ],
+  "cwd": "/workspace/flashinfer-mla",
+  "python": "3.12.3 (main, Jun 19 2026, 12:46:00) [GCC 13.3.0]",
+  "platform": "Linux-6.11.0-1016-nvidia-x86_64-with-glibc2.39",
+  "packages": {
+    "torch": "2.12.1+cu132",
+    "triton": "3.7.1",
+    "nvidia-cutlass-dsl": "4.7.1",
+    "apache-tvm-ffi": "0.1.13.post3",
+    "numpy": "2.5.2"
+  },
+  "expected_partition_sm_counts": [
+    74,
+    74
+  ],
+  "environment": {
+    "MAX_JOBS": "5",
+    "FLASHINFER_NVCC_THREADS": "1",
+    "OMP_NUM_THREADS": "5",
+    "PYTHONPATH": "/workspace/flashinfer-mla"
+  },
+  "ncu_version": "NVIDIA (R) Nsight Compute Command Line Profiler\nCopyright (c) 2018-2026 NVIDIA Corporation\nVersion 2026.1.1.0 (build 37634170) (public-release)",
+  "ncu": "/usr/local/cuda-13.2/bin/ncu",
+  "gpu": "driver_version, uuid, name, power.limit [W]\n595.45.04, GPU-ff675312-2fcc-3db1-b482-712eb0087566, NVIDIA B200, 1000.00 W\n",
+  "source_sha256": {
+    "benchmarks/localized_mla_benchmark.py": "2b2bd864becd2f1fc88119b79d7dcfbec231ee35bf90346157c05ca40483391c",
+    "benchmarks/localized_mla_prefill_benchmark.py": "fc898f82755a75c042c3db1c14ed7b1fb281e7f0209956e45004c75d51337ce2",
+    "benchmarks/profile_cute_dsl_localized_mla_ltc_target.py": "9ae5f6a2eba00d07eebdd91a29b62994976579002fdec561ec36d9b16093cabc",
+    "benchmarks/profile_cute_dsl_localized_mla_memory.py": "13443827135f75ebdd5652bc97cd81538eac4a18fe812b7af31782feb006b1ea",
+    "flashinfer/cute_dsl/attention/__init__.py": "b37ac7421244b0f4c3e6452194c2a48c29de5c18721ff52c1bc4a56712be0434",
+    "flashinfer/cute_dsl/attention/collective_builder.py": "f39b326e13eb4e18faa1dfa3a378a0d7c95cc5fb77712767f124b62c02b1ec9c",
+    "flashinfer/cute_dsl/attention/compat.py": "819319f6f548754d9cb6c1b5bf30314cc1a78712d4f37f7e70ea8171fe1c389d",
+    "flashinfer/cute_dsl/attention/config.py": "4ec8eccad48904ee23af8a5e2afa8bb936ecf77a4da802b726dd14c97e5134cd",
+    "flashinfer/cute_dsl/attention/dsa/__init__.py": "0f759c1de7253706514cc5f271021d519f3999e86f3e3336c37cfc68a54b1ba7",
+    "flashinfer/cute_dsl/attention/dsa/gather4_utils.py": "c75732c6b21810a713cc50796a11718b8657dd6069450a40ca683e0e98e4aed6",
+    "flashinfer/cute_dsl/attention/dsa/hca_fp8.py": "1da376121482eaaf5b2ebee4bb25f6ce1f230e2ecb751c6f38c451b026dd76d3",
+    "flashinfer/cute_dsl/attention/dsa/hca_helpers.py": "e61929e52b90da2c1036f9283b4c2adfa070367d304d2472369124b25a9bdb98",
+    "flashinfer/cute_dsl/attention/experimental/__init__.py": "d2c6c28e26f08f7017771b9d2a557c63ddb3729ee504ed55c99c4f8df16038f4",
+    "flashinfer/cute_dsl/attention/experimental/localized_mla.py": "573be3b3f71b8acee3336ec3fc039ba5703d05ac2cf5c5be747840d341d54ffc",
+    "flashinfer/cute_dsl/attention/experimental/localized_mla_ext.cu": "cc7c3bc04a020e501f64859b15560460b7e2e91c256dd46a64acedda4cd11846",
+    "flashinfer/cute_dsl/attention/experimental/localized_mla_prefill.py": "14055c3f60b2b88aaba30e5f0cf8cb869112808bbccb42544d759d5947b1cc07",
+    "flashinfer/cute_dsl/attention/fmha/__init__.py": "c4dc0cf54a15db963e684ed996a7ceb38a3737390327929f05930ac903f33514",
+    "flashinfer/cute_dsl/attention/fmha/compile.py": "d8bb5f36c0d926de18729049dc18985cf3cffe19a2d02855e7a3e27b6b5c9c13",
+    "flashinfer/cute_dsl/attention/fmha/fmha.py": "f3c185c173b36253fd0c6b3dfe675068e0b367bf0aba0114462ca9550545e0c1",
+    "flashinfer/cute_dsl/attention/fmha/fmha_blockscaled.py": "89b444f06e851effe7c8a5ba379cc3eccdbc1b2cf93cc764409503e6c05a9bfb",
+    "flashinfer/cute_dsl/attention/fmha/helpers/__init__.py": "c4dc0cf54a15db963e684ed996a7ceb38a3737390327929f05930ac903f33514",
+    "flashinfer/cute_dsl/attention/fmha/helpers/fmha_helpers.py": "83344f5f62ed2de096d11e9c1220061efe916dfb916f5eaaf0bf995dcad5459b",
+    "flashinfer/cute_dsl/attention/fmha/helpers/static_persistent_tile_scheduler.py": "f6547bc732d517c7fb57a3211e95a4da976b15b89ed29dbf41e5f77ceb9cb024",
+    "flashinfer/cute_dsl/attention/fmha/quantize.py": "0f3a12c80a250dfa332fe097a71e5840a8ebf0a17189e1646e37724aedc409ae",
+    "flashinfer/cute_dsl/attention/fusion/__init__.py": "30be8c690ea1867cb86aef1d44266a7e1cb39d2627eb10d1a6a1435b884569a4",
+    "flashinfer/cute_dsl/attention/fusion/mask.py": "4b27524b8a9d15e4fc74e6f8a4e27ba9c95bc069a91808a47702a92bc0523bb8",
+    "flashinfer/cute_dsl/attention/fusion/variant.py": "ebefecfa64686da9460fe2ba1cf3f001fc8936649338ed6eadd0439f636a2b70",
+    "flashinfer/cute_dsl/attention/gqa_decode.py": "237cd83c2a487fa6be9d41220fd8d273bf42c90d1b79a37d997002b800ec0c58",
+    "flashinfer/cute_dsl/attention/gqa_decode_paged.py": "747921c5501c560354781f10fdd7589adf9a82e02c578eec665a2ff570e41868",
+    "flashinfer/cute_dsl/attention/mainloop_spec.py": "e0bae2dd913e1d5a46e663ccf5af4e8ea18e80ef7bb2a57e5203607a08c79330",
+    "flashinfer/cute_dsl/attention/mla_config.py": "9107fbb8ebee725ba61e1ced2609cf252e92740f50a092cbf1dd984f9fb9eb1a",
+    "flashinfer/cute_dsl/attention/mla_decode.py": "3e6c73ad83df5aabc7e2852d122e1dc04dc9ba8618f44a1be116158d179fb522",
+    "flashinfer/cute_dsl/attention/mla_decode_fp8.py": "c3007fe4089df64e78e18e94938e1d0b514ed8ec5819b90dbcd1e835a1acd272",
+    "flashinfer/cute_dsl/attention/mla_dispatch.py": "c54a17518eedb295dc34e94cae43e291e27254259038a286a78e86330e646087",
+    "flashinfer/cute_dsl/attention/mla_warp_schedule.py": "a44884a272b24c582f779059972d7178c8cbc6d97bcc0d562ed83b167e58e5ec",
+    "flashinfer/cute_dsl/attention/monolithic/__init__.py": "2181b3b495f75a308b6c26f717d8ff0213b97e3f8ce6c57a92e985dc137f6a03",
+    "flashinfer/cute_dsl/attention/monolithic/mla_decode.py": "c3428166b7304a505e1166e7284c1468e4015879c6558301b2610ed7d1112ca1",
+    "flashinfer/cute_dsl/attention/monolithic/mla_decode_fp16.py": "e73b1c180cfc5c06e5a7525789b3e27e1086d65e41680d3bd754336504f17fc2",
+    "flashinfer/cute_dsl/attention/monolithic/mla_decode_fp8.py": "2f15dea174887d22488168cecc3ffb1992aab9dc2a53c0ea609e226bd70bcb4c",
+    "flashinfer/cute_dsl/attention/monolithic/mla_helpers.py": "84899276c3c07d8418c4de667dc8836f70735614084a4c616129edd0155bc8e9",
+    "flashinfer/cute_dsl/attention/pipeline_topology.py": "1222d0b9ddcf2134470d27d0d72e6e19eb5fa8e7d6aec627b5c6fd181cda142a",
+    "flashinfer/cute_dsl/attention/prefill.py": "3a1810aadcb7eca6d22d8cb1c7d0a134ea6ba92911b9ffdf5a535ede2d470d0c",
+    "flashinfer/cute_dsl/attention/roles/__init__.py": "bcbbac55e9a2134c43809b0d4b39281167aebc1b267484fdcdd2db0f0a738208",
+    "flashinfer/cute_dsl/attention/roles/correction.py": "a030a11f218690e67fafde2c4109836fbf59f9596e09c17282b2d6790566d52a",
+    "flashinfer/cute_dsl/attention/roles/epilogue.py": "3c48ad89247a1438bd5617046fc76528865f96ceea1c4327380900eb335efd44",
+    "flashinfer/cute_dsl/attention/roles/loader_tma.py": "4eb248ba877e82a4d33cda7c74f9a5c2fb3c0d3ff274decc1f5fd4b4bbdd6c6d",
+    "flashinfer/cute_dsl/attention/roles/mla_compute.py": "1c7031cc65548b79448dc00ad6c9d615d40853323ca844b71709efd01feab102",
+    "flashinfer/cute_dsl/attention/roles/mla_correction.py": "46376b76a81ceb66bd6c78a87ab1a7fc4a4a2e424e5ccd19e73fde3ba961e820",
+    "flashinfer/cute_dsl/attention/roles/mla_loader.py": "e03000fa5e85c3d0ee21994d2b92a5be3ea6557f97f53eeb83ba95d0126cef35",
+    "flashinfer/cute_dsl/attention/roles/mla_loader_fp8.py": "c4df4f9480dddd36150db55b27c6e4e7a04017e714fc0ab6be078819a5adf400",
+    "flashinfer/cute_dsl/attention/roles/mla_mma.py": "6d29637fbfc7b5e8fe58bf7497ff07e27a182be1f254056413ec43d130efaf0e",
+    "flashinfer/cute_dsl/attention/roles/mla_mma_fp8.py": "9aa2a84dd7db49bf2520770dd57d6be9fee167dc0a584a70cacb0101f571cb6a",
+    "flashinfer/cute_dsl/attention/roles/mla_pt_loader.py": "dc473c4807873d93504bb89fcf89e9270954ef4104134a5eaaebbe1e854a36ce",
+    "flashinfer/cute_dsl/attention/roles/mma.py": "fa422f6c2c862257c3af2bc0e214ebd24d640393b20bcb9cf07d0db55128c355",
+    "flashinfer/cute_dsl/attention/roles/pt_loader.py": "2f4ebd62deb9ba8abfac5b09e1a0e1ee27ab7429ccc8a879dc07484895e98e38",
+    "flashinfer/cute_dsl/attention/roles/softmax.py": "48889834f6b3e0504c237377fc53ae7706c070270f2993f265df2668b9642bc3",
+    "flashinfer/cute_dsl/attention/roles/softmax_math.py": "0109a2f9989e805c17dbcdb46cf41c80260da68416ca6740de15eb0feee9be55",
+    "flashinfer/cute_dsl/attention/scheduler/__init__.py": "454534119a1c665961f4168138f4c0d26e0f8f466059d119360593b8c446379e",
+    "flashinfer/cute_dsl/attention/scheduler/mla_persistent.py": "d8210d9bb952cf00602a7af4a518917e219e21ebe5d8de2ea6936da16ae0d6c7",
+    "flashinfer/cute_dsl/attention/scheduler/persistent.py": "790a6816927788f21e054b4f1a2aa3274a7dcca5fa6c7b8d135142a269f947a4",
+    "flashinfer/cute_dsl/attention/tmem_layout.py": "8c6fe2237abc8bc8833dd6bd5682d02cc8894a56f7e263c6a3dd21bfd0924fe0",
+    "flashinfer/cute_dsl/attention/warp_schedule.py": "4707ab9b5b5a289f5bfc7f463a0d404cf4547c41d699ef6df8fb97fcba909e79",
+    "flashinfer/cute_dsl/attention/wrappers/__init__.py": "721ce1ea7bdb5773ff668e91aa10887ddda91f20a2d418373a283861100988f7",
+    "flashinfer/cute_dsl/attention/wrappers/batch_decode.py": "787b95a228ff415bd15ed2eb741a06e70987e7a79dbd4003ea8c4395035fcbf9",
+    "flashinfer/cute_dsl/attention/wrappers/batch_hca.py": "e95f7a16507f05364c499c76a26bb43d3e5ff75b7bf5fdc2ad392b3fc32044e2",
+    "flashinfer/cute_dsl/attention/wrappers/batch_mla.py": "2da98c6e174ff0275df546cb4a8dcdd0a5b3cd448f44325d2545bdd479514a5d",
+    "flashinfer/cute_dsl/attention/wrappers/batch_prefill.py": "bfbc8c86fe83ce1da6f86c99079ff404f7923c5f6cf07f4718df727a079a7832",
+    "reports/localized_mla_b200_74_74_separate_20260905/run_experiments.py": "49c7110cf961954254bf344ca2e6d764b24b5b5c7b410a1547140562c9dda726",
+    "reports/mla_b64_sk32768_ncu_20260907/run.py": "adda1fbf997eea19d5d80c46f3647db6574347f122eaca4db6f2a9ed19e424de"
+  },
+  "settings": {
+    "batch_size": 64,
+    "seqlen_k": 32768,
+    "heads": 128,
+    "latent_dim": 512,
+    "rope_dim": 64,
+    "page_size": 64,
+    "dtype": "bfloat16",
+    "split_kv": 1,
+    "enable_pdl": false,
+    "data_initialization": "random",
+    "seed": 42,
+    "warmups": 3,
+    "profiled_launches": 1,
+    "cache_control": "all",
+    "clock_control": "boost",
+    "replay_mode": "kernel",
+    "trials": 3,
+    "groups": {
+      "ltc": [
+        "lts__t_requests_srcunit_ltcfabric.sum"
+      ],
+      "memory": [
+        "gpu__time_duration.avg",
+        "dram__bytes_read.sum",
+        "dram__bytes_write.sum",
+        "dram__bytes_read.sum.per_second",
+        "dram__bytes_write.sum.per_second",
+        "dram__throughput.avg.pct_of_peak_sustained_elapsed",
+        "lts__t_sector_hit_rate.pct",
+        "lts__t_sectors.sum",
+        "lts__t_sectors_lookup_hit.sum",
+        "lts__t_sectors_lookup_miss.sum"
+      ]
+    },
+    "prefill": "Sq=128 dense"
+  },
+  "initial_resources": {
+    "time": "2026-09-07T08:39:35.927288+00:00",
+    "logical_cpus": 20,
+    "load": [
+      0.02685546875,
+      0.08251953125,
+      0.07763671875
+    ],
+    "mem_available_kib": 228004256,
+    "aggregate_process_rss_kib": 438840,
+    "cpu_jiffies": "cpu  2148 0 2200 1407217 8736 0 54 24 0 0",
+    "tmp_disk_free_bytes": 35313815552,
+    "gpu": "GPU-ff675312-2fcc-3db1-b482-712eb0087566, NVIDIA B200, 0 %, 0 MiB, 182625 MiB, 129.51 W, 30, 120 MHz"
+  },
+  "profiles": [
+    {
+      "report": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq1/ltc/standard_01.ncu-rep",
+      "raw_csv": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq1/ltc/standard_01.csv",
+      "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmla_decodeBlackwellMultiLatentAttentionForward_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____MMAAtom_ThrID21_ShapeM_0",
+      "ncu_replay_passes": 1,
+      "metrics": {
+        "lts__t_requests_srcunit_ltcfabric.sum": {
+          "value": 18933975.0,
+          "unit": "request"
+        }
+      },
+      "config": {
+        "workload": "decode",
+        "batch_size": 64,
+        "seqlen_q": 1,
+        "seqlen_k": 32768,
+        "split_kv": 1
+      },
+      "group": "ltc",
+      "mode": "standard",
+      "trial": 1,
+      "elapsed_seconds": 8.717110453999908,
+      "target_metadata": {
+        "batch_size": 64,
+        "data_initialization": "random",
+        "data_seed": 42,
+        "device": "NVIDIA B200",
+        "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+        "localized_mapped_bytes": null,
+        "mode": "standard",
+        "owner_page_counts": null,
+        "owner_tile_counts": null,
+        "owner_work_counts": null,
+        "partition_sm_counts": null,
+        "profiled_launches": 1,
+        "resident_partition_clusters": null,
+        "seqlen_k": 32768,
+        "seqlen_q": 1,
+        "split_kv": 1,
+        "total_sm_count": 148,
+        "warmup_launches": 3,
+        "workload": "decode"
+      },
+      "command_file": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq1/ltc/standard_01.command.json"
+    },
+    {
+      "report": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq1/ltc/localized_01.ncu-rep",
+      "raw_csv": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq1/ltc/localized_01.csv",
+      "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmla_decodeBlackwellMultiLatentAttentionForward_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____MMAAtom_ThrID21_ShapeM_0",
+      "ncu_replay_passes": 1,
+      "metrics": {
+        "lts__t_requests_srcunit_ltcfabric.sum": {
+          "value": 353304.0,
+          "unit": "request"
+        }
+      },
+      "config": {
+        "workload": "decode",
+        "batch_size": 64,
+        "seqlen_q": 1,
+        "seqlen_k": 32768,
+        "split_kv": 1
+      },
+      "group": "ltc",
+      "mode": "localized",
+      "trial": 1,
+      "elapsed_seconds": 7.449645696999937,
+      "target_metadata": {
+        "batch_size": 64,
+        "data_initialization": "random",
+        "data_seed": 42,
+        "device": "NVIDIA B200",
+        "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+        "localized_mapped_bytes": [
+          1207959552,
+          1207959552
+        ],
+        "mode": "localized",
+        "owner_page_counts": [
+          16384,
+          16384
+        ],
+        "owner_tile_counts": [
+          32,
+          32
+        ],
+        "owner_work_counts": [
+          32,
+          32
+        ],
+        "partition_sm_counts": [
+          74,
+          74
+        ],
+        "profiled_launches": 1,
+        "resident_partition_clusters": [
+          37,
+          37
+        ],
+        "seqlen_k": 32768,
+        "seqlen_q": 1,
+        "split_kv": 1,
+        "total_sm_count": 148,
+        "warmup_launches": 3,
+        "workload": "decode"
+      },
+      "command_file": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq1/ltc/localized_01.command.json"
+    },
+    {
+      "report": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq1/ltc/localized_02.ncu-rep",
+      "raw_csv": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq1/ltc/localized_02.csv",
+      "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmla_decodeBlackwellMultiLatentAttentionForward_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____MMAAtom_ThrID21_ShapeM_0",
+      "ncu_replay_passes": 1,
+      "metrics": {
+        "lts__t_requests_srcunit_ltcfabric.sum": {
+          "value": 353313.0,
+          "unit": "request"
+        }
+      },
+      "config": {
+        "workload": "decode",
+        "batch_size": 64,
+        "seqlen_q": 1,
+        "seqlen_k": 32768,
+        "split_kv": 1
+      },
+      "group": "ltc",
+      "mode": "localized",
+      "trial": 2,
+      "elapsed_seconds": 7.305451423000022,
+      "target_metadata": {
+        "batch_size": 64,
+        "data_initialization": "random",
+        "data_seed": 42,
+        "device": "NVIDIA B200",
+        "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+        "localized_mapped_bytes": [
+          1207959552,
+          1207959552
+        ],
+        "mode": "localized",
+        "owner_page_counts": [
+          16384,
+          16384
+        ],
+        "owner_tile_counts": [
+          32,
+          32
+        ],
+        "owner_work_counts": [
+          32,
+          32
+        ],
+        "partition_sm_counts": [
+          74,
+          74
+        ],
+        "profiled_launches": 1,
+        "resident_partition_clusters": [
+          37,
+          37
+        ],
+        "seqlen_k": 32768,
+        "seqlen_q": 1,
+        "split_kv": 1,
+        "total_sm_count": 148,
+        "warmup_launches": 3,
+        "workload": "decode"
+      },
+      "command_file": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq1/ltc/localized_02.command.json"
+    },
+    {
+      "report": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq1/ltc/standard_02.ncu-rep",
+      "raw_csv": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq1/ltc/standard_02.csv",
+      "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmla_decodeBlackwellMultiLatentAttentionForward_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____MMAAtom_ThrID21_ShapeM_0",
+      "ncu_replay_passes": 1,
+      "metrics": {
+        "lts__t_requests_srcunit_ltcfabric.sum": {
+          "value": 18925190.0,
+          "unit": "request"
+        }
+      },
+      "config": {
+        "workload": "decode",
+        "batch_size": 64,
+        "seqlen_q": 1,
+        "seqlen_k": 32768,
+        "split_kv": 1
+      },
+      "group": "ltc",
+      "mode": "standard",
+      "trial": 2,
+      "elapsed_seconds": 6.652253050000013,
+      "target_metadata": {
+        "batch_size": 64,
+        "data_initialization": "random",
+        "data_seed": 42,
+        "device": "NVIDIA B200",
+        "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+        "localized_mapped_bytes": null,
+        "mode": "standard",
+        "owner_page_counts": null,
+        "owner_tile_counts": null,
+        "owner_work_counts": null,
+        "partition_sm_counts": null,
+        "profiled_launches": 1,
+        "resident_partition_clusters": null,
+        "seqlen_k": 32768,
+        "seqlen_q": 1,
+        "split_kv": 1,
+        "total_sm_count": 148,
+        "warmup_launches": 3,
+        "workload": "decode"
+      },
+      "command_file": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq1/ltc/standard_02.command.json"
+    },
+    {
+      "report": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq1/ltc/standard_03.ncu-rep",
+      "raw_csv": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq1/ltc/standard_03.csv",
+      "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmla_decodeBlackwellMultiLatentAttentionForward_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____MMAAtom_ThrID21_ShapeM_0",
+      "ncu_replay_passes": 1,
+      "metrics": {
+        "lts__t_requests_srcunit_ltcfabric.sum": {
+          "value": 18924421.0,
+          "unit": "request"
+        }
+      },
+      "config": {
+        "workload": "decode",
+        "batch_size": 64,
+        "seqlen_q": 1,
+        "seqlen_k": 32768,
+        "split_kv": 1
+      },
+      "group": "ltc",
+      "mode": "standard",
+      "trial": 3,
+      "elapsed_seconds": 6.555215752000095,
+      "target_metadata": {
+        "batch_size": 64,
+        "data_initialization": "random",
+        "data_seed": 42,
+        "device": "NVIDIA B200",
+        "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+        "localized_mapped_bytes": null,
+        "mode": "standard",
+        "owner_page_counts": null,
+        "owner_tile_counts": null,
+        "owner_work_counts": null,
+        "partition_sm_counts": null,
+        "profiled_launches": 1,
+        "resident_partition_clusters": null,
+        "seqlen_k": 32768,
+        "seqlen_q": 1,
+        "split_kv": 1,
+        "total_sm_count": 148,
+        "warmup_launches": 3,
+        "workload": "decode"
+      },
+      "command_file": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq1/ltc/standard_03.command.json"
+    },
+    {
+      "report": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq1/ltc/localized_03.ncu-rep",
+      "raw_csv": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq1/ltc/localized_03.csv",
+      "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmla_decodeBlackwellMultiLatentAttentionForward_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____MMAAtom_ThrID21_ShapeM_0",
+      "ncu_replay_passes": 1,
+      "metrics": {
+        "lts__t_requests_srcunit_ltcfabric.sum": {
+          "value": 353330.0,
+          "unit": "request"
+        }
+      },
+      "config": {
+        "workload": "decode",
+        "batch_size": 64,
+        "seqlen_q": 1,
+        "seqlen_k": 32768,
+        "split_kv": 1
+      },
+      "group": "ltc",
+      "mode": "localized",
+      "trial": 3,
+      "elapsed_seconds": 7.199186875999999,
+      "target_metadata": {
+        "batch_size": 64,
+        "data_initialization": "random",
+        "data_seed": 42,
+        "device": "NVIDIA B200",
+        "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+        "localized_mapped_bytes": [
+          1207959552,
+          1207959552
+        ],
+        "mode": "localized",
+        "owner_page_counts": [
+          16384,
+          16384
+        ],
+        "owner_tile_counts": [
+          32,
+          32
+        ],
+        "owner_work_counts": [
+          32,
+          32
+        ],
+        "partition_sm_counts": [
+          74,
+          74
+        ],
+        "profiled_launches": 1,
+        "resident_partition_clusters": [
+          37,
+          37
+        ],
+        "seqlen_k": 32768,
+        "seqlen_q": 1,
+        "split_kv": 1,
+        "total_sm_count": 148,
+        "warmup_launches": 3,
+        "workload": "decode"
+      },
+      "command_file": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq1/ltc/localized_03.command.json"
+    },
+    {
+      "report": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq1/memory/standard_01.ncu-rep",
+      "raw_csv": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq1/memory/standard_01.csv",
+      "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmla_decodeBlackwellMultiLatentAttentionForward_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____MMAAtom_ThrID21_ShapeM_0",
+      "ncu_replay_passes": 4,
+      "metrics": {
+        "gpu__time_duration.avg": {
+          "value": 462464.0,
+          "unit": "ns"
+        },
+        "dram__bytes_read.sum": {
+          "value": 2426120448.0,
+          "unit": "byte"
+        },
+        "dram__bytes_write.sum": {
+          "value": 3453696.0,
+          "unit": "byte"
+        },
+        "dram__bytes_read.sum.per_second": {
+          "value": 5246074176584.56,
+          "unit": "byte/s"
+        },
+        "dram__bytes_write.sum.per_second": {
+          "value": 7468032106.28,
+          "unit": "byte/s"
+        },
+        "dram__throughput.avg.pct_of_peak_sustained_elapsed": {
+          "value": 68.48,
+          "unit": "%"
+        },
+        "lts__t_sector_hit_rate.pct": {
+          "value": 37.07,
+          "unit": "%"
+        },
+        "lts__t_sectors.sum": {
+          "value": 182311611.0,
+          "unit": "sector"
+        },
+        "lts__t_sectors_lookup_hit.sum": {
+          "value": 67582637.0,
+          "unit": "sector"
+        },
+        "lts__t_sectors_lookup_miss.sum": {
+          "value": 114233745.0,
+          "unit": "sector"
+        }
+      },
+      "config": {
+        "workload": "decode",
+        "batch_size": 64,
+        "seqlen_q": 1,
+        "seqlen_k": 32768,
+        "split_kv": 1
+      },
+      "group": "memory",
+      "mode": "standard",
+      "trial": 1,
+      "elapsed_seconds": 6.648518435000028,
+      "target_metadata": {
+        "batch_size": 64,
+        "data_initialization": "random",
+        "data_seed": 42,
+        "device": "NVIDIA B200",
+        "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+        "localized_mapped_bytes": null,
+        "mode": "standard",
+        "owner_page_counts": null,
+        "owner_tile_counts": null,
+        "owner_work_counts": null,
+        "partition_sm_counts": null,
+        "profiled_launches": 1,
+        "resident_partition_clusters": null,
+        "seqlen_k": 32768,
+        "seqlen_q": 1,
+        "split_kv": 1,
+        "total_sm_count": 148,
+        "warmup_launches": 3,
+        "workload": "decode"
+      },
+      "command_file": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq1/memory/standard_01.command.json",
+      "hbm": {
+        "read_bytes": 2426120448.0,
+        "write_bytes": 3453696.0,
+        "total_bytes": 2429574144.0,
+        "read_gb_s": 5246.07417658456,
+        "write_gb_s": 7.46803210628,
+        "total_gb_s": 5253.54220869084,
+        "peak_sustained_utilization_pct": 68.48,
+        "duration_ns": 462464.0
+      },
+      "l2": {
+        "hit_rate_pct": 37.07,
+        "hit_rate_from_lookup_counts_pct": 37.17081830393039,
+        "total_sectors": 182311611.0,
+        "lookup_hit_sectors": 67582637.0,
+        "lookup_miss_sectors": 114233745.0,
+        "duration_ns": 462464.0,
+        "reported_hit_rate_in_range": true,
+        "counter_sum_relative_error": -0.0027163876029815404,
+        "hit_rate_usable": true,
+        "validation_warnings": []
+      }
+    },
+    {
+      "report": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq1/memory/localized_01.ncu-rep",
+      "raw_csv": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq1/memory/localized_01.csv",
+      "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmla_decodeBlackwellMultiLatentAttentionForward_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____MMAAtom_ThrID21_ShapeM_0",
+      "ncu_replay_passes": 4,
+      "metrics": {
+        "gpu__time_duration.avg": {
+          "value": 430784.0,
+          "unit": "ns"
+        },
+        "dram__bytes_read.sum": {
+          "value": 2425986048.0,
+          "unit": "byte"
+        },
+        "dram__bytes_write.sum": {
+          "value": 3902208.0,
+          "unit": "byte"
+        },
+        "dram__bytes_read.sum.per_second": {
+          "value": 5631560243648.79,
+          "unit": "byte/s"
+        },
+        "dram__bytes_write.sum.per_second": {
+          "value": 9058386569.6,
+          "unit": "byte/s"
+        },
+        "dram__throughput.avg.pct_of_peak_sustained_elapsed": {
+          "value": 73.53,
+          "unit": "%"
+        },
+        "lts__t_sector_hit_rate.pct": {
+          "value": 46.96,
+          "unit": "%"
+        },
+        "lts__t_sectors.sum": {
+          "value": 143963417.0,
+          "unit": "sector"
+        },
+        "lts__t_sectors_lookup_hit.sum": {
+          "value": 67599322.0,
+          "unit": "sector"
+        },
+        "lts__t_sectors_lookup_miss.sum": {
+          "value": 76321324.0,
+          "unit": "sector"
+        }
+      },
+      "config": {
+        "workload": "decode",
+        "batch_size": 64,
+        "seqlen_q": 1,
+        "seqlen_k": 32768,
+        "split_kv": 1
+      },
+      "group": "memory",
+      "mode": "localized",
+      "trial": 1,
+      "elapsed_seconds": 7.3987206420000575,
+      "target_metadata": {
+        "batch_size": 64,
+        "data_initialization": "random",
+        "data_seed": 42,
+        "device": "NVIDIA B200",
+        "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+        "localized_mapped_bytes": [
+          1207959552,
+          1207959552
+        ],
+        "mode": "localized",
+        "owner_page_counts": [
+          16384,
+          16384
+        ],
+        "owner_tile_counts": [
+          32,
+          32
+        ],
+        "owner_work_counts": [
+          32,
+          32
+        ],
+        "partition_sm_counts": [
+          74,
+          74
+        ],
+        "profiled_launches": 1,
+        "resident_partition_clusters": [
+          37,
+          37
+        ],
+        "seqlen_k": 32768,
+        "seqlen_q": 1,
+        "split_kv": 1,
+        "total_sm_count": 148,
+        "warmup_launches": 3,
+        "workload": "decode"
+      },
+      "command_file": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq1/memory/localized_01.command.json",
+      "hbm": {
+        "read_bytes": 2425986048.0,
+        "write_bytes": 3902208.0,
+        "total_bytes": 2429888256.0,
+        "read_gb_s": 5631.56024364879,
+        "write_gb_s": 9.0583865696,
+        "total_gb_s": 5640.61863021839,
+        "peak_sustained_utilization_pct": 73.53,
+        "duration_ns": 430784.0
+      },
+      "l2": {
+        "hit_rate_pct": 46.96,
+        "hit_rate_from_lookup_counts_pct": 46.96985726425936,
+        "total_sectors": 143963417.0,
+        "lookup_hit_sectors": 67599322.0,
+        "lookup_miss_sectors": 76321324.0,
+        "duration_ns": 430784.0,
+        "reported_hit_rate_in_range": true,
+        "counter_sum_relative_error": -0.0002970963102383317,
+        "hit_rate_usable": true,
+        "validation_warnings": []
+      }
+    },
+    {
+      "report": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq1/memory/localized_02.ncu-rep",
+      "raw_csv": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq1/memory/localized_02.csv",
+      "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmla_decodeBlackwellMultiLatentAttentionForward_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____MMAAtom_ThrID21_ShapeM_0",
+      "ncu_replay_passes": 4,
+      "metrics": {
+        "gpu__time_duration.avg": {
+          "value": 431744.0,
+          "unit": "ns"
+        },
+        "dram__bytes_read.sum": {
+          "value": 2425966848.0,
+          "unit": "byte"
+        },
+        "dram__bytes_write.sum": {
+          "value": 3688704.0,
+          "unit": "byte"
+        },
+        "dram__bytes_read.sum.per_second": {
+          "value": 5618993774088.35,
+          "unit": "byte/s"
+        },
+        "dram__bytes_write.sum.per_second": {
+          "value": 8543729617.55,
+          "unit": "byte/s"
+        },
+        "dram__throughput.avg.pct_of_peak_sustained_elapsed": {
+          "value": 73.35,
+          "unit": "%"
+        },
+        "lts__t_sector_hit_rate.pct": {
+          "value": 46.97,
+          "unit": "%"
+        },
+        "lts__t_sectors.sum": {
+          "value": 143918305.0,
+          "unit": "sector"
+        },
+        "lts__t_sectors_lookup_hit.sum": {
+          "value": 67599245.0,
+          "unit": "sector"
+        },
+        "lts__t_sectors_lookup_miss.sum": {
+          "value": 76328529.0,
+          "unit": "sector"
+        }
+      },
+      "config": {
+        "workload": "decode",
+        "batch_size": 64,
+        "seqlen_q": 1,
+        "seqlen_k": 32768,
+        "split_kv": 1
+      },
+      "group": "memory",
+      "mode": "localized",
+      "trial": 2,
+      "elapsed_seconds": 7.352167797999982,
+      "target_metadata": {
+        "batch_size": 64,
+        "data_initialization": "random",
+        "data_seed": 42,
+        "device": "NVIDIA B200",
+        "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+        "localized_mapped_bytes": [
+          1207959552,
+          1207959552
+        ],
+        "mode": "localized",
+        "owner_page_counts": [
+          16384,
+          16384
+        ],
+        "owner_tile_counts": [
+          32,
+          32
+        ],
+        "owner_work_counts": [
+          32,
+          32
+        ],
+        "partition_sm_counts": [
+          74,
+          74
+        ],
+        "profiled_launches": 1,
+        "resident_partition_clusters": [
+          37,
+          37
+        ],
+        "seqlen_k": 32768,
+        "seqlen_q": 1,
+        "split_kv": 1,
+        "total_sm_count": 148,
+        "warmup_launches": 3,
+        "workload": "decode"
+      },
+      "command_file": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq1/memory/localized_02.command.json",
+      "hbm": {
+        "read_bytes": 2425966848.0,
+        "write_bytes": 3688704.0,
+        "total_bytes": 2429655552.0,
+        "read_gb_s": 5618.99377408835,
+        "write_gb_s": 8.54372961755,
+        "total_gb_s": 5627.537503705899,
+        "peak_sustained_utilization_pct": 73.35,
+        "duration_ns": 431744.0
+      },
+      "l2": {
+        "hit_rate_pct": 46.97,
+        "hit_rate_from_lookup_counts_pct": 46.967477590530926,
+        "total_sectors": 143918305.0,
+        "lookup_hit_sectors": 67599245.0,
+        "lookup_miss_sectors": 76328529.0,
+        "duration_ns": 431744.0,
+        "reported_hit_rate_in_range": true,
+        "counter_sum_relative_error": 6.5794271270736e-05,
+        "hit_rate_usable": true,
+        "validation_warnings": []
+      }
+    },
+    {
+      "report": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq1/memory/standard_02.ncu-rep",
+      "raw_csv": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq1/memory/standard_02.csv",
+      "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmla_decodeBlackwellMultiLatentAttentionForward_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____MMAAtom_ThrID21_ShapeM_0",
+      "ncu_replay_passes": 4,
+      "metrics": {
+        "gpu__time_duration.avg": {
+          "value": 460224.0,
+          "unit": "ns"
+        },
+        "dram__bytes_read.sum": {
+          "value": 2426309120.0,
+          "unit": "byte"
+        },
+        "dram__bytes_write.sum": {
+          "value": 3614976.0,
+          "unit": "byte"
+        },
+        "dram__bytes_read.sum.per_second": {
+          "value": 5272017800027.81,
+          "unit": "byte/s"
+        },
+        "dram__bytes_write.sum.per_second": {
+          "value": 7854818523.15,
+          "unit": "byte/s"
+        },
+        "dram__throughput.avg.pct_of_peak_sustained_elapsed": {
+          "value": 68.82,
+          "unit": "%"
+        },
+        "lts__t_sector_hit_rate.pct": {
+          "value": 37.09,
+          "unit": "%"
+        },
+        "lts__t_sectors.sum": {
+          "value": 182261291.0,
+          "unit": "sector"
+        },
+        "lts__t_sectors_lookup_hit.sum": {
+          "value": 67596962.0,
+          "unit": "sector"
+        },
+        "lts__t_sectors_lookup_miss.sum": {
+          "value": 114238141.0,
+          "unit": "sector"
+        }
+      },
+      "config": {
+        "workload": "decode",
+        "batch_size": 64,
+        "seqlen_q": 1,
+        "seqlen_k": 32768,
+        "split_kv": 1
+      },
+      "group": "memory",
+      "mode": "standard",
+      "trial": 2,
+      "elapsed_seconds": 6.652731686999914,
+      "target_metadata": {
+        "batch_size": 64,
+        "data_initialization": "random",
+        "data_seed": 42,
+        "device": "NVIDIA B200",
+        "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+        "localized_mapped_bytes": null,
+        "mode": "standard",
+        "owner_page_counts": null,
+        "owner_tile_counts": null,
+        "owner_work_counts": null,
+        "partition_sm_counts": null,
+        "profiled_launches": 1,
+        "resident_partition_clusters": null,
+        "seqlen_k": 32768,
+        "seqlen_q": 1,
+        "split_kv": 1,
+        "total_sm_count": 148,
+        "warmup_launches": 3,
+        "workload": "decode"
+      },
+      "command_file": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq1/memory/standard_02.command.json",
+      "hbm": {
+        "read_bytes": 2426309120.0,
+        "write_bytes": 3614976.0,
+        "total_bytes": 2429924096.0,
+        "read_gb_s": 5272.017800027809,
+        "write_gb_s": 7.85481852315,
+        "total_gb_s": 5279.87261855096,
+        "peak_sustained_utilization_pct": 68.82,
+        "duration_ns": 460224.0
+      },
+      "l2": {
+        "hit_rate_pct": 37.09,
+        "hit_rate_from_lookup_counts_pct": 37.17486936502024,
+        "total_sectors": 182261291.0,
+        "lookup_hit_sectors": 67596962.0,
+        "lookup_miss_sectors": 114238141.0,
+        "duration_ns": 460224.0,
+        "reported_hit_rate_in_range": true,
+        "counter_sum_relative_error": -0.002338335242012546,
+        "hit_rate_usable": true,
+        "validation_warnings": []
+      }
+    },
+    {
+      "report": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq1/memory/standard_03.ncu-rep",
+      "raw_csv": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq1/memory/standard_03.csv",
+      "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmla_decodeBlackwellMultiLatentAttentionForward_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____MMAAtom_ThrID21_ShapeM_0",
+      "ncu_replay_passes": 4,
+      "metrics": {
+        "gpu__time_duration.avg": {
+          "value": 463840.0,
+          "unit": "ns"
+        },
+        "dram__bytes_read.sum": {
+          "value": 2426646016.0,
+          "unit": "byte"
+        },
+        "dram__bytes_write.sum": {
+          "value": 3813632.0,
+          "unit": "byte"
+        },
+        "dram__bytes_read.sum.per_second": {
+          "value": 5231644567092.1,
+          "unit": "byte/s"
+        },
+        "dram__bytes_write.sum.per_second": {
+          "value": 8221869610.21,
+          "unit": "byte/s"
+        },
+        "dram__throughput.avg.pct_of_peak_sustained_elapsed": {
+          "value": 68.31,
+          "unit": "%"
+        },
+        "lts__t_sector_hit_rate.pct": {
+          "value": 37.07,
+          "unit": "%"
+        },
+        "lts__t_sectors.sum": {
+          "value": 182271712.0,
+          "unit": "sector"
+        },
+        "lts__t_sectors_lookup_hit.sum": {
+          "value": 67567995.0,
+          "unit": "sector"
+        },
+        "lts__t_sectors_lookup_miss.sum": {
+          "value": 114253402.0,
+          "unit": "sector"
+        }
+      },
+      "config": {
+        "workload": "decode",
+        "batch_size": 64,
+        "seqlen_q": 1,
+        "seqlen_k": 32768,
+        "split_kv": 1
+      },
+      "group": "memory",
+      "mode": "standard",
+      "trial": 3,
+      "elapsed_seconds": 6.697841295999979,
+      "target_metadata": {
+        "batch_size": 64,
+        "data_initialization": "random",
+        "data_seed": 42,
+        "device": "NVIDIA B200",
+        "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+        "localized_mapped_bytes": null,
+        "mode": "standard",
+        "owner_page_counts": null,
+        "owner_tile_counts": null,
+        "owner_work_counts": null,
+        "partition_sm_counts": null,
+        "profiled_launches": 1,
+        "resident_partition_clusters": null,
+        "seqlen_k": 32768,
+        "seqlen_q": 1,
+        "split_kv": 1,
+        "total_sm_count": 148,
+        "warmup_launches": 3,
+        "workload": "decode"
+      },
+      "command_file": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq1/memory/standard_03.command.json",
+      "hbm": {
+        "read_bytes": 2426646016.0,
+        "write_bytes": 3813632.0,
+        "total_bytes": 2430459648.0,
+        "read_gb_s": 5231.644567092099,
+        "write_gb_s": 8.22186961021,
+        "total_gb_s": 5239.866436702309,
+        "peak_sustained_utilization_pct": 68.31,
+        "duration_ns": 463840.0
+      },
+      "l2": {
+        "hit_rate_pct": 37.07,
+        "hit_rate_from_lookup_counts_pct": 37.16174010036894,
+        "total_sectors": 182271712.0,
+        "lookup_hit_sectors": 67567995.0,
+        "lookup_miss_sectors": 114253402.0,
+        "duration_ns": 463840.0,
+        "reported_hit_rate_in_range": true,
+        "counter_sum_relative_error": -0.002470569870984707,
+        "hit_rate_usable": true,
+        "validation_warnings": []
+      }
+    },
+    {
+      "report": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq1/memory/localized_03.ncu-rep",
+      "raw_csv": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq1/memory/localized_03.csv",
+      "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmla_decodeBlackwellMultiLatentAttentionForward_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____MMAAtom_ThrID21_ShapeM_0",
+      "ncu_replay_passes": 4,
+      "metrics": {
+        "gpu__time_duration.avg": {
+          "value": 430656.0,
+          "unit": "ns"
+        },
+        "dram__bytes_read.sum": {
+          "value": 2425625088.0,
+          "unit": "byte"
+        },
+        "dram__bytes_write.sum": {
+          "value": 3704064.0,
+          "unit": "byte"
+        },
+        "dram__bytes_read.sum.per_second": {
+          "value": 5632395898350.42,
+          "unit": "byte/s"
+        },
+        "dram__bytes_write.sum.per_second": {
+          "value": 8600980829.25,
+          "unit": "byte/s"
+        },
+        "dram__throughput.avg.pct_of_peak_sustained_elapsed": {
+          "value": 73.53,
+          "unit": "%"
+        },
+        "lts__t_sector_hit_rate.pct": {
+          "value": 46.97,
+          "unit": "%"
+        },
+        "lts__t_sectors.sum": {
+          "value": 143920419.0,
+          "unit": "sector"
+        },
+        "lts__t_sectors_lookup_hit.sum": {
+          "value": 67598393.0,
+          "unit": "sector"
+        },
+        "lts__t_sectors_lookup_miss.sum": {
+          "value": 76319447.0,
+          "unit": "sector"
+        }
+      },
+      "config": {
+        "workload": "decode",
+        "batch_size": 64,
+        "seqlen_q": 1,
+        "seqlen_k": 32768,
+        "split_kv": 1
+      },
+      "group": "memory",
+      "mode": "localized",
+      "trial": 3,
+      "elapsed_seconds": 7.350355314000012,
+      "target_metadata": {
+        "batch_size": 64,
+        "data_initialization": "random",
+        "data_seed": 42,
+        "device": "NVIDIA B200",
+        "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+        "localized_mapped_bytes": [
+          1207959552,
+          1207959552
+        ],
+        "mode": "localized",
+        "owner_page_counts": [
+          16384,
+          16384
+        ],
+        "owner_tile_counts": [
+          32,
+          32
+        ],
+        "owner_work_counts": [
+          32,
+          32
+        ],
+        "partition_sm_counts": [
+          74,
+          74
+        ],
+        "profiled_launches": 1,
+        "resident_partition_clusters": [
+          37,
+          37
+        ],
+        "seqlen_k": 32768,
+        "seqlen_q": 1,
+        "split_kv": 1,
+        "total_sm_count": 148,
+        "warmup_launches": 3,
+        "workload": "decode"
+      },
+      "command_file": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq1/memory/localized_03.command.json",
+      "hbm": {
+        "read_bytes": 2425625088.0,
+        "write_bytes": 3704064.0,
+        "total_bytes": 2429329152.0,
+        "read_gb_s": 5632.39589835042,
+        "write_gb_s": 8.60098082925,
+        "total_gb_s": 5640.99687917967,
+        "peak_sustained_utilization_pct": 73.53,
+        "duration_ns": 430656.0
+      },
+      "l2": {
+        "hit_rate_pct": 46.97,
+        "hit_rate_from_lookup_counts_pct": 46.970127539435,
+        "total_sectors": 143920419.0,
+        "lookup_hit_sectors": 67598393.0,
+        "lookup_miss_sectors": 76319447.0,
+        "duration_ns": 430656.0,
+        "reported_hit_rate_in_range": true,
+        "counter_sum_relative_error": -1.791962542851966e-05,
+        "hit_rate_usable": true,
+        "validation_warnings": []
+      }
+    },
+    {
+      "report": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq4/ltc/standard_01.ncu-rep",
+      "raw_csv": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq4/ltc/standard_01.csv",
+      "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmla_decodeBlackwellMultiLatentAttentionForward_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____MMAAtom_ThrID21_ShapeM_0",
+      "ncu_replay_passes": 1,
+      "metrics": {
+        "lts__t_requests_srcunit_ltcfabric.sum": {
+          "value": 44315989.0,
+          "unit": "request"
+        }
+      },
+      "config": {
+        "workload": "decode",
+        "batch_size": 64,
+        "seqlen_q": 4,
+        "seqlen_k": 32768,
+        "split_kv": 1
+      },
+      "group": "ltc",
+      "mode": "standard",
+      "trial": 1,
+      "elapsed_seconds": 6.649873842999909,
+      "target_metadata": {
+        "batch_size": 64,
+        "data_initialization": "random",
+        "data_seed": 42,
+        "device": "NVIDIA B200",
+        "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+        "localized_mapped_bytes": null,
+        "mode": "standard",
+        "owner_page_counts": null,
+        "owner_tile_counts": null,
+        "owner_work_counts": null,
+        "partition_sm_counts": null,
+        "profiled_launches": 1,
+        "resident_partition_clusters": null,
+        "seqlen_k": 32768,
+        "seqlen_q": 4,
+        "split_kv": 1,
+        "total_sm_count": 148,
+        "warmup_launches": 3,
+        "workload": "decode"
+      },
+      "command_file": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq4/ltc/standard_01.command.json"
+    },
+    {
+      "report": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq4/ltc/localized_01.ncu-rep",
+      "raw_csv": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq4/ltc/localized_01.csv",
+      "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmla_decodeBlackwellMultiLatentAttentionForward_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____MMAAtom_ThrID21_ShapeM_0",
+      "ncu_replay_passes": 1,
+      "metrics": {
+        "lts__t_requests_srcunit_ltcfabric.sum": {
+          "value": 1366063.0,
+          "unit": "request"
+        }
+      },
+      "config": {
+        "workload": "decode",
+        "batch_size": 64,
+        "seqlen_q": 4,
+        "seqlen_k": 32768,
+        "split_kv": 1
+      },
+      "group": "ltc",
+      "mode": "localized",
+      "trial": 1,
+      "elapsed_seconds": 7.254950720000011,
+      "target_metadata": {
+        "batch_size": 64,
+        "data_initialization": "random",
+        "data_seed": 42,
+        "device": "NVIDIA B200",
+        "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+        "localized_mapped_bytes": [
+          1207959552,
+          1207959552
+        ],
+        "mode": "localized",
+        "owner_page_counts": [
+          16384,
+          16384
+        ],
+        "owner_tile_counts": [
+          128,
+          128
+        ],
+        "owner_work_counts": [
+          32,
+          32
+        ],
+        "partition_sm_counts": [
+          74,
+          74
+        ],
+        "profiled_launches": 1,
+        "resident_partition_clusters": [
+          37,
+          37
+        ],
+        "seqlen_k": 32768,
+        "seqlen_q": 4,
+        "split_kv": 1,
+        "total_sm_count": 148,
+        "warmup_launches": 3,
+        "workload": "decode"
+      },
+      "command_file": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq4/ltc/localized_01.command.json"
+    },
+    {
+      "report": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq4/ltc/localized_02.ncu-rep",
+      "raw_csv": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq4/ltc/localized_02.csv",
+      "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmla_decodeBlackwellMultiLatentAttentionForward_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____MMAAtom_ThrID21_ShapeM_0",
+      "ncu_replay_passes": 1,
+      "metrics": {
+        "lts__t_requests_srcunit_ltcfabric.sum": {
+          "value": 1366063.0,
+          "unit": "request"
+        }
+      },
+      "config": {
+        "workload": "decode",
+        "batch_size": 64,
+        "seqlen_q": 4,
+        "seqlen_k": 32768,
+        "split_kv": 1
+      },
+      "group": "ltc",
+      "mode": "localized",
+      "trial": 2,
+      "elapsed_seconds": 7.2568717590000915,
+      "target_metadata": {
+        "batch_size": 64,
+        "data_initialization": "random",
+        "data_seed": 42,
+        "device": "NVIDIA B200",
+        "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+        "localized_mapped_bytes": [
+          1207959552,
+          1207959552
+        ],
+        "mode": "localized",
+        "owner_page_counts": [
+          16384,
+          16384
+        ],
+        "owner_tile_counts": [
+          128,
+          128
+        ],
+        "owner_work_counts": [
+          32,
+          32
+        ],
+        "partition_sm_counts": [
+          74,
+          74
+        ],
+        "profiled_launches": 1,
+        "resident_partition_clusters": [
+          37,
+          37
+        ],
+        "seqlen_k": 32768,
+        "seqlen_q": 4,
+        "split_kv": 1,
+        "total_sm_count": 148,
+        "warmup_launches": 3,
+        "workload": "decode"
+      },
+      "command_file": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq4/ltc/localized_02.command.json"
+    },
+    {
+      "report": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq4/ltc/standard_02.ncu-rep",
+      "raw_csv": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq4/ltc/standard_02.csv",
+      "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmla_decodeBlackwellMultiLatentAttentionForward_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____MMAAtom_ThrID21_ShapeM_0",
+      "ncu_replay_passes": 1,
+      "metrics": {
+        "lts__t_requests_srcunit_ltcfabric.sum": {
+          "value": 44073434.0,
+          "unit": "request"
+        }
+      },
+      "config": {
+        "workload": "decode",
+        "batch_size": 64,
+        "seqlen_q": 4,
+        "seqlen_k": 32768,
+        "split_kv": 1
+      },
+      "group": "ltc",
+      "mode": "standard",
+      "trial": 2,
+      "elapsed_seconds": 6.596665985999948,
+      "target_metadata": {
+        "batch_size": 64,
+        "data_initialization": "random",
+        "data_seed": 42,
+        "device": "NVIDIA B200",
+        "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+        "localized_mapped_bytes": null,
+        "mode": "standard",
+        "owner_page_counts": null,
+        "owner_tile_counts": null,
+        "owner_work_counts": null,
+        "partition_sm_counts": null,
+        "profiled_launches": 1,
+        "resident_partition_clusters": null,
+        "seqlen_k": 32768,
+        "seqlen_q": 4,
+        "split_kv": 1,
+        "total_sm_count": 148,
+        "warmup_launches": 3,
+        "workload": "decode"
+      },
+      "command_file": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq4/ltc/standard_02.command.json"
+    },
+    {
+      "report": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq4/ltc/standard_03.ncu-rep",
+      "raw_csv": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq4/ltc/standard_03.csv",
+      "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmla_decodeBlackwellMultiLatentAttentionForward_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____MMAAtom_ThrID21_ShapeM_0",
+      "ncu_replay_passes": 1,
+      "metrics": {
+        "lts__t_requests_srcunit_ltcfabric.sum": {
+          "value": 44183145.0,
+          "unit": "request"
+        }
+      },
+      "config": {
+        "workload": "decode",
+        "batch_size": 64,
+        "seqlen_q": 4,
+        "seqlen_k": 32768,
+        "split_kv": 1
+      },
+      "group": "ltc",
+      "mode": "standard",
+      "trial": 3,
+      "elapsed_seconds": 6.605950622000023,
+      "target_metadata": {
+        "batch_size": 64,
+        "data_initialization": "random",
+        "data_seed": 42,
+        "device": "NVIDIA B200",
+        "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+        "localized_mapped_bytes": null,
+        "mode": "standard",
+        "owner_page_counts": null,
+        "owner_tile_counts": null,
+        "owner_work_counts": null,
+        "partition_sm_counts": null,
+        "profiled_launches": 1,
+        "resident_partition_clusters": null,
+        "seqlen_k": 32768,
+        "seqlen_q": 4,
+        "split_kv": 1,
+        "total_sm_count": 148,
+        "warmup_launches": 3,
+        "workload": "decode"
+      },
+      "command_file": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq4/ltc/standard_03.command.json"
+    },
+    {
+      "report": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq4/ltc/localized_03.ncu-rep",
+      "raw_csv": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq4/ltc/localized_03.csv",
+      "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmla_decodeBlackwellMultiLatentAttentionForward_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____MMAAtom_ThrID21_ShapeM_0",
+      "ncu_replay_passes": 1,
+      "metrics": {
+        "lts__t_requests_srcunit_ltcfabric.sum": {
+          "value": 1366052.0,
+          "unit": "request"
+        }
+      },
+      "config": {
+        "workload": "decode",
+        "batch_size": 64,
+        "seqlen_q": 4,
+        "seqlen_k": 32768,
+        "split_kv": 1
+      },
+      "group": "ltc",
+      "mode": "localized",
+      "trial": 3,
+      "elapsed_seconds": 7.204312508999919,
+      "target_metadata": {
+        "batch_size": 64,
+        "data_initialization": "random",
+        "data_seed": 42,
+        "device": "NVIDIA B200",
+        "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+        "localized_mapped_bytes": [
+          1207959552,
+          1207959552
+        ],
+        "mode": "localized",
+        "owner_page_counts": [
+          16384,
+          16384
+        ],
+        "owner_tile_counts": [
+          128,
+          128
+        ],
+        "owner_work_counts": [
+          32,
+          32
+        ],
+        "partition_sm_counts": [
+          74,
+          74
+        ],
+        "profiled_launches": 1,
+        "resident_partition_clusters": [
+          37,
+          37
+        ],
+        "seqlen_k": 32768,
+        "seqlen_q": 4,
+        "split_kv": 1,
+        "total_sm_count": 148,
+        "warmup_launches": 3,
+        "workload": "decode"
+      },
+      "command_file": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq4/ltc/localized_03.command.json"
+    },
+    {
+      "report": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq4/memory/standard_01.ncu-rep",
+      "raw_csv": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq4/memory/standard_01.csv",
+      "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmla_decodeBlackwellMultiLatentAttentionForward_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____MMAAtom_ThrID21_ShapeM_0",
+      "ncu_replay_passes": 4,
+      "metrics": {
+        "gpu__time_duration.avg": {
+          "value": 1765952.0,
+          "unit": "ns"
+        },
+        "dram__bytes_read.sum": {
+          "value": 4468982272.0,
+          "unit": "byte"
+        },
+        "dram__bytes_write.sum": {
+          "value": 33485056.0,
+          "unit": "byte"
+        },
+        "dram__bytes_read.sum.per_second": {
+          "value": 2530636320806.0,
+          "unit": "byte/s"
+        },
+        "dram__bytes_write.sum.per_second": {
+          "value": 18961475736.6,
+          "unit": "byte/s"
+        },
+        "dram__throughput.avg.pct_of_peak_sustained_elapsed": {
+          "value": 33.23,
+          "unit": "%"
+        },
+        "lts__t_sector_hit_rate.pct": {
+          "value": 64.08,
+          "unit": "%"
+        },
+        "lts__t_sectors.sum": {
+          "value": 646889369.0,
+          "unit": "sector"
+        },
+        "lts__t_sectors_lookup_hit.sum": {
+          "value": 414544114.0,
+          "unit": "sector"
+        },
+        "lts__t_sectors_lookup_miss.sum": {
+          "value": 228489322.0,
+          "unit": "sector"
+        }
+      },
+      "config": {
+        "workload": "decode",
+        "batch_size": 64,
+        "seqlen_q": 4,
+        "seqlen_k": 32768,
+        "split_kv": 1
+      },
+      "group": "memory",
+      "mode": "standard",
+      "trial": 1,
+      "elapsed_seconds": 6.69816485299998,
+      "target_metadata": {
+        "batch_size": 64,
+        "data_initialization": "random",
+        "data_seed": 42,
+        "device": "NVIDIA B200",
+        "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+        "localized_mapped_bytes": null,
+        "mode": "standard",
+        "owner_page_counts": null,
+        "owner_tile_counts": null,
+        "owner_work_counts": null,
+        "partition_sm_counts": null,
+        "profiled_launches": 1,
+        "resident_partition_clusters": null,
+        "seqlen_k": 32768,
+        "seqlen_q": 4,
+        "split_kv": 1,
+        "total_sm_count": 148,
+        "warmup_launches": 3,
+        "workload": "decode"
+      },
+      "command_file": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq4/memory/standard_01.command.json",
+      "hbm": {
+        "read_bytes": 4468982272.0,
+        "write_bytes": 33485056.0,
+        "total_bytes": 4502467328.0,
+        "read_gb_s": 2530.636320806,
+        "write_gb_s": 18.961475736599997,
+        "total_gb_s": 2549.5977965426,
+        "peak_sustained_utilization_pct": 33.23,
+        "duration_ns": 1765952.0
+      },
+      "l2": {
+        "hit_rate_pct": 64.08,
+        "hit_rate_from_lookup_counts_pct": 64.46696093731586,
+        "total_sectors": 646889369.0,
+        "lookup_hit_sectors": 414544114.0,
+        "lookup_miss_sectors": 228489322.0,
+        "duration_ns": 1765952.0,
+        "reported_hit_rate_in_range": true,
+        "counter_sum_relative_error": -0.005960730203312448,
+        "hit_rate_usable": true,
+        "validation_warnings": []
+      }
+    },
+    {
+      "report": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq4/memory/localized_01.ncu-rep",
+      "raw_csv": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq4/memory/localized_01.csv",
+      "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmla_decodeBlackwellMultiLatentAttentionForward_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____MMAAtom_ThrID21_ShapeM_0",
+      "ncu_replay_passes": 4,
+      "metrics": {
+        "gpu__time_duration.avg": {
+          "value": 1638464.0,
+          "unit": "ns"
+        },
+        "dram__bytes_read.sum": {
+          "value": 2772595200.0,
+          "unit": "byte"
+        },
+        "dram__bytes_write.sum": {
+          "value": 32780544.0,
+          "unit": "byte"
+        },
+        "dram__bytes_read.sum.per_second": {
+          "value": 1692191711261.28,
+          "unit": "byte/s"
+        },
+        "dram__bytes_write.sum.per_second": {
+          "value": 20006874731.46,
+          "unit": "byte/s"
+        },
+        "dram__throughput.avg.pct_of_peak_sustained_elapsed": {
+          "value": 22.32,
+          "unit": "%"
+        },
+        "lts__t_sector_hit_rate.pct": {
+          "value": 84.11,
+          "unit": "%"
+        },
+        "lts__t_sectors.sum": {
+          "value": 567420136.0,
+          "unit": "sector"
+        },
+        "lts__t_sectors_lookup_hit.sum": {
+          "value": 477282665.0,
+          "unit": "sector"
+        },
+        "lts__t_sectors_lookup_miss.sum": {
+          "value": 88813956.0,
+          "unit": "sector"
+        }
+      },
+      "config": {
+        "workload": "decode",
+        "batch_size": 64,
+        "seqlen_q": 4,
+        "seqlen_k": 32768,
+        "split_kv": 1
+      },
+      "group": "memory",
+      "mode": "localized",
+      "trial": 1,
+      "elapsed_seconds": 7.409506689000068,
+      "target_metadata": {
+        "batch_size": 64,
+        "data_initialization": "random",
+        "data_seed": 42,
+        "device": "NVIDIA B200",
+        "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+        "localized_mapped_bytes": [
+          1207959552,
+          1207959552
+        ],
+        "mode": "localized",
+        "owner_page_counts": [
+          16384,
+          16384
+        ],
+        "owner_tile_counts": [
+          128,
+          128
+        ],
+        "owner_work_counts": [
+          32,
+          32
+        ],
+        "partition_sm_counts": [
+          74,
+          74
+        ],
+        "profiled_launches": 1,
+        "resident_partition_clusters": [
+          37,
+          37
+        ],
+        "seqlen_k": 32768,
+        "seqlen_q": 4,
+        "split_kv": 1,
+        "total_sm_count": 148,
+        "warmup_launches": 3,
+        "workload": "decode"
+      },
+      "command_file": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq4/memory/localized_01.command.json",
+      "hbm": {
+        "read_bytes": 2772595200.0,
+        "write_bytes": 32780544.0,
+        "total_bytes": 2805375744.0,
+        "read_gb_s": 1692.19171126128,
+        "write_gb_s": 20.006874731459998,
+        "total_gb_s": 1712.19858599274,
+        "peak_sustained_utilization_pct": 22.32,
+        "duration_ns": 1638464.0
+      },
+      "l2": {
+        "hit_rate_pct": 84.11,
+        "hit_rate_from_lookup_counts_pct": 84.31116655614166,
+        "total_sectors": 567420136.0,
+        "lookup_hit_sectors": 477282665.0,
+        "lookup_miss_sectors": 88813956.0,
+        "duration_ns": 1638464.0,
+        "reported_hit_rate_in_range": true,
+        "counter_sum_relative_error": -0.002332513275489445,
+        "hit_rate_usable": true,
+        "validation_warnings": []
+      }
+    },
+    {
+      "report": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq4/memory/localized_02.ncu-rep",
+      "raw_csv": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq4/memory/localized_02.csv",
+      "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmla_decodeBlackwellMultiLatentAttentionForward_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____MMAAtom_ThrID21_ShapeM_0",
+      "ncu_replay_passes": 4,
+      "metrics": {
+        "gpu__time_duration.avg": {
+          "value": 1635136.0,
+          "unit": "ns"
+        },
+        "dram__bytes_read.sum": {
+          "value": 2784633856.0,
+          "unit": "byte"
+        },
+        "dram__bytes_write.sum": {
+          "value": 32909824.0,
+          "unit": "byte"
+        },
+        "dram__bytes_read.sum.per_second": {
+          "value": 1702998316959.57,
+          "unit": "byte/s"
+        },
+        "dram__bytes_write.sum.per_second": {
+          "value": 20126658577.64,
+          "unit": "byte/s"
+        },
+        "dram__throughput.avg.pct_of_peak_sustained_elapsed": {
+          "value": 22.46,
+          "unit": "%"
+        },
+        "lts__t_sector_hit_rate.pct": {
+          "value": 83.75,
+          "unit": "%"
+        },
+        "lts__t_sectors.sum": {
+          "value": 562773809.0,
+          "unit": "sector"
+        },
+        "lts__t_sectors_lookup_hit.sum": {
+          "value": 471334078.0,
+          "unit": "sector"
+        },
+        "lts__t_sectors_lookup_miss.sum": {
+          "value": 89286705.0,
+          "unit": "sector"
+        }
+      },
+      "config": {
+        "workload": "decode",
+        "batch_size": 64,
+        "seqlen_q": 4,
+        "seqlen_k": 32768,
+        "split_kv": 1
+      },
+      "group": "memory",
+      "mode": "localized",
+      "trial": 2,
+      "elapsed_seconds": 7.401431025999955,
+      "target_metadata": {
+        "batch_size": 64,
+        "data_initialization": "random",
+        "data_seed": 42,
+        "device": "NVIDIA B200",
+        "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+        "localized_mapped_bytes": [
+          1207959552,
+          1207959552
+        ],
+        "mode": "localized",
+        "owner_page_counts": [
+          16384,
+          16384
+        ],
+        "owner_tile_counts": [
+          128,
+          128
+        ],
+        "owner_work_counts": [
+          32,
+          32
+        ],
+        "partition_sm_counts": [
+          74,
+          74
+        ],
+        "profiled_launches": 1,
+        "resident_partition_clusters": [
+          37,
+          37
+        ],
+        "seqlen_k": 32768,
+        "seqlen_q": 4,
+        "split_kv": 1,
+        "total_sm_count": 148,
+        "warmup_launches": 3,
+        "workload": "decode"
+      },
+      "command_file": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq4/memory/localized_02.command.json",
+      "hbm": {
+        "read_bytes": 2784633856.0,
+        "write_bytes": 32909824.0,
+        "total_bytes": 2817543680.0,
+        "read_gb_s": 1702.99831695957,
+        "write_gb_s": 20.12665857764,
+        "total_gb_s": 1723.12497553721,
+        "peak_sustained_utilization_pct": 22.46,
+        "duration_ns": 1635136.0
+      },
+      "l2": {
+        "hit_rate_pct": 83.75,
+        "hit_rate_from_lookup_counts_pct": 84.07360060356521,
+        "total_sectors": 562773809.0,
+        "lookup_hit_sectors": 471334078.0,
+        "lookup_miss_sectors": 89286705.0,
+        "duration_ns": 1635136.0,
+        "reported_hit_rate_in_range": true,
+        "counter_sum_relative_error": -0.0038257395166021446,
+        "hit_rate_usable": true,
+        "validation_warnings": []
+      }
+    },
+    {
+      "report": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq4/memory/standard_02.ncu-rep",
+      "raw_csv": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq4/memory/standard_02.csv",
+      "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmla_decodeBlackwellMultiLatentAttentionForward_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____MMAAtom_ThrID21_ShapeM_0",
+      "ncu_replay_passes": 4,
+      "metrics": {
+        "gpu__time_duration.avg": {
+          "value": 1760640.0,
+          "unit": "ns"
+        },
+        "dram__bytes_read.sum": {
+          "value": 4453879040.0,
+          "unit": "byte"
+        },
+        "dram__bytes_write.sum": {
+          "value": 33416192.0,
+          "unit": "byte"
+        },
+        "dram__bytes_read.sum.per_second": {
+          "value": 2529693202471.83,
+          "unit": "byte/s"
+        },
+        "dram__bytes_write.sum.per_second": {
+          "value": 18979571065.07,
+          "unit": "byte/s"
+        },
+        "dram__throughput.avg.pct_of_peak_sustained_elapsed": {
+          "value": 33.22,
+          "unit": "%"
+        },
+        "lts__t_sector_hit_rate.pct": {
+          "value": 64.66,
+          "unit": "%"
+        },
+        "lts__t_sectors.sum": {
+          "value": 643429690.0,
+          "unit": "sector"
+        },
+        "lts__t_sectors_lookup_hit.sum": {
+          "value": 416041677.0,
+          "unit": "sector"
+        },
+        "lts__t_sectors_lookup_miss.sum": {
+          "value": 228340056.0,
+          "unit": "sector"
+        }
+      },
+      "config": {
+        "workload": "decode",
+        "batch_size": 64,
+        "seqlen_q": 4,
+        "seqlen_k": 32768,
+        "split_kv": 1
+      },
+      "group": "memory",
+      "mode": "standard",
+      "trial": 2,
+      "elapsed_seconds": 6.710038628000007,
+      "target_metadata": {
+        "batch_size": 64,
+        "data_initialization": "random",
+        "data_seed": 42,
+        "device": "NVIDIA B200",
+        "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+        "localized_mapped_bytes": null,
+        "mode": "standard",
+        "owner_page_counts": null,
+        "owner_tile_counts": null,
+        "owner_work_counts": null,
+        "partition_sm_counts": null,
+        "profiled_launches": 1,
+        "resident_partition_clusters": null,
+        "seqlen_k": 32768,
+        "seqlen_q": 4,
+        "split_kv": 1,
+        "total_sm_count": 148,
+        "warmup_launches": 3,
+        "workload": "decode"
+      },
+      "command_file": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq4/memory/standard_02.command.json",
+      "hbm": {
+        "read_bytes": 4453879040.0,
+        "write_bytes": 33416192.0,
+        "total_bytes": 4487295232.0,
+        "read_gb_s": 2529.69320247183,
+        "write_gb_s": 18.97957106507,
+        "total_gb_s": 2548.6727735369,
+        "peak_sustained_utilization_pct": 33.22,
+        "duration_ns": 1760640.0
+      },
+      "l2": {
+        "hit_rate_pct": 64.66,
+        "hit_rate_from_lookup_counts_pct": 64.56447408325276,
+        "total_sectors": 643429690.0,
+        "lookup_hit_sectors": 416041677.0,
+        "lookup_miss_sectors": 228340056.0,
+        "duration_ns": 1760640.0,
+        "reported_hit_rate_in_range": true,
+        "counter_sum_relative_error": 0.0014796379694570483,
+        "hit_rate_usable": true,
+        "validation_warnings": []
+      }
+    },
+    {
+      "report": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq4/memory/standard_03.ncu-rep",
+      "raw_csv": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq4/memory/standard_03.csv",
+      "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmla_decodeBlackwellMultiLatentAttentionForward_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____MMAAtom_ThrID21_ShapeM_0",
+      "ncu_replay_passes": 4,
+      "metrics": {
+        "gpu__time_duration.avg": {
+          "value": 1768640.0,
+          "unit": "ns"
+        },
+        "dram__bytes_read.sum": {
+          "value": 4556630784.0,
+          "unit": "byte"
+        },
+        "dram__bytes_write.sum": {
+          "value": 33786624.0,
+          "unit": "byte"
+        },
+        "dram__bytes_read.sum.per_second": {
+          "value": 2576347240817.8,
+          "unit": "byte/s"
+        },
+        "dram__bytes_write.sum.per_second": {
+          "value": 19103166274.65,
+          "unit": "byte/s"
+        },
+        "dram__throughput.avg.pct_of_peak_sustained_elapsed": {
+          "value": 33.83,
+          "unit": "%"
+        },
+        "lts__t_sector_hit_rate.pct": {
+          "value": 64.31,
+          "unit": "%"
+        },
+        "lts__t_sectors.sum": {
+          "value": 642926154.0,
+          "unit": "sector"
+        },
+        "lts__t_sectors_lookup_hit.sum": {
+          "value": 413439466.0,
+          "unit": "sector"
+        },
+        "lts__t_sectors_lookup_miss.sum": {
+          "value": 227134090.0,
+          "unit": "sector"
+        }
+      },
+      "config": {
+        "workload": "decode",
+        "batch_size": 64,
+        "seqlen_q": 4,
+        "seqlen_k": 32768,
+        "split_kv": 1
+      },
+      "group": "memory",
+      "mode": "standard",
+      "trial": 3,
+      "elapsed_seconds": 6.697373724000045,
+      "target_metadata": {
+        "batch_size": 64,
+        "data_initialization": "random",
+        "data_seed": 42,
+        "device": "NVIDIA B200",
+        "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+        "localized_mapped_bytes": null,
+        "mode": "standard",
+        "owner_page_counts": null,
+        "owner_tile_counts": null,
+        "owner_work_counts": null,
+        "partition_sm_counts": null,
+        "profiled_launches": 1,
+        "resident_partition_clusters": null,
+        "seqlen_k": 32768,
+        "seqlen_q": 4,
+        "split_kv": 1,
+        "total_sm_count": 148,
+        "warmup_launches": 3,
+        "workload": "decode"
+      },
+      "command_file": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq4/memory/standard_03.command.json",
+      "hbm": {
+        "read_bytes": 4556630784.0,
+        "write_bytes": 33786624.0,
+        "total_bytes": 4590417408.0,
+        "read_gb_s": 2576.3472408178,
+        "write_gb_s": 19.10316627465,
+        "total_gb_s": 2595.4504070924495,
+        "peak_sustained_utilization_pct": 33.83,
+        "duration_ns": 1768640.0
+      },
+      "l2": {
+        "hit_rate_pct": 64.31,
+        "hit_rate_from_lookup_counts_pct": 64.54207516490112,
+        "total_sectors": 642926154.0,
+        "lookup_hit_sectors": 413439466.0,
+        "lookup_miss_sectors": 227134090.0,
+        "duration_ns": 1768640.0,
+        "reported_hit_rate_in_range": true,
+        "counter_sum_relative_error": -0.0036592040708923745,
+        "hit_rate_usable": true,
+        "validation_warnings": []
+      }
+    },
+    {
+      "report": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq4/memory/localized_03.ncu-rep",
+      "raw_csv": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq4/memory/localized_03.csv",
+      "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmla_decodeBlackwellMultiLatentAttentionForward_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____MMAAtom_ThrID21_ShapeM_0",
+      "ncu_replay_passes": 4,
+      "metrics": {
+        "gpu__time_duration.avg": {
+          "value": 1635424.0,
+          "unit": "ns"
+        },
+        "dram__bytes_read.sum": {
+          "value": 2776563712.0,
+          "unit": "byte"
+        },
+        "dram__bytes_write.sum": {
+          "value": 32647424.0,
+          "unit": "byte"
+        },
+        "dram__bytes_read.sum.per_second": {
+          "value": 1697763828829.71,
+          "unit": "byte/s"
+        },
+        "dram__bytes_write.sum.per_second": {
+          "value": 19962666562.31,
+          "unit": "byte/s"
+        },
+        "dram__throughput.avg.pct_of_peak_sustained_elapsed": {
+          "value": 22.39,
+          "unit": "%"
+        },
+        "lts__t_sector_hit_rate.pct": {
+          "value": 85.27,
+          "unit": "%"
+        },
+        "lts__t_sectors.sum": {
+          "value": 560396846.0,
+          "unit": "sector"
+        },
+        "lts__t_sectors_lookup_hit.sum": {
+          "value": 477849918.0,
+          "unit": "sector"
+        },
+        "lts__t_sectors_lookup_miss.sum": {
+          "value": 88838365.0,
+          "unit": "sector"
+        }
+      },
+      "config": {
+        "workload": "decode",
+        "batch_size": 64,
+        "seqlen_q": 4,
+        "seqlen_k": 32768,
+        "split_kv": 1
+      },
+      "group": "memory",
+      "mode": "localized",
+      "trial": 3,
+      "elapsed_seconds": 7.404077099999995,
+      "target_metadata": {
+        "batch_size": 64,
+        "data_initialization": "random",
+        "data_seed": 42,
+        "device": "NVIDIA B200",
+        "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+        "localized_mapped_bytes": [
+          1207959552,
+          1207959552
+        ],
+        "mode": "localized",
+        "owner_page_counts": [
+          16384,
+          16384
+        ],
+        "owner_tile_counts": [
+          128,
+          128
+        ],
+        "owner_work_counts": [
+          32,
+          32
+        ],
+        "partition_sm_counts": [
+          74,
+          74
+        ],
+        "profiled_launches": 1,
+        "resident_partition_clusters": [
+          37,
+          37
+        ],
+        "seqlen_k": 32768,
+        "seqlen_q": 4,
+        "split_kv": 1,
+        "total_sm_count": 148,
+        "warmup_launches": 3,
+        "workload": "decode"
+      },
+      "command_file": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/decode_sq4/memory/localized_03.command.json",
+      "hbm": {
+        "read_bytes": 2776563712.0,
+        "write_bytes": 32647424.0,
+        "total_bytes": 2809211136.0,
+        "read_gb_s": 1697.76382882971,
+        "write_gb_s": 19.96266656231,
+        "total_gb_s": 1717.72649539202,
+        "peak_sustained_utilization_pct": 22.39,
+        "duration_ns": 1635424.0
+      },
+      "l2": {
+        "hit_rate_pct": 85.27,
+        "hit_rate_from_lookup_counts_pct": 84.3232394836722,
+        "total_sectors": 560396846.0,
+        "lookup_hit_sectors": 477849918.0,
+        "lookup_miss_sectors": 88838365.0,
+        "duration_ns": 1635424.0,
+        "reported_hit_rate_in_range": true,
+        "counter_sum_relative_error": 0.01122675304992704,
+        "hit_rate_usable": true,
+        "validation_warnings": []
+      }
+    },
+    {
+      "report": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/prefill_sq128/ltc/standard_01.ncu-rep",
+      "raw_csv": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/prefill_sq128/ltc/standard_01.csv",
+      "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmonolithicmla_decode_fp16BlackwellMultiHeadLatentAttentionForwardFP16_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____0",
+      "ncu_replay_passes": 1,
+      "metrics": {
+        "lts__t_requests_srcunit_ltcfabric.sum": {
+          "value": 128976525.0,
+          "unit": "request"
+        }
+      },
+      "config": {
+        "workload": "prefill",
+        "batch_size": 64,
+        "seqlen_q": 128,
+        "seqlen_k": 32768,
+        "split_kv": 1
+      },
+      "group": "ltc",
+      "mode": "standard",
+      "trial": 1,
+      "elapsed_seconds": 7.107462426999973,
+      "target_metadata": {
+        "batch_size": 64,
+        "data_initialization": "random",
+        "data_seed": 42,
+        "device": "NVIDIA B200",
+        "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+        "localized_mapped_bytes": null,
+        "mode": "standard",
+        "owner_page_counts": null,
+        "owner_tile_counts": null,
+        "owner_work_counts": null,
+        "partition_sm_counts": null,
+        "profiled_launches": 1,
+        "resident_partition_clusters": null,
+        "seqlen_k": 32768,
+        "seqlen_q": 128,
+        "split_kv": 1,
+        "total_sm_count": 148,
+        "warmup_launches": 3,
+        "workload": "prefill"
+      },
+      "command_file": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/prefill_sq128/ltc/standard_01.command.json"
+    },
+    {
+      "report": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/prefill_sq128/ltc/localized_01.ncu-rep",
+      "raw_csv": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/prefill_sq128/ltc/localized_01.csv",
+      "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmonolithicmla_decode_fp16BlackwellMultiHeadLatentAttentionForwardFP16_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____0",
+      "ncu_replay_passes": 1,
+      "metrics": {
+        "lts__t_requests_srcunit_ltcfabric.sum": {
+          "value": 43030278.0,
+          "unit": "request"
+        }
+      },
+      "config": {
+        "workload": "prefill",
+        "batch_size": 64,
+        "seqlen_q": 128,
+        "seqlen_k": 32768,
+        "split_kv": 1
+      },
+      "group": "ltc",
+      "mode": "localized",
+      "trial": 1,
+      "elapsed_seconds": 7.807078904000036,
+      "target_metadata": {
+        "batch_size": 64,
+        "data_initialization": "random",
+        "data_seed": 42,
+        "device": "NVIDIA B200",
+        "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+        "localized_mapped_bytes": [
+          1207959552,
+          1207959552
+        ],
+        "mode": "localized",
+        "owner_page_counts": [
+          16384,
+          16384
+        ],
+        "owner_tile_counts": [
+          4096,
+          4096
+        ],
+        "owner_work_counts": [
+          32,
+          32
+        ],
+        "partition_sm_counts": [
+          74,
+          74
+        ],
+        "profiled_launches": 1,
+        "resident_partition_clusters": [
+          37,
+          37
+        ],
+        "seqlen_k": 32768,
+        "seqlen_q": 128,
+        "split_kv": 1,
+        "total_sm_count": 148,
+        "warmup_launches": 3,
+        "workload": "prefill"
+      },
+      "command_file": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/prefill_sq128/ltc/localized_01.command.json"
+    },
+    {
+      "report": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/prefill_sq128/ltc/localized_02.ncu-rep",
+      "raw_csv": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/prefill_sq128/ltc/localized_02.csv",
+      "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmonolithicmla_decode_fp16BlackwellMultiHeadLatentAttentionForwardFP16_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____0",
+      "ncu_replay_passes": 1,
+      "metrics": {
+        "lts__t_requests_srcunit_ltcfabric.sum": {
+          "value": 43034854.0,
+          "unit": "request"
+        }
+      },
+      "config": {
+        "workload": "prefill",
+        "batch_size": 64,
+        "seqlen_q": 128,
+        "seqlen_k": 32768,
+        "split_kv": 1
+      },
+      "group": "ltc",
+      "mode": "localized",
+      "trial": 2,
+      "elapsed_seconds": 7.648791262000032,
+      "target_metadata": {
+        "batch_size": 64,
+        "data_initialization": "random",
+        "data_seed": 42,
+        "device": "NVIDIA B200",
+        "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+        "localized_mapped_bytes": [
+          1207959552,
+          1207959552
+        ],
+        "mode": "localized",
+        "owner_page_counts": [
+          16384,
+          16384
+        ],
+        "owner_tile_counts": [
+          4096,
+          4096
+        ],
+        "owner_work_counts": [
+          32,
+          32
+        ],
+        "partition_sm_counts": [
+          74,
+          74
+        ],
+        "profiled_launches": 1,
+        "resident_partition_clusters": [
+          37,
+          37
+        ],
+        "seqlen_k": 32768,
+        "seqlen_q": 128,
+        "split_kv": 1,
+        "total_sm_count": 148,
+        "warmup_launches": 3,
+        "workload": "prefill"
+      },
+      "command_file": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/prefill_sq128/ltc/localized_02.command.json"
+    },
+    {
+      "report": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/prefill_sq128/ltc/standard_02.ncu-rep",
+      "raw_csv": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/prefill_sq128/ltc/standard_02.csv",
+      "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmonolithicmla_decode_fp16BlackwellMultiHeadLatentAttentionForwardFP16_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____0",
+      "ncu_replay_passes": 1,
+      "metrics": {
+        "lts__t_requests_srcunit_ltcfabric.sum": {
+          "value": 128623443.0,
+          "unit": "request"
+        }
+      },
+      "config": {
+        "workload": "prefill",
+        "batch_size": 64,
+        "seqlen_q": 128,
+        "seqlen_k": 32768,
+        "split_kv": 1
+      },
+      "group": "ltc",
+      "mode": "standard",
+      "trial": 2,
+      "elapsed_seconds": 7.109315362999951,
+      "target_metadata": {
+        "batch_size": 64,
+        "data_initialization": "random",
+        "data_seed": 42,
+        "device": "NVIDIA B200",
+        "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+        "localized_mapped_bytes": null,
+        "mode": "standard",
+        "owner_page_counts": null,
+        "owner_tile_counts": null,
+        "owner_work_counts": null,
+        "partition_sm_counts": null,
+        "profiled_launches": 1,
+        "resident_partition_clusters": null,
+        "seqlen_k": 32768,
+        "seqlen_q": 128,
+        "split_kv": 1,
+        "total_sm_count": 148,
+        "warmup_launches": 3,
+        "workload": "prefill"
+      },
+      "command_file": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/prefill_sq128/ltc/standard_02.command.json"
+    },
+    {
+      "report": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/prefill_sq128/ltc/standard_03.ncu-rep",
+      "raw_csv": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/prefill_sq128/ltc/standard_03.csv",
+      "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmonolithicmla_decode_fp16BlackwellMultiHeadLatentAttentionForwardFP16_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____0",
+      "ncu_replay_passes": 1,
+      "metrics": {
+        "lts__t_requests_srcunit_ltcfabric.sum": {
+          "value": 128253791.0,
+          "unit": "request"
+        }
+      },
+      "config": {
+        "workload": "prefill",
+        "batch_size": 64,
+        "seqlen_q": 128,
+        "seqlen_k": 32768,
+        "split_kv": 1
+      },
+      "group": "ltc",
+      "mode": "standard",
+      "trial": 3,
+      "elapsed_seconds": 7.160578901000008,
+      "target_metadata": {
+        "batch_size": 64,
+        "data_initialization": "random",
+        "data_seed": 42,
+        "device": "NVIDIA B200",
+        "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+        "localized_mapped_bytes": null,
+        "mode": "standard",
+        "owner_page_counts": null,
+        "owner_tile_counts": null,
+        "owner_work_counts": null,
+        "partition_sm_counts": null,
+        "profiled_launches": 1,
+        "resident_partition_clusters": null,
+        "seqlen_k": 32768,
+        "seqlen_q": 128,
+        "split_kv": 1,
+        "total_sm_count": 148,
+        "warmup_launches": 3,
+        "workload": "prefill"
+      },
+      "command_file": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/prefill_sq128/ltc/standard_03.command.json"
+    },
+    {
+      "report": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/prefill_sq128/ltc/localized_03.ncu-rep",
+      "raw_csv": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/prefill_sq128/ltc/localized_03.csv",
+      "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmonolithicmla_decode_fp16BlackwellMultiHeadLatentAttentionForwardFP16_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____0",
+      "ncu_replay_passes": 1,
+      "metrics": {
+        "lts__t_requests_srcunit_ltcfabric.sum": {
+          "value": 43030716.0,
+          "unit": "request"
+        }
+      },
+      "config": {
+        "workload": "prefill",
+        "batch_size": 64,
+        "seqlen_q": 128,
+        "seqlen_k": 32768,
+        "split_kv": 1
+      },
+      "group": "ltc",
+      "mode": "localized",
+      "trial": 3,
+      "elapsed_seconds": 7.710278634999895,
+      "target_metadata": {
+        "batch_size": 64,
+        "data_initialization": "random",
+        "data_seed": 42,
+        "device": "NVIDIA B200",
+        "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+        "localized_mapped_bytes": [
+          1207959552,
+          1207959552
+        ],
+        "mode": "localized",
+        "owner_page_counts": [
+          16384,
+          16384
+        ],
+        "owner_tile_counts": [
+          4096,
+          4096
+        ],
+        "owner_work_counts": [
+          32,
+          32
+        ],
+        "partition_sm_counts": [
+          74,
+          74
+        ],
+        "profiled_launches": 1,
+        "resident_partition_clusters": [
+          37,
+          37
+        ],
+        "seqlen_k": 32768,
+        "seqlen_q": 128,
+        "split_kv": 1,
+        "total_sm_count": 148,
+        "warmup_launches": 3,
+        "workload": "prefill"
+      },
+      "command_file": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/prefill_sq128/ltc/localized_03.command.json"
+    },
+    {
+      "report": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/prefill_sq128/memory/standard_01.ncu-rep",
+      "raw_csv": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/prefill_sq128/memory/standard_01.csv",
+      "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmonolithicmla_decode_fp16BlackwellMultiHeadLatentAttentionForwardFP16_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____0",
+      "ncu_replay_passes": 4,
+      "metrics": {
+        "gpu__time_duration.avg": {
+          "value": 44714752.0,
+          "unit": "ns"
+        },
+        "dram__bytes_read.sum": {
+          "value": 7582977536.0,
+          "unit": "byte"
+        },
+        "dram__bytes_write.sum": {
+          "value": 1064253696.0,
+          "unit": "byte"
+        },
+        "dram__bytes_read.sum.per_second": {
+          "value": 169585588577.12,
+          "unit": "byte/s"
+        },
+        "dram__bytes_write.sum.per_second": {
+          "value": 23800952669.94,
+          "unit": "byte/s"
+        },
+        "dram__throughput.avg.pct_of_peak_sustained_elapsed": {
+          "value": 2.52,
+          "unit": "%"
+        },
+        "lts__t_sector_hit_rate.pct": {
+          "value": 84.28,
+          "unit": "%"
+        },
+        "lts__t_sectors.sum": {
+          "value": 16100956824.0,
+          "unit": "sector"
+        },
+        "lts__t_sectors_lookup_hit.sum": {
+          "value": 13570334394.0,
+          "unit": "sector"
+        },
+        "lts__t_sectors_lookup_miss.sum": {
+          "value": 444218089.0,
+          "unit": "sector"
+        }
+      },
+      "config": {
+        "workload": "prefill",
+        "batch_size": 64,
+        "seqlen_q": 128,
+        "seqlen_k": 32768,
+        "split_kv": 1
+      },
+      "group": "memory",
+      "mode": "standard",
+      "trial": 1,
+      "elapsed_seconds": 7.404577529999983,
+      "target_metadata": {
+        "batch_size": 64,
+        "data_initialization": "random",
+        "data_seed": 42,
+        "device": "NVIDIA B200",
+        "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+        "localized_mapped_bytes": null,
+        "mode": "standard",
+        "owner_page_counts": null,
+        "owner_tile_counts": null,
+        "owner_work_counts": null,
+        "partition_sm_counts": null,
+        "profiled_launches": 1,
+        "resident_partition_clusters": null,
+        "seqlen_k": 32768,
+        "seqlen_q": 128,
+        "split_kv": 1,
+        "total_sm_count": 148,
+        "warmup_launches": 3,
+        "workload": "prefill"
+      },
+      "command_file": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/prefill_sq128/memory/standard_01.command.json",
+      "hbm": {
+        "read_bytes": 7582977536.0,
+        "write_bytes": 1064253696.0,
+        "total_bytes": 8647231232.0,
+        "read_gb_s": 169.58558857712,
+        "write_gb_s": 23.80095266994,
+        "total_gb_s": 193.38654124706,
+        "peak_sustained_utilization_pct": 2.52,
+        "duration_ns": 44714752.0
+      },
+      "l2": {
+        "hit_rate_pct": 84.28,
+        "hit_rate_from_lookup_counts_pct": 96.8303084273376,
+        "total_sectors": 16100956824.0,
+        "lookup_hit_sectors": 13570334394.0,
+        "lookup_miss_sectors": 444218089.0,
+        "duration_ns": 44714752.0,
+        "reported_hit_rate_in_range": true,
+        "counter_sum_relative_error": -0.12958263063534314,
+        "hit_rate_usable": false,
+        "validation_warnings": [
+          "L2 hit+miss differs from total sectors by more than 5%"
+        ]
+      }
+    },
+    {
+      "report": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/prefill_sq128/memory/localized_01.ncu-rep",
+      "raw_csv": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/prefill_sq128/memory/localized_01.csv",
+      "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmonolithicmla_decode_fp16BlackwellMultiHeadLatentAttentionForwardFP16_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____0",
+      "ncu_replay_passes": 4,
+      "metrics": {
+        "gpu__time_duration.avg": {
+          "value": 45759296.0,
+          "unit": "ns"
+        },
+        "dram__bytes_read.sum": {
+          "value": 6312354560.0,
+          "unit": "byte"
+        },
+        "dram__bytes_write.sum": {
+          "value": 1060155136.0,
+          "unit": "byte"
+        },
+        "dram__bytes_read.sum.per_second": {
+          "value": 137946933449.33,
+          "unit": "byte/s"
+        },
+        "dram__bytes_write.sum.per_second": {
+          "value": 23168082306.16,
+          "unit": "byte/s"
+        },
+        "dram__throughput.avg.pct_of_peak_sustained_elapsed": {
+          "value": 2.1,
+          "unit": "%"
+        },
+        "lts__t_sector_hit_rate.pct": {
+          "value": 97.62,
+          "unit": "%"
+        },
+        "lts__t_sectors.sum": {
+          "value": 17939511568.0,
+          "unit": "sector"
+        },
+        "lts__t_sectors_lookup_hit.sum": {
+          "value": 17512610540.0,
+          "unit": "sector"
+        },
+        "lts__t_sectors_lookup_miss.sum": {
+          "value": 256694315.0,
+          "unit": "sector"
+        }
+      },
+      "config": {
+        "workload": "prefill",
+        "batch_size": 64,
+        "seqlen_q": 128,
+        "seqlen_k": 32768,
+        "split_kv": 1
+      },
+      "group": "memory",
+      "mode": "localized",
+      "trial": 1,
+      "elapsed_seconds": 8.003214611999965,
+      "target_metadata": {
+        "batch_size": 64,
+        "data_initialization": "random",
+        "data_seed": 42,
+        "device": "NVIDIA B200",
+        "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+        "localized_mapped_bytes": [
+          1207959552,
+          1207959552
+        ],
+        "mode": "localized",
+        "owner_page_counts": [
+          16384,
+          16384
+        ],
+        "owner_tile_counts": [
+          4096,
+          4096
+        ],
+        "owner_work_counts": [
+          32,
+          32
+        ],
+        "partition_sm_counts": [
+          74,
+          74
+        ],
+        "profiled_launches": 1,
+        "resident_partition_clusters": [
+          37,
+          37
+        ],
+        "seqlen_k": 32768,
+        "seqlen_q": 128,
+        "split_kv": 1,
+        "total_sm_count": 148,
+        "warmup_launches": 3,
+        "workload": "prefill"
+      },
+      "command_file": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/prefill_sq128/memory/localized_01.command.json",
+      "hbm": {
+        "read_bytes": 6312354560.0,
+        "write_bytes": 1060155136.0,
+        "total_bytes": 7372509696.0,
+        "read_gb_s": 137.94693344932998,
+        "write_gb_s": 23.16808230616,
+        "total_gb_s": 161.11501575549,
+        "peak_sustained_utilization_pct": 2.1,
+        "duration_ns": 45759296.0
+      },
+      "l2": {
+        "hit_rate_pct": 97.62,
+        "hit_rate_from_lookup_counts_pct": 98.5554059818622,
+        "total_sectors": 17939511568.0,
+        "lookup_hit_sectors": 17512610540.0,
+        "lookup_miss_sectors": 256694315.0,
+        "duration_ns": 45759296.0,
+        "reported_hit_rate_in_range": true,
+        "counter_sum_relative_error": -0.009487811992808681,
+        "hit_rate_usable": true,
+        "validation_warnings": []
+      }
+    },
+    {
+      "report": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/prefill_sq128/memory/localized_02.ncu-rep",
+      "raw_csv": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/prefill_sq128/memory/localized_02.csv",
+      "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmonolithicmla_decode_fp16BlackwellMultiHeadLatentAttentionForwardFP16_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____0",
+      "ncu_replay_passes": 4,
+      "metrics": {
+        "gpu__time_duration.avg": {
+          "value": 45473920.0,
+          "unit": "ns"
+        },
+        "dram__bytes_read.sum": {
+          "value": 6282476800.0,
+          "unit": "byte"
+        },
+        "dram__bytes_write.sum": {
+          "value": 1060746496.0,
+          "unit": "byte"
+        },
+        "dram__bytes_read.sum.per_second": {
+          "value": 138155602156.14,
+          "unit": "byte/s"
+        },
+        "dram__bytes_write.sum.per_second": {
+          "value": 23326480233.07,
+          "unit": "byte/s"
+        },
+        "dram__throughput.avg.pct_of_peak_sustained_elapsed": {
+          "value": 2.1,
+          "unit": "%"
+        },
+        "lts__t_sector_hit_rate.pct": {
+          "value": 100.82,
+          "unit": "%"
+        },
+        "lts__t_sectors.sum": {
+          "value": 17467174222.0,
+          "unit": "sector"
+        },
+        "lts__t_sectors_lookup_hit.sum": {
+          "value": 17610803167.0,
+          "unit": "sector"
+        },
+        "lts__t_sectors_lookup_miss.sum": {
+          "value": 259085964.0,
+          "unit": "sector"
+        }
+      },
+      "config": {
+        "workload": "prefill",
+        "batch_size": 64,
+        "seqlen_q": 128,
+        "seqlen_k": 32768,
+        "split_kv": 1
+      },
+      "group": "memory",
+      "mode": "localized",
+      "trial": 2,
+      "elapsed_seconds": 7.948696101999985,
+      "target_metadata": {
+        "batch_size": 64,
+        "data_initialization": "random",
+        "data_seed": 42,
+        "device": "NVIDIA B200",
+        "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+        "localized_mapped_bytes": [
+          1207959552,
+          1207959552
+        ],
+        "mode": "localized",
+        "owner_page_counts": [
+          16384,
+          16384
+        ],
+        "owner_tile_counts": [
+          4096,
+          4096
+        ],
+        "owner_work_counts": [
+          32,
+          32
+        ],
+        "partition_sm_counts": [
+          74,
+          74
+        ],
+        "profiled_launches": 1,
+        "resident_partition_clusters": [
+          37,
+          37
+        ],
+        "seqlen_k": 32768,
+        "seqlen_q": 128,
+        "split_kv": 1,
+        "total_sm_count": 148,
+        "warmup_launches": 3,
+        "workload": "prefill"
+      },
+      "command_file": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/prefill_sq128/memory/localized_02.command.json",
+      "hbm": {
+        "read_bytes": 6282476800.0,
+        "write_bytes": 1060746496.0,
+        "total_bytes": 7343223296.0,
+        "read_gb_s": 138.15560215614002,
+        "write_gb_s": 23.32648023307,
+        "total_gb_s": 161.48208238921003,
+        "peak_sustained_utilization_pct": 2.1,
+        "duration_ns": 45473920.0
+      },
+      "l2": {
+        "hit_rate_pct": 100.82,
+        "hit_rate_from_lookup_counts_pct": 98.55015348947774,
+        "total_sectors": 17467174222.0,
+        "lookup_hit_sectors": 17610803167.0,
+        "lookup_miss_sectors": 259085964.0,
+        "duration_ns": 45473920.0,
+        "reported_hit_rate_in_range": false,
+        "counter_sum_relative_error": 0.023055527120853903,
+        "hit_rate_usable": false,
+        "validation_warnings": [
+          "reported L2 hit rate lies outside [0, 100]%"
+        ]
+      }
+    },
+    {
+      "report": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/prefill_sq128/memory/standard_02.ncu-rep",
+      "raw_csv": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/prefill_sq128/memory/standard_02.csv",
+      "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmonolithicmla_decode_fp16BlackwellMultiHeadLatentAttentionForwardFP16_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____0",
+      "ncu_replay_passes": 4,
+      "metrics": {
+        "gpu__time_duration.avg": {
+          "value": 45019648.0,
+          "unit": "ns"
+        },
+        "dram__bytes_read.sum": {
+          "value": 7599379712.0,
+          "unit": "byte"
+        },
+        "dram__bytes_write.sum": {
+          "value": 1062390272.0,
+          "unit": "byte"
+        },
+        "dram__bytes_read.sum.per_second": {
+          "value": 168801402267.74,
+          "unit": "byte/s"
+        },
+        "dram__bytes_write.sum.per_second": {
+          "value": 23598369138.74,
+          "unit": "byte/s"
+        },
+        "dram__throughput.avg.pct_of_peak_sustained_elapsed": {
+          "value": 2.51,
+          "unit": "%"
+        },
+        "lts__t_sector_hit_rate.pct": {
+          "value": 118.02,
+          "unit": "%"
+        },
+        "lts__t_sectors.sum": {
+          "value": 11447699513.0,
+          "unit": "sector"
+        },
+        "lts__t_sectors_lookup_hit.sum": {
+          "value": 13510348499.0,
+          "unit": "sector"
+        },
+        "lts__t_sectors_lookup_miss.sum": {
+          "value": 394403931.0,
+          "unit": "sector"
+        }
+      },
+      "config": {
+        "workload": "prefill",
+        "batch_size": 64,
+        "seqlen_q": 128,
+        "seqlen_k": 32768,
+        "split_kv": 1
+      },
+      "group": "memory",
+      "mode": "standard",
+      "trial": 2,
+      "elapsed_seconds": 7.3581483489999755,
+      "target_metadata": {
+        "batch_size": 64,
+        "data_initialization": "random",
+        "data_seed": 42,
+        "device": "NVIDIA B200",
+        "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+        "localized_mapped_bytes": null,
+        "mode": "standard",
+        "owner_page_counts": null,
+        "owner_tile_counts": null,
+        "owner_work_counts": null,
+        "partition_sm_counts": null,
+        "profiled_launches": 1,
+        "resident_partition_clusters": null,
+        "seqlen_k": 32768,
+        "seqlen_q": 128,
+        "split_kv": 1,
+        "total_sm_count": 148,
+        "warmup_launches": 3,
+        "workload": "prefill"
+      },
+      "command_file": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/prefill_sq128/memory/standard_02.command.json",
+      "hbm": {
+        "read_bytes": 7599379712.0,
+        "write_bytes": 1062390272.0,
+        "total_bytes": 8661769984.0,
+        "read_gb_s": 168.80140226774,
+        "write_gb_s": 23.59836913874,
+        "total_gb_s": 192.39977140647997,
+        "peak_sustained_utilization_pct": 2.51,
+        "duration_ns": 45019648.0
+      },
+      "l2": {
+        "hit_rate_pct": 118.02,
+        "hit_rate_from_lookup_counts_pct": 97.16353144016387,
+        "total_sectors": 11447699513.0,
+        "lookup_hit_sectors": 13510348499.0,
+        "lookup_miss_sectors": 394403931.0,
+        "duration_ns": 45019648.0,
+        "reported_hit_rate_in_range": false,
+        "counter_sum_relative_error": 0.2146328975712346,
+        "hit_rate_usable": false,
+        "validation_warnings": [
+          "reported L2 hit rate lies outside [0, 100]%",
+          "L2 hit+miss differs from total sectors by more than 5%"
+        ]
+      }
+    },
+    {
+      "report": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/prefill_sq128/memory/standard_03.ncu-rep",
+      "raw_csv": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/prefill_sq128/memory/standard_03.csv",
+      "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmonolithicmla_decode_fp16BlackwellMultiHeadLatentAttentionForwardFP16_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____0",
+      "ncu_replay_passes": 4,
+      "metrics": {
+        "gpu__time_duration.avg": {
+          "value": 45486592.0,
+          "unit": "ns"
+        },
+        "dram__bytes_read.sum": {
+          "value": 7597920256.0,
+          "unit": "byte"
+        },
+        "dram__bytes_write.sum": {
+          "value": 1062128896.0,
+          "unit": "byte"
+        },
+        "dram__bytes_read.sum.per_second": {
+          "value": 167036480904.09,
+          "unit": "byte/s"
+        },
+        "dram__bytes_write.sum.per_second": {
+          "value": 23350373138.53,
+          "unit": "byte/s"
+        },
+        "dram__throughput.avg.pct_of_peak_sustained_elapsed": {
+          "value": 2.48,
+          "unit": "%"
+        },
+        "lts__t_sector_hit_rate.pct": {
+          "value": 107.11,
+          "unit": "%"
+        },
+        "lts__t_sectors.sum": {
+          "value": 12569266727.0,
+          "unit": "sector"
+        },
+        "lts__t_sectors_lookup_hit.sum": {
+          "value": 13463164121.0,
+          "unit": "sector"
+        },
+        "lts__t_sectors_lookup_miss.sum": {
+          "value": 402417172.0,
+          "unit": "sector"
+        }
+      },
+      "config": {
+        "workload": "prefill",
+        "batch_size": 64,
+        "seqlen_q": 128,
+        "seqlen_k": 32768,
+        "split_kv": 1
+      },
+      "group": "memory",
+      "mode": "standard",
+      "trial": 3,
+      "elapsed_seconds": 7.45907517899991,
+      "target_metadata": {
+        "batch_size": 64,
+        "data_initialization": "random",
+        "data_seed": 42,
+        "device": "NVIDIA B200",
+        "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+        "localized_mapped_bytes": null,
+        "mode": "standard",
+        "owner_page_counts": null,
+        "owner_tile_counts": null,
+        "owner_work_counts": null,
+        "partition_sm_counts": null,
+        "profiled_launches": 1,
+        "resident_partition_clusters": null,
+        "seqlen_k": 32768,
+        "seqlen_q": 128,
+        "split_kv": 1,
+        "total_sm_count": 148,
+        "warmup_launches": 3,
+        "workload": "prefill"
+      },
+      "command_file": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/prefill_sq128/memory/standard_03.command.json",
+      "hbm": {
+        "read_bytes": 7597920256.0,
+        "write_bytes": 1062128896.0,
+        "total_bytes": 8660049152.0,
+        "read_gb_s": 167.03648090408998,
+        "write_gb_s": 23.35037313853,
+        "total_gb_s": 190.38685404262,
+        "peak_sustained_utilization_pct": 2.48,
+        "duration_ns": 45486592.0
+      },
+      "l2": {
+        "hit_rate_pct": 107.11,
+        "hit_rate_from_lookup_counts_pct": 97.09772591933698,
+        "total_sectors": 12569266727.0,
+        "lookup_hit_sectors": 13463164121.0,
+        "lookup_miss_sectors": 402417172.0,
+        "duration_ns": 45486592.0,
+        "reported_hit_rate_in_range": false,
+        "counter_sum_relative_error": 0.10313366675681968,
+        "hit_rate_usable": false,
+        "validation_warnings": [
+          "reported L2 hit rate lies outside [0, 100]%",
+          "L2 hit+miss differs from total sectors by more than 5%"
+        ]
+      }
+    },
+    {
+      "report": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/prefill_sq128/memory/localized_03.ncu-rep",
+      "raw_csv": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/prefill_sq128/memory/localized_03.csv",
+      "kernel_name": "kernel_cutlass_split_kv_kernel_flashinfercute_dslattentionmonolithicmla_decode_fp16BlackwellMultiHeadLatentAttentionForwardFP16_object_at__TiledMMA_ThrLayoutVMNK21111000_PermutationMNK____0",
+      "ncu_replay_passes": 4,
+      "metrics": {
+        "gpu__time_duration.avg": {
+          "value": 45325472.0,
+          "unit": "ns"
+        },
+        "dram__bytes_read.sum": {
+          "value": 6308503296.0,
+          "unit": "byte"
+        },
+        "dram__bytes_write.sum": {
+          "value": 1060648192.0,
+          "unit": "byte"
+        },
+        "dram__bytes_read.sum.per_second": {
+          "value": 139182296788.88,
+          "unit": "byte/s"
+        },
+        "dram__bytes_write.sum.per_second": {
+          "value": 23400709252.4,
+          "unit": "byte/s"
+        },
+        "dram__throughput.avg.pct_of_peak_sustained_elapsed": {
+          "value": 2.12,
+          "unit": "%"
+        },
+        "lts__t_sector_hit_rate.pct": {
+          "value": 100.02,
+          "unit": "%"
+        },
+        "lts__t_sectors.sum": {
+          "value": 17532251408.0,
+          "unit": "sector"
+        },
+        "lts__t_sectors_lookup_hit.sum": {
+          "value": 17535061385.0,
+          "unit": "sector"
+        },
+        "lts__t_sectors_lookup_miss.sum": {
+          "value": 262355753.0,
+          "unit": "sector"
+        }
+      },
+      "config": {
+        "workload": "prefill",
+        "batch_size": 64,
+        "seqlen_q": 128,
+        "seqlen_k": 32768,
+        "split_kv": 1
+      },
+      "group": "memory",
+      "mode": "localized",
+      "trial": 3,
+      "elapsed_seconds": 8.012854726,
+      "target_metadata": {
+        "batch_size": 64,
+        "data_initialization": "random",
+        "data_seed": 42,
+        "device": "NVIDIA B200",
+        "l2_cache_policy": "triton_clear_cache_before_each_attention_launch",
+        "localized_mapped_bytes": [
+          1207959552,
+          1207959552
+        ],
+        "mode": "localized",
+        "owner_page_counts": [
+          16384,
+          16384
+        ],
+        "owner_tile_counts": [
+          4096,
+          4096
+        ],
+        "owner_work_counts": [
+          32,
+          32
+        ],
+        "partition_sm_counts": [
+          74,
+          74
+        ],
+        "profiled_launches": 1,
+        "resident_partition_clusters": [
+          37,
+          37
+        ],
+        "seqlen_k": 32768,
+        "seqlen_q": 128,
+        "split_kv": 1,
+        "total_sm_count": 148,
+        "warmup_launches": 3,
+        "workload": "prefill"
+      },
+      "command_file": "/workspace/flashinfer-mla/reports/mla_b64_sk32768_ncu_20260907/data/prefill_sq128/memory/localized_03.command.json",
+      "hbm": {
+        "read_bytes": 6308503296.0,
+        "write_bytes": 1060648192.0,
+        "total_bytes": 7369151488.0,
+        "read_gb_s": 139.18229678888,
+        "write_gb_s": 23.400709252400002,
+        "total_gb_s": 162.58300604128,
+        "peak_sustained_utilization_pct": 2.12,
+        "duration_ns": 45325472.0
+      },
+      "l2": {
+        "hit_rate_pct": 100.02,
+        "hit_rate_from_lookup_counts_pct": 98.52587737329686,
+        "total_sectors": 17532251408.0,
+        "lookup_hit_sectors": 17535061385.0,
+        "lookup_miss_sectors": 262355753.0,
+        "duration_ns": 45325472.0,
+        "reported_hit_rate_in_range": false,
+        "counter_sum_relative_error": 0.015124454003608623,
+        "hit_rate_usable": false,
+        "validation_warnings": [
+          "reported L2 hit rate lies outside [0, 100]%"
+        ]
+      }
+    }
+  ],
+  "finished_at": "2026-09-07T08:44:06.914769+00:00",
+  "final_resources": {
+    "time": "2026-09-07T08:44:06.932679+00:00",
+    "logical_cpus": 20,
+    "load": [
+      1.2841796875,
+      0.87451171875,
+      0.4287109375
+    ],
+    "mem_available_kib": 227483684,
+    "aggregate_process_rss_kib": 444728,
+    "cpu_jiffies": "cpu  29908 0 13913 1908543 9102 0 140 36 0 0",
+    "tmp_disk_free_bytes": 35300249600,
+    "gpu": "GPU-ff675312-2fcc-3db1-b482-712eb0087566, NVIDIA B200, 0 %, 0 MiB, 182625 MiB, 185.93 W, 34, 1965 MHz"
+  }
+}

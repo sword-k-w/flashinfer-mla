@@ -1,0 +1,35 @@
+{
+  "git_head": "88607b17a97dbcbca1abda946fef5d778e8a4cb9",
+  "files": {
+    "benchmarks/bench_sm90_mla_partition.py": "0599af14d3da216a21df9440ca8bb28993117fcc880fb17f733bff82eac3bf35",
+    "benchmarks/sm90_mla_partition.py": "0002f97883c8c01869fb913b99d0f8c0aee8df1b25a950483256f27884ece4fa",
+    "benchmarks/sm90_mla_separate_merge.py": "e2159d1f4d476aa73341fc2cfda8e3a0fff35e92293d0502d25be6353a1914f1",
+    "csrc/batch_mla_config.jinja": "29895e0f7030f5fc053a1ffe4258c8efd5e8b20612afc19476a1871033b7f224",
+    "csrc/batch_mla_sm90_binding.cu": "ea4fcac3471186a377723ef9f343509668a47dd4124630e7a7e2a2c24b46a4b1",
+    "csrc/batch_mla_sm90_run.cu": "783fe856c4955c16cea9be383dbea3747ad1ca90724c622e8712cf88cd463add",
+    "csrc/partition_runtime/LICENSE.upstream": "8c9ccb96c065e706135b6cbad279b721da6156e51f3a5f27c6b3329af9416d73",
+    "csrc/partition_runtime/README.md": "99cae353a3a6ff590878ae1b51f4caaae6105377b1bca8d0f6490d14460fb67f",
+    "csrc/partition_runtime/UPSTREAM.json": "8f5fc3ce6b793a6a521e03a9691899744330c3a5dfc90dcf931b1c2c278f02ab",
+    "csrc/partition_runtime/cuda_malloc_hash.cuh": "598c1bfb7790a6e00a02b1f406404a3c595795d2acb43687acd9a10aa2aa348b",
+    "csrc/partition_runtime/partition_kv.h": "74d23ed5e77dc7091927ddf7cd01c4f49cf514254d8729638fad37af202b9da1",
+    "csrc/partition_runtime/runtime.cu": "0000a3852caebdd5ee49361d8ae43a47c0e57b178d0df135d7ef8538b37dec85",
+    "docs/design_docs/batch_mla_backend_architecture.md": "d80e7cc031841a7d4f15a905cf8b82b67dbd3fd86b6be6291f2f2b68b6c3aa37",
+    "flashinfer/jit/attention/modules.py": "9814a811a777208a9db39987907da9cb15a34530ce3ca655b9e1dcd029329404",
+    "flashinfer/jit/partition_runtime.py": "edb53ed83c0cdc9348c6abfaefba1a0b214182331e5ff4266601757c129ac03e",
+    "flashinfer/mla/experimental/__init__.py": "ab26675460c9f265f0e36ac8b62bd5640c3e6ba34f4b208d6a76a360f66527eb",
+    "flashinfer/mla/experimental/partition_runtime.py": "88a5d523a7c45eb10251e47f2cc37b57667ad245d7447ca46b42c0d920ab2383",
+    "flashinfer/mla/experimental/partition_schedule.py": "6f34771d6c4a57551fbbf97329ba0a3889515ee9ef621b983ef28c2e00fab5cc",
+    "include/flashinfer/attention/mla_hopper.cuh": "b60a7509a9779090baa3ee4441a7f745d7a85239d366a3aa8ff7b203e24ad516",
+    "include/flashinfer/attention/mla_params.cuh": "994bd69fcdd5a1eeb1ef6d1629ffb53507292ca718670ae4733c84aec74f7912",
+    "include/flashinfer/attention/mla_partition.cuh": "47004f53f18fc51352cd8d0331a8fcdbdd4804992909dd6d8e49e5214dd17181",
+    "include/flashinfer/partition/address.cuh": "0d3cd266ad755fee3b04b6fa3ef1b615cfa510b03a855f997d65cbfa66cb43b6",
+    "tests/attention/test_sm90_mla_partition.py": "d42ddff367442fd2ff59a8fda9e23f84e4fccf9d9b51e776162a944746ccb9a9",
+    "tests/attention/test_sm90_mla_separate_merge.py": "38de391e0a339fa3068badc85b3dd2c9f57907167fe8542ec64e6788aa7605a6"
+  },
+  "build_environment": {
+    "MAX_JOBS": "4",
+    "FLASHINFER_NVCC_THREADS": "1",
+    "FLASHINFER_CUDA_ARCH_LIST": "9.0a",
+    "OMP_NUM_THREADS": "4"
+  }
+}

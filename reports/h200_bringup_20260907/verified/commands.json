@@ -1,0 +1,59 @@
+[
+  {
+    "name": "fa3_baseline",
+    "argv": [
+      "/workspace/vllm-fa/.venv/bin/python",
+      "-c",
+      "import sys, runpy; import torch; sys.path.insert(0, sys.argv.pop(1)); import flash_attn_3_cuda; print('FA3_EXTENSION', flash_attn_3_cuda.__file__, flush=True); sys.argv=sys.argv[1:]; runpy.run_path(sys.argv[0], run_name='__main__')",
+      "/workspace/flashinfer-mla/reports/h200_bringup_20260907/fa3_lib",
+      "/workspace/vllm-fa/hopper/exp_h200/mla_baseline/run_mla_baseline.py",
+      "--device",
+      "0",
+      "--batch-size",
+      "2",
+      "--seqlen-k",
+      "1024",
+      "--output",
+      "/workspace/flashinfer-mla/reports/h200_bringup_20260907/verified/fa3_baseline.json"
+    ],
+    "returncode": 0
+  },
+  {
+    "name": "fa3_owner_split_compact",
+    "argv": [
+      "/workspace/vllm-fa/.venv/bin/python",
+      "-c",
+      "import sys, runpy; import torch; sys.path.insert(0, sys.argv.pop(1)); import flash_attn_3_cuda; print('FA3_EXTENSION', flash_attn_3_cuda.__file__, flush=True); sys.argv=sys.argv[1:]; runpy.run_path(sys.argv[0], run_name='__main__')",
+      "/workspace/flashinfer-mla/reports/h200_bringup_20260907/fa3_lib",
+      "/workspace/vllm-fa/hopper/exp_h200/mla_partition_aware/run_partition_aware_mla.py",
+      "--device",
+      "0",
+      "--batch-size",
+      "2",
+      "--seqlen-k",
+      "1024",
+      "--output",
+      "/workspace/flashinfer-mla/reports/h200_bringup_20260907/verified/fa3_owner_split_compact.json"
+    ],
+    "returncode": 0
+  },
+  {
+    "name": "fa3_owner_split_compact_b16_sk4096",
+    "argv": [
+      "/workspace/vllm-fa/.venv/bin/python",
+      "-c",
+      "import sys, runpy; import torch; sys.path.insert(0, sys.argv.pop(1)); import flash_attn_3_cuda; print('FA3_EXTENSION', flash_attn_3_cuda.__file__, flush=True); sys.argv=sys.argv[1:]; runpy.run_path(sys.argv[0], run_name='__main__')",
+      "/workspace/flashinfer-mla/reports/h200_bringup_20260907/fa3_lib",
+      "/workspace/vllm-fa/hopper/exp_h200/mla_partition_aware/run_partition_aware_mla.py",
+      "--device",
+      "0",
+      "--batch-size",
+      "16",
+      "--seqlen-k",
+      "4096",
+      "--output",
+      "/workspace/flashinfer-mla/reports/h200_bringup_20260907/verified/fa3_owner_split_compact_b16_sk4096.json"
+    ],
+    "returncode": 0
+  }
+]

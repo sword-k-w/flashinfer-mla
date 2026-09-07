@@ -1,0 +1,103 @@
+{
+  "scope": "real planner metadata only; no attention launches or timing",
+  "cases": [
+    {
+      "batch": 2,
+      "sq": 1,
+      "sk": 512,
+      "grid": [
+        2,
+        66
+      ],
+      "logical_work_items": 16,
+      "active_logical_groups": 16,
+      "kv_chunk_lengths": [
+        64
+      ],
+      "non_page_aligned_starts": 0,
+      "work_items_using_partial_output": 16
+    },
+    {
+      "batch": 2,
+      "sq": 1,
+      "sk": 1024,
+      "grid": [
+        2,
+        66
+      ],
+      "logical_work_items": 16,
+      "active_logical_groups": 16,
+      "kv_chunk_lengths": [
+        128
+      ],
+      "non_page_aligned_starts": 0,
+      "work_items_using_partial_output": 16
+    },
+    {
+      "batch": 64,
+      "sq": 1,
+      "sk": 32768,
+      "grid": [
+        2,
+        66
+      ],
+      "logical_work_items": 128,
+      "active_logical_groups": 66,
+      "kv_chunk_lengths": [
+        768,
+        32000
+      ],
+      "non_page_aligned_starts": 0,
+      "work_items_using_partial_output": 128
+    },
+    {
+      "batch": 64,
+      "sq": 4,
+      "sk": 32768,
+      "grid": [
+        2,
+        66
+      ],
+      "logical_work_items": 256,
+      "active_logical_groups": 66,
+      "kv_chunk_lengths": [
+        32768
+      ],
+      "non_page_aligned_starts": 0,
+      "work_items_using_partial_output": 0
+    },
+    {
+      "batch": 64,
+      "sq": 128,
+      "sk": 32768,
+      "grid": [
+        2,
+        66
+      ],
+      "logical_work_items": 8192,
+      "active_logical_groups": 66,
+      "kv_chunk_lengths": [
+        32768
+      ],
+      "non_page_aligned_starts": 0,
+      "work_items_using_partial_output": 0
+    },
+    {
+      "batch": 2,
+      "sq": 1,
+      "sk": 1048576,
+      "grid": [
+        2,
+        66
+      ],
+      "logical_work_items": 66,
+      "active_logical_groups": 66,
+      "kv_chunk_lengths": [
+        24576,
+        32000
+      ],
+      "non_page_aligned_starts": 0,
+      "work_items_using_partial_output": 66
+    }
+  ]
+}

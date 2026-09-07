@@ -33,6 +33,158 @@ flashinfer.mla.BatchMLAPagedAttentionWrapper
 There is no generic repository-wide backend interface in this design. The
 contracts are specific to Batch MLA.
 
+### Experimental SM90 separate-merge baseline
+
+`benchmarks/sm90_mla_separate_merge.py` provides an experimental fixed-plan
+runner outside the public wrapper. Its JIT module is generated with
+`gen_batch_mla_module(..., separate_merge=True)` and has a distinct URI suffix.
+The ordinary FA3 module, public wrapper, and default cooperative fused launch
+retain their existing behavior.
+
+The experimental module reuses the SM90 planner, persistent attention worklist,
+partial-output layout, and `DevicePersistentMergeStates` reduction. A compile-time
+specialization removes `grid.sync()` and the reduction from the attention kernel.
+Attention and merge use ordinary kernel launches, ordered on the same CUDA stream.
+The separate merge preserves the planner's grid and block indexing and needs no
+dynamic shared memory. No-split plans still launch an empty merge kernel in the
+full experimental invocation, so the launch structure is consistently two kernels.
+
+The experimental FFI `run` adds a final phase argument: `0` launches attention and
+merge, `1` launches attention only, and `2` launches merge only. The Python runner
+exposes these as `run()`, `attention()`, and `merge()`. Attention-only leaves split
+rows in workspace; a matching merge must run before consuming the final output.
+Direct-output rows remain valid after attention and are not touched by merge.
+Keep the plan and all tensors alive and avoid concurrent use of the same scratch
+buffers across streams. Allocate and plan before CUDA Graph capture.
+
+The experiment runner currently restricts inputs to contiguous BF16/FP16 split
+Q/KV tensors with CKV/KPE dimensions 512/64 on SM90. Custom in-kernel profiling
+is disabled for this variant. The existing BF16/FP16 `cp.async` data path remains
+in use. Partition-aware scheduling and allocation are separate specializations
+described below; removing merge does not itself implement either optimization.
+
+Reproduce validation and timing from the repository root:
+
+```bash
+MAX_JOBS=4 FLASHINFER_NVCC_THREADS=1 FLASHINFER_CUDA_ARCH_LIST=9.0a \
+  python -m pytest tests/attention/test_sm90_mla_separate_merge.py -v
+MAX_JOBS=4 FLASHINFER_NVCC_THREADS=1 FLASHINFER_CUDA_ARCH_LIST=9.0a \
+  python -m benchmarks.sm90_mla_separate_merge --case 2,1,1024 --case 64,1,32768
+```
+
+Timing reports fused, attention-only, merge-only, and complete separate launches
+independently. CUDA events surround graph replays with reused, resident inputs;
+these are baseline measurements rather than cold-cache or partition-aware results.
+
+### H200 partition runtime and static owner scheduling (stages 1/2)
+
+The repository owns its runtime in `flashinfer/mla/experimental/partition_runtime.py`
+and `csrc/partition_runtime/`. Hash recovery and remapping were imported with
+provenance and the upstream license; all builds and imports use local files.
+There is no dependency on an external `partition_kv` package or vllm-fa checkout.
+The H200 implementation allocates a 64 GiB cudaMalloc arena, validates its hash
+base, probes SM affinity, and assigns a dense local rank to each partition's SMs.
+
+`partition_schedule.py` preserves the existing planner's work items, split
+boundaries, and partial/merge offsets. It groups all Q sub-tiles reading a given
+`(request KV indptr, KV start, KV end)` into one data owner. A weighted greedy
+assignment balances estimated work per partition SM. This also creates physical
+page owners for CKV/KPE compact scatter/gather. Owner-local page slots and distinct
+CKV/KPE pool spans prevent collisions; overlapping owners for a page are rejected.
+
+The `partition_schedule=True` JIT variant uses separate merge and ordinary KV
+pointers. Each CTA reads `%smid`, looks up `(partition, local rank)`, and processes
+local tasks `rank, rank + partition_sm_count, ...`. Q sub-tile indices are explicit
+task metadata, including partial-output addressing. The two logical Q sub-tiles
+from the original grid are not hardware partitions. Merge retains the original
+planner's grid and offsets.
+
+This static schedule requires exclusive GPU execution with one persistent CTA
+per SM. The launcher checks that the kernel's maximum occupancy is one CTA/SM and
+that the grid contains exactly one CTA per physical SM. Those checks alone do
+not prove launch coverage: the experimental variant records actual SM visits,
+task visit counts, and task SMIDs. `validate()` checks complete, unique execution
+and the precise expected owner-local SM rank. Invoke it after asynchronous
+launches/graph replays, or use `run_checked()` for an eager checked run. No task
+queue atomics or attention-wide barrier are used; atomics serve only the audit.
+Audit resets and counters are enabled by default. The `schedule_audit=False`
+specialization compiles out both the diagnostic atomics and their reset memsets.
+Only that specialization is used for performance measurements; `validate()`
+rejects it because there are no diagnostic counters to inspect.
+
+The first version accepts noncausal BF16, 128 heads, 64-token pages, identity
+page tables, and nonempty page-aligned KV ranges. It supports split and unsplit
+work in the same plan. Compact roundtrips support BF16/FP16. The stage 1/2
+command below still exercises ordinary KV loads; direct compact loads are
+available through the stage 3 specialization below.
+
+```bash
+MAX_JOBS=4 FLASHINFER_NVCC_THREADS=1 FLASHINFER_CUDA_ARCH_LIST=9.0a \
+  python -m benchmarks.sm90_mla_partition --output stages12.json
+MAX_JOBS=4 FLASHINFER_NVCC_THREADS=1 FLASHINFER_CUDA_ARCH_LIST=9.0a \
+  python -m pytest tests/attention/test_sm90_mla_partition.py -v
+```
+
+Create the runtime before large tensor allocations and close it only after GPU
+work completes. Compact layouts start at arena offset zero and are used sequentially;
+scattering a new layout replaces prior contents. Keep plan/metadata tensors alive
+and immutable through launches and graph replay. The ordinary-KV baseline and
+separate-merge baseline remain available unchanged at their existing entry points.
+
+### H200 compact loads and attention-only matrix (stages 3/4)
+
+`SM90PartitionExperiment(baseline, runtime, compact=True)` scatters the original
+CKV/KPE once, then passes the cudaMalloc arena, validated hash base, KPE logical
+span offset, and per-page owner-local slots to the attention module. The JIT
+option `compact_kv=True` requires the partition schedule and has its own URI.
+`include/flashinfer/partition/address.cuh` provides the shared 4 KiB page-pair
+remapping used by the runtime and the kernel.
+
+The compact specialization changes address prefetching: an identity KV page
+index becomes an owner-local slot, and its logical byte offset is mapped to the
+physical page selected for the CTA's partition. CKV rows occupy 1 KiB and KPE
+rows 128 bytes, so each BF16 row fits within one remapped 4 KiB page; the existing
+inner `cp.async` increments remain valid. Tensor-core computation, asynchronous
+copy pipeline, original split boundaries, partial layout, and separate merge
+are reused. The ordinary specialization retains linear addressing.
+
+Validation includes poisoning the original linear KV tensors after scatter,
+then comparing compact output and LSE exactly against the original fused
+baseline, in both audit and no-audit variants and through CUDA Graph replay.
+The performance driver checks full outputs before and after each timed case,
+and audits exact SM/task/owner coverage before disabling counters.
+
+`benchmarks/bench_sm90_mla_partition.py` compares three paths with the same
+inputs and original split plan: A, ordinary separate-merge baseline; B,
+owner-local schedule with ordinary KV; C, that schedule with compact KV. Only
+one attention kernel falls between the captured external CUDA events. Merge,
+256 MiB L2 eviction, allocation, scattering, planning, Python/FFI validation,
+and diagnostic resets are outside the interval. The capture removes host
+submission gaps from these small kernels. Each sample starts after eviction;
+the driver preserves the earlier B200 warmup/repetition budgets and uses
+ABC/CBA/CBA/ABC measurement blocks. This event capture is an intentional timing
+method difference from B200's eager Triton `do_bench`.
+
+The default B/Sq axes match the earlier B200 experiment: B=2/4/8/16/32/64 and
+Sq=1/4/128, BF16, H128, dimensions 512/64, page64, random seed42. Every batch
+uses the same KV axis. The driver checks a common maximum against the largest
+B/Sq point, the 64 GiB arena, ordinary KV storage, outputs, workspaces, and a
+4 GiB reserve. It fails a case explicitly instead of skipping points or
+shortening individual rows. On this H200 the verified maximum is 932032 tokens,
+yielding 216 configurations. Decode uses the earlier DeepSeek effective scale;
+Sq128 uses B200 prefill's `1/sqrt(512)` scale.
+
+```bash
+MAX_JOBS=4 FLASHINFER_NVCC_THREADS=1 FLASHINFER_CUDA_ARCH_LIST=9.0a OMP_NUM_THREADS=4 \
+  python -m benchmarks.bench_sm90_mla_partition --max-seqlen-k 932032 \
+  --output reports/h200_partition_stages34/matrix.json
+```
+
+JSON is checkpointed after each case. `--resume` checks axes, timing settings,
+configuration and source hashes before reusing completed points. Runtime
+allocation/hash/SM maps are recorded per process segment. This is a controlled
+single-GPU experiment, not a production allocator or concurrent-stream scheduler.
+
 ## Motivation
 
 Batch MLA planning must preserve a mature public API while handling several

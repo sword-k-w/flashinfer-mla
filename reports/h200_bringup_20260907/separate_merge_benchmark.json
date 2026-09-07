@@ -1,0 +1,82 @@
+{
+  "gpu": "NVIDIA H200",
+  "dtype": "bfloat16",
+  "heads": 128,
+  "page_size": 64,
+  "causal": false,
+  "timing": "CUDA events around graph replay, 20 invocations/graph, median of 10 replays; resident reused inputs",
+  "cases": [
+    {
+      "batch": 2,
+      "sq": 1,
+      "sk": 1024,
+      "grid": [
+        2,
+        66
+      ],
+      "work_count": 16,
+      "split_work_count": 16,
+      "direct_work_count": 0,
+      "merge_rows": 256,
+      "fused_us": 14.868799597024918,
+      "attention_us": 9.194400161504745,
+      "merge_us": 5.360799841582775,
+      "full_us": 14.864800125360489,
+      "correctness": "bitwise equal to fused output and LSE"
+    },
+    {
+      "batch": 64,
+      "sq": 1,
+      "sk": 32768,
+      "grid": [
+        2,
+        66
+      ],
+      "work_count": 128,
+      "split_work_count": 128,
+      "direct_work_count": 0,
+      "merge_rows": 8192,
+      "fused_us": 1166.486406326294,
+      "attention_us": 1164.1511917114258,
+      "merge_us": 12.409599870443344,
+      "full_us": 1175.0432014465332,
+      "correctness": "bitwise equal to fused output and LSE"
+    },
+    {
+      "batch": 64,
+      "sq": 4,
+      "sk": 32768,
+      "grid": [
+        2,
+        66
+      ],
+      "work_count": 256,
+      "split_work_count": 0,
+      "direct_work_count": 256,
+      "merge_rows": 0,
+      "fused_us": 4113.64803314209,
+      "attention_us": 4129.1015625,
+      "merge_us": 1.253599999472499,
+      "full_us": 4149.283218383789,
+      "correctness": "bitwise equal to fused output and LSE"
+    },
+    {
+      "batch": 2,
+      "sq": 128,
+      "sk": 1024,
+      "grid": [
+        2,
+        66
+      ],
+      "work_count": 256,
+      "split_work_count": 0,
+      "direct_work_count": 256,
+      "merge_rows": 0,
+      "fused_us": 148.80159497261047,
+      "attention_us": 144.7103977203369,
+      "merge_us": 1.170399971306324,
+      "full_us": 146.14399671554565,
+      "correctness": "bitwise equal to fused output and LSE"
+    }
+  ]
+}

@@ -1,0 +1,142 @@
+{
+  "status": "passed",
+  "implementation": "official_fa3_absorbed_mla_forward_with_compact_partition_kv",
+  "attention_launched": true,
+  "gpu": "NVIDIA H200",
+  "compute_capability": "9.0",
+  "torch": "2.12.1+cu132",
+  "cuda": "13.2",
+  "dtype": "torch.bfloat16",
+  "batch_size": 16,
+  "seqlen_q": 1,
+  "seqlen_k": 4096,
+  "num_heads_q": 128,
+  "num_heads_kv": 1,
+  "head_dim_qk": 64,
+  "head_dim_v": 512,
+  "scale_mode": "deepseek-v3",
+  "softmax_scale": 0.1352337788608801,
+  "softmax_scale_passed_explicitly": true,
+  "deepseek_v3_scale_parameters": {
+    "config_revision": "e815299b0bcbac849fa540c768ef21845365c9eb",
+    "qk_nope_head_dim": 128,
+    "qk_rope_head_dim": 64,
+    "base_softmax_scale": 0.07216878364870323,
+    "rope_scaling_factor": 40.0,
+    "mscale_all_dim": 1.0,
+    "yarn_mscale": 1.3688879454113936,
+    "effective_softmax_scale": 0.1352337788608801
+  },
+  "page_size": 64,
+  "num_pages": 1024,
+  "num_splits": 1,
+  "pack_gqa": true,
+  "causal_requested": false,
+  "decode_mask_equivalent_to_causal": true,
+  "fixed_full_page_table": true,
+  "partition_kv": true,
+  "partition_kv_pattern": "compact",
+  "ownership": "capacity_contiguous_batch_kv_head",
+  "kv_group_partition": [
+    [
+      0
+    ],
+    [
+      0
+    ],
+    [
+      0
+    ],
+    [
+      0
+    ],
+    [
+      0
+    ],
+    [
+      0
+    ],
+    [
+      0
+    ],
+    [
+      0
+    ],
+    [
+      1
+    ],
+    [
+      1
+    ],
+    [
+      1
+    ],
+    [
+      1
+    ],
+    [
+      1
+    ],
+    [
+      1
+    ],
+    [
+      1
+    ],
+    [
+      1
+    ]
+  ],
+  "owned_kv_groups_p0": 8,
+  "owned_kv_groups_p1": 8,
+  "sm_count_p0": 66,
+  "sm_count_p1": 66,
+  "arena_bytes": 68719476736,
+  "arena_hash_base": "0x21000000",
+  "k_shape": [
+    1024,
+    64,
+    1,
+    64
+  ],
+  "v_shape": [
+    1024,
+    64,
+    1,
+    512
+  ],
+  "k_page_stride_bytes": 8192,
+  "v_page_stride_bytes": 65536,
+  "k_pool_span_bytes": 4194304,
+  "v_pool_span_bytes": 33554432,
+  "k_logical_offset": 0,
+  "v_logical_offset": 4194304,
+  "k_roundtrip_exact": true,
+  "v_roundtrip_exact": true,
+  "ordinary_scheduler": "StaticPersistentTileScheduler",
+  "partition_aware_scheduler": "PartitionStaticPersistentTileScheduler",
+  "force_dynamic_scheduler": false,
+  "scheduler_grid_ctas": 132,
+  "pack_gqa_block_m": 64,
+  "m_tiles_per_kv_group": 2,
+  "valid_work_tiles": 32,
+  "first_wave_early_exit_ctas": 100,
+  "output_shape": [
+    16,
+    1,
+    128,
+    512
+  ],
+  "ordinary_vs_partition_aware_exact": true,
+  "ordinary_vs_partition_aware_max_abs_diff": 0.0,
+  "ordinary_vs_partition_aware_mean_abs_diff": 0.0,
+  "ordinary_max_abs_diff": 0.015625,
+  "ordinary_mean_abs_diff": 0.0001416276063537225,
+  "partition_aware_max_abs_diff": 0.015625,
+  "partition_aware_mean_abs_diff": 0.0001416276063537225,
+  "pytorch_reordered_max_abs_diff": 0.0703125,
+  "pytorch_reordered_mean_abs_diff": 0.004139925353229046,
+  "allowed_max_abs_diff": 0.140635,
+  "allowed_mean_abs_diff": 0.006209888029843569,
+  "seed": 0
+}

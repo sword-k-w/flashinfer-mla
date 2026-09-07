@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "<stdin>", line 2, in <module>
+  File "/workspace/flashinfer-mla/flashinfer/jit/partition_runtime.py", line 8, in gen_partition_runtime_module
+    return gen_jit_spec(
+           ^^^^^^^^^^^^^
+TypeError: gen_jit_spec() got an unexpected keyword argument 'supported_major_versions'

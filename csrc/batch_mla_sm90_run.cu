@@ -26,13 +26,35 @@ using namespace flashinfer;
 using tvm::ffi::Array;
 using tvm::ffi::Optional;
 
-void BatchMLAPagedAttentionSM90Run(
-    TensorView float_workspace_buffer, TensorView int_workspace_buffer,
-    Array<int64_t> plan_info_vec, TensorView q_nope, TensorView q_pe, TensorView ckv_cache,
-    TensorView kpe_cache, TensorView kv_indices, TensorView o, Optional<TensorView> maybe_lse,
-    int64_t mask_mode_code, int64_t num_heads, int64_t page_size, double sm_scale,
-    bool return_lse_base_on_e, double ckv_scale, double kpe_scale,
-    Optional<TensorView> maybe_ckv_scale_arr ADDITIONAL_FUNC_PARAMS) {
+void BatchMLAPagedAttentionSM90Run(TensorView float_workspace_buffer,
+                                   TensorView int_workspace_buffer, Array<int64_t> plan_info_vec,
+                                   TensorView q_nope, TensorView q_pe, TensorView ckv_cache,
+                                   TensorView kpe_cache, TensorView kv_indices, TensorView o,
+                                   Optional<TensorView> maybe_lse, int64_t mask_mode_code,
+                                   int64_t num_heads, int64_t page_size, double sm_scale,
+                                   bool return_lse_base_on_e, double ckv_scale, double kpe_scale,
+                                   Optional<TensorView> maybe_ckv_scale_arr ADDITIONAL_FUNC_PARAMS
+#ifdef FLASHINFER_MLA_SEPARATE_MERGE
+                                   ,
+                                   int64_t phase
+#endif
+#ifdef FLASHINFER_MLA_PARTITION_SCHEDULE
+                                   ,
+                                   TensorView sm_partition, TensorView sm_rank, TensorView sm_count,
+                                   TensorView task_work, TensorView task_q_subtile,
+                                   TensorView owner_indptr, TensorView sm_visits,
+                                   TensorView task_visits, TensorView task_smid
+#endif
+#ifdef FLASHINFER_MLA_COMPACT_KV
+                                   ,
+                                   int64_t compact_arena, int64_t compact_hash_base,
+                                   int64_t compact_kpe_offset, TensorView compact_slots
+#endif
+) {
+#ifdef FLASHINFER_MLA_SEPARATE_MERGE
+  TVM_FFI_ICHECK(phase >= 0 && phase <= 2)
+      << "MLA phase must be 0 (full), 1 (attention), or 2 (merge)";
+#endif
   // q_nope: [n, num_heads, head_dim_ckv]
   // q_pe: [n, num_heads, head_dim_kpe]
   // ckv_cache: [num_pages, page_size, head_dim_ckv]
@@ -59,10 +81,68 @@ void BatchMLAPagedAttentionSM90Run(
   ffi::CUDADeviceGuard device_guard(q_nope.device().device_id);
   const cudaStream_t stream = get_stream(q_nope.device());
 
+#ifdef FLASHINFER_MLA_PARTITION_SCHEDULE
+  TVM_FFI_ICHECK(mask_mode_code == 0 && num_heads == 128 && page_size == 64)
+      << "Partition schedule currently supports noncausal H128/page64";
+  int physical_sms = 0;
+  TVM_FFI_ICHECK(cudaDeviceGetAttribute(&physical_sms, cudaDevAttrMultiProcessorCount,
+                                        q_nope.device().device_id) == cudaSuccess);
+  for (auto t : {sm_partition, sm_rank, sm_count, task_work, task_q_subtile, owner_indptr,
+                 sm_visits, task_visits, task_smid}) {
+    TVM_FFI_ICHECK(t.ndim() == 1 && t.stride(0) == 1 && t.dtype().code == kDLInt &&
+                   t.dtype().bits == 32 && t.dtype().lanes == 1 &&
+                   t.device().device_type == kDLCUDA &&
+                   t.device().device_id == q_nope.device().device_id)
+        << "Schedule metadata must be contiguous CUDA int32 on the query device";
+  }
+  TVM_FFI_ICHECK(sm_partition.size(0) == physical_sms && sm_rank.size(0) == physical_sms &&
+                 sm_visits.size(0) == physical_sms && sm_count.size(0) == 2 &&
+                 owner_indptr.size(0) == 3 && task_work.size(0) > 0 &&
+                 task_q_subtile.size(0) == task_work.size(0) &&
+                 task_visits.size(0) == task_work.size(0) && task_smid.size(0) == task_work.size(0))
+      << "Invalid partition schedule metadata lengths";
+#endif
+
   DISPATCH_context(
       DTypeQ, DTypeKV, DTypeO, IdType, MASK_MODE, HEAD_DIM_CKV, HEAD_DIM_KPE, Params, [&] {
         Params params;
 
+#ifdef FLASHINFER_MLA_PARTITION_SCHEDULE
+        params.sm_partition = static_cast<int*>(sm_partition.data_ptr());
+        params.sm_rank = static_cast<int*>(sm_rank.data_ptr());
+        params.sm_count = static_cast<int*>(sm_count.data_ptr());
+        params.task_work = static_cast<IdType*>(task_work.data_ptr());
+        params.task_q_subtile = static_cast<IdType*>(task_q_subtile.data_ptr());
+        params.owner_indptr = static_cast<IdType*>(owner_indptr.data_ptr());
+        params.sm_visits = static_cast<int*>(sm_visits.data_ptr());
+        params.task_visits = static_cast<int*>(task_visits.data_ptr());
+        params.task_smid = static_cast<int*>(task_smid.data_ptr());
+        params.logical_grid_x = plan_info.num_blks_x;
+        if constexpr (Params::SCHEDULE_AUDIT) {
+          if (phase != 2) {
+            TVM_FFI_ICHECK(cudaMemsetAsync(params.sm_visits, 0, sm_visits.size(0) * sizeof(int),
+                                           stream) == cudaSuccess);
+            TVM_FFI_ICHECK(cudaMemsetAsync(params.task_visits, 0, task_visits.size(0) * sizeof(int),
+                                           stream) == cudaSuccess);
+            TVM_FFI_ICHECK(cudaMemsetAsync(params.task_smid, 0xff, task_smid.size(0) * sizeof(int),
+                                           stream) == cudaSuccess);
+          }
+        }
+#endif
+#ifdef FLASHINFER_MLA_COMPACT_KV
+        TVM_FFI_ICHECK(compact_arena != 0 && compact_hash_base >= 0 &&
+                       compact_hash_base % 8192 == 0 && compact_kpe_offset >= 0 &&
+                       compact_kpe_offset % 4096 == 0);
+        TVM_FFI_ICHECK(compact_slots.ndim() == 1 && compact_slots.stride(0) == 1 &&
+                       compact_slots.dtype().code == kDLInt && compact_slots.dtype().bits == 32 &&
+                       compact_slots.device().device_type == kDLCUDA &&
+                       compact_slots.device().device_id == q_nope.device().device_id &&
+                       compact_slots.size(0) == ckv_cache.size(0));
+        params.compact_arena = reinterpret_cast<uint8_t*>(compact_arena);
+        params.compact_hash_base = compact_hash_base;
+        params.compact_kpe_offset = compact_kpe_offset;
+        params.compact_slots = static_cast<int*>(compact_slots.data_ptr());
+#endif
         params.q_nope = static_cast<DTypeQ*>(q_nope.data_ptr());
         params.q_pe = static_cast<DTypeQ*>(q_pe.data_ptr());
         params.ckv = static_cast<DTypeKV*>(ckv_cache.data_ptr());
@@ -123,9 +203,26 @@ void BatchMLAPagedAttentionSM90Run(
                 ? static_cast<const float*>(maybe_ckv_scale_arr.value().data_ptr())
                 : nullptr;
 
-        cudaError_t status =
-            mla::BatchMLAPageAttentionHopper<MASK_MODE, HEAD_DIM_CKV, HEAD_DIM_KPE>(
-                params, plan_info.num_blks_x, plan_info.num_blks_y, stream);
+        cudaError_t status;
+#ifdef FLASHINFER_MLA_SEPARATE_MERGE
+        using mla::HopperMLALaunchMode;
+        if (phase == 1) {
+          status = mla::BatchMLAPageAttentionHopper<MASK_MODE, HEAD_DIM_CKV, HEAD_DIM_KPE,
+                                                    HopperMLALaunchMode::kAttentionOnly>(
+              params, plan_info.num_blks_x, plan_info.num_blks_y, stream);
+        } else if (phase == 2) {
+          status = mla::BatchMLAPageAttentionHopper<MASK_MODE, HEAD_DIM_CKV, HEAD_DIM_KPE,
+                                                    HopperMLALaunchMode::kMergeOnly>(
+              params, plan_info.num_blks_x, plan_info.num_blks_y, stream);
+        } else {
+          status = mla::BatchMLAPageAttentionHopper<MASK_MODE, HEAD_DIM_CKV, HEAD_DIM_KPE,
+                                                    HopperMLALaunchMode::kSeparate>(
+              params, plan_info.num_blks_x, plan_info.num_blks_y, stream);
+        }
+#else
+        status = mla::BatchMLAPageAttentionHopper<MASK_MODE, HEAD_DIM_CKV, HEAD_DIM_KPE>(
+            params, plan_info.num_blks_x, plan_info.num_blks_y, stream);
+#endif
 
         TVM_FFI_ICHECK(status == cudaSuccess)
             << "Failed to run MLA, error: " << cudaGetErrorString(status);

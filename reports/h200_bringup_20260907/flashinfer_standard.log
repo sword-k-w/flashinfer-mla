@@ -1,0 +1,10 @@
+
+[91m[1merror:[0m expects arch to be one of [base_dsl.Arch.sm_100a, base_dsl.Arch.sm_100f, base_dsl.Arch.sm_110a, base_dsl.Arch.sm_110f, base_dsl.Arch.sm_103a, base_dsl.Arch.sm_103f], but got sm_90a
+   [94m-->[0m /workspace/flashinfer-mla/flashinfer/cute_dsl/attention/collective_builder.py:441
+    |
+439 |     p_major_mode = cute.nvgpu.OperandMajorMode.K
+440 | 
+441 |     qk_tiled_mma = sm100_utils.make_trivial_tiled_mma(
+    |     [91m^[0m
+  [92msuggestion:[0m Ensure env CUTE_DSL_ARCH matches your GPU architecture
+

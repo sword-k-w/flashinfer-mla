@@ -34,7 +34,24 @@ void BatchMLAPagedAttentionSM90Run(TensorView float_workspace_buffer,
                                    Optional<TensorView> maybe_lse, int64_t mask_mode_code,
                                    int64_t num_heads, int64_t page_size, double sm_scale,
                                    bool return_lse_base_on_e, double ckv_scale, double kpe_scale,
-                                   Optional<TensorView> maybe_ckv_scale_arr ADDITIONAL_FUNC_PARAMS);
+                                   Optional<TensorView> maybe_ckv_scale_arr ADDITIONAL_FUNC_PARAMS
+#ifdef FLASHINFER_MLA_SEPARATE_MERGE
+                                   ,
+                                   int64_t phase
+#endif
+#ifdef FLASHINFER_MLA_PARTITION_SCHEDULE
+                                   ,
+                                   TensorView sm_partition, TensorView sm_rank, TensorView sm_count,
+                                   TensorView task_work, TensorView task_q_subtile,
+                                   TensorView owner_indptr, TensorView sm_visits,
+                                   TensorView task_visits, TensorView task_smid
+#endif
+#ifdef FLASHINFER_MLA_COMPACT_KV
+                                   ,
+                                   int64_t compact_arena, int64_t compact_hash_base,
+                                   int64_t compact_kpe_offset, TensorView compact_slots
+#endif
+);
 
 TVM_FFI_DLL_EXPORT_TYPED_FUNC(plan, BatchMLAPagedAttentionSM90Plan);
 TVM_FFI_DLL_EXPORT_TYPED_FUNC(run, BatchMLAPagedAttentionSM90Run);

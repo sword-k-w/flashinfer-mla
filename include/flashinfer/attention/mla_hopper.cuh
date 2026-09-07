@@ -19,6 +19,7 @@
 
 #include <cstdint>
 #include <cuda/std/limits>
+#include <flashinfer/partition/address.cuh>
 #include <sstream>
 
 #include "hopper.cuh"
@@ -243,12 +244,12 @@ __device__ __forceinline__ void load_q(
   }
 }
 
-template <typename KTraits>
+template <typename KTraits, typename Params>
 __device__ __forceinline__ void prefetch_offset(
     const uint32_t packed_block_iter_base, const uint32_t packed_kv_bound,
     const uint32_t ckv_stride_page, const uint32_t ckv_stride_n, const uint32_t kpe_stride_page,
     const uint32_t kpe_stride_n, const uint_fastdiv& block_size, typename KTraits::IdType* indices,
-    int64_t (*ckv_offset)[2], int64_t (*kpe_offset)[2]) {
+    int64_t (*ckv_offset)[2], int64_t (*kpe_offset)[2], const Params& params, int owner) {
   using DTypeKV = typename KTraits::DTypeKV;
   const uint32_t lane_idx = cutlass::canonical_lane_idx();
   const uint32_t warp_idx_in_wg = cutlass::canonical_warp_idx() % 4;
@@ -260,15 +261,36 @@ __device__ __forceinline__ void prefetch_offset(
       uint32_t packed_block_iter =
           packed_block_iter_base + lane_idx / 8 + (j + mma_kv * 2) * 16 + warp_idx_in_wg * 4;
       block_size.divmod(packed_block_iter, q, r);
-      // Widen page index to int64_t before multiplying to avoid overflow.
-      ckv_offset[mma_kv][j] =
-          static_cast<int64_t>(packed_block_iter < packed_kv_bound ? indices[q] : 0) *
-              ckv_stride_page +
-          r * ckv_stride_n + (lane_idx % 8) * upcast_size<DTypeKV>();
-      kpe_offset[mma_kv][j] =
-          static_cast<int64_t>(packed_block_iter < packed_kv_bound ? indices[q] : 0) *
-              kpe_stride_page +
-          r * kpe_stride_n + (lane_idx % 8) * upcast_size<DTypeKV>();
+      int page = packed_block_iter < packed_kv_bound ? indices[q] : 0;
+      if constexpr (Params::COMPACT_KV) {
+        // BF16 CKV rows are 1 KiB, KPE rows 128 B. A row never crosses a
+        // remapped 4 KiB page, so inner cp.async loads can increment normally.
+        static_assert(sizeof(DTypeKV) == 2 && KTraits::HEAD_DIM_CKV == 512 &&
+                      KTraits::HEAD_DIM_KPE == 64);
+        uint64_t slot = params.compact_slots[page];
+        uint64_t ck =
+            (slot * ckv_stride_page + r * ckv_stride_n + (lane_idx % 8) * upcast_size<DTypeKV>()) *
+            sizeof(DTypeKV);
+        uint64_t kp = params.compact_kpe_offset + (slot * kpe_stride_page + r * kpe_stride_n +
+                                                   (lane_idx % 8) * upcast_size<DTypeKV>()) *
+                                                      sizeof(DTypeKV);
+        constexpr uint64_t mask = flash::PARTITION_MASK_H200;
+        ckv_offset[mma_kv][j] =
+            (owner == 0
+                 ? flash::cuda_malloc_partition_offset<mask, 0>(params.compact_hash_base, ck)
+                 : flash::cuda_malloc_partition_offset<mask, 1>(params.compact_hash_base, ck)) /
+            sizeof(DTypeKV);
+        kpe_offset[mma_kv][j] =
+            (owner == 0
+                 ? flash::cuda_malloc_partition_offset<mask, 0>(params.compact_hash_base, kp)
+                 : flash::cuda_malloc_partition_offset<mask, 1>(params.compact_hash_base, kp)) /
+            sizeof(DTypeKV);
+      } else {
+        ckv_offset[mma_kv][j] = static_cast<int64_t>(page) * ckv_stride_page + r * ckv_stride_n +
+                                (lane_idx % 8) * upcast_size<DTypeKV>();
+        kpe_offset[mma_kv][j] = static_cast<int64_t>(page) * kpe_stride_page + r * kpe_stride_n +
+                                (lane_idx % 8) * upcast_size<DTypeKV>();
+      }
     }
   }
 }
@@ -657,7 +679,8 @@ __device__ __forceinline__ void write_o(
     typename KTraits::SharedStorage* smem_storage, typename KTraits::DTypeO* final_o,
     float* final_lse, typename KTraits::DTypeO* partial_o, float* partial_lse, float(*o_frag),
     float* m, float* d, const uint32_t o_stride_n, const uint32_t o_stride_h, const uint32_t q_len,
-    const uint32_t packed_offset, const uint_fastdiv& num_heads, const bool& return_lse_base_on_e) {
+    const uint32_t packed_offset, const uint_fastdiv& num_heads, const bool& return_lse_base_on_e,
+    const uint32_t q_subtile) {
   using DTypeO = typename KTraits::DTypeO;
   constexpr uint32_t NUM_MMA_D_CKV = KTraits::NUM_MMA_D_CKV;
   constexpr uint32_t HEAD_DIM_CKV = KTraits::HEAD_DIM_CKV;
@@ -690,7 +713,7 @@ __device__ __forceinline__ void write_o(
       uint32_t q_idx = (packed_offset + warp_idx_in_wg * 16 + 4 * j + lane_idx / 8) / num_heads;
       DTypeO* o_partial_ptr =
           partial_o +
-          ((blockIdx.x * 4 + warp_idx_in_wg) * 16 + 4 * j + lane_idx / 8) * HEAD_DIM_CKV +
+          ((q_subtile * 4 + warp_idx_in_wg) * 16 + 4 * j + lane_idx / 8) * HEAD_DIM_CKV +
           warp_group_idx * (HEAD_DIM_CKV / 2) + (lane_idx % 8) * upcast_size<DTypeO>();
       uint32_t o_smem_offset_w = get_swizzle_offset<KTraits::SWIZZLE_MODE_O, UPCAST_STRIDE_FINAL_O>(
           warp_idx_in_wg * 16 + 4 * j + lane_idx / 8,
@@ -712,7 +735,7 @@ __device__ __forceinline__ void write_o(
         if (lane_idx % 4 == 0 && q_idx < q_len) {
           float lse = (m[j] == -math::inf) ? -cuda::std::numeric_limits<float>::infinity()
                                            : math::ptx_log2(d[j]) + float(m[j]);
-          partial_lse[(blockIdx.x * 4 + warp_idx_in_wg) * 16 + 8 * j + lane_idx / 4] = lse;
+          partial_lse[(q_subtile * 4 + warp_idx_in_wg) * 16 + 8 * j + lane_idx / 4] = lse;
         }
       }
     }
@@ -804,7 +827,7 @@ __device__ __forceinline__ void load_o_scale_smem(typename KTraits::SharedStorag
   }
 }
 
-template <typename KTraits, typename Params>
+template <typename KTraits, typename Params, bool MERGE_IN_KERNEL = true>
 __global__ __launch_bounds__(KTraits::NUM_THREADS) void BatchMLAPageAttentionHopperKernel(
     const __grid_constant__ Params params) {
   using DTypeQ = typename Params::DTypeQ;
@@ -814,6 +837,24 @@ __global__ __launch_bounds__(KTraits::NUM_THREADS) void BatchMLAPageAttentionHop
 
   extern __shared__ __align__(alignof(typename KTraits::SharedStorage)) uint8_t smem[];
   auto& smem_storage = reinterpret_cast<typename KTraits::SharedStorage&>(smem);
+
+  constexpr bool PARTITION_SCHEDULE = Params::PARTITION_SCHEDULE;
+  IdType task_begin, task_end, task_stride = 1;
+  uint32_t physical_smid = 0;
+  int partition_owner = 0;
+  if constexpr (PARTITION_SCHEDULE) {
+    asm volatile("mov.u32 %0, %%smid;" : "=r"(physical_smid));
+    int owner = partition_owner = params.sm_partition[physical_smid];
+    task_begin = params.owner_indptr[owner] + params.sm_rank[physical_smid];
+    task_end = params.owner_indptr[owner + 1];
+    task_stride = params.sm_count[owner];
+    if constexpr (Params::SCHEDULE_AUDIT) {
+      if (threadIdx.x == 0) atomicAdd(params.sm_visits + physical_smid, 1);
+    }
+  } else {
+    task_begin = params.work_indptr[blockIdx.y];
+    task_end = params.work_indptr[blockIdx.y + 1];
+  }
 
   typename KTraits::AttentionVariant variant(params, blockIdx.y, smem);
   [[maybe_unused]] constexpr SwizzleMode SWIZZLE_MODE_Q_NOPE = KTraits::SWIZZLE_MODE_Q_NOPE;
@@ -833,12 +874,15 @@ __global__ __launch_bounds__(KTraits::NUM_THREADS) void BatchMLAPageAttentionHop
   DTypeQ* q_pe = params.q_pe;
   DTypeKV* ckv = params.ckv;
   DTypeKV* kpe = params.kpe;
+  if constexpr (Params::COMPACT_KV) {
+    ckv = reinterpret_cast<DTypeKV*>(params.compact_arena);
+    kpe = reinterpret_cast<DTypeKV*>(params.compact_arena);
+  }
   IdType* kv_indices = params.kv_indices;
   DTypeO* partial_o = params.partial_o;
   float* partial_lse = params.partial_lse;
   DTypeO* final_o = params.final_o;
   float* final_lse = params.final_lse;
-  IdType* work_indptr = params.work_indptr;
 
   const uint_fastdiv& num_heads = params.num_heads;
   const uint_fastdiv& block_size = params.block_size;
@@ -852,7 +896,12 @@ __global__ __launch_bounds__(KTraits::NUM_THREADS) void BatchMLAPageAttentionHop
   const uint32_t kpe_stride_n = params.kpe_stride_n;
   const uint32_t o_stride_n = params.o_stride_n;
   const uint32_t o_stride_h = params.o_stride_h;
-  const uint32_t cluster_tile_q = gridDim.x * KTraits::CTA_TILE_Q;
+  const uint32_t cluster_tile_q = [&]() {
+    if constexpr (PARTITION_SCHEDULE)
+      return params.logical_grid_x * KTraits::CTA_TILE_Q;
+    else
+      return gridDim.x * KTraits::CTA_TILE_Q;
+  }();
 
   const uint32_t lane_predicate = cute::elect_one_sync();
   const uint32_t lane_idx = cutlass::canonical_lane_idx();
@@ -897,14 +946,25 @@ __global__ __launch_bounds__(KTraits::NUM_THREADS) void BatchMLAPageAttentionHop
     int64_t kpe_offset[KTraits::NUM_MMA_KV / 2][2];
 
 #pragma unroll 1
-    for (IdType work_idx = work_indptr[blockIdx.y]; work_idx < work_indptr[blockIdx.y + 1];
-         ++work_idx) {
+    for (IdType task_idx = task_begin; task_idx < task_end; task_idx += task_stride) {
+      IdType work_idx = task_idx;
+      uint32_t q_subtile = blockIdx.x;
+      if constexpr (PARTITION_SCHEDULE) {
+        work_idx = params.task_work[task_idx];
+        q_subtile = params.task_q_subtile[task_idx];
+        if constexpr (Params::SCHEDULE_AUDIT) {
+          if (threadIdx.x == 0) {
+            atomicAdd(params.task_visits + task_idx, 1);
+            params.task_smid[task_idx] = physical_smid;
+          }
+        }
+      }
       auto [q_indptr, kv_indptr, partial_indptr, q_len, kv_len, packed_qo_start, kv_start, kv_end] =
           get_block_coord(params, work_idx);
 
       init_states_<KTraits>(o_frag, m, d, o_scale);
 
-      const uint32_t qo_packed_idx_base = packed_qo_start + blockIdx.x * KTraits::CTA_TILE_Q;
+      const uint32_t qo_packed_idx_base = packed_qo_start + q_subtile * KTraits::CTA_TILE_Q;
       const uint32_t qo_upperbound =
           min(q_len, ceil_div(qo_packed_idx_base + KTraits::CTA_TILE_Q, num_heads));
 
@@ -923,7 +983,8 @@ __global__ __launch_bounds__(KTraits::NUM_THREADS) void BatchMLAPageAttentionHop
       if (has_kv) {
         prefetch_offset<KTraits>(block_iter_base + kv_tile_idx * CTA_TILE_KV, packed_kv_bound,
                                  ckv_stride_page, ckv_stride_n, kpe_stride_page, kpe_stride_n,
-                                 block_size, kv_indices, ckv_offset, kpe_offset);
+                                 block_size, kv_indices, ckv_offset, kpe_offset, params,
+                                 partition_owner);
         pipeline_kv.producer_acquire(smem_pipe_write_kv);
         PROFILER_EVENT_START(variant, ProfileEventType::kIssueLoadKV);
         load_kv<true, KTraits>(&smem_storage, ckv, kpe, packed_kv_bound,
@@ -936,7 +997,8 @@ __global__ __launch_bounds__(KTraits::NUM_THREADS) void BatchMLAPageAttentionHop
         if (kv_tile_idx >= 0) {
           prefetch_offset<KTraits>(block_iter_base + kv_tile_idx * CTA_TILE_KV, packed_kv_bound,
                                    ckv_stride_page, ckv_stride_n, kpe_stride_page, kpe_stride_n,
-                                   block_size, kv_indices, ckv_offset, kpe_offset);
+                                   block_size, kv_indices, ckv_offset, kpe_offset, params,
+                                   partition_owner);
         }
       }
 
@@ -961,7 +1023,8 @@ __global__ __launch_bounds__(KTraits::NUM_THREADS) void BatchMLAPageAttentionHop
         if (kv_tile_idx > 0) {
           prefetch_offset<KTraits>(block_iter_base + (kv_tile_idx - 1) * CTA_TILE_KV,
                                    packed_kv_bound, ckv_stride_page, ckv_stride_n, kpe_stride_page,
-                                   kpe_stride_n, block_size, kv_indices, ckv_offset, kpe_offset);
+                                   kpe_stride_n, block_size, kv_indices, ckv_offset, kpe_offset,
+                                   params, partition_owner);
         }
         pipeline_kv.producer_commit(smem_pipe_write_kv, cutlass::arch::cpasync_barrier_arrive);
         ++smem_pipe_write_kv;
@@ -1045,7 +1108,8 @@ __global__ __launch_bounds__(KTraits::NUM_THREADS) void BatchMLAPageAttentionHop
           final_lse ? final_lse + q_indptr * num_heads : nullptr,
           (partial_indptr == -1) ? nullptr : partial_o + partial_indptr * KTraits::HEAD_DIM_CKV,
           (partial_indptr == -1) ? nullptr : partial_lse + partial_indptr, o_frag, m, d, o_stride_n,
-          o_stride_h, qo_upperbound, qo_packed_idx_base, num_heads, params.return_lse_base_on_e);
+          o_stride_h, qo_upperbound, qo_packed_idx_base, num_heads, params.return_lse_base_on_e,
+          q_subtile);
       PROFILER_EVENT_END(variant, ProfileEventType::kWriteO);
       __syncthreads();
     }
@@ -1057,11 +1121,22 @@ __global__ __launch_bounds__(KTraits::NUM_THREADS) void BatchMLAPageAttentionHop
     uint32_t p_frag[KTraits::NUM_REGS_P_FRAG];
 
 #pragma unroll 1
-    for (IdType work_idx = work_indptr[blockIdx.y]; work_idx < work_indptr[blockIdx.y + 1];
-         ++work_idx) {
+    for (IdType task_idx = task_begin; task_idx < task_end; task_idx += task_stride) {
+      IdType work_idx = task_idx;
+      uint32_t q_subtile = blockIdx.x;
+      if constexpr (PARTITION_SCHEDULE) {
+        work_idx = params.task_work[task_idx];
+        q_subtile = params.task_q_subtile[task_idx];
+        if constexpr (Params::SCHEDULE_AUDIT) {
+          if (threadIdx.x == 0) {
+            atomicAdd(params.task_visits + task_idx, 1);
+            params.task_smid[task_idx] = physical_smid;
+          }
+        }
+      }
       auto [q_indptr, kv_indptr, partial_indptr, q_len, kv_len, packed_qo_start, kv_start, kv_end] =
           get_block_coord(params, work_idx);
-      const uint32_t qo_packed_idx_base = packed_qo_start + blockIdx.x * KTraits::CTA_TILE_Q;
+      const uint32_t qo_packed_idx_base = packed_qo_start + q_subtile * KTraits::CTA_TILE_Q;
       const uint32_t qo_upperbound =
           min(q_len, ceil_div(qo_packed_idx_base + KTraits::CTA_TILE_Q, num_heads));
 
@@ -1245,31 +1320,50 @@ __global__ __launch_bounds__(KTraits::NUM_THREADS) void BatchMLAPageAttentionHop
           final_lse ? final_lse + q_indptr * num_heads : nullptr,
           (partial_indptr == -1) ? nullptr : partial_o + partial_indptr * KTraits::HEAD_DIM_CKV,
           (partial_indptr == -1) ? nullptr : partial_lse + partial_indptr, o_frag, m, d, o_stride_n,
-          o_stride_h, qo_upperbound, qo_packed_idx_base, num_heads, params.return_lse_base_on_e);
+          o_stride_h, qo_upperbound, qo_packed_idx_base, num_heads, params.return_lse_base_on_e,
+          q_subtile);
       PROFILER_EVENT_END(variant, ProfileEventType::kWriteO);
       __syncthreads();
     }
   }
 
-  auto grid = cg::this_grid();
-  grid.sync();
+  if constexpr (MERGE_IN_KERNEL) {
+    auto grid = cg::this_grid();
+    grid.sync();
 
-  PROFILER_EVENT_START(variant, ProfileEventType::kSplitK);
+    PROFILER_EVENT_START(variant, ProfileEventType::kSplitK);
 
-  __syncthreads();
-  // the second stage, merge partial outputs
+    __syncthreads();
+    // the second stage, merge partial outputs
+    DevicePersistentMergeStates<KTraits>(
+        params.merge_packed_offset_start, params.merge_packed_offset_end,
+        params.merge_partial_packed_offset_start, params.merge_partial_packed_offset_end,
+        params.merge_partial_stride, partial_o, partial_lse, final_o, final_lse, o_stride_n,
+        o_stride_h, num_heads, params.return_lse_base_on_e);
+
+    PROFILER_EVENT_END(variant, ProfileEventType::kSplitK);
+  }
+}
+
+// The planner assigns merge rows using the same two-dimensional grid as attention.
+// Launch on the attention stream: kernel completion replaces the fused grid.sync().
+template <typename KTraits, typename Params>
+__global__ __launch_bounds__(KTraits::NUM_THREADS) void BatchMLAPageAttentionHopperMergeKernel(
+    const __grid_constant__ Params params) {
   DevicePersistentMergeStates<KTraits>(
       params.merge_packed_offset_start, params.merge_packed_offset_end,
       params.merge_partial_packed_offset_start, params.merge_partial_packed_offset_end,
-      params.merge_partial_stride, partial_o, partial_lse, final_o, final_lse, o_stride_n,
-      o_stride_h, num_heads, params.return_lse_base_on_e);
-
-  PROFILER_EVENT_END(variant, ProfileEventType::kSplitK);
+      params.merge_partial_stride, params.partial_o, params.partial_lse, params.final_o,
+      params.final_lse, params.o_stride_n, params.o_stride_h, params.num_heads,
+      params.return_lse_base_on_e);
 }
 
 }  // namespace hopper
 
-template <MaskMode MASK_MODE, uint32_t HEAD_DIM_CKV, uint32_t HEAD_DIM_KPE, typename Params>
+enum class HopperMLALaunchMode { kFused, kSeparate, kAttentionOnly, kMergeOnly };
+
+template <MaskMode MASK_MODE, uint32_t HEAD_DIM_CKV, uint32_t HEAD_DIM_KPE,
+          HopperMLALaunchMode LAUNCH_MODE = HopperMLALaunchMode::kFused, typename Params>
 cudaError_t BatchMLAPageAttentionHopper(Params params, uint32_t num_blks_x, uint32_t num_blks_y,
                                         cudaStream_t stream) {
   using DTypeQ = typename Params::DTypeQ;
@@ -1302,13 +1396,35 @@ cudaError_t BatchMLAPageAttentionHopper(Params params, uint32_t num_blks_x, uint
   dim3 nthrs(KTraits::NUM_THREADS);
   size_t smem_size = sizeof(typename KTraits::SharedStorage);
 
-  auto kernel = hopper::BatchMLAPageAttentionHopperKernel<KTraits, Params>;
   void* args[] = {(void*)&params};
 
-  FLASHINFER_CUDA_CALL(
-      cudaFuncSetAttribute(kernel, cudaFuncAttributeMaxDynamicSharedMemorySize, smem_size));
-  FLASHINFER_CUDA_CALL(
-      cudaLaunchCooperativeKernel((void*)kernel, nblks, nthrs, args, smem_size, stream));
+  if constexpr (LAUNCH_MODE != HopperMLALaunchMode::kMergeOnly) {
+    constexpr bool MERGE_IN_KERNEL = LAUNCH_MODE == HopperMLALaunchMode::kFused;
+    auto kernel = hopper::BatchMLAPageAttentionHopperKernel<KTraits, Params, MERGE_IN_KERNEL>;
+    FLASHINFER_CUDA_CALL(
+        cudaFuncSetAttribute(kernel, cudaFuncAttributeMaxDynamicSharedMemorySize, smem_size));
+    if constexpr (Params::PARTITION_SCHEDULE) {
+      static_assert(!MERGE_IN_KERNEL, "Partition schedule requires separate merge");
+      int active_blocks = 0, num_sms = 0;
+      FLASHINFER_CUDA_CALL(cudaOccupancyMaxActiveBlocksPerMultiprocessor(
+          &active_blocks, kernel, KTraits::NUM_THREADS, smem_size));
+      FLASHINFER_CUDA_CALL(
+          cudaDeviceGetAttribute(&num_sms, cudaDevAttrMultiProcessorCount, device));
+      if (active_blocks != 1 || num_blks_x * num_blks_y != uint32_t(num_sms))
+        return cudaErrorInvalidConfiguration;
+    }
+    if constexpr (MERGE_IN_KERNEL) {
+      FLASHINFER_CUDA_CALL(
+          cudaLaunchCooperativeKernel((void*)kernel, nblks, nthrs, args, smem_size, stream));
+    } else {
+      FLASHINFER_CUDA_CALL(cudaLaunchKernel((void*)kernel, nblks, nthrs, args, smem_size, stream));
+    }
+  }
+  if constexpr (LAUNCH_MODE == HopperMLALaunchMode::kSeparate ||
+                LAUNCH_MODE == HopperMLALaunchMode::kMergeOnly) {
+    auto merge_kernel = hopper::BatchMLAPageAttentionHopperMergeKernel<KTraits, Params>;
+    FLASHINFER_CUDA_CALL(cudaLaunchKernel((void*)merge_kernel, nblks, nthrs, args, 0, stream));
+  }
 
   return cudaSuccess;
 }

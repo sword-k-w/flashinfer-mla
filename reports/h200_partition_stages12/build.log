@@ -1,0 +1,4 @@
+building runtime
+ffi.Module(imports_=())
+building partition attention
+<flashinfer.jit.attention.modules._BatchMLAModuleProxy object at 0x7748b0569610>

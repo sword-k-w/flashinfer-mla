@@ -1,0 +1,49 @@
+CAPACITY {"max_seqlen_k": 14913024, "arena_limit": 14913024, "hbm_limit": 16416960, "max_batch": 4, "max_sq": 4, "free_after_runtime": 80835903488, "device_total_bytes": 150109880320, "estimated_fixed_bytes": 891584512, "reserve_bytes": 4294967296, "arena_bytes": 68719476736} AXIS [512, 1024]
+START 1/8 B=2 Sq=1 Sk=512
+BLOCK B=2 Sq=1 Sk=512 1/4
+BLOCK B=2 Sq=1 Sk=512 2/4
+BLOCK B=2 Sq=1 Sk=512 3/4
+BLOCK B=2 Sq=1 Sk=512 4/4
+RESULT {"batch": 2, "sq": 1, "sk": 512, "status": "passed", "wall_seconds": 0.7197045699995215, "median_ms": {"baseline": 0.010400000028312206, "schedule_only": 0.010607999749481678, "compact": 0.011071999557316303}, "speedup": {"compact_vs_baseline": 0.9393063984942047, "schedule_vs_baseline": 0.9803921826846164, "compact_vs_schedule": 0.9580925012295528}}
+START 2/8 B=2 Sq=1 Sk=1024
+BLOCK B=2 Sq=1 Sk=1024 1/4
+BLOCK B=2 Sq=1 Sk=1024 2/4
+BLOCK B=2 Sq=1 Sk=1024 3/4
+BLOCK B=2 Sq=1 Sk=1024 4/4
+RESULT {"batch": 2, "sq": 1, "sk": 1024, "status": "passed", "wall_seconds": 0.240212774999236, "median_ms": {"baseline": 0.012144000269472599, "schedule_only": 0.01244799979031086, "compact": 0.013199999928474426}, "speedup": {"compact_vs_baseline": 0.9200000253997067, "schedule_vs_baseline": 0.97557844425135, "compact_vs_schedule": 0.9430302922546698}}
+START 3/8 B=4 Sq=1 Sk=512
+BLOCK B=4 Sq=1 Sk=512 1/4
+BLOCK B=4 Sq=1 Sk=512 2/4
+BLOCK B=4 Sq=1 Sk=512 3/4
+BLOCK B=4 Sq=1 Sk=512 4/4
+RESULT {"batch": 4, "sq": 1, "sk": 512, "status": "passed", "wall_seconds": 0.23775550299978931, "median_ms": {"baseline": 0.012128000147640705, "schedule_only": 0.012784000020474195, "compact": 0.013407999649643898}, "speedup": {"compact_vs_baseline": 0.9045346408524714, "schedule_vs_baseline": 0.9486858673511519, "compact_vs_schedule": 0.9534606469663597}}
+START 4/8 B=4 Sq=1 Sk=1024
+BLOCK B=4 Sq=1 Sk=1024 1/4
+BLOCK B=4 Sq=1 Sk=1024 2/4
+BLOCK B=4 Sq=1 Sk=1024 3/4
+BLOCK B=4 Sq=1 Sk=1024 4/4
+RESULT {"batch": 4, "sq": 1, "sk": 1024, "status": "passed", "wall_seconds": 0.2383155709994753, "median_ms": {"baseline": 0.014560000039637089, "schedule_only": 0.01515199989080429, "compact": 0.015375999733805656}, "speedup": {"compact_vs_baseline": 0.9469302999287577, "schedule_vs_baseline": 0.9609292598050714, "compact_vs_schedule": 0.9854318517898463}}
+START 5/8 B=2 Sq=4 Sk=512
+BLOCK B=2 Sq=4 Sk=512 1/4
+BLOCK B=2 Sq=4 Sk=512 2/4
+BLOCK B=2 Sq=4 Sk=512 3/4
+BLOCK B=2 Sq=4 Sk=512 4/4
+RESULT {"batch": 2, "sq": 4, "sk": 512, "status": "passed", "wall_seconds": 0.23952768400158675, "median_ms": {"baseline": 0.01384000014513731, "schedule_only": 0.014287999831140041, "compact": 0.01524799969047308}, "speedup": {"compact_vs_baseline": 0.9076600489298616, "schedule_vs_baseline": 0.9686450384030425, "compact_vs_schedule": 0.9370409313470248}}
+START 6/8 B=2 Sq=4 Sk=1024
+BLOCK B=2 Sq=4 Sk=1024 1/4
+BLOCK B=2 Sq=4 Sk=1024 2/4
+BLOCK B=2 Sq=4 Sk=1024 3/4
+BLOCK B=2 Sq=4 Sk=1024 4/4
+RESULT {"batch": 2, "sq": 4, "sk": 1024, "status": "passed", "wall_seconds": 0.24152404999949795, "median_ms": {"baseline": 0.016127999871969223, "schedule_only": 0.01651199907064438, "compact": 0.016944000497460365}, "speedup": {"compact_vs_baseline": 0.9518413242720662, "schedule_vs_baseline": 0.9767442332674399, "compact_vs_schedule": 0.9745041658325767}}
+START 7/8 B=4 Sq=4 Sk=512
+BLOCK B=4 Sq=4 Sk=512 1/4
+BLOCK B=4 Sq=4 Sk=512 2/4
+BLOCK B=4 Sq=4 Sk=512 3/4
+BLOCK B=4 Sq=4 Sk=512 4/4
+RESULT {"batch": 4, "sq": 4, "sk": 512, "status": "passed", "wall_seconds": 0.24216045100001793, "median_ms": {"baseline": 0.016472000628709793, "schedule_only": 0.016976000741124153, "compact": 0.017319999635219574}, "speedup": {"compact_vs_baseline": 0.9510393172996721, "schedule_vs_baseline": 0.9703110220068838, "compact_vs_schedule": 0.9801386315623292}}
+START 8/8 B=4 Sq=4 Sk=1024
+BLOCK B=4 Sq=4 Sk=1024 1/4
+BLOCK B=4 Sq=4 Sk=1024 2/4
+BLOCK B=4 Sq=4 Sk=1024 3/4
+BLOCK B=4 Sq=4 Sk=1024 4/4
+RESULT {"batch": 4, "sq": 4, "sk": 1024, "status": "passed", "wall_seconds": 0.23963900499984447, "median_ms": {"baseline": 0.017487999983131886, "schedule_only": 0.017928000539541245, "compact": 0.018543999642133713}, "speedup": {"compact_vs_baseline": 0.9430543744941358, "schedule_vs_baseline": 0.9754573547987735, "compact_vs_schedule": 0.9667817561216481}}

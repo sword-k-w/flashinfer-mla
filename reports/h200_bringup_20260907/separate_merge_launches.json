@@ -1,0 +1,40 @@
+{
+  "fused": {
+    "kernel_count": 1,
+    "kernel_names": [
+      "void flashinfer::mla::hopper::BatchMLAPageAttentionHopperKernel<flashinfer::mla::hopper::HopperKernelTraits<false, 2u, 512u, 64u, 64u, 64u, __nv_bfloat16, __nv_bfloat16, __nv_bfloat16, int>, flashinfer::MLAParams<__nv_bfloat16, __nv_bfloat16, __nv_bfloat16, int>, true>(flashinfer::MLAParams<__nv_bfloat16, __nv_bfloat16, __nv_bfloat16, int>)"
+    ],
+    "launch_apis": [
+      "cudaLaunchCooperativeKernel"
+    ]
+  },
+  "attention": {
+    "kernel_count": 1,
+    "kernel_names": [
+      "void flashinfer::mla::hopper::BatchMLAPageAttentionHopperKernel<flashinfer::mla::hopper::HopperKernelTraits<false, 2u, 512u, 64u, 64u, 64u, __nv_bfloat16, __nv_bfloat16, __nv_bfloat16, int>, flashinfer::MLAParams<__nv_bfloat16, __nv_bfloat16, __nv_bfloat16, int>, false>(flashinfer::MLAParams<__nv_bfloat16, __nv_bfloat16, __nv_bfloat16, int>)"
+    ],
+    "launch_apis": [
+      "cudaLaunchKernel"
+    ]
+  },
+  "merge": {
+    "kernel_count": 1,
+    "kernel_names": [
+      "void flashinfer::mla::hopper::BatchMLAPageAttentionHopperMergeKernel<flashinfer::mla::hopper::HopperKernelTraits<false, 2u, 512u, 64u, 64u, 64u, __nv_bfloat16, __nv_bfloat16, __nv_bfloat16, int>, flashinfer::MLAParams<__nv_bfloat16, __nv_bfloat16, __nv_bfloat16, int> >(flashinfer::MLAParams<__nv_bfloat16, __nv_bfloat16, __nv_bfloat16, int>)"
+    ],
+    "launch_apis": [
+      "cudaLaunchKernel"
+    ]
+  },
+  "full": {
+    "kernel_count": 2,
+    "kernel_names": [
+      "void flashinfer::mla::hopper::BatchMLAPageAttentionHopperKernel<flashinfer::mla::hopper::HopperKernelTraits<false, 2u, 512u, 64u, 64u, 64u, __nv_bfloat16, __nv_bfloat16, __nv_bfloat16, int>, flashinfer::MLAParams<__nv_bfloat16, __nv_bfloat16, __nv_bfloat16, int>, false>(flashinfer::MLAParams<__nv_bfloat16, __nv_bfloat16, __nv_bfloat16, int>)",
+      "void flashinfer::mla::hopper::BatchMLAPageAttentionHopperMergeKernel<flashinfer::mla::hopper::HopperKernelTraits<false, 2u, 512u, 64u, 64u, 64u, __nv_bfloat16, __nv_bfloat16, __nv_bfloat16, int>, flashinfer::MLAParams<__nv_bfloat16, __nv_bfloat16, __nv_bfloat16, int> >(flashinfer::MLAParams<__nv_bfloat16, __nv_bfloat16, __nv_bfloat16, int>)"
+    ],
+    "launch_apis": [
+      "cudaLaunchKernel",
+      "cudaLaunchKernel"
+    ]
+  }
+}

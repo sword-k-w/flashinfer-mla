@@ -1,0 +1,12 @@
+{
+  "source_repository": "/workspace/vllm-fa",
+  "revision": "3af25a9cfc193db6826fc67d16b4b75c8fc7bfeb",
+  "current_paths": {
+    "cuda_malloc_hash.cuh": "csrc/partition_runtime/cuda_malloc_hash.cuh",
+    "partition_kv.h": "include/flashinfer/partition/address.cuh"
+  },
+  "files": {
+    "cuda_malloc_hash.cuh": "598c1bfb7790a6e00a02b1f406404a3c595795d2acb43687acd9a10aa2aa348b",
+    "partition_kv.h": "0d3cd266ad755fee3b04b6fa3ef1b615cfa510b03a855f997d65cbfa66cb43b6"
+  }
+}

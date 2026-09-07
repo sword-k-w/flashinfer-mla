@@ -1,0 +1,9 @@
+Submodule '3rdparty/cccl' (https://github.com/NVIDIA/cccl.git) registered for path '3rdparty/cccl'
+Submodule '3rdparty/cutlass' (https://github.com/NVIDIA/cutlass.git) registered for path '3rdparty/cutlass'
+Submodule '3rdparty/spdlog' (https://github.com/gabime/spdlog.git) registered for path '3rdparty/spdlog'
+Cloning into '/workspace/flashinfer-mla/3rdparty/cccl'...
+Cloning into '/workspace/flashinfer-mla/3rdparty/cutlass'...
+Cloning into '/workspace/flashinfer-mla/3rdparty/spdlog'...
+Submodule path '3rdparty/cccl': checked out '16bd510c9b712e82b0ab6cbb630d8e29ba1f7116'
+Submodule path '3rdparty/cutlass': checked out 'b46b16d003484063bca4ed365e44095c4c6ed633'
+Submodule path '3rdparty/spdlog': checked out 'c3aed4b68373955e1cc94307683d44dca1515d2b'

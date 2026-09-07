@@ -1,0 +1,1 @@
+{"batch": 2, "sq": 1, "sk": 1048576, "grid": [2, 66], "work_count": 66, "split_work_count": 66, "direct_work_count": 0, "merge_rows": 256, "fused_us": 1095.3904151916504, "attention_us": 1090.0383949279785, "merge_us": 9.775200113654137, "full_us": 1101.8424034118652, "correctness": "bitwise equal to fused output and LSE"}

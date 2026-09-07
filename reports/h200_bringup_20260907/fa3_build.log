@@ -1,0 +1,899 @@
+/workspace/vllm-fa/.venv/lib/python3.12/site-packages/wheel/bdist_wheel.py:4: FutureWarning: The 'wheel' package is no longer the canonical location of the 'bdist_wheel' command, and will be removed in a future release. Please update to setuptools v70.1 or later which contains an integrated version of this command.
+  warn(
+/workspace/vllm-fa/.venv/lib/python3.12/site-packages/setuptools/dist.py:765: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+!!
+
+        ********************************************************************************
+        Please consider removing the following classifiers in favor of a SPDX license expression:
+
+        License :: OSI Approved :: Apache Software License
+
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+
+!!
+  self._finalize_license_expression()
+
+
+torch.__version__  = 2.12.1+cu132
+
+
+running build_ext
+W0907 09:16:18.267000 8123 torch/utils/cpp_extension.py:556] There are no x86_64-linux-gnu-g++ version bounds defined for CUDA version 13.2
+building 'flash_attn_3_cuda' extension
+[1/10] /usr/local/cuda/bin/nvcc --generate-dependencies-with-compile --dependency-output /workspace/flashinfer-mla/reports/h200_bringup_20260907/fa3_build/flash_prepare_scheduler.o.d -I/workspace/vllm-fa/hopper -I/workspace/vllm-fa/partition_kv/csrc -I/workspace/vllm-fa/csrc/cutlass/include -I/usr/local/lib/python3.12/dist-packages/torch/include -I/usr/local/lib/python3.12/dist-packages/torch/include/torch/csrc/api/include -I/usr/local/cuda/include -I/workspace/vllm-fa/.venv/include -I/usr/include/python3.12 -c -c /workspace/vllm-fa/hopper/flash_prepare_scheduler.cu -o /workspace/flashinfer-mla/reports/h200_bringup_20260907/fa3_build/flash_prepare_scheduler.o -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_BFLOAT16_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ --expt-relaxed-constexpr --compiler-options ''"'"'-fPIC'"'"'' --threads 1 -O3 -std=c++17 --ftemplate-backtrace-limit=0 --use_fast_math --resource-usage -lineinfo -DCUTE_SM90_EXTENDED_MMA_SHAPES_ENABLED -DCUTLASS_ENABLE_GDC_FOR_SM90 -DCUTLASS_DEBUG_TRACE_LEVEL=0 -DNDEBUG -gencode arch=compute_90a,code=sm_90a -gencode arch=compute_90a,code=compute_90a -DFLASHATTENTION_DISABLE_BACKWARD -DFLASHATTENTION_DISABLE_SPLIT -DFLASHATTENTION_DISABLE_APPENDKV -DFLASHATTENTION_DISABLE_LOCAL -DFLASHATTENTION_DISABLE_SOFTCAP -DFLASHATTENTION_DISABLE_FP16 -DFLASHATTENTION_DISABLE_FP8 -DFLASHATTENTION_DISABLE_VARLEN -DFLASHATTENTION_DISABLE_CLUSTER -DFLASHATTENTION_DISABLE_HDIM96 -DFLASHATTENTION_DISABLE_HDIM128 -DFLASHATTENTION_DISABLE_HDIM192 -DFLASHATTENTION_DISABLE_HDIM256 -DFLASHATTENTION_DISABLE_SM8x -DFLASHATTENTION_DISABLE_HDIMDIFF192 -DFLASHATTENTION_PACKGQA_ONLY -DFLASHATTENTION_VARLEN_ONLY -DTORCH_API_INCLUDE_EXTENSION_H -DTORCH_EXTENSION_NAME=flash_attn_3_cuda -gencode arch=compute_80,code=sm_80
+ptxas info    : 67 bytes gmem
+ptxas info    : Compiling entry function '_ZN5flash32prepare_varlen_num_blocks_kernelILi32ELb0EEEviiiPKiS2_S2_S2_S2_S2_iiiiiN7cutlass10FastDivmodES4_PiS5_S5_S5_S5_bbbi' for 'sm_90a'
+ptxas info    : Function properties for _ZN5flash32prepare_varlen_num_blocks_kernelILi32ELb0EEEviiiPKiS2_S2_S2_S2_S2_iiiiiN7cutlass10FastDivmodES4_PiS5_S5_S5_S5_bbbi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 16 registers, used 1 barriers, 4 bytes smem
+ptxas info    : Compile time = 80.410 ms
+ptxas info    : Compiling entry function '_ZN5flash32prepare_varlen_num_blocks_kernelILi16ELb0EEEviiiPKiS2_S2_S2_S2_S2_iiiiiN7cutlass10FastDivmodES4_PiS5_S5_S5_S5_bbbi' for 'sm_90a'
+ptxas info    : Function properties for _ZN5flash32prepare_varlen_num_blocks_kernelILi16ELb0EEEviiiPKiS2_S2_S2_S2_S2_iiiiiN7cutlass10FastDivmodES4_PiS5_S5_S5_S5_bbbi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 16 registers, used 1 barriers, 4 bytes smem
+ptxas info    : Compile time = 10.891 ms
+ptxas info    : Compiling entry function '_ZN5flash32prepare_varlen_num_blocks_kernelILi8ELb0EEEviiiPKiS2_S2_S2_S2_S2_iiiiiN7cutlass10FastDivmodES4_PiS5_S5_S5_S5_bbbi' for 'sm_90a'
+ptxas info    : Function properties for _ZN5flash32prepare_varlen_num_blocks_kernelILi8ELb0EEEviiiPKiS2_S2_S2_S2_S2_iiiiiN7cutlass10FastDivmodES4_PiS5_S5_S5_S5_bbbi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 16 registers, used 1 barriers, 4 bytes smem
+ptxas info    : Compile time = 10.937 ms
+ptxas info    : Compiling entry function '_ZN5flash32prepare_varlen_num_blocks_kernelILi4ELb0EEEviiiPKiS2_S2_S2_S2_S2_iiiiiN7cutlass10FastDivmodES4_PiS5_S5_S5_S5_bbbi' for 'sm_90a'
+ptxas info    : Function properties for _ZN5flash32prepare_varlen_num_blocks_kernelILi4ELb0EEEviiiPKiS2_S2_S2_S2_S2_iiiiiN7cutlass10FastDivmodES4_PiS5_S5_S5_S5_bbbi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 16 registers, used 1 barriers, 4 bytes smem
+ptxas info    : Compile time = 10.626 ms
+ptxas info    : Compiling entry function '_ZN5flash32prepare_varlen_num_blocks_kernelILi2ELb0EEEviiiPKiS2_S2_S2_S2_S2_iiiiiN7cutlass10FastDivmodES4_PiS5_S5_S5_S5_bbbi' for 'sm_90a'
+ptxas info    : Function properties for _ZN5flash32prepare_varlen_num_blocks_kernelILi2ELb0EEEviiiPKiS2_S2_S2_S2_S2_iiiiiN7cutlass10FastDivmodES4_PiS5_S5_S5_S5_bbbi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 16 registers, used 1 barriers, 4 bytes smem
+ptxas info    : Compile time = 10.721 ms
+ptxas info    : Compiling entry function '_ZN5flash32prepare_varlen_num_blocks_kernelILi1ELb0EEEviiiPKiS2_S2_S2_S2_S2_iiiiiN7cutlass10FastDivmodES4_PiS5_S5_S5_S5_bbbi' for 'sm_90a'
+ptxas info    : Function properties for _ZN5flash32prepare_varlen_num_blocks_kernelILi1ELb0EEEviiiPKiS2_S2_S2_S2_S2_iiiiiN7cutlass10FastDivmodES4_PiS5_S5_S5_S5_bbbi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 16 registers, used 1 barriers, 4 bytes smem
+ptxas info    : Compile time = 10.668 ms
+ptxas info    : Compiling entry function '_ZN5flash32prepare_varlen_num_blocks_kernelILi32ELb1EEEviiiPKiS2_S2_S2_S2_S2_iiiiiN7cutlass10FastDivmodES4_PiS5_S5_S5_S5_bbbi' for 'sm_90a'
+ptxas info    : Function properties for _ZN5flash32prepare_varlen_num_blocks_kernelILi32ELb1EEEviiiPKiS2_S2_S2_S2_S2_iiiiiN7cutlass10FastDivmodES4_PiS5_S5_S5_S5_bbbi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 25 registers, used 1 barriers, 16416 bytes smem
+ptxas info    : Compile time = 17.088 ms
+ptxas info    : Compiling entry function '_ZN5flash32prepare_varlen_num_blocks_kernelILi16ELb1EEEviiiPKiS2_S2_S2_S2_S2_iiiiiN7cutlass10FastDivmodES4_PiS5_S5_S5_S5_bbbi' for 'sm_90a'
+ptxas info    : Function properties for _ZN5flash32prepare_varlen_num_blocks_kernelILi16ELb1EEEviiiPKiS2_S2_S2_S2_S2_iiiiiN7cutlass10FastDivmodES4_PiS5_S5_S5_S5_bbbi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 25 registers, used 1 barriers, 8224 bytes smem
+ptxas info    : Compile time = 15.817 ms
+ptxas info    : Compiling entry function '_ZN5flash32prepare_varlen_num_blocks_kernelILi8ELb1EEEviiiPKiS2_S2_S2_S2_S2_iiiiiN7cutlass10FastDivmodES4_PiS5_S5_S5_S5_bbbi' for 'sm_90a'
+ptxas info    : Function properties for _ZN5flash32prepare_varlen_num_blocks_kernelILi8ELb1EEEviiiPKiS2_S2_S2_S2_S2_iiiiiN7cutlass10FastDivmodES4_PiS5_S5_S5_S5_bbbi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 25 registers, used 1 barriers, 4128 bytes smem
+ptxas info    : Compile time = 15.739 ms
+ptxas info    : Compiling entry function '_ZN5flash32prepare_varlen_num_blocks_kernelILi4ELb1EEEviiiPKiS2_S2_S2_S2_S2_iiiiiN7cutlass10FastDivmodES4_PiS5_S5_S5_S5_bbbi' for 'sm_90a'
+ptxas info    : Function properties for _ZN5flash32prepare_varlen_num_blocks_kernelILi4ELb1EEEviiiPKiS2_S2_S2_S2_S2_iiiiiN7cutlass10FastDivmodES4_PiS5_S5_S5_S5_bbbi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 25 registers, used 1 barriers, 2080 bytes smem
+ptxas info    : Compile time = 15.720 ms
+ptxas info    : Compiling entry function '_ZN5flash32prepare_varlen_num_blocks_kernelILi2ELb1EEEviiiPKiS2_S2_S2_S2_S2_iiiiiN7cutlass10FastDivmodES4_PiS5_S5_S5_S5_bbbi' for 'sm_90a'
+ptxas info    : Function properties for _ZN5flash32prepare_varlen_num_blocks_kernelILi2ELb1EEEviiiPKiS2_S2_S2_S2_S2_iiiiiN7cutlass10FastDivmodES4_PiS5_S5_S5_S5_bbbi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 25 registers, used 1 barriers, 1056 bytes smem
+ptxas info    : Compile time = 16.016 ms
+ptxas info    : Compiling entry function '_ZN5flash32prepare_varlen_num_blocks_kernelILi1ELb1EEEviiiPKiS2_S2_S2_S2_S2_iiiiiN7cutlass10FastDivmodES4_PiS5_S5_S5_S5_bbbi' for 'sm_90a'
+ptxas info    : Function properties for _ZN5flash32prepare_varlen_num_blocks_kernelILi1ELb1EEEviiiPKiS2_S2_S2_S2_S2_iiiiiN7cutlass10FastDivmodES4_PiS5_S5_S5_S5_bbbi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 31 registers, used 1 barriers, 544 bytes smem
+ptxas info    : Compile time = 22.635 ms
+ptxas info    : Compiling entry function '_ZN3cub20_V_300200_SM_800_9006detail11EmptyKernelIvEEvv' for 'sm_90a'
+ptxas info    : Function properties for _ZN3cub20_V_300200_SM_800_9006detail11EmptyKernelIvEEvv
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 4 registers, used 0 barriers
+ptxas info    : Compile time = 0.683 ms
+ptxas info    : 67 bytes gmem, 536 bytes cmem[4]
+ptxas info    : Compiling entry function '_ZN5flash32prepare_varlen_num_blocks_kernelILi32ELb0EEEviiiPKiS2_S2_S2_S2_S2_iiiiiN7cutlass10FastDivmodES4_PiS5_S5_S5_S5_bbbi' for 'sm_80'
+ptxas info    : Function properties for _ZN5flash32prepare_varlen_num_blocks_kernelILi32ELb0EEEviiiPKiS2_S2_S2_S2_S2_iiiiiN7cutlass10FastDivmodES4_PiS5_S5_S5_S5_bbbi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 18 registers, used 1 barriers, 4 bytes smem, 512 bytes cmem[0]
+ptxas info    : Compile time = 11.488 ms
+ptxas info    : Compiling entry function '_ZN5flash32prepare_varlen_num_blocks_kernelILi16ELb0EEEviiiPKiS2_S2_S2_S2_S2_iiiiiN7cutlass10FastDivmodES4_PiS5_S5_S5_S5_bbbi' for 'sm_80'
+ptxas info    : Function properties for _ZN5flash32prepare_varlen_num_blocks_kernelILi16ELb0EEEviiiPKiS2_S2_S2_S2_S2_iiiiiN7cutlass10FastDivmodES4_PiS5_S5_S5_S5_bbbi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 18 registers, used 1 barriers, 4 bytes smem, 512 bytes cmem[0]
+ptxas info    : Compile time = 9.491 ms
+ptxas info    : Compiling entry function '_ZN5flash32prepare_varlen_num_blocks_kernelILi8ELb0EEEviiiPKiS2_S2_S2_S2_S2_iiiiiN7cutlass10FastDivmodES4_PiS5_S5_S5_S5_bbbi' for 'sm_80'
+ptxas info    : Function properties for _ZN5flash32prepare_varlen_num_blocks_kernelILi8ELb0EEEviiiPKiS2_S2_S2_S2_S2_iiiiiN7cutlass10FastDivmodES4_PiS5_S5_S5_S5_bbbi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 18 registers, used 1 barriers, 4 bytes smem, 512 bytes cmem[0]
+ptxas info    : Compile time = 9.062 ms
+ptxas info    : Compiling entry function '_ZN5flash32prepare_varlen_num_blocks_kernelILi4ELb0EEEviiiPKiS2_S2_S2_S2_S2_iiiiiN7cutlass10FastDivmodES4_PiS5_S5_S5_S5_bbbi' for 'sm_80'
+ptxas info    : Function properties for _ZN5flash32prepare_varlen_num_blocks_kernelILi4ELb0EEEviiiPKiS2_S2_S2_S2_S2_iiiiiN7cutlass10FastDivmodES4_PiS5_S5_S5_S5_bbbi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 18 registers, used 1 barriers, 4 bytes smem, 512 bytes cmem[0]
+ptxas info    : Compile time = 8.833 ms
+ptxas info    : Compiling entry function '_ZN5flash32prepare_varlen_num_blocks_kernelILi2ELb0EEEviiiPKiS2_S2_S2_S2_S2_iiiiiN7cutlass10FastDivmodES4_PiS5_S5_S5_S5_bbbi' for 'sm_80'
+ptxas info    : Function properties for _ZN5flash32prepare_varlen_num_blocks_kernelILi2ELb0EEEviiiPKiS2_S2_S2_S2_S2_iiiiiN7cutlass10FastDivmodES4_PiS5_S5_S5_S5_bbbi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 18 registers, used 1 barriers, 4 bytes smem, 512 bytes cmem[0]
+ptxas info    : Compile time = 9.188 ms
+ptxas info    : Compiling entry function '_ZN5flash32prepare_varlen_num_blocks_kernelILi1ELb0EEEviiiPKiS2_S2_S2_S2_S2_iiiiiN7cutlass10FastDivmodES4_PiS5_S5_S5_S5_bbbi' for 'sm_80'
+ptxas info    : Function properties for _ZN5flash32prepare_varlen_num_blocks_kernelILi1ELb0EEEviiiPKiS2_S2_S2_S2_S2_iiiiiN7cutlass10FastDivmodES4_PiS5_S5_S5_S5_bbbi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 18 registers, used 1 barriers, 4 bytes smem, 512 bytes cmem[0]
+ptxas info    : Compile time = 9.470 ms
+ptxas info    : Compiling entry function '_ZN5flash32prepare_varlen_num_blocks_kernelILi32ELb1EEEviiiPKiS2_S2_S2_S2_S2_iiiiiN7cutlass10FastDivmodES4_PiS5_S5_S5_S5_bbbi' for 'sm_80'
+ptxas info    : Function properties for _ZN5flash32prepare_varlen_num_blocks_kernelILi32ELb1EEEviiiPKiS2_S2_S2_S2_S2_iiiiiN7cutlass10FastDivmodES4_PiS5_S5_S5_S5_bbbi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 22 registers, used 1 barriers, 16416 bytes smem, 512 bytes cmem[0]
+ptxas info    : Compile time = 13.504 ms
+ptxas info    : Compiling entry function '_ZN5flash32prepare_varlen_num_blocks_kernelILi16ELb1EEEviiiPKiS2_S2_S2_S2_S2_iiiiiN7cutlass10FastDivmodES4_PiS5_S5_S5_S5_bbbi' for 'sm_80'
+ptxas info    : Function properties for _ZN5flash32prepare_varlen_num_blocks_kernelILi16ELb1EEEviiiPKiS2_S2_S2_S2_S2_iiiiiN7cutlass10FastDivmodES4_PiS5_S5_S5_S5_bbbi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 22 registers, used 1 barriers, 8224 bytes smem, 512 bytes cmem[0]
+ptxas info    : Compile time = 13.329 ms
+ptxas info    : Compiling entry function '_ZN5flash32prepare_varlen_num_blocks_kernelILi8ELb1EEEviiiPKiS2_S2_S2_S2_S2_iiiiiN7cutlass10FastDivmodES4_PiS5_S5_S5_S5_bbbi' for 'sm_80'
+ptxas info    : Function properties for _ZN5flash32prepare_varlen_num_blocks_kernelILi8ELb1EEEviiiPKiS2_S2_S2_S2_S2_iiiiiN7cutlass10FastDivmodES4_PiS5_S5_S5_S5_bbbi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 22 registers, used 1 barriers, 4128 bytes smem, 512 bytes cmem[0]
+ptxas info    : Compile time = 13.269 ms
+ptxas info    : Compiling entry function '_ZN5flash32prepare_varlen_num_blocks_kernelILi4ELb1EEEviiiPKiS2_S2_S2_S2_S2_iiiiiN7cutlass10FastDivmodES4_PiS5_S5_S5_S5_bbbi' for 'sm_80'
+ptxas info    : Function properties for _ZN5flash32prepare_varlen_num_blocks_kernelILi4ELb1EEEviiiPKiS2_S2_S2_S2_S2_iiiiiN7cutlass10FastDivmodES4_PiS5_S5_S5_S5_bbbi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 22 registers, used 1 barriers, 2080 bytes smem, 512 bytes cmem[0]
+ptxas info    : Compile time = 13.936 ms
+ptxas info    : Compiling entry function '_ZN5flash32prepare_varlen_num_blocks_kernelILi2ELb1EEEviiiPKiS2_S2_S2_S2_S2_iiiiiN7cutlass10FastDivmodES4_PiS5_S5_S5_S5_bbbi' for 'sm_80'
+ptxas info    : Function properties for _ZN5flash32prepare_varlen_num_blocks_kernelILi2ELb1EEEviiiPKiS2_S2_S2_S2_S2_iiiiiN7cutlass10FastDivmodES4_PiS5_S5_S5_S5_bbbi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 22 registers, used 1 barriers, 1056 bytes smem, 512 bytes cmem[0]
+ptxas info    : Compile time = 13.315 ms
+ptxas info    : Compiling entry function '_ZN5flash32prepare_varlen_num_blocks_kernelILi1ELb1EEEviiiPKiS2_S2_S2_S2_S2_iiiiiN7cutlass10FastDivmodES4_PiS5_S5_S5_S5_bbbi' for 'sm_80'
+ptxas info    : Function properties for _ZN5flash32prepare_varlen_num_blocks_kernelILi1ELb1EEEviiiPKiS2_S2_S2_S2_S2_iiiiiN7cutlass10FastDivmodES4_PiS5_S5_S5_S5_bbbi
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 30 registers, used 1 barriers, 544 bytes smem, 512 bytes cmem[0]
+ptxas info    : Compile time = 19.550 ms
+ptxas info    : Compiling entry function '_ZN3cub20_V_300200_SM_800_9006detail11EmptyKernelIvEEvv' for 'sm_80'
+ptxas info    : Function properties for _ZN3cub20_V_300200_SM_800_9006detail11EmptyKernelIvEEvv
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 4 registers, used 0 barriers, 352 bytes cmem[0]
+ptxas info    : Compile time = 0.490 ms
+/workspace/vllm-fa/csrc/cutlass/include/cutlass/platform/platform.h:599:33: warning: ‘long4’ is deprecated: use long4_16a or long4_32a [-Wdeprecated-declarations]
+  599 | struct alignment_of<long4> {
+      |                                 ^    
+In file included from /usr/local/cuda/include/driver_types.h:61,
+                 from /usr/local/cuda/include/builtin_types.h:59,
+                 from /usr/local/cuda/include/crt/host_runtime.h:58,
+                 from /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h:218:
+/usr/local/cuda/include/vector_types.h:535:98: note: declared here
+  535 | typedef __device_builtin__ struct long4 __VECTOR_TYPE_DEPRECATED__("use long4_16a or long4_32a") long4;
+      |                                                                                                  ^~~~~
+/workspace/vllm-fa/csrc/cutlass/include/cutlass/platform/platform.h:603:33: warning: ‘ulong4’ is deprecated: use ulong4_16a or ulong4_32a [-Wdeprecated-declarations]
+  603 | struct alignment_of<ulong4> {
+      |                                 ^     
+/usr/local/cuda/include/vector_types.h:536:101: note: declared here
+  536 | typedef __device_builtin__ struct ulong4 __VECTOR_TYPE_DEPRECATED__("use ulong4_16a or ulong4_32a") ulong4;
+      |                                                                                                     ^~~~~~
+/workspace/vllm-fa/csrc/cutlass/include/cutlass/platform/platform.h:619:33: warning: ‘longlong4’ is deprecated: use longlong4_16a or longlong4_32a [-Wdeprecated-declarations]
+  619 | struct alignment_of<longlong4> {
+      |                                 ^        
+/usr/local/cuda/include/vector_types.h:553:110: note: declared here
+  553 | typedef __device_builtin__ struct longlong4 __VECTOR_TYPE_DEPRECATED__("use longlong4_16a or longlong4_32a") longlong4;
+      |                                                                                                              ^~~~~~~~~
+/workspace/vllm-fa/csrc/cutlass/include/cutlass/platform/platform.h:623:33: warning: ‘ulonglong4’ is deprecated: use ulonglong4_16a or ulonglong4_32a [-Wdeprecated-declarations]
+  623 | struct alignment_of<ulonglong4> {
+      |                                 ^         
+/usr/local/cuda/include/vector_types.h:554:113: note: declared here
+  554 | typedef __device_builtin__ struct ulonglong4 __VECTOR_TYPE_DEPRECATED__("use ulonglong4_16a or ulonglong4_32a") ulonglong4;
+      |                                                                                                                 ^~~~~~~~~~
+/workspace/vllm-fa/csrc/cutlass/include/cutlass/platform/platform.h:627:33: warning: ‘double4’ is deprecated: use double4_16a or double4_32a [-Wdeprecated-declarations]
+  627 | struct alignment_of<double4> {
+      |                                 ^      
+/usr/local/cuda/include/vector_types.h:564:104: note: declared here
+  564 | typedef __device_builtin__ struct double4 __VECTOR_TYPE_DEPRECATED__("use double4_16a or double4_32a") double4;
+      |                                                                                                        ^~~~~~~
+[2/10] c++ -MMD -MF /workspace/flashinfer-mla/reports/h200_bringup_20260907/fa3_build/flash_api.o.d -fno-strict-overflow -Wsign-compare -DNDEBUG -g -O2 -Wall -fPIC -I/workspace/vllm-fa/hopper -I/workspace/vllm-fa/partition_kv/csrc -I/workspace/vllm-fa/csrc/cutlass/include -I/usr/local/lib/python3.12/dist-packages/torch/include -I/usr/local/lib/python3.12/dist-packages/torch/include/torch/csrc/api/include -I/usr/local/cuda/include -I/workspace/vllm-fa/.venv/include -I/usr/include/python3.12 -c -c /workspace/vllm-fa/hopper/flash_api.cpp -o /workspace/flashinfer-mla/reports/h200_bringup_20260907/fa3_build/flash_api.o -O3 -std=c++17 -DFLASHATTENTION_DISABLE_BACKWARD -DFLASHATTENTION_DISABLE_SPLIT -DFLASHATTENTION_DISABLE_APPENDKV -DFLASHATTENTION_DISABLE_LOCAL -DFLASHATTENTION_DISABLE_SOFTCAP -DFLASHATTENTION_DISABLE_FP16 -DFLASHATTENTION_DISABLE_FP8 -DFLASHATTENTION_DISABLE_VARLEN -DFLASHATTENTION_DISABLE_CLUSTER -DFLASHATTENTION_DISABLE_HDIM96 -DFLASHATTENTION_DISABLE_HDIM128 -DFLASHATTENTION_DISABLE_HDIM192 -DFLASHATTENTION_DISABLE_HDIM256 -DFLASHATTENTION_DISABLE_SM8x -DFLASHATTENTION_DISABLE_HDIMDIFF192 -DFLASHATTENTION_PACKGQA_ONLY -DFLASHATTENTION_VARLEN_ONLY -DTORCH_API_INCLUDE_EXTENSION_H -DTORCH_EXTENSION_NAME=flash_attn_3_cuda
+In file included from /workspace/vllm-fa/csrc/cutlass/include/cutlass/integer_subbyte.h:47,
+                 from /workspace/vllm-fa/csrc/cutlass/include/cutlass/numeric_types.h:40,
+                 from /workspace/vllm-fa/hopper/flash_api.cpp:11:
+/workspace/vllm-fa/csrc/cutlass/include/cutlass/platform/platform.h:599:21: warning: ‘long4’ is deprecated: use long4_16a or long4_32a [-Wdeprecated-declarations]
+  599 | struct alignment_of<long4> {
+      |                     ^~~~~
+In file included from /usr/local/cuda/include/driver_types.h:61,
+                 from /usr/local/cuda/include/builtin_types.h:59,
+                 from /usr/local/cuda/include/cuda_runtime_api.h:150,
+                 from /usr/local/lib/python3.12/dist-packages/torch/include/ATen/cuda/CUDAContextLight.h:9,
+                 from /usr/local/lib/python3.12/dist-packages/torch/include/ATen/cuda/CUDAContext.h:4,
+                 from /workspace/vllm-fa/hopper/flash_api.cpp:8:
+/usr/local/cuda/include/vector_types.h:535:98: note: declared here
+  535 | typedef __device_builtin__ struct long4 __VECTOR_TYPE_DEPRECATED__("use long4_16a or long4_32a") long4;
+      |                                                                                                  ^~~~~
+/workspace/vllm-fa/csrc/cutlass/include/cutlass/platform/platform.h:603:21: warning: ‘ulong4’ is deprecated: use ulong4_16a or ulong4_32a [-Wdeprecated-declarations]
+  603 | struct alignment_of<ulong4> {
+      |                     ^~~~~~
+/usr/local/cuda/include/vector_types.h:536:101: note: declared here
+  536 | typedef __device_builtin__ struct ulong4 __VECTOR_TYPE_DEPRECATED__("use ulong4_16a or ulong4_32a") ulong4;
+      |                                                                                                     ^~~~~~
+/workspace/vllm-fa/csrc/cutlass/include/cutlass/platform/platform.h:619:21: warning: ‘longlong4’ is deprecated: use longlong4_16a or longlong4_32a [-Wdeprecated-declarations]
+  619 | struct alignment_of<longlong4> {
+      |                     ^~~~~~~~~
+/usr/local/cuda/include/vector_types.h:553:110: note: declared here
+  553 | typedef __device_builtin__ struct longlong4 __VECTOR_TYPE_DEPRECATED__("use longlong4_16a or longlong4_32a") longlong4;
+      |                                                                                                              ^~~~~~~~~
+/workspace/vllm-fa/csrc/cutlass/include/cutlass/platform/platform.h:623:21: warning: ‘ulonglong4’ is deprecated: use ulonglong4_16a or ulonglong4_32a [-Wdeprecated-declarations]
+  623 | struct alignment_of<ulonglong4> {
+      |                     ^~~~~~~~~~
+/usr/local/cuda/include/vector_types.h:554:113: note: declared here
+  554 | typedef __device_builtin__ struct ulonglong4 __VECTOR_TYPE_DEPRECATED__("use ulonglong4_16a or ulonglong4_32a") ulonglong4;
+      |                                                                                                                 ^~~~~~~~~~
+/workspace/vllm-fa/csrc/cutlass/include/cutlass/platform/platform.h:627:21: warning: ‘double4’ is deprecated: use double4_16a or double4_32a [-Wdeprecated-declarations]
+  627 | struct alignment_of<double4> {
+      |                     ^~~~~~~
+/usr/local/cuda/include/vector_types.h:564:104: note: declared here
+  564 | typedef __device_builtin__ struct double4 __VECTOR_TYPE_DEPRECATED__("use double4_16a or double4_32a") double4;
+      |                                                                                                        ^~~~~~~
+[3/10] /usr/local/cuda/bin/nvcc --generate-dependencies-with-compile --dependency-output /workspace/flashinfer-mla/reports/h200_bringup_20260907/fa3_build/instantiations/flash_fwd_hdim64_256_bf16_packgqa_sm90.o.d -I/workspace/vllm-fa/hopper -I/workspace/vllm-fa/partition_kv/csrc -I/workspace/vllm-fa/csrc/cutlass/include -I/usr/local/lib/python3.12/dist-packages/torch/include -I/usr/local/lib/python3.12/dist-packages/torch/include/torch/csrc/api/include -I/usr/local/cuda/include -I/workspace/vllm-fa/.venv/include -I/usr/include/python3.12 -c -c /workspace/vllm-fa/hopper/instantiations/flash_fwd_hdim64_256_bf16_packgqa_sm90.cu -o /workspace/flashinfer-mla/reports/h200_bringup_20260907/fa3_build/instantiations/flash_fwd_hdim64_256_bf16_packgqa_sm90.o -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_BFLOAT16_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ --expt-relaxed-constexpr --compiler-options ''"'"'-fPIC'"'"'' --threads 1 -O3 -std=c++17 --ftemplate-backtrace-limit=0 --use_fast_math --resource-usage -lineinfo -DCUTE_SM90_EXTENDED_MMA_SHAPES_ENABLED -DCUTLASS_ENABLE_GDC_FOR_SM90 -DCUTLASS_DEBUG_TRACE_LEVEL=0 -DNDEBUG -gencode arch=compute_90a,code=sm_90a -gencode arch=compute_90a,code=compute_90a -DFLASHATTENTION_DISABLE_BACKWARD -DFLASHATTENTION_DISABLE_SPLIT -DFLASHATTENTION_DISABLE_APPENDKV -DFLASHATTENTION_DISABLE_LOCAL -DFLASHATTENTION_DISABLE_SOFTCAP -DFLASHATTENTION_DISABLE_FP16 -DFLASHATTENTION_DISABLE_FP8 -DFLASHATTENTION_DISABLE_VARLEN -DFLASHATTENTION_DISABLE_CLUSTER -DFLASHATTENTION_DISABLE_HDIM96 -DFLASHATTENTION_DISABLE_HDIM128 -DFLASHATTENTION_DISABLE_HDIM192 -DFLASHATTENTION_DISABLE_HDIM256 -DFLASHATTENTION_DISABLE_SM8x -DFLASHATTENTION_DISABLE_HDIMDIFF192 -DFLASHATTENTION_PACKGQA_ONLY -DFLASHATTENTION_VARLEN_ONLY -DTORCH_API_INCLUDE_EXTENSION_H -DTORCH_EXTENSION_NAME=flash_attn_3_cuda
+ptxas info    : 12 bytes gmem
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi128EEENS7_ILi96EEENS7_ILi64EEEEEELi256ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb1ELb0ELb1ELb0ELb0ESE_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi256EEESB_EEES9_SE_SG_Li256ELb0ELb1ELb0ELb0ELi1EEENS1_29StaticPersistentTileSchedulerILb0EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi128EEENS7_ILi96EEENS7_ILi64EEEEEELi256ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb1ELb0ELb1ELb0ELb0ESE_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi256EEESB_EEES9_SE_SG_Li256ELb0ELb1ELb0ELb0ELi1EEENS1_29StaticPersistentTileSchedulerILb0EEEEEEEEEvNT_6ParamsE
+    8 bytes stack frame, 8 bytes spill stores, 8 bytes spill loads
+ptxas info    : Used 168 registers, used 16 barriers, 8 bytes cumulative stack size
+ptxas info    : Compile time = 371.266 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi128EEENS7_ILi96EEENS7_ILi64EEEEEELi256ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb1ELb0ELb1ELb0ELb0ESE_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi256EEESB_EEES9_SE_SG_Li256ELb0ELb1ELb0ELb0ELi1EEENS1_30DynamicPersistentTileSchedulerILi256ELi128ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi128EEENS7_ILi96EEENS7_ILi64EEEEEELi256ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb1ELb0ELb1ELb0ELb0ESE_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi256EEESB_EEES9_SE_SG_Li256ELb0ELb1ELb0ELb0ELi1EEENS1_30DynamicPersistentTileSchedulerILi256ELi128ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 168 registers, used 16 barriers
+ptxas info    : Compile time = 369.510 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi128EEENS7_ILi96EEENS7_ILi64EEEEEELi256ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb0ELb0ELb1ELb1ELb0ELb1ELb0ELb0ESE_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi256EEESB_EEES9_SE_SG_Li256ELb0ELb1ELb0ELb0ELi1EEENS1_29StaticPersistentTileSchedulerILb0EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi128EEENS7_ILi96EEENS7_ILi64EEEEEELi256ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb0ELb0ELb1ELb1ELb0ELb1ELb0ELb0ESE_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi256EEESB_EEES9_SE_SG_Li256ELb0ELb1ELb0ELb0ELi1EEENS1_29StaticPersistentTileSchedulerILb0EEEEEEEEEvNT_6ParamsE
+    16 bytes stack frame, 16 bytes spill stores, 16 bytes spill loads
+ptxas info    : Used 168 registers, used 16 barriers, 16 bytes cumulative stack size
+ptxas info    : Compile time = 510.658 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi128EEENS7_ILi96EEENS7_ILi64EEEEEELi256ENS_10bfloat16_tEfNS_4arch4Sm90ELb1ELb0ELb0ELb0ELb0ELb0ELb0ELb1ELb0ELb1ELb0ELb0ESE_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi256EEESB_EEES9_SE_SG_Li256ELb0ELb1ELb0ELb0ELi1EEENS1_30DynamicPersistentTileSchedulerILi256ELi128ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi128EEENS7_ILi96EEENS7_ILi64EEEEEELi256ENS_10bfloat16_tEfNS_4arch4Sm90ELb1ELb0ELb0ELb0ELb0ELb0ELb0ELb1ELb0ELb1ELb0ELb0ESE_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi256EEESB_EEES9_SE_SG_Li256ELb0ELb1ELb0ELb0ELi1EEENS1_30DynamicPersistentTileSchedulerILi256ELi128ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 168 registers, used 16 barriers
+ptxas info    : Compile time = 617.986 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi128EEENS7_ILi96EEENS7_ILi64EEEEEELi256ENS_10bfloat16_tEfNS_4arch4Sm90ELb1ELb0ELb0ELb0ELb0ELb0ELb1ELb1ELb0ELb1ELb0ELb0ESE_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi256EEESB_EEES9_SE_SG_Li256ELb0ELb1ELb0ELb0ELi1EEENS1_30DynamicPersistentTileSchedulerILi256ELi128ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi128EEENS7_ILi96EEENS7_ILi64EEEEEELi256ENS_10bfloat16_tEfNS_4arch4Sm90ELb1ELb0ELb0ELb0ELb0ELb0ELb1ELb1ELb0ELb1ELb0ELb0ESE_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi256EEESB_EEES9_SE_SG_Li256ELb0ELb1ELb0ELb0ELi1EEENS1_30DynamicPersistentTileSchedulerILi256ELi128ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE
+    40 bytes stack frame, 44 bytes spill stores, 68 bytes spill loads
+ptxas info    : Used 168 registers, used 16 barriers, 40 bytes cumulative stack size
+ptxas info    : Compile time = 995.149 ms
+/workspace/vllm-fa/csrc/cutlass/include/cutlass/platform/platform.h:599:33: warning: ‘long4’ is deprecated: use long4_16a or long4_32a [-Wdeprecated-declarations]
+  599 | struct alignment_of<long4> {
+      |                                 ^    
+In file included from /usr/local/cuda/include/driver_types.h:61,
+                 from /usr/local/cuda/include/builtin_types.h:59,
+                 from /usr/local/cuda/include/crt/host_runtime.h:58,
+                 from /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h:218:
+/usr/local/cuda/include/vector_types.h:535:98: note: declared here
+  535 | typedef __device_builtin__ struct long4 __VECTOR_TYPE_DEPRECATED__("use long4_16a or long4_32a") long4;
+      |                                                                                                  ^~~~~
+/workspace/vllm-fa/csrc/cutlass/include/cutlass/platform/platform.h:603:33: warning: ‘ulong4’ is deprecated: use ulong4_16a or ulong4_32a [-Wdeprecated-declarations]
+  603 | struct alignment_of<ulong4> {
+      |                                 ^     
+/usr/local/cuda/include/vector_types.h:536:101: note: declared here
+  536 | typedef __device_builtin__ struct ulong4 __VECTOR_TYPE_DEPRECATED__("use ulong4_16a or ulong4_32a") ulong4;
+      |                                                                                                     ^~~~~~
+/workspace/vllm-fa/csrc/cutlass/include/cutlass/platform/platform.h:619:33: warning: ‘longlong4’ is deprecated: use longlong4_16a or longlong4_32a [-Wdeprecated-declarations]
+  619 | struct alignment_of<longlong4> {
+      |                                 ^        
+/usr/local/cuda/include/vector_types.h:553:110: note: declared here
+  553 | typedef __device_builtin__ struct longlong4 __VECTOR_TYPE_DEPRECATED__("use longlong4_16a or longlong4_32a") longlong4;
+      |                                                                                                              ^~~~~~~~~
+/workspace/vllm-fa/csrc/cutlass/include/cutlass/platform/platform.h:623:33: warning: ‘ulonglong4’ is deprecated: use ulonglong4_16a or ulonglong4_32a [-Wdeprecated-declarations]
+  623 | struct alignment_of<ulonglong4> {
+      |                                 ^         
+/usr/local/cuda/include/vector_types.h:554:113: note: declared here
+  554 | typedef __device_builtin__ struct ulonglong4 __VECTOR_TYPE_DEPRECATED__("use ulonglong4_16a or ulonglong4_32a") ulonglong4;
+      |                                                                                                                 ^~~~~~~~~~
+/workspace/vllm-fa/csrc/cutlass/include/cutlass/platform/platform.h:627:33: warning: ‘double4’ is deprecated: use double4_16a or double4_32a [-Wdeprecated-declarations]
+  627 | struct alignment_of<double4> {
+      |                                 ^      
+/usr/local/cuda/include/vector_types.h:564:104: note: declared here
+  564 | typedef __device_builtin__ struct double4 __VECTOR_TYPE_DEPRECATED__("use double4_16a or double4_32a") double4;
+      |                                                                                                        ^~~~~~~
+[4/10] /usr/local/cuda/bin/nvcc --generate-dependencies-with-compile --dependency-output /workspace/flashinfer-mla/reports/h200_bringup_20260907/fa3_build/instantiations/flash_fwd_hdim64_256_bf16_sm90.o.d -I/workspace/vllm-fa/hopper -I/workspace/vllm-fa/partition_kv/csrc -I/workspace/vllm-fa/csrc/cutlass/include -I/usr/local/lib/python3.12/dist-packages/torch/include -I/usr/local/lib/python3.12/dist-packages/torch/include/torch/csrc/api/include -I/usr/local/cuda/include -I/workspace/vllm-fa/.venv/include -I/usr/include/python3.12 -c -c /workspace/vllm-fa/hopper/instantiations/flash_fwd_hdim64_256_bf16_sm90.cu -o /workspace/flashinfer-mla/reports/h200_bringup_20260907/fa3_build/instantiations/flash_fwd_hdim64_256_bf16_sm90.o -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_BFLOAT16_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ --expt-relaxed-constexpr --compiler-options ''"'"'-fPIC'"'"'' --threads 1 -O3 -std=c++17 --ftemplate-backtrace-limit=0 --use_fast_math --resource-usage -lineinfo -DCUTE_SM90_EXTENDED_MMA_SHAPES_ENABLED -DCUTLASS_ENABLE_GDC_FOR_SM90 -DCUTLASS_DEBUG_TRACE_LEVEL=0 -DNDEBUG -gencode arch=compute_90a,code=sm_90a -gencode arch=compute_90a,code=compute_90a -DFLASHATTENTION_DISABLE_BACKWARD -DFLASHATTENTION_DISABLE_SPLIT -DFLASHATTENTION_DISABLE_APPENDKV -DFLASHATTENTION_DISABLE_LOCAL -DFLASHATTENTION_DISABLE_SOFTCAP -DFLASHATTENTION_DISABLE_FP16 -DFLASHATTENTION_DISABLE_FP8 -DFLASHATTENTION_DISABLE_VARLEN -DFLASHATTENTION_DISABLE_CLUSTER -DFLASHATTENTION_DISABLE_HDIM96 -DFLASHATTENTION_DISABLE_HDIM128 -DFLASHATTENTION_DISABLE_HDIM192 -DFLASHATTENTION_DISABLE_HDIM256 -DFLASHATTENTION_DISABLE_SM8x -DFLASHATTENTION_DISABLE_HDIMDIFF192 -DFLASHATTENTION_PACKGQA_ONLY -DFLASHATTENTION_VARLEN_ONLY -DTORCH_API_INCLUDE_EXTENSION_H -DTORCH_EXTENSION_NAME=flash_attn_3_cuda
+ptxas info    : 12 bytes gmem
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi128EEENS7_ILi96EEENS7_ILi64EEEEEELi256ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb0ELb0ESE_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi256EEESB_EEES9_SE_SG_Li256ELb0ELb0ELb0ELb0ELi1EEENS1_29StaticPersistentTileSchedulerILb0EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi128EEENS7_ILi96EEENS7_ILi64EEEEEELi256ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb0ELb0ESE_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi256EEESB_EEES9_SE_SG_Li256ELb0ELb0ELb0ELb0ELi1EEENS1_29StaticPersistentTileSchedulerILb0EEEEEEEEEvNT_6ParamsE
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 168 registers, used 16 barriers
+ptxas info    : Compile time = 313.541 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi128EEENS7_ILi96EEENS7_ILi64EEEEEELi256ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb0ELb0ESE_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi256EEESB_EEES9_SE_SG_Li256ELb0ELb0ELb0ELb0ELi1EEENS1_30DynamicPersistentTileSchedulerILi256ELi32ELb0ELb0ELb1EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi128EEENS7_ILi96EEENS7_ILi64EEEEEELi256ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb0ELb0ESE_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi256EEESB_EEES9_SE_SG_Li256ELb0ELb0ELb0ELb0ELi1EEENS1_30DynamicPersistentTileSchedulerILi256ELi32ELb0ELb0ELb1EEEEEEEEEvNT_6ParamsE
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 168 registers, used 16 barriers
+ptxas info    : Compile time = 303.055 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi128EEENS7_ILi96EEENS7_ILi64EEEEEELi256ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb0ELb0ELb1ELb1ELb0ELb0ELb0ELb0ESE_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi256EEESB_EEES9_SE_SG_Li256ELb0ELb0ELb0ELb0ELi1EEENS1_29StaticPersistentTileSchedulerILb0EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi128EEENS7_ILi96EEENS7_ILi64EEEEEELi256ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb0ELb0ELb1ELb1ELb0ELb0ELb0ELb0ESE_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi256EEESB_EEES9_SE_SG_Li256ELb0ELb0ELb0ELb0ELi1EEENS1_29StaticPersistentTileSchedulerILb0EEEEEEEEEvNT_6ParamsE
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 168 registers, used 16 barriers
+ptxas info    : Compile time = 436.656 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi128EEENS7_ILi96EEENS7_ILi64EEEEEELi256ENS_10bfloat16_tEfNS_4arch4Sm90ELb1ELb0ELb0ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb0ELb0ESE_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi256EEESB_EEES9_SE_SG_Li256ELb0ELb0ELb0ELb0ELi1EEENS1_30DynamicPersistentTileSchedulerILi256ELi32ELb0ELb0ELb1EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi128EEENS7_ILi96EEENS7_ILi64EEEEEELi256ENS_10bfloat16_tEfNS_4arch4Sm90ELb1ELb0ELb0ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb0ELb0ESE_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi256EEESB_EEES9_SE_SG_Li256ELb0ELb0ELb0ELb0ELi1EEENS1_30DynamicPersistentTileSchedulerILi256ELi32ELb0ELb0ELb1EEEEEEEEEvNT_6ParamsE
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 168 registers, used 16 barriers
+ptxas info    : Compile time = 567.725 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi128EEENS7_ILi96EEENS7_ILi64EEEEEELi256ENS_10bfloat16_tEfNS_4arch4Sm90ELb1ELb0ELb0ELb0ELb0ELb0ELb1ELb1ELb0ELb0ELb0ELb0ESE_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi256EEESB_EEES9_SE_SG_Li256ELb0ELb0ELb0ELb0ELi1EEENS1_30DynamicPersistentTileSchedulerILi256ELi32ELb0ELb0ELb1EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi128EEENS7_ILi96EEENS7_ILi64EEEEEELi256ENS_10bfloat16_tEfNS_4arch4Sm90ELb1ELb0ELb0ELb0ELb0ELb0ELb1ELb1ELb0ELb0ELb0ELb0ESE_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi256EEESB_EEES9_SE_SG_Li256ELb0ELb0ELb0ELb0ELi1EEENS1_30DynamicPersistentTileSchedulerILi256ELi32ELb0ELb0ELb1EEEEEEEEEvNT_6ParamsE
+    16 bytes stack frame, 20 bytes spill stores, 24 bytes spill loads
+ptxas info    : Used 168 registers, used 16 barriers, 16 bytes cumulative stack size
+ptxas info    : Compile time = 844.961 ms
+/workspace/vllm-fa/csrc/cutlass/include/cutlass/platform/platform.h:599:33: warning: ‘long4’ is deprecated: use long4_16a or long4_32a [-Wdeprecated-declarations]
+  599 | struct alignment_of<long4> {
+      |                                 ^    
+In file included from /usr/local/cuda/include/driver_types.h:61,
+                 from /usr/local/cuda/include/builtin_types.h:59,
+                 from /usr/local/cuda/include/crt/host_runtime.h:58,
+                 from /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h:218:
+/usr/local/cuda/include/vector_types.h:535:98: note: declared here
+  535 | typedef __device_builtin__ struct long4 __VECTOR_TYPE_DEPRECATED__("use long4_16a or long4_32a") long4;
+      |                                                                                                  ^~~~~
+/workspace/vllm-fa/csrc/cutlass/include/cutlass/platform/platform.h:603:33: warning: ‘ulong4’ is deprecated: use ulong4_16a or ulong4_32a [-Wdeprecated-declarations]
+  603 | struct alignment_of<ulong4> {
+      |                                 ^     
+/usr/local/cuda/include/vector_types.h:536:101: note: declared here
+  536 | typedef __device_builtin__ struct ulong4 __VECTOR_TYPE_DEPRECATED__("use ulong4_16a or ulong4_32a") ulong4;
+      |                                                                                                     ^~~~~~
+/workspace/vllm-fa/csrc/cutlass/include/cutlass/platform/platform.h:619:33: warning: ‘longlong4’ is deprecated: use longlong4_16a or longlong4_32a [-Wdeprecated-declarations]
+  619 | struct alignment_of<longlong4> {
+      |                                 ^        
+/usr/local/cuda/include/vector_types.h:553:110: note: declared here
+  553 | typedef __device_builtin__ struct longlong4 __VECTOR_TYPE_DEPRECATED__("use longlong4_16a or longlong4_32a") longlong4;
+      |                                                                                                              ^~~~~~~~~
+/workspace/vllm-fa/csrc/cutlass/include/cutlass/platform/platform.h:623:33: warning: ‘ulonglong4’ is deprecated: use ulonglong4_16a or ulonglong4_32a [-Wdeprecated-declarations]
+  623 | struct alignment_of<ulonglong4> {
+      |                                 ^         
+/usr/local/cuda/include/vector_types.h:554:113: note: declared here
+  554 | typedef __device_builtin__ struct ulonglong4 __VECTOR_TYPE_DEPRECATED__("use ulonglong4_16a or ulonglong4_32a") ulonglong4;
+      |                                                                                                                 ^~~~~~~~~~
+/workspace/vllm-fa/csrc/cutlass/include/cutlass/platform/platform.h:627:33: warning: ‘double4’ is deprecated: use double4_16a or double4_32a [-Wdeprecated-declarations]
+  627 | struct alignment_of<double4> {
+      |                                 ^      
+/usr/local/cuda/include/vector_types.h:564:104: note: declared here
+  564 | typedef __device_builtin__ struct double4 __VECTOR_TYPE_DEPRECATED__("use double4_16a or double4_32a") double4;
+      |                                                                                                        ^~~~~~~
+[5/10] /usr/local/cuda/bin/nvcc --generate-dependencies-with-compile --dependency-output /workspace/flashinfer-mla/reports/h200_bringup_20260907/fa3_build/instantiations/flash_fwd_hdim64_256_bf16_paged_sm90.o.d -I/workspace/vllm-fa/hopper -I/workspace/vllm-fa/partition_kv/csrc -I/workspace/vllm-fa/csrc/cutlass/include -I/usr/local/lib/python3.12/dist-packages/torch/include -I/usr/local/lib/python3.12/dist-packages/torch/include/torch/csrc/api/include -I/usr/local/cuda/include -I/workspace/vllm-fa/.venv/include -I/usr/include/python3.12 -c -c /workspace/vllm-fa/hopper/instantiations/flash_fwd_hdim64_256_bf16_paged_sm90.cu -o /workspace/flashinfer-mla/reports/h200_bringup_20260907/fa3_build/instantiations/flash_fwd_hdim64_256_bf16_paged_sm90.o -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_BFLOAT16_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ --expt-relaxed-constexpr --compiler-options ''"'"'-fPIC'"'"'' --threads 1 -O3 -std=c++17 --ftemplate-backtrace-limit=0 --use_fast_math --resource-usage -lineinfo -DCUTE_SM90_EXTENDED_MMA_SHAPES_ENABLED -DCUTLASS_ENABLE_GDC_FOR_SM90 -DCUTLASS_DEBUG_TRACE_LEVEL=0 -DNDEBUG -gencode arch=compute_90a,code=sm_90a -gencode arch=compute_90a,code=compute_90a -DFLASHATTENTION_DISABLE_BACKWARD -DFLASHATTENTION_DISABLE_SPLIT -DFLASHATTENTION_DISABLE_APPENDKV -DFLASHATTENTION_DISABLE_LOCAL -DFLASHATTENTION_DISABLE_SOFTCAP -DFLASHATTENTION_DISABLE_FP16 -DFLASHATTENTION_DISABLE_FP8 -DFLASHATTENTION_DISABLE_VARLEN -DFLASHATTENTION_DISABLE_CLUSTER -DFLASHATTENTION_DISABLE_HDIM96 -DFLASHATTENTION_DISABLE_HDIM128 -DFLASHATTENTION_DISABLE_HDIM192 -DFLASHATTENTION_DISABLE_HDIM256 -DFLASHATTENTION_DISABLE_SM8x -DFLASHATTENTION_DISABLE_HDIMDIFF192 -DFLASHATTENTION_PACKGQA_ONLY -DFLASHATTENTION_VARLEN_ONLY -DTORCH_API_INCLUDE_EXTENSION_H -DTORCH_EXTENSION_NAME=flash_attn_3_cuda
+ptxas info    : 12 bytes gmem
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi128EEENS7_ILi96EEENS7_ILi64EEEEEELi256ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb1ELb0ELb1ELb0ELb0ESE_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi256EEESB_EEES9_SE_SG_Li256ELb0ELb1ELb0ELb0ELi1EEENS1_29StaticPersistentTileSchedulerILb0EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi128EEENS7_ILi96EEENS7_ILi64EEEEEELi256ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb1ELb0ELb1ELb0ELb0ESE_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi256EEESB_EEES9_SE_SG_Li256ELb0ELb1ELb0ELb0ELi1EEENS1_29StaticPersistentTileSchedulerILb0EEEEEEEEEvNT_6ParamsE
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 168 registers, used 16 barriers
+ptxas info    : Compile time = 450.496 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi128EEENS7_ILi96EEENS7_ILi64EEEEEELi256ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb1ELb0ELb1ELb0ELb0ESE_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi256EEESB_EEES9_SE_SG_Li256ELb0ELb1ELb0ELb0ELi1EEENS1_30DynamicPersistentTileSchedulerILi256ELi128ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi128EEENS7_ILi96EEENS7_ILi64EEEEEELi256ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb1ELb0ELb1ELb0ELb0ESE_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi256EEESB_EEES9_SE_SG_Li256ELb0ELb1ELb0ELb0ELi1EEENS1_30DynamicPersistentTileSchedulerILi256ELi128ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE
+    8 bytes stack frame, 12 bytes spill stores, 12 bytes spill loads
+ptxas info    : Used 168 registers, used 16 barriers, 8 bytes cumulative stack size
+ptxas info    : Compile time = 478.613 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi128EEENS7_ILi96EEENS7_ILi64EEEEEELi256ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb1ELb0ELb1ELb0ELb0ESE_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi256EEESB_EEES9_SE_SG_Li256ELb0ELb1ELb0ELb0ELi1EEENS1_38PartitionStaticPersistentTileSchedulerEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi128EEENS7_ILi96EEENS7_ILi64EEEEEELi256ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb1ELb0ELb1ELb0ELb0ESE_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi256EEESB_EEES9_SE_SG_Li256ELb0ELb1ELb0ELb0ELi1EEENS1_38PartitionStaticPersistentTileSchedulerEEEEEEEvNT_6ParamsE
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 168 registers, used 16 barriers
+ptxas info    : Compile time = 474.272 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi128EEENS7_ILi96EEENS7_ILi64EEEEEELi256ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb1ELb0ELb1ELb0ELb0ESE_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi256EEESB_EEES9_SE_SG_Li256ELb0ELb1ELb0ELb0ELi1EEENS1_39PartitionDynamicPersistentTileSchedulerILi256ELi128ELb1ELb1EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi128EEENS7_ILi96EEENS7_ILi64EEEEEELi256ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb1ELb0ELb1ELb0ELb0ESE_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi256EEESB_EEES9_SE_SG_Li256ELb0ELb1ELb0ELb0ELi1EEENS1_39PartitionDynamicPersistentTileSchedulerILi256ELi128ELb1ELb1EEEEEEEEEvNT_6ParamsE
+    16 bytes stack frame, 20 bytes spill stores, 16 bytes spill loads
+ptxas info    : Used 168 registers, used 16 barriers, 16 bytes cumulative stack size
+ptxas info    : Compile time = 496.459 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi128EEENS7_ILi96EEENS7_ILi64EEEEEELi256ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb1ELb1ELb0ELb1ELb0ELb0ESE_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi256EEESB_EEES9_SE_SG_Li256ELb0ELb1ELb0ELb0ELi1EEENS1_29StaticPersistentTileSchedulerILb0EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi128EEENS7_ILi96EEENS7_ILi64EEEEEELi256ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb1ELb1ELb0ELb1ELb0ELb0ESE_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi256EEESB_EEES9_SE_SG_Li256ELb0ELb1ELb0ELb0ELi1EEENS1_29StaticPersistentTileSchedulerILb0EEEEEEEEEvNT_6ParamsE
+    8 bytes stack frame, 4 bytes spill stores, 4 bytes spill loads
+ptxas info    : Used 168 registers, used 16 barriers, 8 bytes cumulative stack size
+ptxas info    : Compile time = 607.477 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi128EEENS7_ILi96EEENS7_ILi64EEEEEELi256ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb1ELb1ELb0ELb1ELb0ELb0ESE_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi256EEESB_EEES9_SE_SG_Li256ELb0ELb1ELb0ELb0ELi1EEENS1_38PartitionStaticPersistentTileSchedulerEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi128EEENS7_ILi96EEENS7_ILi64EEEEEELi256ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb1ELb1ELb0ELb1ELb0ELb0ESE_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi256EEESB_EEES9_SE_SG_Li256ELb0ELb1ELb0ELb0ELi1EEENS1_38PartitionStaticPersistentTileSchedulerEEEEEEEvNT_6ParamsE
+    8 bytes stack frame, 12 bytes spill stores, 12 bytes spill loads
+ptxas info    : Used 168 registers, used 16 barriers, 8 bytes cumulative stack size
+ptxas info    : Compile time = 618.740 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi128EEENS7_ILi96EEENS7_ILi64EEEEEELi256ENS_10bfloat16_tEfNS_4arch4Sm90ELb1ELb0ELb0ELb0ELb1ELb0ELb0ELb1ELb0ELb1ELb0ELb0ESE_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi256EEESB_EEES9_SE_SG_Li256ELb0ELb1ELb0ELb0ELi1EEENS1_30DynamicPersistentTileSchedulerILi256ELi128ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi128EEENS7_ILi96EEENS7_ILi64EEEEEELi256ENS_10bfloat16_tEfNS_4arch4Sm90ELb1ELb0ELb0ELb0ELb1ELb0ELb0ELb1ELb0ELb1ELb0ELb0ESE_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi256EEESB_EEES9_SE_SG_Li256ELb0ELb1ELb0ELb0ELi1EEENS1_30DynamicPersistentTileSchedulerILi256ELi128ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE
+    8 bytes stack frame, 8 bytes spill stores, 8 bytes spill loads
+ptxas info    : Used 168 registers, used 16 barriers, 8 bytes cumulative stack size
+ptxas info    : Compile time = 732.783 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi128EEENS7_ILi96EEENS7_ILi64EEEEEELi256ENS_10bfloat16_tEfNS_4arch4Sm90ELb1ELb0ELb0ELb0ELb1ELb0ELb1ELb1ELb0ELb1ELb0ELb0ESE_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi256EEESB_EEES9_SE_SG_Li256ELb0ELb1ELb0ELb0ELi1EEENS1_30DynamicPersistentTileSchedulerILi256ELi128ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi128EEENS7_ILi96EEENS7_ILi64EEEEEELi256ENS_10bfloat16_tEfNS_4arch4Sm90ELb1ELb0ELb0ELb0ELb1ELb0ELb1ELb1ELb0ELb1ELb0ELb0ESE_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi256EEESB_EEES9_SE_SG_Li256ELb0ELb1ELb0ELb0ELi1EEENS1_30DynamicPersistentTileSchedulerILi256ELi128ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE
+    64 bytes stack frame, 104 bytes spill stores, 132 bytes spill loads
+ptxas info    : Used 168 registers, used 16 barriers, 64 bytes cumulative stack size
+ptxas info    : Compile time = 1131.347 ms
+/workspace/vllm-fa/csrc/cutlass/include/cutlass/platform/platform.h:599:33: warning: ‘long4’ is deprecated: use long4_16a or long4_32a [-Wdeprecated-declarations]
+  599 | struct alignment_of<long4> {
+      |                                 ^    
+In file included from /usr/local/cuda/include/driver_types.h:61,
+                 from /usr/local/cuda/include/builtin_types.h:59,
+                 from /usr/local/cuda/include/crt/host_runtime.h:58,
+                 from /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h:218:
+/usr/local/cuda/include/vector_types.h:535:98: note: declared here
+  535 | typedef __device_builtin__ struct long4 __VECTOR_TYPE_DEPRECATED__("use long4_16a or long4_32a") long4;
+      |                                                                                                  ^~~~~
+/workspace/vllm-fa/csrc/cutlass/include/cutlass/platform/platform.h:603:33: warning: ‘ulong4’ is deprecated: use ulong4_16a or ulong4_32a [-Wdeprecated-declarations]
+  603 | struct alignment_of<ulong4> {
+      |                                 ^     
+/usr/local/cuda/include/vector_types.h:536:101: note: declared here
+  536 | typedef __device_builtin__ struct ulong4 __VECTOR_TYPE_DEPRECATED__("use ulong4_16a or ulong4_32a") ulong4;
+      |                                                                                                     ^~~~~~
+/workspace/vllm-fa/csrc/cutlass/include/cutlass/platform/platform.h:619:33: warning: ‘longlong4’ is deprecated: use longlong4_16a or longlong4_32a [-Wdeprecated-declarations]
+  619 | struct alignment_of<longlong4> {
+      |                                 ^        
+/usr/local/cuda/include/vector_types.h:553:110: note: declared here
+  553 | typedef __device_builtin__ struct longlong4 __VECTOR_TYPE_DEPRECATED__("use longlong4_16a or longlong4_32a") longlong4;
+      |                                                                                                              ^~~~~~~~~
+/workspace/vllm-fa/csrc/cutlass/include/cutlass/platform/platform.h:623:33: warning: ‘ulonglong4’ is deprecated: use ulonglong4_16a or ulonglong4_32a [-Wdeprecated-declarations]
+  623 | struct alignment_of<ulonglong4> {
+      |                                 ^         
+/usr/local/cuda/include/vector_types.h:554:113: note: declared here
+  554 | typedef __device_builtin__ struct ulonglong4 __VECTOR_TYPE_DEPRECATED__("use ulonglong4_16a or ulonglong4_32a") ulonglong4;
+      |                                                                                                                 ^~~~~~~~~~
+/workspace/vllm-fa/csrc/cutlass/include/cutlass/platform/platform.h:627:33: warning: ‘double4’ is deprecated: use double4_16a or double4_32a [-Wdeprecated-declarations]
+  627 | struct alignment_of<double4> {
+      |                                 ^      
+/usr/local/cuda/include/vector_types.h:564:104: note: declared here
+  564 | typedef __device_builtin__ struct double4 __VECTOR_TYPE_DEPRECATED__("use double4_16a or double4_32a") double4;
+      |                                                                                                        ^~~~~~~
+[6/10] /usr/local/cuda/bin/nvcc --generate-dependencies-with-compile --dependency-output /workspace/flashinfer-mla/reports/h200_bringup_20260907/fa3_build/instantiations/flash_fwd_hdim64_512_bf16_packgqa_sm90.o.d -I/workspace/vllm-fa/hopper -I/workspace/vllm-fa/partition_kv/csrc -I/workspace/vllm-fa/csrc/cutlass/include -I/usr/local/lib/python3.12/dist-packages/torch/include -I/usr/local/lib/python3.12/dist-packages/torch/include/torch/csrc/api/include -I/usr/local/cuda/include -I/workspace/vllm-fa/.venv/include -I/usr/include/python3.12 -c -c /workspace/vllm-fa/hopper/instantiations/flash_fwd_hdim64_512_bf16_packgqa_sm90.cu -o /workspace/flashinfer-mla/reports/h200_bringup_20260907/fa3_build/instantiations/flash_fwd_hdim64_512_bf16_packgqa_sm90.o -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_BFLOAT16_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ --expt-relaxed-constexpr --compiler-options ''"'"'-fPIC'"'"'' --threads 1 -O3 -std=c++17 --ftemplate-backtrace-limit=0 --use_fast_math --resource-usage -lineinfo -DCUTE_SM90_EXTENDED_MMA_SHAPES_ENABLED -DCUTLASS_ENABLE_GDC_FOR_SM90 -DCUTLASS_DEBUG_TRACE_LEVEL=0 -DNDEBUG -gencode arch=compute_90a,code=sm_90a -gencode arch=compute_90a,code=compute_90a -DFLASHATTENTION_DISABLE_BACKWARD -DFLASHATTENTION_DISABLE_SPLIT -DFLASHATTENTION_DISABLE_APPENDKV -DFLASHATTENTION_DISABLE_LOCAL -DFLASHATTENTION_DISABLE_SOFTCAP -DFLASHATTENTION_DISABLE_FP16 -DFLASHATTENTION_DISABLE_FP8 -DFLASHATTENTION_DISABLE_VARLEN -DFLASHATTENTION_DISABLE_CLUSTER -DFLASHATTENTION_DISABLE_HDIM96 -DFLASHATTENTION_DISABLE_HDIM128 -DFLASHATTENTION_DISABLE_HDIM192 -DFLASHATTENTION_DISABLE_HDIM256 -DFLASHATTENTION_DISABLE_SM8x -DFLASHATTENTION_DISABLE_HDIMDIFF192 -DFLASHATTENTION_PACKGQA_ONLY -DFLASHATTENTION_VARLEN_ONLY -DTORCH_API_INCLUDE_EXTENSION_H -DTORCH_EXTENSION_NAME=flash_attn_3_cuda
+ptxas info    : 12 bytes gmem
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi64EEESA_SA_EEELi512ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb1ELb0ELb0ESC_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi512EEESA_EEES9_SC_SE_Li256ELb0ELb1ELb0ELb0ELi1EEENS1_29StaticPersistentTileSchedulerILb0EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi64EEESA_SA_EEELi512ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb1ELb0ELb0ESC_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi512EEESA_EEES9_SC_SE_Li256ELb0ELb1ELb0ELb0ELi1EEENS1_29StaticPersistentTileSchedulerILb0EEEEEEEEEvNT_6ParamsE
+    8 bytes stack frame, 8 bytes spill stores, 8 bytes spill loads
+ptxas info    : Used 168 registers, used 16 barriers, 8 bytes cumulative stack size
+ptxas info    : Compile time = 399.258 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi64EEESA_SA_EEELi512ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb1ELb0ELb0ESC_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi512EEESA_EEES9_SC_SE_Li256ELb0ELb1ELb0ELb0ELi1EEENS1_30DynamicPersistentTileSchedulerILi256ELi128ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi64EEESA_SA_EEELi512ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb1ELb0ELb0ESC_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi512EEESA_EEES9_SC_SE_Li256ELb0ELb1ELb0ELb0ELi1EEENS1_30DynamicPersistentTileSchedulerILi256ELi128ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 168 registers, used 16 barriers
+ptxas info    : Compile time = 394.137 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi64EEESA_SA_EEELi512ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb1ELb0ELb0ESC_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi512EEESA_EEES9_SC_SE_Li256ELb0ELb1ELb0ELb0ELi1EEENS1_29StaticPersistentTileSchedulerILb0EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi64EEESA_SA_EEELi512ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb1ELb0ELb0ESC_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi512EEESA_EEES9_SC_SE_Li256ELb0ELb1ELb0ELb0ELi1EEENS1_29StaticPersistentTileSchedulerILb0EEEEEEEEEvNT_6ParamsE
+    32 bytes stack frame, 40 bytes spill stores, 40 bytes spill loads
+ptxas info    : Used 168 registers, used 16 barriers, 32 bytes cumulative stack size
+ptxas info    : Compile time = 577.568 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi64EEESA_SA_EEELi512ENS_10bfloat16_tEfNS_4arch4Sm90ELb1ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb1ELb0ELb0ESC_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi512EEESA_EEES9_SC_SE_Li256ELb0ELb1ELb0ELb0ELi1EEENS1_30DynamicPersistentTileSchedulerILi256ELi128ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi64EEESA_SA_EEELi512ENS_10bfloat16_tEfNS_4arch4Sm90ELb1ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb1ELb0ELb0ESC_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi512EEESA_EEES9_SC_SE_Li256ELb0ELb1ELb0ELb0ELi1EEENS1_30DynamicPersistentTileSchedulerILi256ELi128ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 168 registers, used 16 barriers
+ptxas info    : Compile time = 591.934 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi64EEESA_SA_EEELi512ENS_10bfloat16_tEfNS_4arch4Sm90ELb1ELb0ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb1ELb0ELb0ESC_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi512EEESA_EEES9_SC_SE_Li256ELb0ELb1ELb0ELb0ELi1EEENS1_30DynamicPersistentTileSchedulerILi256ELi128ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi64EEESA_SA_EEELi512ENS_10bfloat16_tEfNS_4arch4Sm90ELb1ELb0ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb1ELb0ELb0ESC_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi512EEESA_EEES9_SC_SE_Li256ELb0ELb1ELb0ELb0ELi1EEENS1_30DynamicPersistentTileSchedulerILi256ELi128ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE
+    8 bytes stack frame, 4 bytes spill stores, 4 bytes spill loads
+ptxas info    : Used 168 registers, used 16 barriers, 8 bytes cumulative stack size
+ptxas info    : Compile time = 964.710 ms
+/workspace/vllm-fa/csrc/cutlass/include/cutlass/platform/platform.h:599:33: warning: ‘long4’ is deprecated: use long4_16a or long4_32a [-Wdeprecated-declarations]
+  599 | struct alignment_of<long4> {
+      |                                 ^    
+In file included from /usr/local/cuda/include/driver_types.h:61,
+                 from /usr/local/cuda/include/builtin_types.h:59,
+                 from /usr/local/cuda/include/crt/host_runtime.h:58,
+                 from /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h:218:
+/usr/local/cuda/include/vector_types.h:535:98: note: declared here
+  535 | typedef __device_builtin__ struct long4 __VECTOR_TYPE_DEPRECATED__("use long4_16a or long4_32a") long4;
+      |                                                                                                  ^~~~~
+/workspace/vllm-fa/csrc/cutlass/include/cutlass/platform/platform.h:603:33: warning: ‘ulong4’ is deprecated: use ulong4_16a or ulong4_32a [-Wdeprecated-declarations]
+  603 | struct alignment_of<ulong4> {
+      |                                 ^     
+/usr/local/cuda/include/vector_types.h:536:101: note: declared here
+  536 | typedef __device_builtin__ struct ulong4 __VECTOR_TYPE_DEPRECATED__("use ulong4_16a or ulong4_32a") ulong4;
+      |                                                                                                     ^~~~~~
+/workspace/vllm-fa/csrc/cutlass/include/cutlass/platform/platform.h:619:33: warning: ‘longlong4’ is deprecated: use longlong4_16a or longlong4_32a [-Wdeprecated-declarations]
+  619 | struct alignment_of<longlong4> {
+      |                                 ^        
+/usr/local/cuda/include/vector_types.h:553:110: note: declared here
+  553 | typedef __device_builtin__ struct longlong4 __VECTOR_TYPE_DEPRECATED__("use longlong4_16a or longlong4_32a") longlong4;
+      |                                                                                                              ^~~~~~~~~
+/workspace/vllm-fa/csrc/cutlass/include/cutlass/platform/platform.h:623:33: warning: ‘ulonglong4’ is deprecated: use ulonglong4_16a or ulonglong4_32a [-Wdeprecated-declarations]
+  623 | struct alignment_of<ulonglong4> {
+      |                                 ^         
+/usr/local/cuda/include/vector_types.h:554:113: note: declared here
+  554 | typedef __device_builtin__ struct ulonglong4 __VECTOR_TYPE_DEPRECATED__("use ulonglong4_16a or ulonglong4_32a") ulonglong4;
+      |                                                                                                                 ^~~~~~~~~~
+/workspace/vllm-fa/csrc/cutlass/include/cutlass/platform/platform.h:627:33: warning: ‘double4’ is deprecated: use double4_16a or double4_32a [-Wdeprecated-declarations]
+  627 | struct alignment_of<double4> {
+      |                                 ^      
+/usr/local/cuda/include/vector_types.h:564:104: note: declared here
+  564 | typedef __device_builtin__ struct double4 __VECTOR_TYPE_DEPRECATED__("use double4_16a or double4_32a") double4;
+      |                                                                                                        ^~~~~~~
+[7/10] /usr/local/cuda/bin/nvcc --generate-dependencies-with-compile --dependency-output /workspace/flashinfer-mla/reports/h200_bringup_20260907/fa3_build/instantiations/flash_fwd_hdim64_512_bf16_sm90.o.d -I/workspace/vllm-fa/hopper -I/workspace/vllm-fa/partition_kv/csrc -I/workspace/vllm-fa/csrc/cutlass/include -I/usr/local/lib/python3.12/dist-packages/torch/include -I/usr/local/lib/python3.12/dist-packages/torch/include/torch/csrc/api/include -I/usr/local/cuda/include -I/workspace/vllm-fa/.venv/include -I/usr/include/python3.12 -c -c /workspace/vllm-fa/hopper/instantiations/flash_fwd_hdim64_512_bf16_sm90.cu -o /workspace/flashinfer-mla/reports/h200_bringup_20260907/fa3_build/instantiations/flash_fwd_hdim64_512_bf16_sm90.o -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_BFLOAT16_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ --expt-relaxed-constexpr --compiler-options ''"'"'-fPIC'"'"'' --threads 1 -O3 -std=c++17 --ftemplate-backtrace-limit=0 --use_fast_math --resource-usage -lineinfo -DCUTE_SM90_EXTENDED_MMA_SHAPES_ENABLED -DCUTLASS_ENABLE_GDC_FOR_SM90 -DCUTLASS_DEBUG_TRACE_LEVEL=0 -DNDEBUG -gencode arch=compute_90a,code=sm_90a -gencode arch=compute_90a,code=compute_90a -DFLASHATTENTION_DISABLE_BACKWARD -DFLASHATTENTION_DISABLE_SPLIT -DFLASHATTENTION_DISABLE_APPENDKV -DFLASHATTENTION_DISABLE_LOCAL -DFLASHATTENTION_DISABLE_SOFTCAP -DFLASHATTENTION_DISABLE_FP16 -DFLASHATTENTION_DISABLE_FP8 -DFLASHATTENTION_DISABLE_VARLEN -DFLASHATTENTION_DISABLE_CLUSTER -DFLASHATTENTION_DISABLE_HDIM96 -DFLASHATTENTION_DISABLE_HDIM128 -DFLASHATTENTION_DISABLE_HDIM192 -DFLASHATTENTION_DISABLE_HDIM256 -DFLASHATTENTION_DISABLE_SM8x -DFLASHATTENTION_DISABLE_HDIMDIFF192 -DFLASHATTENTION_PACKGQA_ONLY -DFLASHATTENTION_VARLEN_ONLY -DTORCH_API_INCLUDE_EXTENSION_H -DTORCH_EXTENSION_NAME=flash_attn_3_cuda
+ptxas info    : 12 bytes gmem
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi64EEESA_SA_EEELi512ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb0ESC_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi512EEESA_EEES9_SC_SE_Li256ELb0ELb0ELb0ELb0ELi1EEENS1_29StaticPersistentTileSchedulerILb0EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi64EEESA_SA_EEELi512ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb0ESC_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi512EEESA_EEES9_SC_SE_Li256ELb0ELb0ELb0ELb0ELi1EEENS1_29StaticPersistentTileSchedulerILb0EEEEEEEEEvNT_6ParamsE
+    8 bytes stack frame, 4 bytes spill stores, 4 bytes spill loads
+ptxas info    : Used 168 registers, used 16 barriers, 8 bytes cumulative stack size
+ptxas info    : Compile time = 378.403 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi64EEESA_SA_EEELi512ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb0ESC_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi512EEESA_EEES9_SC_SE_Li256ELb0ELb0ELb0ELb0ELi1EEENS1_30DynamicPersistentTileSchedulerILi256ELi32ELb0ELb0ELb1EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi64EEESA_SA_EEELi512ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb0ESC_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi512EEESA_EEES9_SC_SE_Li256ELb0ELb0ELb0ELb0ELi1EEENS1_30DynamicPersistentTileSchedulerILi256ELi32ELb0ELb0ELb1EEEEEEEEEvNT_6ParamsE
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 168 registers, used 16 barriers
+ptxas info    : Compile time = 367.907 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi64EEESA_SA_EEELi512ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb0ELb0ELb0ESC_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi512EEESA_EEES9_SC_SE_Li256ELb0ELb0ELb0ELb0ELi1EEENS1_29StaticPersistentTileSchedulerILb0EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi64EEESA_SA_EEELi512ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb0ELb0ELb0ESC_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi512EEESA_EEES9_SC_SE_Li256ELb0ELb0ELb0ELb0ELi1EEENS1_29StaticPersistentTileSchedulerILb0EEEEEEEEEvNT_6ParamsE
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 168 registers, used 16 barriers
+ptxas info    : Compile time = 547.752 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi64EEESA_SA_EEELi512ENS_10bfloat16_tEfNS_4arch4Sm90ELb1ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb0ESC_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi512EEESA_EEES9_SC_SE_Li256ELb0ELb0ELb0ELb0ELi1EEENS1_30DynamicPersistentTileSchedulerILi256ELi32ELb0ELb0ELb1EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi64EEESA_SA_EEELi512ENS_10bfloat16_tEfNS_4arch4Sm90ELb1ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb0ESC_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi512EEESA_EEES9_SC_SE_Li256ELb0ELb0ELb0ELb0ELi1EEENS1_30DynamicPersistentTileSchedulerILi256ELi32ELb0ELb0ELb1EEEEEEEEEvNT_6ParamsE
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 168 registers, used 16 barriers
+ptxas info    : Compile time = 551.420 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi64EEESA_SA_EEELi512ENS_10bfloat16_tEfNS_4arch4Sm90ELb1ELb0ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb0ELb0ELb0ESC_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi512EEESA_EEES9_SC_SE_Li256ELb0ELb0ELb0ELb0ELi1EEENS1_30DynamicPersistentTileSchedulerILi256ELi32ELb0ELb0ELb1EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi64EEESA_SA_EEELi512ENS_10bfloat16_tEfNS_4arch4Sm90ELb1ELb0ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb0ELb0ELb0ESC_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi512EEESA_EEES9_SC_SE_Li256ELb0ELb0ELb0ELb0ELi1EEENS1_30DynamicPersistentTileSchedulerILi256ELi32ELb0ELb0ELb1EEEEEEEEEvNT_6ParamsE
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 168 registers, used 16 barriers
+ptxas info    : Compile time = 837.995 ms
+/workspace/vllm-fa/csrc/cutlass/include/cutlass/platform/platform.h:599:33: warning: ‘long4’ is deprecated: use long4_16a or long4_32a [-Wdeprecated-declarations]
+  599 | struct alignment_of<long4> {
+      |                                 ^    
+In file included from /usr/local/cuda/include/driver_types.h:61,
+                 from /usr/local/cuda/include/builtin_types.h:59,
+                 from /usr/local/cuda/include/crt/host_runtime.h:58,
+                 from /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h:218:
+/usr/local/cuda/include/vector_types.h:535:98: note: declared here
+  535 | typedef __device_builtin__ struct long4 __VECTOR_TYPE_DEPRECATED__("use long4_16a or long4_32a") long4;
+      |                                                                                                  ^~~~~
+/workspace/vllm-fa/csrc/cutlass/include/cutlass/platform/platform.h:603:33: warning: ‘ulong4’ is deprecated: use ulong4_16a or ulong4_32a [-Wdeprecated-declarations]
+  603 | struct alignment_of<ulong4> {
+      |                                 ^     
+/usr/local/cuda/include/vector_types.h:536:101: note: declared here
+  536 | typedef __device_builtin__ struct ulong4 __VECTOR_TYPE_DEPRECATED__("use ulong4_16a or ulong4_32a") ulong4;
+      |                                                                                                     ^~~~~~
+/workspace/vllm-fa/csrc/cutlass/include/cutlass/platform/platform.h:619:33: warning: ‘longlong4’ is deprecated: use longlong4_16a or longlong4_32a [-Wdeprecated-declarations]
+  619 | struct alignment_of<longlong4> {
+      |                                 ^        
+/usr/local/cuda/include/vector_types.h:553:110: note: declared here
+  553 | typedef __device_builtin__ struct longlong4 __VECTOR_TYPE_DEPRECATED__("use longlong4_16a or longlong4_32a") longlong4;
+      |                                                                                                              ^~~~~~~~~
+/workspace/vllm-fa/csrc/cutlass/include/cutlass/platform/platform.h:623:33: warning: ‘ulonglong4’ is deprecated: use ulonglong4_16a or ulonglong4_32a [-Wdeprecated-declarations]
+  623 | struct alignment_of<ulonglong4> {
+      |                                 ^         
+/usr/local/cuda/include/vector_types.h:554:113: note: declared here
+  554 | typedef __device_builtin__ struct ulonglong4 __VECTOR_TYPE_DEPRECATED__("use ulonglong4_16a or ulonglong4_32a") ulonglong4;
+      |                                                                                                                 ^~~~~~~~~~
+/workspace/vllm-fa/csrc/cutlass/include/cutlass/platform/platform.h:627:33: warning: ‘double4’ is deprecated: use double4_16a or double4_32a [-Wdeprecated-declarations]
+  627 | struct alignment_of<double4> {
+      |                                 ^      
+/usr/local/cuda/include/vector_types.h:564:104: note: declared here
+  564 | typedef __device_builtin__ struct double4 __VECTOR_TYPE_DEPRECATED__("use double4_16a or double4_32a") double4;
+      |                                                                                                        ^~~~~~~
+[8/10] /usr/local/cuda/bin/nvcc --generate-dependencies-with-compile --dependency-output /workspace/flashinfer-mla/reports/h200_bringup_20260907/fa3_build/instantiations/flash_fwd_hdim64_512_bf16_paged_sm90.o.d -I/workspace/vllm-fa/hopper -I/workspace/vllm-fa/partition_kv/csrc -I/workspace/vllm-fa/csrc/cutlass/include -I/usr/local/lib/python3.12/dist-packages/torch/include -I/usr/local/lib/python3.12/dist-packages/torch/include/torch/csrc/api/include -I/usr/local/cuda/include -I/workspace/vllm-fa/.venv/include -I/usr/include/python3.12 -c -c /workspace/vllm-fa/hopper/instantiations/flash_fwd_hdim64_512_bf16_paged_sm90.cu -o /workspace/flashinfer-mla/reports/h200_bringup_20260907/fa3_build/instantiations/flash_fwd_hdim64_512_bf16_paged_sm90.o -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_BFLOAT16_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ --expt-relaxed-constexpr --compiler-options ''"'"'-fPIC'"'"'' --threads 1 -O3 -std=c++17 --ftemplate-backtrace-limit=0 --use_fast_math --resource-usage -lineinfo -DCUTE_SM90_EXTENDED_MMA_SHAPES_ENABLED -DCUTLASS_ENABLE_GDC_FOR_SM90 -DCUTLASS_DEBUG_TRACE_LEVEL=0 -DNDEBUG -gencode arch=compute_90a,code=sm_90a -gencode arch=compute_90a,code=compute_90a -DFLASHATTENTION_DISABLE_BACKWARD -DFLASHATTENTION_DISABLE_SPLIT -DFLASHATTENTION_DISABLE_APPENDKV -DFLASHATTENTION_DISABLE_LOCAL -DFLASHATTENTION_DISABLE_SOFTCAP -DFLASHATTENTION_DISABLE_FP16 -DFLASHATTENTION_DISABLE_FP8 -DFLASHATTENTION_DISABLE_VARLEN -DFLASHATTENTION_DISABLE_CLUSTER -DFLASHATTENTION_DISABLE_HDIM96 -DFLASHATTENTION_DISABLE_HDIM128 -DFLASHATTENTION_DISABLE_HDIM192 -DFLASHATTENTION_DISABLE_HDIM256 -DFLASHATTENTION_DISABLE_SM8x -DFLASHATTENTION_DISABLE_HDIMDIFF192 -DFLASHATTENTION_PACKGQA_ONLY -DFLASHATTENTION_VARLEN_ONLY -DTORCH_API_INCLUDE_EXTENSION_H -DTORCH_EXTENSION_NAME=flash_attn_3_cuda
+ptxas info    : 12 bytes gmem
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi64EEESA_SA_EEELi512ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb0ELb0ELb1ELb0ELb0ESC_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi512EEESA_EEES9_SC_SE_Li256ELb0ELb1ELb0ELb0ELi1EEENS1_29StaticPersistentTileSchedulerILb0EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi64EEESA_SA_EEELi512ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb0ELb0ELb1ELb0ELb0ESC_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi512EEESA_EEES9_SC_SE_Li256ELb0ELb1ELb0ELb0ELi1EEENS1_29StaticPersistentTileSchedulerILb0EEEEEEEEEvNT_6ParamsE
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 168 registers, used 16 barriers
+ptxas info    : Compile time = 512.324 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi64EEESA_SA_EEELi512ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb0ELb0ELb1ELb0ELb0ESC_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi512EEESA_EEES9_SC_SE_Li256ELb0ELb1ELb0ELb0ELi1EEENS1_30DynamicPersistentTileSchedulerILi256ELi128ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi64EEESA_SA_EEELi512ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb0ELb0ELb1ELb0ELb0ESC_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi512EEESA_EEES9_SC_SE_Li256ELb0ELb1ELb0ELb0ELi1EEENS1_30DynamicPersistentTileSchedulerILi256ELi128ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE
+    32 bytes stack frame, 44 bytes spill stores, 44 bytes spill loads
+ptxas info    : Used 168 registers, used 16 barriers, 32 bytes cumulative stack size
+ptxas info    : Compile time = 530.587 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi64EEESA_SA_EEELi512ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb0ELb0ELb1ELb0ELb0ESC_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi512EEESA_EEES9_SC_SE_Li256ELb0ELb1ELb0ELb0ELi1EEENS1_38PartitionStaticPersistentTileSchedulerEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi64EEESA_SA_EEELi512ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb0ELb0ELb1ELb0ELb0ESC_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi512EEESA_EEES9_SC_SE_Li256ELb0ELb1ELb0ELb0ELi1EEENS1_38PartitionStaticPersistentTileSchedulerEEEEEEEvNT_6ParamsE
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 168 registers, used 16 barriers
+ptxas info    : Compile time = 521.703 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi64EEESA_SA_EEELi512ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb0ELb0ELb1ELb0ELb0ESC_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi512EEESA_EEES9_SC_SE_Li256ELb0ELb1ELb0ELb0ELi1EEENS1_39PartitionDynamicPersistentTileSchedulerILi256ELi128ELb1ELb1EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi64EEESA_SA_EEELi512ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb0ELb0ELb1ELb0ELb0ESC_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi512EEESA_EEES9_SC_SE_Li256ELb0ELb1ELb0ELb0ELi1EEENS1_39PartitionDynamicPersistentTileSchedulerILi256ELi128ELb1ELb1EEEEEEEEEvNT_6ParamsE
+    24 bytes stack frame, 28 bytes spill stores, 20 bytes spill loads
+ptxas info    : Used 168 registers, used 16 barriers, 24 bytes cumulative stack size
+ptxas info    : Compile time = 555.610 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi64EEESA_SA_EEELi512ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb1ELb0ELb0ELb1ELb0ELb0ESC_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi512EEESA_EEES9_SC_SE_Li256ELb0ELb1ELb0ELb0ELi1EEENS1_29StaticPersistentTileSchedulerILb0EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi64EEESA_SA_EEELi512ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb1ELb0ELb0ELb1ELb0ELb0ESC_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi512EEESA_EEES9_SC_SE_Li256ELb0ELb1ELb0ELb0ELi1EEENS1_29StaticPersistentTileSchedulerILb0EEEEEEEEEvNT_6ParamsE
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 168 registers, used 16 barriers
+ptxas info    : Compile time = 682.851 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi64EEESA_SA_EEELi512ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb1ELb0ELb0ELb1ELb0ELb0ESC_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi512EEESA_EEES9_SC_SE_Li256ELb0ELb1ELb0ELb0ELi1EEENS1_38PartitionStaticPersistentTileSchedulerEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi64EEESA_SA_EEELi512ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb1ELb0ELb0ELb1ELb0ELb0ESC_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi512EEESA_EEES9_SC_SE_Li256ELb0ELb1ELb0ELb0ELi1EEENS1_38PartitionStaticPersistentTileSchedulerEEEEEEEvNT_6ParamsE
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 168 registers, used 16 barriers
+ptxas info    : Compile time = 701.645 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi64EEESA_SA_EEELi512ENS_10bfloat16_tEfNS_4arch4Sm90ELb1ELb0ELb0ELb0ELb1ELb0ELb0ELb0ELb0ELb1ELb0ELb0ESC_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi512EEESA_EEES9_SC_SE_Li256ELb0ELb1ELb0ELb0ELi1EEENS1_30DynamicPersistentTileSchedulerILi256ELi128ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi64EEESA_SA_EEELi512ENS_10bfloat16_tEfNS_4arch4Sm90ELb1ELb0ELb0ELb0ELb1ELb0ELb0ELb0ELb0ELb1ELb0ELb0ESC_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi512EEESA_EEES9_SC_SE_Li256ELb0ELb1ELb0ELb0ELi1EEENS1_30DynamicPersistentTileSchedulerILi256ELi128ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE
+    16 bytes stack frame, 16 bytes spill stores, 16 bytes spill loads
+ptxas info    : Used 168 registers, used 16 barriers, 16 bytes cumulative stack size
+ptxas info    : Compile time = 739.795 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi64EEESA_SA_EEELi512ENS_10bfloat16_tEfNS_4arch4Sm90ELb1ELb0ELb0ELb0ELb1ELb0ELb1ELb0ELb0ELb1ELb0ELb0ESC_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi512EEESA_EEES9_SC_SE_Li256ELb0ELb1ELb0ELb0ELi1EEENS1_30DynamicPersistentTileSchedulerILi256ELi128ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi64EEESA_SA_EEELi512ENS_10bfloat16_tEfNS_4arch4Sm90ELb1ELb0ELb0ELb0ELb1ELb0ELb1ELb0ELb0ELb1ELb0ELb0ESC_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_NS7_ILi512EEESA_EEES9_SC_SE_Li256ELb0ELb1ELb0ELb0ELi1EEENS1_30DynamicPersistentTileSchedulerILi256ELi128ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE
+    40 bytes stack frame, 72 bytes spill stores, 80 bytes spill loads
+ptxas info    : Used 168 registers, used 16 barriers, 40 bytes cumulative stack size
+ptxas info    : Compile time = 1105.062 ms
+/workspace/vllm-fa/csrc/cutlass/include/cutlass/platform/platform.h:599:33: warning: ‘long4’ is deprecated: use long4_16a or long4_32a [-Wdeprecated-declarations]
+  599 | struct alignment_of<long4> {
+      |                                 ^    
+In file included from /usr/local/cuda/include/driver_types.h:61,
+                 from /usr/local/cuda/include/builtin_types.h:59,
+                 from /usr/local/cuda/include/crt/host_runtime.h:58,
+                 from /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h:218:
+/usr/local/cuda/include/vector_types.h:535:98: note: declared here
+  535 | typedef __device_builtin__ struct long4 __VECTOR_TYPE_DEPRECATED__("use long4_16a or long4_32a") long4;
+      |                                                                                                  ^~~~~
+/workspace/vllm-fa/csrc/cutlass/include/cutlass/platform/platform.h:603:33: warning: ‘ulong4’ is deprecated: use ulong4_16a or ulong4_32a [-Wdeprecated-declarations]
+  603 | struct alignment_of<ulong4> {
+      |                                 ^     
+/usr/local/cuda/include/vector_types.h:536:101: note: declared here
+  536 | typedef __device_builtin__ struct ulong4 __VECTOR_TYPE_DEPRECATED__("use ulong4_16a or ulong4_32a") ulong4;
+      |                                                                                                     ^~~~~~
+/workspace/vllm-fa/csrc/cutlass/include/cutlass/platform/platform.h:619:33: warning: ‘longlong4’ is deprecated: use longlong4_16a or longlong4_32a [-Wdeprecated-declarations]
+  619 | struct alignment_of<longlong4> {
+      |                                 ^        
+/usr/local/cuda/include/vector_types.h:553:110: note: declared here
+  553 | typedef __device_builtin__ struct longlong4 __VECTOR_TYPE_DEPRECATED__("use longlong4_16a or longlong4_32a") longlong4;
+      |                                                                                                              ^~~~~~~~~
+/workspace/vllm-fa/csrc/cutlass/include/cutlass/platform/platform.h:623:33: warning: ‘ulonglong4’ is deprecated: use ulonglong4_16a or ulonglong4_32a [-Wdeprecated-declarations]
+  623 | struct alignment_of<ulonglong4> {
+      |                                 ^         
+/usr/local/cuda/include/vector_types.h:554:113: note: declared here
+  554 | typedef __device_builtin__ struct ulonglong4 __VECTOR_TYPE_DEPRECATED__("use ulonglong4_16a or ulonglong4_32a") ulonglong4;
+      |                                                                                                                 ^~~~~~~~~~
+/workspace/vllm-fa/csrc/cutlass/include/cutlass/platform/platform.h:627:33: warning: ‘double4’ is deprecated: use double4_16a or double4_32a [-Wdeprecated-declarations]
+  627 | struct alignment_of<double4> {
+      |                                 ^      
+/usr/local/cuda/include/vector_types.h:564:104: note: declared here
+  564 | typedef __device_builtin__ struct double4 __VECTOR_TYPE_DEPRECATED__("use double4_16a or double4_32a") double4;
+      |                                                                                                        ^~~~~~~
+[9/10] /usr/local/cuda/bin/nvcc --generate-dependencies-with-compile --dependency-output /workspace/flashinfer-mla/reports/h200_bringup_20260907/fa3_build/instantiations/flash_fwd_hdim64_bf16_packgqa_sm90.o.d -I/workspace/vllm-fa/hopper -I/workspace/vllm-fa/partition_kv/csrc -I/workspace/vllm-fa/csrc/cutlass/include -I/usr/local/lib/python3.12/dist-packages/torch/include -I/usr/local/lib/python3.12/dist-packages/torch/include/torch/csrc/api/include -I/usr/local/cuda/include -I/workspace/vllm-fa/.venv/include -I/usr/include/python3.12 -c -c /workspace/vllm-fa/hopper/instantiations/flash_fwd_hdim64_bf16_packgqa_sm90.cu -o /workspace/flashinfer-mla/reports/h200_bringup_20260907/fa3_build/instantiations/flash_fwd_hdim64_bf16_packgqa_sm90.o -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_BFLOAT16_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ --expt-relaxed-constexpr --compiler-options ''"'"'-fPIC'"'"'' --threads 1 -O3 -std=c++17 --ftemplate-backtrace-limit=0 --use_fast_math --resource-usage -lineinfo -DCUTE_SM90_EXTENDED_MMA_SHAPES_ENABLED -DCUTLASS_ENABLE_GDC_FOR_SM90 -DCUTLASS_DEBUG_TRACE_LEVEL=0 -DNDEBUG -gencode arch=compute_90a,code=sm_90a -gencode arch=compute_90a,code=compute_90a -DFLASHATTENTION_DISABLE_BACKWARD -DFLASHATTENTION_DISABLE_SPLIT -DFLASHATTENTION_DISABLE_APPENDKV -DFLASHATTENTION_DISABLE_LOCAL -DFLASHATTENTION_DISABLE_SOFTCAP -DFLASHATTENTION_DISABLE_FP16 -DFLASHATTENTION_DISABLE_FP8 -DFLASHATTENTION_DISABLE_VARLEN -DFLASHATTENTION_DISABLE_CLUSTER -DFLASHATTENTION_DISABLE_HDIM96 -DFLASHATTENTION_DISABLE_HDIM128 -DFLASHATTENTION_DISABLE_HDIM192 -DFLASHATTENTION_DISABLE_HDIM256 -DFLASHATTENTION_DISABLE_SM8x -DFLASHATTENTION_DISABLE_HDIMDIFF192 -DFLASHATTENTION_PACKGQA_ONLY -DFLASHATTENTION_VARLEN_ONLY -DTORCH_API_INCLUDE_EXTENSION_H -DTORCH_EXTENSION_NAME=flash_attn_3_cuda
+ptxas info    : 12 bytes gmem
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEESA_NS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb1ELb1ELb0ELb0ESD_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SB_SA_EEES9_SD_SF_Li384ELb0ELb1ELb0ELb0ELi1EEENS1_29StaticPersistentTileSchedulerILb0EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEESA_NS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb1ELb1ELb0ELb0ESD_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SB_SA_EEES9_SD_SF_Li384ELb0ELb1ELb0ELb0ELi1EEENS1_29StaticPersistentTileSchedulerILb0EEEEEEEEEvNT_6ParamsE
+    24 bytes stack frame, 20 bytes spill stores, 20 bytes spill loads
+ptxas info    : Used 128 registers, used 16 barriers, 24 bytes cumulative stack size
+ptxas info    : Compile time = 249.275 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEESA_NS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb1ELb1ELb0ELb0ESD_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SB_SA_EEES9_SD_SF_Li384ELb0ELb1ELb0ELb0ELi1EEENS1_30DynamicPersistentTileSchedulerILi384ELi128ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEESA_NS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb1ELb1ELb0ELb0ESD_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SB_SA_EEES9_SD_SF_Li384ELb0ELb1ELb0ELb0ELi1EEENS1_30DynamicPersistentTileSchedulerILi384ELi128ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 128 registers, used 16 barriers
+ptxas info    : Compile time = 254.192 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEESA_NS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb1ELb1ELb0ELb0ESD_Li4EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SB_SA_EEES9_SD_SF_Li384ELb0ELb1ELb0ELb0ELi4EEENS1_29StaticPersistentTileSchedulerILb0EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEESA_NS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb1ELb1ELb0ELb0ESD_Li4EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SB_SA_EEES9_SD_SF_Li384ELb0ELb1ELb0ELb0ELi4EEENS1_29StaticPersistentTileSchedulerILb0EEEEEEEEEvNT_6ParamsE
+    16 bytes stack frame, 16 bytes spill stores, 16 bytes spill loads
+ptxas info    : Used 128 registers, used 16 barriers, 16 bytes cumulative stack size
+ptxas info    : Compile time = 244.254 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEESA_NS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb1ELb1ELb0ELb0ESD_Li4EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SB_SA_EEES9_SD_SF_Li384ELb0ELb1ELb0ELb0ELi4EEENS1_30DynamicPersistentTileSchedulerILi384ELi32ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEESA_NS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb1ELb1ELb0ELb0ESD_Li4EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SB_SA_EEES9_SD_SF_Li384ELb0ELb1ELb0ELb0ELi4EEENS1_30DynamicPersistentTileSchedulerILi384ELi32ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE
+    8 bytes stack frame, 8 bytes spill stores, 8 bytes spill loads
+ptxas info    : Used 128 registers, used 16 barriers, 8 bytes cumulative stack size
+ptxas info    : Compile time = 249.134 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEESA_NS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb1ELb1ELb0ELb0ESD_Li8EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SB_SA_EEES9_SD_SF_Li384ELb0ELb1ELb0ELb0ELi8EEENS1_29StaticPersistentTileSchedulerILb0EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEESA_NS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb1ELb1ELb0ELb0ESD_Li8EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SB_SA_EEES9_SD_SF_Li384ELb0ELb1ELb0ELb0ELi8EEENS1_29StaticPersistentTileSchedulerILb0EEEEEEEEEvNT_6ParamsE
+    16 bytes stack frame, 16 bytes spill stores, 16 bytes spill loads
+ptxas info    : Used 128 registers, used 16 barriers, 16 bytes cumulative stack size
+ptxas info    : Compile time = 240.915 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEESA_NS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb1ELb1ELb0ELb0ESD_Li8EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SB_SA_EEES9_SD_SF_Li384ELb0ELb1ELb0ELb0ELi8EEENS1_30DynamicPersistentTileSchedulerILi384ELi32ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEESA_NS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb1ELb1ELb0ELb0ESD_Li8EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SB_SA_EEES9_SD_SF_Li384ELb0ELb1ELb0ELb0ELi8EEENS1_30DynamicPersistentTileSchedulerILi384ELi32ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE
+    8 bytes stack frame, 8 bytes spill stores, 8 bytes spill loads
+ptxas info    : Used 128 registers, used 16 barriers, 8 bytes cumulative stack size
+ptxas info    : Compile time = 248.360 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEESA_NS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb1ELb1ELb0ELb0ESD_Li16EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SB_SA_EEES9_SD_SF_Li384ELb0ELb1ELb0ELb0ELi16EEENS1_29StaticPersistentTileSchedulerILb0EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEESA_NS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb1ELb1ELb0ELb0ESD_Li16EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SB_SA_EEES9_SD_SF_Li384ELb0ELb1ELb0ELb0ELi16EEENS1_29StaticPersistentTileSchedulerILb0EEEEEEEEEvNT_6ParamsE
+    16 bytes stack frame, 16 bytes spill stores, 16 bytes spill loads
+ptxas info    : Used 128 registers, used 16 barriers, 16 bytes cumulative stack size
+ptxas info    : Compile time = 240.576 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEESA_NS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb1ELb1ELb0ELb0ESD_Li16EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SB_SA_EEES9_SD_SF_Li384ELb0ELb1ELb0ELb0ELi16EEENS1_30DynamicPersistentTileSchedulerILi384ELi32ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEESA_NS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb1ELb1ELb0ELb0ESD_Li16EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SB_SA_EEES9_SD_SF_Li384ELb0ELb1ELb0ELb0ELi16EEENS1_30DynamicPersistentTileSchedulerILi384ELi32ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE
+    8 bytes stack frame, 8 bytes spill stores, 8 bytes spill loads
+ptxas info    : Used 128 registers, used 16 barriers, 8 bytes cumulative stack size
+ptxas info    : Compile time = 242.629 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi64EEENS7_ILi192EEESA_EEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb1ELb1ELb1ELb0ELb0ESD_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SA_SB_EEES9_SD_SF_Li128ELb0ELb1ELb0ELb0ELi1EEENS1_29StaticPersistentTileSchedulerILb0EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi64EEENS7_ILi192EEESA_EEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb1ELb1ELb1ELb0ELb0ESD_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SA_SB_EEES9_SD_SF_Li128ELb0ELb1ELb0ELb0ELi1EEENS1_29StaticPersistentTileSchedulerILb0EEEEEEEEEvNT_6ParamsE
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 255 registers, used 9 barriers
+ptxas info    : Compile time = 233.454 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi64EEENS7_ILi192EEESA_EEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb1ELb1ELb1ELb0ELb0ESD_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SA_SB_EEES9_SD_SF_Li128ELb0ELb1ELb0ELb0ELi1EEENS1_30DynamicPersistentTileSchedulerILi128ELi128ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi64EEENS7_ILi192EEESA_EEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb0ELb0ELb0ELb1ELb1ELb1ELb0ELb0ESD_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SA_SB_EEES9_SD_SF_Li128ELb0ELb1ELb0ELb0ELi1EEENS1_30DynamicPersistentTileSchedulerILi128ELi128ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 255 registers, used 9 barriers
+ptxas info    : Compile time = 246.355 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEENS7_ILi128EEENS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb1ELb0ELb0ELb0ELb0ELb0ELb0ELb1ELb1ELb1ELb0ELb0ESE_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SC_SB_EEES9_SE_SG_Li384ELb0ELb1ELb0ELb0ELi1EEENS1_30DynamicPersistentTileSchedulerILi384ELi128ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEENS7_ILi128EEENS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb1ELb0ELb0ELb0ELb0ELb0ELb0ELb1ELb1ELb1ELb0ELb0ESE_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SC_SB_EEES9_SE_SG_Li384ELb0ELb1ELb0ELb0ELi1EEENS1_30DynamicPersistentTileSchedulerILi384ELi128ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 128 registers, used 16 barriers
+ptxas info    : Compile time = 381.261 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEENS7_ILi128EEENS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb1ELb0ELb0ELb0ELb0ELb0ELb0ELb1ELb1ELb1ELb0ELb0ESE_Li4EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SC_SB_EEES9_SE_SG_Li384ELb0ELb1ELb0ELb0ELi4EEENS1_30DynamicPersistentTileSchedulerILi384ELi32ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEENS7_ILi128EEENS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb1ELb0ELb0ELb0ELb0ELb0ELb0ELb1ELb1ELb1ELb0ELb0ESE_Li4EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SC_SB_EEES9_SE_SG_Li384ELb0ELb1ELb0ELb0ELi4EEENS1_30DynamicPersistentTileSchedulerILi384ELi32ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 128 registers, used 16 barriers
+ptxas info    : Compile time = 347.109 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEENS7_ILi128EEENS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb1ELb0ELb0ELb0ELb0ELb0ELb0ELb1ELb1ELb1ELb0ELb0ESE_Li8EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SC_SB_EEES9_SE_SG_Li384ELb0ELb1ELb0ELb0ELi8EEENS1_30DynamicPersistentTileSchedulerILi384ELi32ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEENS7_ILi128EEENS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb1ELb0ELb0ELb0ELb0ELb0ELb0ELb1ELb1ELb1ELb0ELb0ESE_Li8EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SC_SB_EEES9_SE_SG_Li384ELb0ELb1ELb0ELb0ELi8EEENS1_30DynamicPersistentTileSchedulerILi384ELi32ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 128 registers, used 16 barriers
+ptxas info    : Compile time = 356.554 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEENS7_ILi128EEENS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb1ELb0ELb0ELb0ELb0ELb0ELb0ELb1ELb1ELb1ELb0ELb0ESE_Li16EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SC_SB_EEES9_SE_SG_Li384ELb0ELb1ELb0ELb0ELi16EEENS1_30DynamicPersistentTileSchedulerILi384ELi32ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEENS7_ILi128EEENS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb1ELb0ELb0ELb0ELb0ELb0ELb0ELb1ELb1ELb1ELb0ELb0ESE_Li16EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SC_SB_EEES9_SE_SG_Li384ELb0ELb1ELb0ELb0ELi16EEENS1_30DynamicPersistentTileSchedulerILi384ELi32ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 128 registers, used 16 barriers
+ptxas info    : Compile time = 351.130 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi64EEENS7_ILi192EEESA_EEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb1ELb0ELb0ELb0ELb0ELb0ELb0ELb1ELb1ELb1ELb0ELb0ESD_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SA_SB_EEES9_SD_SF_Li128ELb0ELb1ELb0ELb0ELi1EEENS1_30DynamicPersistentTileSchedulerILi128ELi128ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi64EEENS7_ILi192EEESA_EEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb1ELb0ELb0ELb0ELb0ELb0ELb0ELb1ELb1ELb1ELb0ELb0ESD_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SA_SB_EEES9_SD_SF_Li128ELb0ELb1ELb0ELb0ELi1EEENS1_30DynamicPersistentTileSchedulerILi128ELi128ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 255 registers, used 9 barriers
+ptxas info    : Compile time = 571.587 ms
+/workspace/vllm-fa/csrc/cutlass/include/cutlass/platform/platform.h:599:33: warning: ‘long4’ is deprecated: use long4_16a or long4_32a [-Wdeprecated-declarations]
+  599 | struct alignment_of<long4> {
+      |                                 ^    
+In file included from /usr/local/cuda/include/driver_types.h:61,
+                 from /usr/local/cuda/include/builtin_types.h:59,
+                 from /usr/local/cuda/include/crt/host_runtime.h:58,
+                 from /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h:218:
+/usr/local/cuda/include/vector_types.h:535:98: note: declared here
+  535 | typedef __device_builtin__ struct long4 __VECTOR_TYPE_DEPRECATED__("use long4_16a or long4_32a") long4;
+      |                                                                                                  ^~~~~
+/workspace/vllm-fa/csrc/cutlass/include/cutlass/platform/platform.h:603:33: warning: ‘ulong4’ is deprecated: use ulong4_16a or ulong4_32a [-Wdeprecated-declarations]
+  603 | struct alignment_of<ulong4> {
+      |                                 ^     
+/usr/local/cuda/include/vector_types.h:536:101: note: declared here
+  536 | typedef __device_builtin__ struct ulong4 __VECTOR_TYPE_DEPRECATED__("use ulong4_16a or ulong4_32a") ulong4;
+      |                                                                                                     ^~~~~~
+/workspace/vllm-fa/csrc/cutlass/include/cutlass/platform/platform.h:619:33: warning: ‘longlong4’ is deprecated: use longlong4_16a or longlong4_32a [-Wdeprecated-declarations]
+  619 | struct alignment_of<longlong4> {
+      |                                 ^        
+/usr/local/cuda/include/vector_types.h:553:110: note: declared here
+  553 | typedef __device_builtin__ struct longlong4 __VECTOR_TYPE_DEPRECATED__("use longlong4_16a or longlong4_32a") longlong4;
+      |                                                                                                              ^~~~~~~~~
+/workspace/vllm-fa/csrc/cutlass/include/cutlass/platform/platform.h:623:33: warning: ‘ulonglong4’ is deprecated: use ulonglong4_16a or ulonglong4_32a [-Wdeprecated-declarations]
+  623 | struct alignment_of<ulonglong4> {
+      |                                 ^         
+/usr/local/cuda/include/vector_types.h:554:113: note: declared here
+  554 | typedef __device_builtin__ struct ulonglong4 __VECTOR_TYPE_DEPRECATED__("use ulonglong4_16a or ulonglong4_32a") ulonglong4;
+      |                                                                                                                 ^~~~~~~~~~
+/workspace/vllm-fa/csrc/cutlass/include/cutlass/platform/platform.h:627:33: warning: ‘double4’ is deprecated: use double4_16a or double4_32a [-Wdeprecated-declarations]
+  627 | struct alignment_of<double4> {
+      |                                 ^      
+/usr/local/cuda/include/vector_types.h:564:104: note: declared here
+  564 | typedef __device_builtin__ struct double4 __VECTOR_TYPE_DEPRECATED__("use double4_16a or double4_32a") double4;
+      |                                                                                                        ^~~~~~~
+[10/10] /usr/local/cuda/bin/nvcc --generate-dependencies-with-compile --dependency-output /workspace/flashinfer-mla/reports/h200_bringup_20260907/fa3_build/instantiations/flash_fwd_hdim64_bf16_paged_sm90.o.d -I/workspace/vllm-fa/hopper -I/workspace/vllm-fa/partition_kv/csrc -I/workspace/vllm-fa/csrc/cutlass/include -I/usr/local/lib/python3.12/dist-packages/torch/include -I/usr/local/lib/python3.12/dist-packages/torch/include/torch/csrc/api/include -I/usr/local/cuda/include -I/workspace/vllm-fa/.venv/include -I/usr/include/python3.12 -c -c /workspace/vllm-fa/hopper/instantiations/flash_fwd_hdim64_bf16_paged_sm90.cu -o /workspace/flashinfer-mla/reports/h200_bringup_20260907/fa3_build/instantiations/flash_fwd_hdim64_bf16_paged_sm90.o -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_BFLOAT16_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ --expt-relaxed-constexpr --compiler-options ''"'"'-fPIC'"'"'' --threads 1 -O3 -std=c++17 --ftemplate-backtrace-limit=0 --use_fast_math --resource-usage -lineinfo -DCUTE_SM90_EXTENDED_MMA_SHAPES_ENABLED -DCUTLASS_ENABLE_GDC_FOR_SM90 -DCUTLASS_DEBUG_TRACE_LEVEL=0 -DNDEBUG -gencode arch=compute_90a,code=sm_90a -gencode arch=compute_90a,code=compute_90a -DFLASHATTENTION_DISABLE_BACKWARD -DFLASHATTENTION_DISABLE_SPLIT -DFLASHATTENTION_DISABLE_APPENDKV -DFLASHATTENTION_DISABLE_LOCAL -DFLASHATTENTION_DISABLE_SOFTCAP -DFLASHATTENTION_DISABLE_FP16 -DFLASHATTENTION_DISABLE_FP8 -DFLASHATTENTION_DISABLE_VARLEN -DFLASHATTENTION_DISABLE_CLUSTER -DFLASHATTENTION_DISABLE_HDIM96 -DFLASHATTENTION_DISABLE_HDIM128 -DFLASHATTENTION_DISABLE_HDIM192 -DFLASHATTENTION_DISABLE_HDIM256 -DFLASHATTENTION_DISABLE_SM8x -DFLASHATTENTION_DISABLE_HDIMDIFF192 -DFLASHATTENTION_PACKGQA_ONLY -DFLASHATTENTION_VARLEN_ONLY -DTORCH_API_INCLUDE_EXTENSION_H -DTORCH_EXTENSION_NAME=flash_attn_3_cuda
+ptxas info    : 12 bytes gmem
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEENS7_ILi160EEENS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb0ELb1ELb1ELb0ELb0ESE_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SC_SB_EEES9_SE_SG_Li384ELb0ELb1ELb0ELb0ELi1EEENS1_29StaticPersistentTileSchedulerILb0EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEENS7_ILi160EEENS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb0ELb1ELb1ELb0ELb0ESE_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SC_SB_EEES9_SE_SG_Li384ELb0ELb1ELb0ELb0ELi1EEENS1_29StaticPersistentTileSchedulerILb0EEEEEEEEEvNT_6ParamsE
+    8 bytes stack frame, 8 bytes spill stores, 8 bytes spill loads
+ptxas info    : Used 128 registers, used 16 barriers, 8 bytes cumulative stack size
+ptxas info    : Compile time = 379.136 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEENS7_ILi160EEENS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb0ELb1ELb1ELb0ELb0ESE_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SC_SB_EEES9_SE_SG_Li384ELb0ELb1ELb0ELb0ELi1EEENS1_30DynamicPersistentTileSchedulerILi384ELi128ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEENS7_ILi160EEENS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb0ELb1ELb1ELb0ELb0ESE_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SC_SB_EEES9_SE_SG_Li384ELb0ELb1ELb0ELb0ELi1EEENS1_30DynamicPersistentTileSchedulerILi384ELi128ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE
+    104 bytes stack frame, 196 bytes spill stores, 260 bytes spill loads
+ptxas info    : Used 128 registers, used 16 barriers, 104 bytes cumulative stack size
+ptxas info    : Compile time = 381.363 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEENS7_ILi160EEENS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb0ELb1ELb1ELb0ELb0ESE_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SC_SB_EEES9_SE_SG_Li384ELb0ELb1ELb0ELb0ELi1EEENS1_38PartitionStaticPersistentTileSchedulerEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEENS7_ILi160EEENS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb0ELb1ELb1ELb0ELb0ESE_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SC_SB_EEES9_SE_SG_Li384ELb0ELb1ELb0ELb0ELi1EEENS1_38PartitionStaticPersistentTileSchedulerEEEEEEEvNT_6ParamsE
+    16 bytes stack frame, 16 bytes spill stores, 16 bytes spill loads
+ptxas info    : Used 128 registers, used 16 barriers, 16 bytes cumulative stack size
+ptxas info    : Compile time = 381.796 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEENS7_ILi160EEENS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb0ELb1ELb1ELb0ELb0ESE_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SC_SB_EEES9_SE_SG_Li384ELb0ELb1ELb0ELb0ELi1EEENS1_39PartitionDynamicPersistentTileSchedulerILi384ELi128ELb1ELb1EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEENS7_ILi160EEENS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb0ELb1ELb1ELb0ELb0ESE_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SC_SB_EEES9_SE_SG_Li384ELb0ELb1ELb0ELb0ELi1EEENS1_39PartitionDynamicPersistentTileSchedulerILi384ELi128ELb1ELb1EEEEEEEEEvNT_6ParamsE
+    104 bytes stack frame, 204 bytes spill stores, 264 bytes spill loads
+ptxas info    : Used 128 registers, used 16 barriers, 104 bytes cumulative stack size
+ptxas info    : Compile time = 399.252 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEENS7_ILi160EEENS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb0ELb1ELb1ELb0ELb0ESE_Li4EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SC_SB_EEES9_SE_SG_Li384ELb0ELb1ELb0ELb0ELi4EEENS1_29StaticPersistentTileSchedulerILb0EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEENS7_ILi160EEENS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb0ELb1ELb1ELb0ELb0ESE_Li4EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SC_SB_EEES9_SE_SG_Li384ELb0ELb1ELb0ELb0ELi4EEENS1_29StaticPersistentTileSchedulerILb0EEEEEEEEEvNT_6ParamsE
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 128 registers, used 16 barriers
+ptxas info    : Compile time = 365.046 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEENS7_ILi160EEENS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb0ELb1ELb1ELb0ELb0ESE_Li4EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SC_SB_EEES9_SE_SG_Li384ELb0ELb1ELb0ELb0ELi4EEENS1_30DynamicPersistentTileSchedulerILi384ELi128ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEENS7_ILi160EEENS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb0ELb1ELb1ELb0ELb0ESE_Li4EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SC_SB_EEES9_SE_SG_Li384ELb0ELb1ELb0ELb0ELi4EEENS1_30DynamicPersistentTileSchedulerILi384ELi128ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 128 registers, used 16 barriers
+ptxas info    : Compile time = 381.012 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEENS7_ILi160EEENS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb0ELb1ELb1ELb0ELb0ESE_Li4EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SC_SB_EEES9_SE_SG_Li384ELb0ELb1ELb0ELb0ELi4EEENS1_38PartitionStaticPersistentTileSchedulerEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEENS7_ILi160EEENS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb0ELb1ELb1ELb0ELb0ESE_Li4EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SC_SB_EEES9_SE_SG_Li384ELb0ELb1ELb0ELb0ELi4EEENS1_38PartitionStaticPersistentTileSchedulerEEEEEEEvNT_6ParamsE
+    8 bytes stack frame, 8 bytes spill stores, 8 bytes spill loads
+ptxas info    : Used 128 registers, used 16 barriers, 8 bytes cumulative stack size
+ptxas info    : Compile time = 385.874 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEENS7_ILi160EEENS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb0ELb1ELb1ELb0ELb0ESE_Li4EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SC_SB_EEES9_SE_SG_Li384ELb0ELb1ELb0ELb0ELi4EEENS1_39PartitionDynamicPersistentTileSchedulerILi384ELi128ELb1ELb1EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEENS7_ILi160EEENS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb0ELb1ELb1ELb0ELb0ESE_Li4EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SC_SB_EEES9_SE_SG_Li384ELb0ELb1ELb0ELb0ELi4EEENS1_39PartitionDynamicPersistentTileSchedulerILi384ELi128ELb1ELb1EEEEEEEEEvNT_6ParamsE
+    8 bytes stack frame, 8 bytes spill stores, 4 bytes spill loads
+ptxas info    : Used 128 registers, used 16 barriers, 8 bytes cumulative stack size
+ptxas info    : Compile time = 383.329 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEENS7_ILi160EEENS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb0ELb1ELb1ELb0ELb0ESE_Li8EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SC_SB_EEES9_SE_SG_Li384ELb0ELb1ELb0ELb0ELi8EEENS1_29StaticPersistentTileSchedulerILb0EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEENS7_ILi160EEENS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb0ELb1ELb1ELb0ELb0ESE_Li8EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SC_SB_EEES9_SE_SG_Li384ELb0ELb1ELb0ELb0ELi8EEENS1_29StaticPersistentTileSchedulerILb0EEEEEEEEEvNT_6ParamsE
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 128 registers, used 16 barriers
+ptxas info    : Compile time = 347.512 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEENS7_ILi160EEENS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb0ELb1ELb1ELb0ELb0ESE_Li8EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SC_SB_EEES9_SE_SG_Li384ELb0ELb1ELb0ELb0ELi8EEENS1_30DynamicPersistentTileSchedulerILi384ELi128ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEENS7_ILi160EEENS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb0ELb1ELb1ELb0ELb0ESE_Li8EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SC_SB_EEES9_SE_SG_Li384ELb0ELb1ELb0ELb0ELi8EEENS1_30DynamicPersistentTileSchedulerILi384ELi128ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 128 registers, used 16 barriers
+ptxas info    : Compile time = 360.506 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEENS7_ILi160EEENS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb0ELb1ELb1ELb0ELb0ESE_Li8EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SC_SB_EEES9_SE_SG_Li384ELb0ELb1ELb0ELb0ELi8EEENS1_38PartitionStaticPersistentTileSchedulerEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEENS7_ILi160EEENS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb0ELb1ELb1ELb0ELb0ESE_Li8EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SC_SB_EEES9_SE_SG_Li384ELb0ELb1ELb0ELb0ELi8EEENS1_38PartitionStaticPersistentTileSchedulerEEEEEEEvNT_6ParamsE
+    8 bytes stack frame, 8 bytes spill stores, 8 bytes spill loads
+ptxas info    : Used 128 registers, used 16 barriers, 8 bytes cumulative stack size
+ptxas info    : Compile time = 370.106 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEENS7_ILi160EEENS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb0ELb1ELb1ELb0ELb0ESE_Li8EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SC_SB_EEES9_SE_SG_Li384ELb0ELb1ELb0ELb0ELi8EEENS1_39PartitionDynamicPersistentTileSchedulerILi384ELi128ELb1ELb1EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEENS7_ILi160EEENS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb0ELb1ELb1ELb0ELb0ESE_Li8EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SC_SB_EEES9_SE_SG_Li384ELb0ELb1ELb0ELb0ELi8EEENS1_39PartitionDynamicPersistentTileSchedulerILi384ELi128ELb1ELb1EEEEEEEEEvNT_6ParamsE
+    8 bytes stack frame, 8 bytes spill stores, 4 bytes spill loads
+ptxas info    : Used 128 registers, used 16 barriers, 8 bytes cumulative stack size
+ptxas info    : Compile time = 378.304 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEENS7_ILi160EEENS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb0ELb1ELb1ELb0ELb0ESE_Li16EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SC_SB_EEES9_SE_SG_Li384ELb0ELb1ELb0ELb0ELi16EEENS1_29StaticPersistentTileSchedulerILb0EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEENS7_ILi160EEENS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb0ELb1ELb1ELb0ELb0ESE_Li16EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SC_SB_EEES9_SE_SG_Li384ELb0ELb1ELb0ELb0ELi16EEENS1_29StaticPersistentTileSchedulerILb0EEEEEEEEEvNT_6ParamsE
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 128 registers, used 16 barriers
+ptxas info    : Compile time = 356.954 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEENS7_ILi160EEENS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb0ELb1ELb1ELb0ELb0ESE_Li16EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SC_SB_EEES9_SE_SG_Li384ELb0ELb1ELb0ELb0ELi16EEENS1_30DynamicPersistentTileSchedulerILi384ELi128ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEENS7_ILi160EEENS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb0ELb1ELb1ELb0ELb0ESE_Li16EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SC_SB_EEES9_SE_SG_Li384ELb0ELb1ELb0ELb0ELi16EEENS1_30DynamicPersistentTileSchedulerILi384ELi128ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 128 registers, used 16 barriers
+ptxas info    : Compile time = 356.633 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEENS7_ILi160EEENS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb0ELb1ELb1ELb0ELb0ESE_Li16EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SC_SB_EEES9_SE_SG_Li384ELb0ELb1ELb0ELb0ELi16EEENS1_38PartitionStaticPersistentTileSchedulerEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEENS7_ILi160EEENS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb0ELb1ELb1ELb0ELb0ESE_Li16EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SC_SB_EEES9_SE_SG_Li384ELb0ELb1ELb0ELb0ELi16EEENS1_38PartitionStaticPersistentTileSchedulerEEEEEEEvNT_6ParamsE
+    8 bytes stack frame, 8 bytes spill stores, 8 bytes spill loads
+ptxas info    : Used 128 registers, used 16 barriers, 8 bytes cumulative stack size
+ptxas info    : Compile time = 360.593 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEENS7_ILi160EEENS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb0ELb1ELb1ELb0ELb0ESE_Li16EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SC_SB_EEES9_SE_SG_Li384ELb0ELb1ELb0ELb0ELi16EEENS1_39PartitionDynamicPersistentTileSchedulerILi384ELi128ELb1ELb1EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEENS7_ILi160EEENS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb0ELb1ELb1ELb0ELb0ESE_Li16EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SC_SB_EEES9_SE_SG_Li384ELb0ELb1ELb0ELb0ELi16EEENS1_39PartitionDynamicPersistentTileSchedulerILi384ELi128ELb1ELb1EEEEEEEEEvNT_6ParamsE
+    8 bytes stack frame, 8 bytes spill stores, 4 bytes spill loads
+ptxas info    : Used 128 registers, used 16 barriers, 8 bytes cumulative stack size
+ptxas info    : Compile time = 376.770 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi64EEENS7_ILi192EEESA_EEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb1ELb1ELb1ELb0ELb0ESD_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SA_SB_EEES9_SD_SF_Li128ELb0ELb1ELb0ELb0ELi1EEENS1_29StaticPersistentTileSchedulerILb0EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi64EEENS7_ILi192EEESA_EEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb1ELb1ELb1ELb0ELb0ESD_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SA_SB_EEES9_SD_SF_Li128ELb0ELb1ELb0ELb0ELi1EEENS1_29StaticPersistentTileSchedulerILb0EEEEEEEEEvNT_6ParamsE
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 255 registers, used 9 barriers
+ptxas info    : Compile time = 424.949 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi64EEENS7_ILi192EEESA_EEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb1ELb1ELb1ELb0ELb0ESD_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SA_SB_EEES9_SD_SF_Li128ELb0ELb1ELb0ELb0ELi1EEENS1_30DynamicPersistentTileSchedulerILi128ELi128ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi64EEENS7_ILi192EEESA_EEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb1ELb1ELb1ELb0ELb0ESD_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SA_SB_EEES9_SD_SF_Li128ELb0ELb1ELb0ELb0ELi1EEENS1_30DynamicPersistentTileSchedulerILi128ELi128ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE
+    24 bytes stack frame, 24 bytes spill stores, 40 bytes spill loads
+ptxas info    : Used 255 registers, used 9 barriers, 24 bytes cumulative stack size
+ptxas info    : Compile time = 441.091 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi64EEENS7_ILi192EEESA_EEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb1ELb1ELb1ELb0ELb0ESD_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SA_SB_EEES9_SD_SF_Li128ELb0ELb1ELb0ELb0ELi1EEENS1_38PartitionStaticPersistentTileSchedulerEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi64EEENS7_ILi192EEESA_EEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb1ELb1ELb1ELb0ELb0ESD_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SA_SB_EEES9_SD_SF_Li128ELb0ELb1ELb0ELb0ELi1EEENS1_38PartitionStaticPersistentTileSchedulerEEEEEEEvNT_6ParamsE
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 255 registers, used 9 barriers
+ptxas info    : Compile time = 425.215 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi64EEENS7_ILi192EEESA_EEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb1ELb1ELb1ELb0ELb0ESD_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SA_SB_EEES9_SD_SF_Li128ELb0ELb1ELb0ELb0ELi1EEENS1_39PartitionDynamicPersistentTileSchedulerILi128ELi128ELb1ELb1EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi64EEENS7_ILi192EEESA_EEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb0ELb0ELb0ELb0ELb1ELb0ELb0ELb1ELb1ELb1ELb0ELb0ESD_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SA_SB_EEES9_SD_SF_Li128ELb0ELb1ELb0ELb0ELi1EEENS1_39PartitionDynamicPersistentTileSchedulerILi128ELi128ELb1ELb1EEEEEEEEEvNT_6ParamsE
+    56 bytes stack frame, 68 bytes spill stores, 76 bytes spill loads
+ptxas info    : Used 255 registers, used 9 barriers, 56 bytes cumulative stack size
+ptxas info    : Compile time = 459.988 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEENS7_ILi128EEENS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb1ELb0ELb0ELb0ELb1ELb0ELb0ELb1ELb1ELb1ELb0ELb0ESE_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SC_SB_EEES9_SE_SG_Li384ELb0ELb1ELb0ELb0ELi1EEENS1_30DynamicPersistentTileSchedulerILi384ELi128ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEENS7_ILi128EEENS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb1ELb0ELb0ELb0ELb1ELb0ELb0ELb1ELb1ELb1ELb0ELb0ESE_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SC_SB_EEES9_SE_SG_Li384ELb0ELb1ELb0ELb0ELi1EEENS1_30DynamicPersistentTileSchedulerILi384ELi128ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE
+    64 bytes stack frame, 164 bytes spill stores, 180 bytes spill loads
+ptxas info    : Used 128 registers, used 16 barriers, 64 bytes cumulative stack size
+ptxas info    : Compile time = 483.311 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEENS7_ILi128EEENS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb1ELb0ELb0ELb0ELb1ELb0ELb0ELb1ELb1ELb1ELb0ELb0ESE_Li4EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SC_SB_EEES9_SE_SG_Li384ELb0ELb1ELb0ELb0ELi4EEENS1_30DynamicPersistentTileSchedulerILi384ELi128ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEENS7_ILi128EEENS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb1ELb0ELb0ELb0ELb1ELb0ELb0ELb1ELb1ELb1ELb0ELb0ESE_Li4EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SC_SB_EEES9_SE_SG_Li384ELb0ELb1ELb0ELb0ELi4EEENS1_30DynamicPersistentTileSchedulerILi384ELi128ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 128 registers, used 16 barriers
+ptxas info    : Compile time = 436.200 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEENS7_ILi128EEENS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb1ELb0ELb0ELb0ELb1ELb0ELb0ELb1ELb1ELb1ELb0ELb0ESE_Li8EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SC_SB_EEES9_SE_SG_Li384ELb0ELb1ELb0ELb0ELi8EEENS1_30DynamicPersistentTileSchedulerILi384ELi128ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEENS7_ILi128EEENS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb1ELb0ELb0ELb0ELb1ELb0ELb0ELb1ELb1ELb1ELb0ELb0ESE_Li8EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SC_SB_EEES9_SE_SG_Li384ELb0ELb1ELb0ELb0ELi8EEENS1_30DynamicPersistentTileSchedulerILi384ELi128ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 128 registers, used 16 barriers
+ptxas info    : Compile time = 449.042 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEENS7_ILi128EEENS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb1ELb0ELb0ELb0ELb1ELb0ELb0ELb1ELb1ELb1ELb0ELb0ESE_Li16EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SC_SB_EEES9_SE_SG_Li384ELb0ELb1ELb0ELb0ELi16EEENS1_30DynamicPersistentTileSchedulerILi384ELi128ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi192EEENS7_ILi128EEENS7_ILi64EEEEEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb1ELb0ELb0ELb0ELb1ELb0ELb0ELb1ELb1ELb1ELb0ELb0ESE_Li16EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SC_SB_EEES9_SE_SG_Li384ELb0ELb1ELb0ELb0ELi16EEENS1_30DynamicPersistentTileSchedulerILi384ELi128ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 128 registers, used 16 barriers
+ptxas info    : Compile time = 439.015 ms
+ptxas info    : Compiling entry function '_ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi64EEENS7_ILi192EEESA_EEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb1ELb0ELb0ELb0ELb1ELb0ELb0ELb1ELb1ELb1ELb0ELb0ESD_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SA_SB_EEES9_SD_SF_Li128ELb0ELb1ELb0ELb0ELi1EEENS1_30DynamicPersistentTileSchedulerILi128ELi128ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE' for 'sm_90a'
+ptxas info    : Function properties for _ZN7cutlass13device_kernelIN5flash20enable_sm90_or_laterINS1_16FlashAttnFwdSm90INS1_25CollectiveMainloopFwdSm90ILi2EN4cute5tupleIJNS5_1CILi1EEES8_S8_EEENS6_IJNS7_ILi64EEENS7_ILi192EEESA_EEELi64ENS_10bfloat16_tEfNS_4arch4Sm90ELb1ELb0ELb0ELb0ELb1ELb0ELb0ELb1ELb1ELb1ELb0ELb0ESD_Li1EEENS1_21CollectiveEpilogueFwdINS6_IJSA_SA_SB_EEES9_SD_SF_Li128ELb0ELb1ELb0ELb0ELi1EEENS1_30DynamicPersistentTileSchedulerILi128ELi128ELb0ELb1ELb1EEEEEEEEEvNT_6ParamsE
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 255 registers, used 9 barriers
+ptxas info    : Compile time = 799.766 ms
+/workspace/vllm-fa/csrc/cutlass/include/cutlass/platform/platform.h:599:33: warning: ‘long4’ is deprecated: use long4_16a or long4_32a [-Wdeprecated-declarations]
+  599 | struct alignment_of<long4> {
+      |                                 ^    
+In file included from /usr/local/cuda/include/driver_types.h:61,
+                 from /usr/local/cuda/include/builtin_types.h:59,
+                 from /usr/local/cuda/include/crt/host_runtime.h:58,
+                 from /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h:218:
+/usr/local/cuda/include/vector_types.h:535:98: note: declared here
+  535 | typedef __device_builtin__ struct long4 __VECTOR_TYPE_DEPRECATED__("use long4_16a or long4_32a") long4;
+      |                                                                                                  ^~~~~
+/workspace/vllm-fa/csrc/cutlass/include/cutlass/platform/platform.h:603:33: warning: ‘ulong4’ is deprecated: use ulong4_16a or ulong4_32a [-Wdeprecated-declarations]
+  603 | struct alignment_of<ulong4> {
+      |                                 ^     
+/usr/local/cuda/include/vector_types.h:536:101: note: declared here
+  536 | typedef __device_builtin__ struct ulong4 __VECTOR_TYPE_DEPRECATED__("use ulong4_16a or ulong4_32a") ulong4;
+      |                                                                                                     ^~~~~~
+/workspace/vllm-fa/csrc/cutlass/include/cutlass/platform/platform.h:619:33: warning: ‘longlong4’ is deprecated: use longlong4_16a or longlong4_32a [-Wdeprecated-declarations]
+  619 | struct alignment_of<longlong4> {
+      |                                 ^        
+/usr/local/cuda/include/vector_types.h:553:110: note: declared here
+  553 | typedef __device_builtin__ struct longlong4 __VECTOR_TYPE_DEPRECATED__("use longlong4_16a or longlong4_32a") longlong4;
+      |                                                                                                              ^~~~~~~~~
+/workspace/vllm-fa/csrc/cutlass/include/cutlass/platform/platform.h:623:33: warning: ‘ulonglong4’ is deprecated: use ulonglong4_16a or ulonglong4_32a [-Wdeprecated-declarations]
+  623 | struct alignment_of<ulonglong4> {
+      |                                 ^         
+/usr/local/cuda/include/vector_types.h:554:113: note: declared here
+  554 | typedef __device_builtin__ struct ulonglong4 __VECTOR_TYPE_DEPRECATED__("use ulonglong4_16a or ulonglong4_32a") ulonglong4;
+      |                                                                                                                 ^~~~~~~~~~
+/workspace/vllm-fa/csrc/cutlass/include/cutlass/platform/platform.h:627:33: warning: ‘double4’ is deprecated: use double4_16a or double4_32a [-Wdeprecated-declarations]
+  627 | struct alignment_of<double4> {
+      |                                 ^      
+/usr/local/cuda/include/vector_types.h:564:104: note: declared here
+  564 | typedef __device_builtin__ struct double4 __VECTOR_TYPE_DEPRECATED__("use double4_16a or double4_32a") double4;
+      |                                                                                                        ^~~~~~~
+x86_64-linux-gnu-g++ -fno-strict-overflow -Wsign-compare -DNDEBUG -g -O2 -Wall -shared -Wl,-O1 -Wl,-Bsymbolic-functions /workspace/flashinfer-mla/reports/h200_bringup_20260907/fa3_build/flash_api.o /workspace/flashinfer-mla/reports/h200_bringup_20260907/fa3_build/flash_prepare_scheduler.o /workspace/flashinfer-mla/reports/h200_bringup_20260907/fa3_build/instantiations/flash_fwd_hdim64_256_bf16_packgqa_sm90.o /workspace/flashinfer-mla/reports/h200_bringup_20260907/fa3_build/instantiations/flash_fwd_hdim64_256_bf16_paged_sm90.o /workspace/flashinfer-mla/reports/h200_bringup_20260907/fa3_build/instantiations/flash_fwd_hdim64_256_bf16_sm90.o /workspace/flashinfer-mla/reports/h200_bringup_20260907/fa3_build/instantiations/flash_fwd_hdim64_512_bf16_packgqa_sm90.o /workspace/flashinfer-mla/reports/h200_bringup_20260907/fa3_build/instantiations/flash_fwd_hdim64_512_bf16_paged_sm90.o /workspace/flashinfer-mla/reports/h200_bringup_20260907/fa3_build/instantiations/flash_fwd_hdim64_512_bf16_sm90.o /workspace/flashinfer-mla/reports/h200_bringup_20260907/fa3_build/instantiations/flash_fwd_hdim64_bf16_packgqa_sm90.o /workspace/flashinfer-mla/reports/h200_bringup_20260907/fa3_build/instantiations/flash_fwd_hdim64_bf16_paged_sm90.o -L/usr/local/lib/python3.12/dist-packages/torch/lib -L/usr/local/cuda/lib64 -L/usr/lib/x86_64-linux-gnu -lc10 -ltorch -ltorch_cpu -ltorch_python -lcudart -lc10_cuda -ltorch_cuda -o /workspace/flashinfer-mla/reports/h200_bringup_20260907/fa3_lib/flash_attn_3_cuda.cpython-312-x86_64-linux-gnu.so

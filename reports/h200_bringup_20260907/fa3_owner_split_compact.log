@@ -1,0 +1,17 @@
+[hfuse] cudaMalloc arena 64.00 GiB, hash base 0x21000000, P0=66, P1=66
+Traceback (most recent call last):
+  File "/workspace/vllm-fa/hopper/exp_h200/mla_partition_aware/run_partition_aware_mla.py", line 486, in <module>
+    main()
+  File "/workspace/vllm-fa/hopper/exp_h200/mla_partition_aware/run_partition_aware_mla.py", line 262, in main
+    ordinary = run_ordinary()
+               ^^^^^^^^^^^^^^
+  File "/workspace/vllm-fa/hopper/exp_h200/mla_partition_aware/run_partition_aware_mla.py", line 249, in run_ordinary
+    return flash_attn_with_kvcache(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/vllm-fa/hopper/flash_attn_interface.py", line 866, in flash_attn_with_kvcache
+    out, softmax_lse, *rest = _flash_attn_forward(
+                              ^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/vllm-fa/hopper/flash_attn_interface.py", line 102, in _flash_attn_forward
+    out, softmax_lse, *rest = flash_attn_3_cuda.fwd(
+                              ^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: This flash attention build does not support hdim != hdim_v when hdim <= 64

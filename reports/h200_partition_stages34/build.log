@@ -1,0 +1,6 @@
+BUILD True True
+<flashinfer.jit.attention.modules._BatchMLAModuleProxy object at 0x704e888a2ae0>
+BUILD True False
+<flashinfer.jit.attention.modules._BatchMLAModuleProxy object at 0x704e93733c50>
+BUILD False False
+<flashinfer.jit.attention.modules._BatchMLAModuleProxy object at 0x704e88611f10>

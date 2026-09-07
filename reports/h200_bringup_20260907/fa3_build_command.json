@@ -1,0 +1,31 @@
+{
+  "argv": [
+    "/workspace/vllm-fa/.venv/bin/python",
+    "setup.py",
+    "build_ext",
+    "--build-lib",
+    "/workspace/flashinfer-mla/reports/h200_bringup_20260907/fa3_lib",
+    "--build-temp",
+    "/workspace/flashinfer-mla/reports/h200_bringup_20260907/fa3_build"
+  ],
+  "cwd": "/workspace/vllm-fa/hopper",
+  "env": {
+    "FLASH_ATTENTION_DISABLE_VARLEN": "TRUE",
+    "FLASH_ATTENTION_DISABLE_SPLIT": "TRUE",
+    "FLASH_ATTENTION_DISABLE_APPENDKV": "TRUE",
+    "FLASH_ATTENTION_DISABLE_LOCAL": "TRUE",
+    "FLASH_ATTENTION_DISABLE_SOFTCAP": "TRUE",
+    "FLASH_ATTENTION_DISABLE_FP16": "TRUE",
+    "FLASH_ATTENTION_DISABLE_FP8": "TRUE",
+    "FLASH_ATTENTION_DISABLE_HDIM96": "TRUE",
+    "FLASH_ATTENTION_DISABLE_HDIM128": "TRUE",
+    "FLASH_ATTENTION_DISABLE_HDIM192": "TRUE",
+    "FLASH_ATTENTION_DISABLE_HDIM256": "TRUE",
+    "FLASH_ATTENTION_DISABLE_HDIMDIFF192": "TRUE",
+    "FLASH_ATTENTION_FORCE_BUILD": "TRUE",
+    "FLASH_ATTENTION_DISABLE_HDIMDIFF64": "FALSE",
+    "MAX_JOBS": "4",
+    "NVCC_THREADS": "1",
+    "OMP_NUM_THREADS": "4"
+  }
+}

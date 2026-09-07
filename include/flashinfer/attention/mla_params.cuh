@@ -24,6 +24,8 @@ namespace flashinfer {
 
 template <typename DTypeQ_, typename DTypeKV_, typename DTypeO_, typename IdType_>
 struct MLAParams {
+  static constexpr bool PARTITION_SCHEDULE = false;
+  static constexpr bool COMPACT_KV = false;
   using DTypeQ = DTypeQ_;
   using DTypeKV = DTypeKV_;
   using DTypeO = DTypeO_;

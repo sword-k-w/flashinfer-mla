@@ -7,6 +7,12 @@
 #include <flashinfer/fastdiv.cuh>
 #include <flashinfer/attention/variant_helper.cuh>
 #include <flashinfer/attention/mla_params.cuh>
+#ifdef FLASHINFER_MLA_PARTITION_SCHEDULE
+#include <flashinfer/attention/mla_partition.cuh>
+#define MLA_PARAMS_TYPE SM90PartitionMLAParams
+#else
+#define MLA_PARAMS_TYPE MLAParams
+#endif
 
 using namespace flashinfer;
 
@@ -28,6 +34,6 @@ constexpr int HEAD_DIM_KPE = {{ head_dim_kpe }};
 
 #define DISPATCH_context(DTypeQ, DTypeKV, DTypeO, IdType, MASK_MODE, HEAD_DIM_CKV, HEAD_DIM_KPE, Params, ...) \
   DISPATCH_MASK_MODE(mask_mode, MASK_MODE, { \
-    using Params = MLAParams<DTypeQ, DTypeKV, DTypeO, IdType>; \
+    using Params = MLA_PARAMS_TYPE<DTypeQ, DTypeKV, DTypeO, IdType>; \
     __VA_ARGS__(); \
   })

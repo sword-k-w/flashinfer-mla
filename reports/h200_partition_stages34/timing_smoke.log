@@ -1,0 +1,31 @@
+CAPACITY {"max_seqlen_k": 14913024, "arena_limit": 14913024, "hbm_limit": 16416960, "max_batch": 4, "max_sq": 4, "free_after_runtime": 80835903488, "device_total_bytes": 150109880320, "estimated_fixed_bytes": 891584512, "reserve_bytes": 4294967296, "arena_bytes": 68719476736} AXIS [512, 1024]
+START 1/8 B=2 Sq=1 Sk=512
+/usr/local/lib/python3.12/dist-packages/torch/profiler/profiler.py:272: UserWarning: Warning: Profiler clears events at the end of each cycle.Only events from the current cycle will be reported.To keep events across cycles, set acc_events=True.
+  _warn_once(
+USDT:2026-09-07 10:49:02 28765:28765 ActivityProfilerController.cpp:415] profiler_start
+USDT:2026-09-07 10:49:02 28765:28765 ActivityProfilerController.cpp:455] profiler_stop
+USDT:2026-09-07 10:49:02 28765:28765 ActivityProfilerController.cpp:415] profiler_start
+USDT:2026-09-07 10:49:02 28765:28765 ActivityProfilerController.cpp:455] profiler_stop
+USDT:2026-09-07 10:49:02 28765:28765 ActivityProfilerController.cpp:415] profiler_start
+USDT:2026-09-07 10:49:02 28765:28765 ActivityProfilerController.cpp:455] profiler_stop
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/workspace/flashinfer-mla/benchmarks/bench_sm90_mla_partition.py", line 454, in <module>
+    main()
+  File "/workspace/flashinfer-mla/benchmarks/bench_sm90_mla_partition.py", line 414, in main
+    rec = run_case(
+          ^^^^^^^^^
+  File "/workspace/flashinfer-mla/benchmarks/bench_sm90_mla_partition.py", line 213, in run_case
+    mode: TimedAttention(
+          ^^^^^^^^^^^^^^^
+  File "/workspace/flashinfer-mla/benchmarks/bench_sm90_mla_partition.py", line 66, in __init__
+    self.last.synchronize()
+  File "/usr/local/lib/python3.12/dist-packages/torch/cuda/streams.py", line 254, in synchronize
+    super().synchronize()
+torch.AcceleratorError: CUDA error: invalid argument
+Search for `cudaErrorInvalidValue' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+

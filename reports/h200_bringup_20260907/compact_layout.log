@@ -1,0 +1,35 @@
+[hfuse] arithmetic compact K/V layout: 0.3 MB logical K bytes, 2.1 MB logical V bytes; storage span 2.4 MB
+{
+  "status": "passed",
+  "scope": "partition_aware_mla_compact_layout_roundtrip",
+  "attention_launched": false,
+  "gpu": "NVIDIA H200",
+  "compute_capability": "9.0",
+  "dtype": "torch.bfloat16",
+  "batch_size": 2,
+  "seqlen_k": 1024,
+  "page_size": 64,
+  "num_pages": 32,
+  "num_kv_heads": 1,
+  "k_shape": [
+    32,
+    64,
+    1,
+    64
+  ],
+  "v_shape": [
+    32,
+    64,
+    1,
+    512
+  ],
+  "k_page_stride_bytes": 8192,
+  "v_page_stride_bytes": 65536,
+  "k_pool_span_bytes": 131072,
+  "v_pool_span_bytes": 1048576,
+  "k_logical_offset": 0,
+  "v_logical_offset": 131072,
+  "k_roundtrip_exact": true,
+  "v_roundtrip_exact": true
+}
+[hfuse] cudaMalloc arena 64.00 GiB, hash base 0x21000000, P0=66, P1=66

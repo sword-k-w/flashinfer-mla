@@ -1,0 +1,57 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.1.1, pluggy-1.6.0 -- /workspace/flashinfer-mla/.venv/bin/python
+cachedir: .pytest_cache
+hypothesis profile 'default'
+rootdir: /workspace/flashinfer-mla
+configfile: pytest.ini
+plugins: hypothesis-6.155.3
+collecting ... collected 35 items
+
+tests/attention/test_sm90_mla_partition.py::test_runtime_is_local_and_topology_is_consistent PASSED [  2%]
+tests/attention/test_sm90_mla_partition.py::test_compact_roundtrip[dtype0-owners0] PASSED [  5%]
+tests/attention/test_sm90_mla_partition.py::test_compact_roundtrip[dtype0-owners1] PASSED [  8%]
+tests/attention/test_sm90_mla_partition.py::test_compact_roundtrip[dtype0-owners2] PASSED [ 11%]
+tests/attention/test_sm90_mla_partition.py::test_compact_roundtrip[dtype1-owners0] PASSED [ 14%]
+tests/attention/test_sm90_mla_partition.py::test_compact_roundtrip[dtype1-owners1] PASSED [ 17%]
+tests/attention/test_sm90_mla_partition.py::test_compact_roundtrip[dtype1-owners2] PASSED [ 20%]
+tests/attention/test_sm90_mla_partition.py::test_partition_schedule_matches_fused[2-1-1024] PASSED [ 22%]
+tests/attention/test_sm90_mla_partition.py::test_partition_schedule_matches_fused[64-1-32768] PASSED [ 25%]
+tests/attention/test_sm90_mla_partition.py::test_partition_schedule_matches_fused[64-4-32768] PASSED [ 28%]
+tests/attention/test_sm90_mla_partition.py::test_partition_schedule_matches_fused[2-128-1024] PASSED [ 31%]
+tests/attention/test_sm90_mla_partition.py::test_partition_schedule_matches_fused[2-1-1048576] PASSED [ 34%]
+tests/attention/test_sm90_mla_partition.py::test_mixed_split_and_direct_against_reference PASSED [ 37%]
+tests/attention/test_sm90_mla_partition.py::test_repeated_static_sm_coverage_and_graph[False-False] PASSED [ 40%]
+tests/attention/test_sm90_mla_partition.py::test_repeated_static_sm_coverage_and_graph[False-True] PASSED [ 42%]
+tests/attention/test_sm90_mla_partition.py::test_repeated_static_sm_coverage_and_graph[True-False] PASSED [ 45%]
+tests/attention/test_sm90_mla_partition.py::test_repeated_static_sm_coverage_and_graph[True-True] PASSED [ 48%]
+tests/attention/test_sm90_mla_partition.py::test_validation_detects_missing_work PASSED [ 51%]
+tests/attention/test_sm90_mla_partition.py::test_unsupported_inputs_rejected PASSED [ 54%]
+tests/attention/test_sm90_mla_partition.py::test_compact_attention_loads_arena[2-1-1024] PASSED [ 57%]
+tests/attention/test_sm90_mla_partition.py::test_compact_attention_loads_arena[2-4-4096] PASSED [ 60%]
+tests/attention/test_sm90_mla_partition.py::test_compact_attention_loads_arena[2-128-1024] PASSED [ 62%]
+tests/attention/test_sm90_mla_partition.py::test_compact_attention_loads_arena[64-1-32768] PASSED [ 65%]
+tests/attention/test_sm90_mla_partition.py::test_noaudit_linear_schedule PASSED [ 68%]
+tests/attention/test_sm90_mla_separate_merge.py::test_separate_matches_fused_and_reference[q_lens0-kv_lens0-False-False-dtype0-split] PASSED [ 71%]
+tests/attention/test_sm90_mla_separate_merge.py::test_separate_matches_fused_and_reference[q_lens1-kv_lens1-True-True-dtype1-split] PASSED [ 74%]
+tests/attention/test_sm90_mla_separate_merge.py::test_separate_matches_fused_and_reference[q_lens2-kv_lens2-False-False-dtype2-direct] PASSED [ 77%]
+tests/attention/test_sm90_mla_separate_merge.py::test_separate_matches_fused_and_reference[q_lens3-kv_lens3-False-True-dtype3-mixed] PASSED [ 80%]
+tests/attention/test_sm90_mla_separate_merge.py::test_separate_matches_fused_and_reference[q_lens4-kv_lens4-True-False-dtype4-mixed] PASSED [ 82%]
+tests/attention/test_sm90_mla_separate_merge.py::test_separate_matches_fused_and_reference[q_lens5-kv_lens5-True-True-dtype5-split] PASSED [ 85%]
+tests/attention/test_sm90_mla_separate_merge.py::test_cuda_graph_replay[False-False] PASSED [ 88%]
+tests/attention/test_sm90_mla_separate_merge.py::test_cuda_graph_replay[False-True] PASSED [ 91%]
+tests/attention/test_sm90_mla_separate_merge.py::test_cuda_graph_replay[True-False] PASSED [ 94%]
+tests/attention/test_sm90_mla_separate_merge.py::test_cuda_graph_replay[True-True] PASSED [ 97%]
+tests/attention/test_sm90_mla_separate_merge.py::test_invalid_experimental_modes PASSED [100%]
+
+=============================== warnings summary ===============================
+tests/conftest.py:16
+tests/conftest.py:16
+  /workspace/flashinfer-mla/tests/conftest.py:16: DeprecationWarning: tcgen05.OperandMajorMode is deprecated, use cute.nvgpu.OperandMajorMode instead
+    from cutlass.cute.nvgpu.tcgen05 import OperandMajorMode
+
+flashinfer/cute_dsl/utils.py:135
+  /workspace/flashinfer-mla/flashinfer/cute_dsl/utils.py:135: DeprecationWarning: Arch from arch.py is deprecated. Use Arch from enums.py instead.
+    from cutlass.base_dsl.arch import Arch
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+================== 35 passed, 3 warnings in 72.76s (0:01:12) ===================

@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "/workspace/vllm-fa/hopper/exp_h200/mla_baseline/run_mla_baseline.py", line 337, in <module>
+    main()
+  File "/workspace/vllm-fa/hopper/exp_h200/mla_baseline/run_mla_baseline.py", line 226, in main
+    out = run_fa3()
+          ^^^^^^^^^
+  File "/workspace/vllm-fa/hopper/exp_h200/mla_baseline/run_mla_baseline.py", line 213, in run_fa3
+    return flash_attn_with_kvcache(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/vllm-fa/hopper/flash_attn_interface.py", line 866, in flash_attn_with_kvcache
+    out, softmax_lse, *rest = _flash_attn_forward(
+                              ^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/vllm-fa/hopper/flash_attn_interface.py", line 102, in _flash_attn_forward
+    out, softmax_lse, *rest = flash_attn_3_cuda.fwd(
+                              ^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: This flash attention build does not support hdim != hdim_v when hdim <= 64

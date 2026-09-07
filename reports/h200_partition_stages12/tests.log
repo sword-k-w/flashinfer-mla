@@ -1,0 +1,52 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.1.1, pluggy-1.6.0 -- /workspace/flashinfer-mla/.venv/bin/python
+cachedir: .pytest_cache
+hypothesis profile 'default'
+rootdir: /workspace/flashinfer-mla
+configfile: pytest.ini
+plugins: hypothesis-6.155.3
+collecting ... collected 30 items
+
+tests/attention/test_sm90_mla_partition.py::test_runtime_is_local_and_topology_is_consistent PASSED [  3%]
+tests/attention/test_sm90_mla_partition.py::test_compact_roundtrip[dtype0-owners0] PASSED [  6%]
+tests/attention/test_sm90_mla_partition.py::test_compact_roundtrip[dtype0-owners1] PASSED [ 10%]
+tests/attention/test_sm90_mla_partition.py::test_compact_roundtrip[dtype0-owners2] PASSED [ 13%]
+tests/attention/test_sm90_mla_partition.py::test_compact_roundtrip[dtype1-owners0] PASSED [ 16%]
+tests/attention/test_sm90_mla_partition.py::test_compact_roundtrip[dtype1-owners1] PASSED [ 20%]
+tests/attention/test_sm90_mla_partition.py::test_compact_roundtrip[dtype1-owners2] PASSED [ 23%]
+tests/attention/test_sm90_mla_partition.py::test_partition_schedule_matches_fused[2-1-1024] PASSED [ 26%]
+tests/attention/test_sm90_mla_partition.py::test_partition_schedule_matches_fused[64-1-32768] PASSED [ 30%]
+tests/attention/test_sm90_mla_partition.py::test_partition_schedule_matches_fused[64-4-32768] PASSED [ 33%]
+tests/attention/test_sm90_mla_partition.py::test_partition_schedule_matches_fused[2-128-1024] PASSED [ 36%]
+tests/attention/test_sm90_mla_partition.py::test_partition_schedule_matches_fused[2-1-1048576] PASSED [ 40%]
+tests/attention/test_sm90_mla_partition.py::test_mixed_split_and_direct_against_reference PASSED [ 43%]
+tests/attention/test_sm90_mla_partition.py::test_repeated_static_sm_coverage_and_graph[False-False] PASSED [ 46%]
+tests/attention/test_sm90_mla_partition.py::test_repeated_static_sm_coverage_and_graph[False-True] PASSED [ 50%]
+tests/attention/test_sm90_mla_partition.py::test_repeated_static_sm_coverage_and_graph[True-False] PASSED [ 53%]
+tests/attention/test_sm90_mla_partition.py::test_repeated_static_sm_coverage_and_graph[True-True] PASSED [ 56%]
+tests/attention/test_sm90_mla_partition.py::test_validation_detects_missing_work PASSED [ 60%]
+tests/attention/test_sm90_mla_partition.py::test_unsupported_inputs_rejected PASSED [ 63%]
+tests/attention/test_sm90_mla_separate_merge.py::test_separate_matches_fused_and_reference[q_lens0-kv_lens0-False-False-dtype0-split] PASSED [ 66%]
+tests/attention/test_sm90_mla_separate_merge.py::test_separate_matches_fused_and_reference[q_lens1-kv_lens1-True-True-dtype1-split] PASSED [ 70%]
+tests/attention/test_sm90_mla_separate_merge.py::test_separate_matches_fused_and_reference[q_lens2-kv_lens2-False-False-dtype2-direct] PASSED [ 73%]
+tests/attention/test_sm90_mla_separate_merge.py::test_separate_matches_fused_and_reference[q_lens3-kv_lens3-False-True-dtype3-mixed] PASSED [ 76%]
+tests/attention/test_sm90_mla_separate_merge.py::test_separate_matches_fused_and_reference[q_lens4-kv_lens4-True-False-dtype4-mixed] PASSED [ 80%]
+tests/attention/test_sm90_mla_separate_merge.py::test_separate_matches_fused_and_reference[q_lens5-kv_lens5-True-True-dtype5-split] PASSED [ 83%]
+tests/attention/test_sm90_mla_separate_merge.py::test_cuda_graph_replay[False-False] PASSED [ 86%]
+tests/attention/test_sm90_mla_separate_merge.py::test_cuda_graph_replay[False-True] PASSED [ 90%]
+tests/attention/test_sm90_mla_separate_merge.py::test_cuda_graph_replay[True-False] PASSED [ 93%]
+tests/attention/test_sm90_mla_separate_merge.py::test_cuda_graph_replay[True-True] PASSED [ 96%]
+tests/attention/test_sm90_mla_separate_merge.py::test_invalid_experimental_modes PASSED [100%]
+
+=============================== warnings summary ===============================
+tests/conftest.py:16
+tests/conftest.py:16
+  /workspace/flashinfer-mla/tests/conftest.py:16: DeprecationWarning: tcgen05.OperandMajorMode is deprecated, use cute.nvgpu.OperandMajorMode instead
+    from cutlass.cute.nvgpu.tcgen05 import OperandMajorMode
+
+flashinfer/cute_dsl/utils.py:135
+  /workspace/flashinfer-mla/flashinfer/cute_dsl/utils.py:135: DeprecationWarning: Arch from arch.py is deprecated. Use Arch from enums.py instead.
+    from cutlass.base_dsl.arch import Arch
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+================== 30 passed, 3 warnings in 68.08s (0:01:08) ===================

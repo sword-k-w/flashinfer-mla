@@ -1,0 +1,1297 @@
+CAPACITY {"max_seqlen_k": 932032, "arena_limit": 932032, "hbm_limit": 951296, "max_batch": 64, "max_sq": 128, "free_after_runtime": 80835903488, "device_total_bytes": 150109880320, "estimated_fixed_bytes": 6400507904, "reserve_bytes": 4294967296, "arena_bytes": 68719476736} AXIS [512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072, 262144, 524288, 932032]
+START 1/216 B=2 Sq=1 Sk=512
+BLOCK B=2 Sq=1 Sk=512 1/4
+BLOCK B=2 Sq=1 Sk=512 2/4
+BLOCK B=2 Sq=1 Sk=512 3/4
+BLOCK B=2 Sq=1 Sk=512 4/4
+RESULT {"batch": 2, "sq": 1, "sk": 512, "status": "passed", "wall_seconds": 13.78860103900115, "median_ms": {"baseline": 0.01017600018531084, "schedule_only": 0.010495999827980995, "compact": 0.011103999800980091}, "speedup": {"compact_vs_baseline": 0.9164265460823098, "schedule_vs_baseline": 0.9695122286666701, "compact_vs_schedule": 0.9452449582225829}}
+START 2/216 B=2 Sq=1 Sk=1024
+BLOCK B=2 Sq=1 Sk=1024 1/4
+BLOCK B=2 Sq=1 Sk=1024 2/4
+BLOCK B=2 Sq=1 Sk=1024 3/4
+BLOCK B=2 Sq=1 Sk=1024 4/4
+RESULT {"batch": 2, "sq": 1, "sk": 1024, "status": "passed", "wall_seconds": 13.3684562870003, "median_ms": {"baseline": 0.012160000391304493, "schedule_only": 0.012480000033974648, "compact": 0.012927999719977379}, "speedup": {"compact_vs_baseline": 0.9405941100473485, "schedule_vs_baseline": 0.9743590030609767, "compact_vs_schedule": 0.9653465581910211}}
+START 3/216 B=2 Sq=1 Sk=2048
+BLOCK B=2 Sq=1 Sk=2048 1/4
+BLOCK B=2 Sq=1 Sk=2048 2/4
+BLOCK B=2 Sq=1 Sk=2048 3/4
+BLOCK B=2 Sq=1 Sk=2048 4/4
+RESULT {"batch": 2, "sq": 1, "sk": 2048, "status": "passed", "wall_seconds": 13.346281116000682, "median_ms": {"baseline": 0.014303999952971935, "schedule_only": 0.014960000291466713, "compact": 0.01521599991247058}, "speedup": {"compact_vs_baseline": 0.9400630937996263, "schedule_vs_baseline": 0.9561497108480028, "compact_vs_schedule": 0.9831756294376647}}
+START 4/216 B=2 Sq=1 Sk=4096
+BLOCK B=2 Sq=1 Sk=4096 1/4
+BLOCK B=2 Sq=1 Sk=4096 2/4
+BLOCK B=2 Sq=1 Sk=4096 3/4
+BLOCK B=2 Sq=1 Sk=4096 4/4
+RESULT {"batch": 2, "sq": 1, "sk": 4096, "status": "passed", "wall_seconds": 13.514207492999049, "median_ms": {"baseline": 0.016416000202298164, "schedule_only": 0.016896000131964684, "compact": 0.01724799908697605}, "speedup": {"compact_vs_baseline": 0.9517625853014957, "schedule_vs_baseline": 0.9715909134755254, "compact_vs_schedule": 0.9795918962404653}}
+START 5/216 B=2 Sq=1 Sk=8192
+BLOCK B=2 Sq=1 Sk=8192 1/4
+BLOCK B=2 Sq=1 Sk=8192 2/4
+BLOCK B=2 Sq=1 Sk=8192 3/4
+BLOCK B=2 Sq=1 Sk=8192 4/4
+RESULT {"batch": 2, "sq": 1, "sk": 8192, "status": "passed", "wall_seconds": 13.598980291999396, "median_ms": {"baseline": 0.01820800080895424, "schedule_only": 0.018751999363303185, "compact": 0.01865600049495697}, "speedup": {"compact_vs_baseline": 0.975986295341071, "schedule_vs_baseline": 0.9709898372003187, "compact_vs_schedule": 1.0051457368031356}}
+START 6/216 B=2 Sq=1 Sk=16384
+BLOCK B=2 Sq=1 Sk=16384 1/4
+BLOCK B=2 Sq=1 Sk=16384 2/4
+BLOCK B=2 Sq=1 Sk=16384 3/4
+BLOCK B=2 Sq=1 Sk=16384 4/4
+RESULT {"batch": 2, "sq": 1, "sk": 16384, "status": "passed", "wall_seconds": 14.000055362001149, "median_ms": {"baseline": 0.026048000901937485, "schedule_only": 0.026575999334454536, "compact": 0.026335999369621277}, "speedup": {"compact_vs_baseline": 0.9890644564634976, "schedule_vs_baseline": 0.9801325088147287, "compact_vs_schedule": 1.009113000097885}}
+START 7/216 B=2 Sq=1 Sk=32768
+BLOCK B=2 Sq=1 Sk=32768 1/4
+BLOCK B=2 Sq=1 Sk=32768 2/4
+BLOCK B=2 Sq=1 Sk=32768 3/4
+BLOCK B=2 Sq=1 Sk=32768 4/4
+RESULT {"batch": 2, "sq": 1, "sk": 32768, "status": "passed", "wall_seconds": 14.771638134001478, "median_ms": {"baseline": 0.04102399945259094, "schedule_only": 0.04171200096607208, "compact": 0.04249599948525429}, "speedup": {"compact_vs_baseline": 0.9653614445949409, "schedule_vs_baseline": 0.9835059096292036, "compact_vs_schedule": 0.9815512394418622}}
+START 8/216 B=2 Sq=1 Sk=65536
+BLOCK B=2 Sq=1 Sk=65536 1/4
+BLOCK B=2 Sq=1 Sk=65536 2/4
+BLOCK B=2 Sq=1 Sk=65536 3/4
+BLOCK B=2 Sq=1 Sk=65536 4/4
+RESULT {"batch": 2, "sq": 1, "sk": 65536, "status": "passed", "wall_seconds": 15.946886685000209, "median_ms": {"baseline": 0.07017599791288376, "schedule_only": 0.07072000205516815, "compact": 0.0735040009021759}, "speedup": {"compact_vs_baseline": 0.954723512347018, "schedule_vs_baseline": 0.9923076339582114, "compact_vs_schedule": 0.9621245263817287}}
+START 9/216 B=2 Sq=1 Sk=131072
+BLOCK B=2 Sq=1 Sk=131072 1/4
+BLOCK B=2 Sq=1 Sk=131072 2/4
+BLOCK B=2 Sq=1 Sk=131072 3/4
+BLOCK B=2 Sq=1 Sk=131072 4/4
+RESULT {"batch": 2, "sq": 1, "sk": 131072, "status": "passed", "wall_seconds": 17.349963480999577, "median_ms": {"baseline": 0.1369119957089424, "schedule_only": 0.13708800077438354, "compact": 0.14081600308418274}, "speedup": {"compact_vs_baseline": 0.9722758259733701, "schedule_vs_baseline": 0.9987161161848819, "compact_vs_schedule": 0.9735257198887365}}
+START 10/216 B=2 Sq=1 Sk=262144
+BLOCK B=2 Sq=1 Sk=262144 1/4
+BLOCK B=2 Sq=1 Sk=262144 2/4
+BLOCK B=2 Sq=1 Sk=262144 3/4
+BLOCK B=2 Sq=1 Sk=262144 4/4
+RESULT {"batch": 2, "sq": 1, "sk": 262144, "status": "passed", "wall_seconds": 18.85072184800083, "median_ms": {"baseline": 0.27585600316524506, "schedule_only": 0.2756880074739456, "compact": 0.2810879945755005}, "speedup": {"compact_vs_baseline": 0.9813866422215691, "schedule_vs_baseline": 1.0006093688762117, "compact_vs_schedule": 0.9807889799430604}}
+START 11/216 B=2 Sq=1 Sk=524288
+BLOCK B=2 Sq=1 Sk=524288 1/4
+BLOCK B=2 Sq=1 Sk=524288 2/4
+BLOCK B=2 Sq=1 Sk=524288 3/4
+BLOCK B=2 Sq=1 Sk=524288 4/4
+RESULT {"batch": 2, "sq": 1, "sk": 524288, "status": "passed", "wall_seconds": 18.70338308600003, "median_ms": {"baseline": 0.55799999833107, "schedule_only": 0.5571680068969727, "compact": 0.5607199966907501}, "speedup": {"compact_vs_baseline": 0.9951490969187241, "schedule_vs_baseline": 1.0014932505524337, "compact_vs_schedule": 0.9936653056521249}}
+START 12/216 B=2 Sq=1 Sk=932032
+BLOCK B=2 Sq=1 Sk=932032 1/4
+BLOCK B=2 Sq=1 Sk=932032 2/4
+BLOCK B=2 Sq=1 Sk=932032 3/4
+BLOCK B=2 Sq=1 Sk=932032 4/4
+RESULT {"batch": 2, "sq": 1, "sk": 932032, "status": "passed", "wall_seconds": 20.85914884399972, "median_ms": {"baseline": 0.9936160147190094, "schedule_only": 0.996431976556778, "compact": 1.0030879974365234}, "speedup": {"compact_vs_baseline": 0.9905571766966402, "schedule_vs_baseline": 0.997173954766587, "compact_vs_schedule": 0.9933644696210546}}
+START 13/216 B=4 Sq=1 Sk=512
+BLOCK B=4 Sq=1 Sk=512 1/4
+BLOCK B=4 Sq=1 Sk=512 2/4
+BLOCK B=4 Sq=1 Sk=512 3/4
+BLOCK B=4 Sq=1 Sk=512 4/4
+RESULT {"batch": 4, "sq": 1, "sk": 512, "status": "passed", "wall_seconds": 13.118023119999634, "median_ms": {"baseline": 0.012223999947309494, "schedule_only": 0.01283199992030859, "compact": 0.013151999562978745}, "speedup": {"compact_vs_baseline": 0.9294404161720432, "schedule_vs_baseline": 0.9526184556752652, "compact_vs_schedule": 0.9756691261174526}}
+START 14/216 B=4 Sq=1 Sk=1024
+BLOCK B=4 Sq=1 Sk=1024 1/4
+BLOCK B=4 Sq=1 Sk=1024 2/4
+BLOCK B=4 Sq=1 Sk=1024 3/4
+BLOCK B=4 Sq=1 Sk=1024 4/4
+RESULT {"batch": 4, "sq": 1, "sk": 1024, "status": "passed", "wall_seconds": 13.451122102000227, "median_ms": {"baseline": 0.014399999752640724, "schedule_only": 0.015104000456631184, "compact": 0.015584000386297703}, "speedup": {"compact_vs_baseline": 0.9240246018796293, "schedule_vs_baseline": 0.9533897853080785, "compact_vs_schedule": 0.9691991839214429}}
+START 15/216 B=4 Sq=1 Sk=2048
+BLOCK B=4 Sq=1 Sk=2048 1/4
+BLOCK B=4 Sq=1 Sk=2048 2/4
+BLOCK B=4 Sq=1 Sk=2048 3/4
+BLOCK B=4 Sq=1 Sk=2048 4/4
+RESULT {"batch": 4, "sq": 1, "sk": 2048, "status": "passed", "wall_seconds": 13.624162522000915, "median_ms": {"baseline": 0.016575999557971954, "schedule_only": 0.016896000131964684, "compact": 0.01740800030529499}, "speedup": {"compact_vs_baseline": 0.9522058402612753, "schedule_vs_baseline": 0.9810605722364232, "compact_vs_schedule": 0.9705882258529963}}
+START 16/216 B=4 Sq=1 Sk=4096
+BLOCK B=4 Sq=1 Sk=4096 1/4
+BLOCK B=4 Sq=1 Sk=4096 2/4
+BLOCK B=4 Sq=1 Sk=4096 3/4
+BLOCK B=4 Sq=1 Sk=4096 4/4
+RESULT {"batch": 4, "sq": 1, "sk": 4096, "status": "passed", "wall_seconds": 13.559543913999732, "median_ms": {"baseline": 0.01836800016462803, "schedule_only": 0.018688000738620758, "compact": 0.018719999119639397}, "speedup": {"compact_vs_baseline": 0.9811966361343425, "schedule_vs_baseline": 0.9828766822910375, "compact_vs_schedule": 0.99829068469426}}
+START 17/216 B=4 Sq=1 Sk=8192
+BLOCK B=4 Sq=1 Sk=8192 1/4
+BLOCK B=4 Sq=1 Sk=8192 2/4
+BLOCK B=4 Sq=1 Sk=8192 3/4
+BLOCK B=4 Sq=1 Sk=8192 4/4
+RESULT {"batch": 4, "sq": 1, "sk": 8192, "status": "passed", "wall_seconds": 13.925608777999514, "median_ms": {"baseline": 0.02598400041460991, "schedule_only": 0.026847999542951584, "compact": 0.026399999856948853}, "speedup": {"compact_vs_baseline": 0.9842424452805651, "schedule_vs_baseline": 0.9678188638613673, "compact_vs_schedule": 1.016969685167813}}
+START 18/216 B=4 Sq=1 Sk=16384
+BLOCK B=4 Sq=1 Sk=16384 1/4
+BLOCK B=4 Sq=1 Sk=16384 2/4
+BLOCK B=4 Sq=1 Sk=16384 3/4
+BLOCK B=4 Sq=1 Sk=16384 4/4
+RESULT {"batch": 4, "sq": 1, "sk": 16384, "status": "passed", "wall_seconds": 14.739236842000537, "median_ms": {"baseline": 0.04110400006175041, "schedule_only": 0.04195199906826019, "compact": 0.04255999997258186}, "speedup": {"compact_vs_baseline": 0.965789475757297, "schedule_vs_baseline": 0.9797864458108421, "compact_vs_schedule": 0.985714264456923}}
+START 19/216 B=4 Sq=1 Sk=32768
+BLOCK B=4 Sq=1 Sk=32768 1/4
+BLOCK B=4 Sq=1 Sk=32768 2/4
+BLOCK B=4 Sq=1 Sk=32768 3/4
+BLOCK B=4 Sq=1 Sk=32768 4/4
+RESULT {"batch": 4, "sq": 1, "sk": 32768, "status": "passed", "wall_seconds": 15.954371484000148, "median_ms": {"baseline": 0.07073600217700005, "schedule_only": 0.07119999825954437, "compact": 0.07345600053668022}, "speedup": {"compact_vs_baseline": 0.9629710528778116, "schedule_vs_baseline": 0.99348320092856, "compact_vs_schedule": 0.969287706100888}}
+START 20/216 B=4 Sq=1 Sk=65536
+BLOCK B=4 Sq=1 Sk=65536 1/4
+BLOCK B=4 Sq=1 Sk=65536 2/4
+BLOCK B=4 Sq=1 Sk=65536 3/4
+BLOCK B=4 Sq=1 Sk=65536 4/4
+RESULT {"batch": 4, "sq": 1, "sk": 65536, "status": "passed", "wall_seconds": 17.425976717000594, "median_ms": {"baseline": 0.13715199381113052, "schedule_only": 0.13734400272369385, "compact": 0.1406560018658638}, "speedup": {"compact_vs_baseline": 0.9750881014087486, "schedule_vs_baseline": 0.9986019854616469, "compact_vs_schedule": 0.9764531971744197}}
+START 21/216 B=4 Sq=1 Sk=131072
+BLOCK B=4 Sq=1 Sk=131072 1/4
+BLOCK B=4 Sq=1 Sk=131072 2/4
+BLOCK B=4 Sq=1 Sk=131072 3/4
+BLOCK B=4 Sq=1 Sk=131072 4/4
+RESULT {"batch": 4, "sq": 1, "sk": 131072, "status": "passed", "wall_seconds": 19.01769917599995, "median_ms": {"baseline": 0.2762559950351715, "schedule_only": 0.2767520099878311, "compact": 0.28203199803829193}, "speedup": {"compact_vs_baseline": 0.9795200436712993, "schedule_vs_baseline": 0.9982077277318369, "compact_vs_schedule": 0.9812787623844584}}
+START 22/216 B=4 Sq=1 Sk=262144
+BLOCK B=4 Sq=1 Sk=262144 1/4
+BLOCK B=4 Sq=1 Sk=262144 2/4
+BLOCK B=4 Sq=1 Sk=262144 3/4
+BLOCK B=4 Sq=1 Sk=262144 4/4
+RESULT {"batch": 4, "sq": 1, "sk": 262144, "status": "passed", "wall_seconds": 18.414914199998748, "median_ms": {"baseline": 0.6286399960517883, "schedule_only": 0.6304479837417603, "compact": 0.6468319892883301}, "speedup": {"compact_vs_baseline": 0.9718752418900041, "schedule_vs_baseline": 0.9971322175078722, "compact_vs_schedule": 0.9746703845544248}}
+START 23/216 B=4 Sq=1 Sk=524288
+BLOCK B=4 Sq=1 Sk=524288 1/4
+BLOCK B=4 Sq=1 Sk=524288 2/4
+BLOCK B=4 Sq=1 Sk=524288 3/4
+BLOCK B=4 Sq=1 Sk=524288 4/4
+RESULT {"batch": 4, "sq": 1, "sk": 524288, "status": "passed", "wall_seconds": 18.380207989001065, "median_ms": {"baseline": 1.333072006702423, "schedule_only": 1.3369999825954437, "compact": 1.3766160011291504}, "speedup": {"compact_vs_baseline": 0.9683688157111272, "schedule_vs_baseline": 0.9970620972743803, "compact_vs_schedule": 0.9712221719773617}}
+START 24/216 B=4 Sq=1 Sk=932032
+BLOCK B=4 Sq=1 Sk=932032 1/4
+BLOCK B=4 Sq=1 Sk=932032 2/4
+BLOCK B=4 Sq=1 Sk=932032 3/4
+BLOCK B=4 Sq=1 Sk=932032 4/4
+RESULT {"batch": 4, "sq": 1, "sk": 932032, "status": "passed", "wall_seconds": 18.547643196001445, "median_ms": {"baseline": 2.436959981918335, "schedule_only": 2.4407999515533447, "compact": 2.510032057762146}, "speedup": {"compact_vs_baseline": 0.9708879910048004, "schedule_vs_baseline": 0.9984267577387627, "compact_vs_schedule": 0.9724178398460273}}
+START 25/216 B=8 Sq=1 Sk=512
+BLOCK B=8 Sq=1 Sk=512 1/4
+BLOCK B=8 Sq=1 Sk=512 2/4
+BLOCK B=8 Sq=1 Sk=512 3/4
+BLOCK B=8 Sq=1 Sk=512 4/4
+RESULT {"batch": 8, "sq": 1, "sk": 512, "status": "passed", "wall_seconds": 13.3510360270011, "median_ms": {"baseline": 0.0144640002399683, "schedule_only": 0.014783999882638454, "compact": 0.015135999768972397}, "speedup": {"compact_vs_baseline": 0.9556025674378218, "schedule_vs_baseline": 0.9783550023531896, "compact_vs_schedule": 0.9767441932011974}}
+START 26/216 B=8 Sq=1 Sk=1024
+BLOCK B=8 Sq=1 Sk=1024 1/4
+BLOCK B=8 Sq=1 Sk=1024 2/4
+BLOCK B=8 Sq=1 Sk=1024 3/4
+BLOCK B=8 Sq=1 Sk=1024 4/4
+RESULT {"batch": 8, "sq": 1, "sk": 1024, "status": "passed", "wall_seconds": 13.556024928000625, "median_ms": {"baseline": 0.016656000167131424, "schedule_only": 0.017103999853134155, "compact": 0.01735999993979931}, "speedup": {"compact_vs_baseline": 0.959447017562834, "schedule_vs_baseline": 0.9738073146720333, "compact_vs_schedule": 0.985253451177828}}
+START 27/216 B=8 Sq=1 Sk=2048
+BLOCK B=8 Sq=1 Sk=2048 1/4
+BLOCK B=8 Sq=1 Sk=2048 2/4
+BLOCK B=8 Sq=1 Sk=2048 3/4
+BLOCK B=8 Sq=1 Sk=2048 4/4
+RESULT {"batch": 8, "sq": 1, "sk": 2048, "status": "passed", "wall_seconds": 13.677450347999184, "median_ms": {"baseline": 0.01833599992096424, "schedule_only": 0.019023999571800232, "compact": 0.018991999328136444}, "speedup": {"compact_vs_baseline": 0.9654591706835022, "schedule_vs_baseline": 0.9638351731327922, "compact_vs_schedule": 1.00168493285572}}
+START 28/216 B=8 Sq=1 Sk=4096
+BLOCK B=8 Sq=1 Sk=4096 1/4
+BLOCK B=8 Sq=1 Sk=4096 2/4
+BLOCK B=8 Sq=1 Sk=4096 3/4
+BLOCK B=8 Sq=1 Sk=4096 4/4
+RESULT {"batch": 8, "sq": 1, "sk": 4096, "status": "passed", "wall_seconds": 14.046503469000527, "median_ms": {"baseline": 0.026208000257611275, "schedule_only": 0.02672000043094158, "compact": 0.026464000344276428}, "speedup": {"compact_vs_baseline": 0.9903264781085706, "schedule_vs_baseline": 0.9808383171754214, "compact_vs_schedule": 1.0096735218914294}}
+START 29/216 B=8 Sq=1 Sk=8192
+BLOCK B=8 Sq=1 Sk=8192 1/4
+BLOCK B=8 Sq=1 Sk=8192 2/4
+BLOCK B=8 Sq=1 Sk=8192 3/4
+BLOCK B=8 Sq=1 Sk=8192 4/4
+RESULT {"batch": 8, "sq": 1, "sk": 8192, "status": "passed", "wall_seconds": 14.804163917999176, "median_ms": {"baseline": 0.041280001401901245, "schedule_only": 0.042160000652074814, "compact": 0.04291199892759323}, "speedup": {"compact_vs_baseline": 0.9619687367991012, "schedule_vs_baseline": 0.979127152832948, "compact_vs_schedule": 0.9824758041034796}}
+START 30/216 B=8 Sq=1 Sk=16384
+BLOCK B=8 Sq=1 Sk=16384 1/4
+BLOCK B=8 Sq=1 Sk=16384 2/4
+BLOCK B=8 Sq=1 Sk=16384 3/4
+BLOCK B=8 Sq=1 Sk=16384 4/4
+RESULT {"batch": 8, "sq": 1, "sk": 16384, "status": "passed", "wall_seconds": 15.829090629998973, "median_ms": {"baseline": 0.07046400010585785, "schedule_only": 0.07115199789404869, "compact": 0.07342400029301643}, "speedup": {"compact_vs_baseline": 0.9596862037570008, "schedule_vs_baseline": 0.9903305907275389, "compact_vs_schedule": 0.9690564067620837}}
+START 31/216 B=8 Sq=1 Sk=32768
+BLOCK B=8 Sq=1 Sk=32768 1/4
+BLOCK B=8 Sq=1 Sk=32768 2/4
+BLOCK B=8 Sq=1 Sk=32768 3/4
+BLOCK B=8 Sq=1 Sk=32768 4/4
+RESULT {"batch": 8, "sq": 1, "sk": 32768, "status": "passed", "wall_seconds": 17.428603473001203, "median_ms": {"baseline": 0.13758400082588196, "schedule_only": 0.13791999965906143, "compact": 0.14192000031471252}, "speedup": {"compact_vs_baseline": 0.9694475797687758, "schedule_vs_baseline": 0.9975638135585118, "compact_vs_schedule": 0.9718151025452301}}
+START 32/216 B=8 Sq=1 Sk=65536
+BLOCK B=8 Sq=1 Sk=65536 1/4
+BLOCK B=8 Sq=1 Sk=65536 2/4
+BLOCK B=8 Sq=1 Sk=65536 3/4
+BLOCK B=8 Sq=1 Sk=65536 4/4
+RESULT {"batch": 8, "sq": 1, "sk": 65536, "status": "passed", "wall_seconds": 19.039425364000635, "median_ms": {"baseline": 0.27665600180625916, "schedule_only": 0.2765119969844818, "compact": 0.28172799944877625}, "speedup": {"compact_vs_baseline": 0.9819968279601571, "schedule_vs_baseline": 1.0005207905022127, "compact_vs_schedule": 0.9814856795401949}}
+START 33/216 B=8 Sq=1 Sk=131072
+BLOCK B=8 Sq=1 Sk=131072 1/4
+BLOCK B=8 Sq=1 Sk=131072 2/4
+BLOCK B=8 Sq=1 Sk=131072 3/4
+BLOCK B=8 Sq=1 Sk=131072 4/4
+RESULT {"batch": 8, "sq": 1, "sk": 131072, "status": "passed", "wall_seconds": 18.76397376999921, "median_ms": {"baseline": 0.5924960076808929, "schedule_only": 0.5935759991407394, "compact": 0.6069279909133911}, "speedup": {"compact_vs_baseline": 0.9762212594433503, "schedule_vs_baseline": 0.9981805338130081, "compact_vs_schedule": 0.9780006986453901}}
+START 34/216 B=8 Sq=1 Sk=262144
+BLOCK B=8 Sq=1 Sk=262144 1/4
+BLOCK B=8 Sq=1 Sk=262144 2/4
+BLOCK B=8 Sq=1 Sk=262144 3/4
+BLOCK B=8 Sq=1 Sk=262144 4/4
+RESULT {"batch": 8, "sq": 1, "sk": 262144, "status": "passed", "wall_seconds": 18.590116420000413, "median_ms": {"baseline": 1.2238239645957947, "schedule_only": 1.2196479737758636, "compact": 1.2490559816360474}, "speedup": {"compact_vs_baseline": 0.9797991303742822, "schedule_vs_baseline": 1.0034239312569861, "compact_vs_schedule": 0.976455812795785}}
+START 35/216 B=8 Sq=1 Sk=524288
+BLOCK B=8 Sq=1 Sk=524288 1/4
+BLOCK B=8 Sq=1 Sk=524288 2/4
+BLOCK B=8 Sq=1 Sk=524288 3/4
+BLOCK B=8 Sq=1 Sk=524288 4/4
+RESULT {"batch": 8, "sq": 1, "sk": 524288, "status": "passed", "wall_seconds": 18.28267215899905, "median_ms": {"baseline": 2.4720319509506226, "schedule_only": 2.4701199531555176, "compact": 2.5329360365867615}, "speedup": {"compact_vs_baseline": 0.9759551426658962, "schedule_vs_baseline": 1.0007740505851397, "compact_vs_schedule": 0.9752002883120999}}
+START 36/216 B=8 Sq=1 Sk=932032
+BLOCK B=8 Sq=1 Sk=932032 1/4
+BLOCK B=8 Sq=1 Sk=932032 2/4
+BLOCK B=8 Sq=1 Sk=932032 3/4
+BLOCK B=8 Sq=1 Sk=932032 4/4
+RESULT {"batch": 8, "sq": 1, "sk": 932032, "status": "passed", "wall_seconds": 18.93930904899935, "median_ms": {"baseline": 4.41429591178894, "schedule_only": 4.397432088851929, "compact": 4.533680081367493}, "speedup": {"compact_vs_baseline": 0.973667270862539, "schedule_vs_baseline": 1.0038349251554706, "compact_vs_schedule": 0.9699475944331591}}
+START 37/216 B=16 Sq=1 Sk=512
+BLOCK B=16 Sq=1 Sk=512 1/4
+BLOCK B=16 Sq=1 Sk=512 2/4
+BLOCK B=16 Sq=1 Sk=512 3/4
+BLOCK B=16 Sq=1 Sk=512 4/4
+RESULT {"batch": 16, "sq": 1, "sk": 512, "status": "passed", "wall_seconds": 12.854381488999934, "median_ms": {"baseline": 0.016831999644637108, "schedule_only": 0.017503999173641205, "compact": 0.01772800087928772}, "speedup": {"compact_vs_baseline": 0.9494584166172146, "schedule_vs_baseline": 0.9616088002325752, "compact_vs_schedule": 0.9873645253533225}}
+START 38/216 B=16 Sq=1 Sk=1024
+BLOCK B=16 Sq=1 Sk=1024 1/4
+BLOCK B=16 Sq=1 Sk=1024 2/4
+BLOCK B=16 Sq=1 Sk=1024 3/4
+BLOCK B=16 Sq=1 Sk=1024 4/4
+RESULT {"batch": 16, "sq": 1, "sk": 1024, "status": "passed", "wall_seconds": 13.579835696000373, "median_ms": {"baseline": 0.018719999119639397, "schedule_only": 0.019247999414801598, "compact": 0.019200000911951065}, "speedup": {"compact_vs_baseline": 0.9749999078378746, "schedule_vs_baseline": 0.9725685623849213, "compact_vs_schedule": 1.0024999219047253}}
+START 39/216 B=16 Sq=1 Sk=2048
+BLOCK B=16 Sq=1 Sk=2048 1/4
+BLOCK B=16 Sq=1 Sk=2048 2/4
+BLOCK B=16 Sq=1 Sk=2048 3/4
+BLOCK B=16 Sq=1 Sk=2048 4/4
+RESULT {"batch": 16, "sq": 1, "sk": 2048, "status": "passed", "wall_seconds": 13.906714525999632, "median_ms": {"baseline": 0.026655999943614006, "schedule_only": 0.027327999472618103, "compact": 0.027055999264121056}, "speedup": {"compact_vs_baseline": 0.9852158733225024, "schedule_vs_baseline": 0.9754098528259479, "compact_vs_schedule": 1.0100532309245642}}
+START 40/216 B=16 Sq=1 Sk=4096
+BLOCK B=16 Sq=1 Sk=4096 1/4
+BLOCK B=16 Sq=1 Sk=4096 2/4
+BLOCK B=16 Sq=1 Sk=4096 3/4
+BLOCK B=16 Sq=1 Sk=4096 4/4
+RESULT {"batch": 16, "sq": 1, "sk": 4096, "status": "passed", "wall_seconds": 14.824466665000728, "median_ms": {"baseline": 0.041519999504089355, "schedule_only": 0.042208001017570496, "compact": 0.043296001851558685}, "speedup": {"compact_vs_baseline": 0.9589799918810427, "schedule_vs_baseline": 0.983699737090256, "compact_vs_schedule": 0.9748706396096706}}
+START 41/216 B=16 Sq=1 Sk=8192
+BLOCK B=16 Sq=1 Sk=8192 1/4
+BLOCK B=16 Sq=1 Sk=8192 2/4
+BLOCK B=16 Sq=1 Sk=8192 3/4
+BLOCK B=16 Sq=1 Sk=8192 4/4
+RESULT {"batch": 16, "sq": 1, "sk": 8192, "status": "passed", "wall_seconds": 15.930896176001625, "median_ms": {"baseline": 0.07094400003552437, "schedule_only": 0.0713919997215271, "compact": 0.07398399710655212}, "speedup": {"compact_vs_baseline": 0.9589100725843518, "schedule_vs_baseline": 0.993724791464727, "compact_vs_schedule": 0.9649654318988468}}
+START 42/216 B=16 Sq=1 Sk=16384
+BLOCK B=16 Sq=1 Sk=16384 1/4
+BLOCK B=16 Sq=1 Sk=16384 2/4
+BLOCK B=16 Sq=1 Sk=16384 3/4
+BLOCK B=16 Sq=1 Sk=16384 4/4
+RESULT {"batch": 16, "sq": 1, "sk": 16384, "status": "passed", "wall_seconds": 17.438370214000315, "median_ms": {"baseline": 0.1377120018005371, "schedule_only": 0.13819199800491333, "compact": 0.1414560005068779}, "speedup": {"compact_vs_baseline": 0.9735324150765966, "schedule_vs_baseline": 0.9965265991424543, "compact_vs_schedule": 0.9769256695349176}}
+START 43/216 B=16 Sq=1 Sk=32768
+BLOCK B=16 Sq=1 Sk=32768 1/4
+BLOCK B=16 Sq=1 Sk=32768 2/4
+BLOCK B=16 Sq=1 Sk=32768 3/4
+BLOCK B=16 Sq=1 Sk=32768 4/4
+RESULT {"batch": 16, "sq": 1, "sk": 32768, "status": "passed", "wall_seconds": 19.022762008000427, "median_ms": {"baseline": 0.2768480032682419, "schedule_only": 0.27662399411201477, "compact": 0.2823200076818466}, "speedup": {"compact_vs_baseline": 0.9806177236302315, "schedule_vs_baseline": 1.000809796550535, "compact_vs_schedule": 0.9798242653200449}}
+START 44/216 B=16 Sq=1 Sk=65536
+BLOCK B=16 Sq=1 Sk=65536 1/4
+BLOCK B=16 Sq=1 Sk=65536 2/4
+BLOCK B=16 Sq=1 Sk=65536 3/4
+BLOCK B=16 Sq=1 Sk=65536 4/4
+RESULT {"batch": 16, "sq": 1, "sk": 65536, "status": "passed", "wall_seconds": 18.713039964000927, "median_ms": {"baseline": 0.5782719850540161, "schedule_only": 0.5758479982614517, "compact": 0.5858240127563477}, "speedup": {"compact_vs_baseline": 0.987108709206373, "schedule_vs_baseline": 1.0042094212359558, "compact_vs_schedule": 0.9829709703295397}}
+START 45/216 B=16 Sq=1 Sk=131072
+BLOCK B=16 Sq=1 Sk=131072 1/4
+BLOCK B=16 Sq=1 Sk=131072 2/4
+BLOCK B=16 Sq=1 Sk=131072 3/4
+BLOCK B=16 Sq=1 Sk=131072 4/4
+RESULT {"batch": 16, "sq": 1, "sk": 131072, "status": "passed", "wall_seconds": 18.4755234309996, "median_ms": {"baseline": 1.177344024181366, "schedule_only": 1.1828400194644928, "compact": 1.1881920099258423}, "speedup": {"compact_vs_baseline": 0.9908701744719245, "schedule_vs_baseline": 0.9953535599128486, "compact_vs_schedule": 0.9954956855317656}}
+START 46/216 B=16 Sq=1 Sk=262144
+BLOCK B=16 Sq=1 Sk=262144 1/4
+BLOCK B=16 Sq=1 Sk=262144 2/4
+BLOCK B=16 Sq=1 Sk=262144 3/4
+BLOCK B=16 Sq=1 Sk=262144 4/4
+RESULT {"batch": 16, "sq": 1, "sk": 262144, "status": "passed", "wall_seconds": 18.95882651500142, "median_ms": {"baseline": 2.36843204498291, "schedule_only": 2.3610960245132446, "compact": 2.3904719948768616}, "speedup": {"compact_vs_baseline": 0.9907800844598111, "schedule_vs_baseline": 1.0031070402870115, "compact_vs_schedule": 0.9877112258890403}}
+START 47/216 B=16 Sq=1 Sk=524288
+BLOCK B=16 Sq=1 Sk=524288 1/4
+BLOCK B=16 Sq=1 Sk=524288 2/4
+BLOCK B=16 Sq=1 Sk=524288 3/4
+BLOCK B=16 Sq=1 Sk=524288 4/4
+RESULT {"batch": 16, "sq": 1, "sk": 524288, "status": "passed", "wall_seconds": 19.24177488799978, "median_ms": {"baseline": 4.7290719747543335, "schedule_only": 4.741487979888916, "compact": 4.777328014373779}, "speedup": {"compact_vs_baseline": 0.9898989478063354, "schedule_vs_baseline": 0.9973814116608024, "compact_vs_schedule": 0.9924978912109385}}
+START 48/216 B=16 Sq=1 Sk=932032
+BLOCK B=16 Sq=1 Sk=932032 1/4
+BLOCK B=16 Sq=1 Sk=932032 2/4
+BLOCK B=16 Sq=1 Sk=932032 3/4
+BLOCK B=16 Sq=1 Sk=932032 4/4
+RESULT {"batch": 16, "sq": 1, "sk": 932032, "status": "passed", "wall_seconds": 19.746917038000902, "median_ms": {"baseline": 8.492543697357178, "schedule_only": 8.524192333221436, "compact": 8.510560035705566}, "speedup": {"compact_vs_baseline": 0.9978830607771049, "schedule_vs_baseline": 0.9962871982908089, "compact_vs_schedule": 1.0016018096880435}}
+START 49/216 B=32 Sq=1 Sk=512
+BLOCK B=32 Sq=1 Sk=512 1/4
+BLOCK B=32 Sq=1 Sk=512 2/4
+BLOCK B=32 Sq=1 Sk=512 3/4
+BLOCK B=32 Sq=1 Sk=512 4/4
+RESULT {"batch": 32, "sq": 1, "sk": 512, "status": "passed", "wall_seconds": 12.540506150999136, "median_ms": {"baseline": 0.01958400011062622, "schedule_only": 0.019967999309301376, "compact": 0.019967999309301376}, "speedup": {"compact_vs_baseline": 0.9807692702344855, "schedule_vs_baseline": 0.9807692702344855, "compact_vs_schedule": 1.0}}
+START 50/216 B=32 Sq=1 Sk=1024
+BLOCK B=32 Sq=1 Sk=1024 1/4
+BLOCK B=32 Sq=1 Sk=1024 2/4
+BLOCK B=32 Sq=1 Sk=1024 3/4
+BLOCK B=32 Sq=1 Sk=1024 4/4
+RESULT {"batch": 32, "sq": 1, "sk": 1024, "status": "passed", "wall_seconds": 14.084978883000076, "median_ms": {"baseline": 0.02739199995994568, "schedule_only": 0.02796800062060356, "compact": 0.027952000498771667}, "speedup": {"compact_vs_baseline": 0.9799656364899322, "schedule_vs_baseline": 0.9794050111600201, "compact_vs_schedule": 1.0005724141938461}}
+START 51/216 B=32 Sq=1 Sk=2048
+BLOCK B=32 Sq=1 Sk=2048 1/4
+BLOCK B=32 Sq=1 Sk=2048 2/4
+BLOCK B=32 Sq=1 Sk=2048 3/4
+BLOCK B=32 Sq=1 Sk=2048 4/4
+RESULT {"batch": 32, "sq": 1, "sk": 2048, "status": "passed", "wall_seconds": 14.735010763999526, "median_ms": {"baseline": 0.041999999433755875, "schedule_only": 0.04283199831843376, "compact": 0.04387199878692627}, "speedup": {"compact_vs_baseline": 0.9573304293186604, "schedule_vs_baseline": 0.9805752961024045, "compact_vs_schedule": 0.9762946640853203}}
+START 52/216 B=32 Sq=1 Sk=4096
+BLOCK B=32 Sq=1 Sk=4096 1/4
+BLOCK B=32 Sq=1 Sk=4096 2/4
+BLOCK B=32 Sq=1 Sk=4096 3/4
+BLOCK B=32 Sq=1 Sk=4096 4/4
+RESULT {"batch": 32, "sq": 1, "sk": 4096, "status": "passed", "wall_seconds": 15.866435662001095, "median_ms": {"baseline": 0.07116799801588058, "schedule_only": 0.07171200215816498, "compact": 0.07436800003051758}, "speedup": {"compact_vs_baseline": 0.9569707130308218, "schedule_vs_baseline": 0.9924140433133556, "compact_vs_schedule": 0.9642857429100865}}
+START 53/216 B=32 Sq=1 Sk=8192
+BLOCK B=32 Sq=1 Sk=8192 1/4
+BLOCK B=32 Sq=1 Sk=8192 2/4
+BLOCK B=32 Sq=1 Sk=8192 3/4
+BLOCK B=32 Sq=1 Sk=8192 4/4
+RESULT {"batch": 32, "sq": 1, "sk": 8192, "status": "passed", "wall_seconds": 17.429281417998936, "median_ms": {"baseline": 0.13833599537611008, "schedule_only": 0.13875199854373932, "compact": 0.14155200123786926}, "speedup": {"compact_vs_baseline": 0.9772803928334797, "schedule_vs_baseline": 0.9970018221575518, "compact_vs_schedule": 0.9802192645130837}}
+START 54/216 B=32 Sq=1 Sk=16384
+BLOCK B=32 Sq=1 Sk=16384 1/4
+BLOCK B=32 Sq=1 Sk=16384 2/4
+BLOCK B=32 Sq=1 Sk=16384 3/4
+BLOCK B=32 Sq=1 Sk=16384 4/4
+RESULT {"batch": 32, "sq": 1, "sk": 16384, "status": "passed", "wall_seconds": 18.838645138001084, "median_ms": {"baseline": 0.2773279994726181, "schedule_only": 0.2767919972538948, "compact": 0.2826559990644455}, "speedup": {"compact_vs_baseline": 0.9811502334659007, "schedule_vs_baseline": 1.001936480187437, "compact_vs_schedule": 0.9792539276365626}}
+START 55/216 B=32 Sq=1 Sk=32768
+BLOCK B=32 Sq=1 Sk=32768 1/4
+BLOCK B=32 Sq=1 Sk=32768 2/4
+BLOCK B=32 Sq=1 Sk=32768 3/4
+BLOCK B=32 Sq=1 Sk=32768 4/4
+RESULT {"batch": 32, "sq": 1, "sk": 32768, "status": "passed", "wall_seconds": 19.28247536299932, "median_ms": {"baseline": 0.5800000131130219, "schedule_only": 0.5716319978237152, "compact": 0.5751680135726929}, "speedup": {"compact_vs_baseline": 1.0084010227034614, "schedule_vs_baseline": 1.0146388153937584, "compact_vs_schedule": 0.9938522037638821}}
+START 56/216 B=32 Sq=1 Sk=65536
+BLOCK B=32 Sq=1 Sk=65536 1/4
+BLOCK B=32 Sq=1 Sk=65536 2/4
+BLOCK B=32 Sq=1 Sk=65536 3/4
+BLOCK B=32 Sq=1 Sk=65536 4/4
+RESULT {"batch": 32, "sq": 1, "sk": 65536, "status": "passed", "wall_seconds": 18.858591014999547, "median_ms": {"baseline": 1.178712010383606, "schedule_only": 1.1509039998054504, "compact": 1.1548480093479156}, "speedup": {"compact_vs_baseline": 1.020664192034383, "schedule_vs_baseline": 1.0241618854247236, "compact_vs_schedule": 0.9965848237079334}}
+START 57/216 B=32 Sq=1 Sk=131072
+BLOCK B=32 Sq=1 Sk=131072 1/4
+BLOCK B=32 Sq=1 Sk=131072 2/4
+BLOCK B=32 Sq=1 Sk=131072 3/4
+BLOCK B=32 Sq=1 Sk=131072 4/4
+RESULT {"batch": 32, "sq": 1, "sk": 131072, "status": "passed", "wall_seconds": 18.971291698999266, "median_ms": {"baseline": 2.3683680295944214, "schedule_only": 2.304111957550049, "compact": 2.308784008026123}, "speedup": {"compact_vs_baseline": 1.025807533905798, "schedule_vs_baseline": 1.027887565026439, "compact_vs_schedule": 0.9979764020974536}}
+START 58/216 B=32 Sq=1 Sk=262144
+BLOCK B=32 Sq=1 Sk=262144 1/4
+BLOCK B=32 Sq=1 Sk=262144 2/4
+BLOCK B=32 Sq=1 Sk=262144 3/4
+BLOCK B=32 Sq=1 Sk=262144 4/4
+RESULT {"batch": 32, "sq": 1, "sk": 262144, "status": "passed", "wall_seconds": 19.181719318001342, "median_ms": {"baseline": 4.731992125511169, "schedule_only": 4.63318395614624, "compact": 4.636944055557251}, "speedup": {"compact_vs_baseline": 1.0204979979950386, "schedule_vs_baseline": 1.0213261917290923, "compact_vs_schedule": 0.9991890996816094}}
+START 59/216 B=32 Sq=1 Sk=524288
+BLOCK B=32 Sq=1 Sk=524288 1/4
+BLOCK B=32 Sq=1 Sk=524288 2/4
+BLOCK B=32 Sq=1 Sk=524288 3/4
+BLOCK B=32 Sq=1 Sk=524288 4/4
+RESULT {"batch": 32, "sq": 1, "sk": 524288, "status": "passed", "wall_seconds": 19.715558251000402, "median_ms": {"baseline": 9.565807819366455, "schedule_only": 9.260583877563477, "compact": 9.29260778427124}, "speedup": {"compact_vs_baseline": 1.0293997165744622, "schedule_vs_baseline": 1.0329594705731757, "compact_vs_schedule": 0.9965538299419063}}
+START 60/216 B=32 Sq=1 Sk=932032
+BLOCK B=32 Sq=1 Sk=932032 1/4
+BLOCK B=32 Sq=1 Sk=932032 2/4
+BLOCK B=32 Sq=1 Sk=932032 3/4
+BLOCK B=32 Sq=1 Sk=932032 4/4
+RESULT {"batch": 32, "sq": 1, "sk": 932032, "status": "passed", "wall_seconds": 19.955850972999542, "median_ms": {"baseline": 16.887592315673828, "schedule_only": 16.541815757751465, "compact": 16.512720108032227}, "speedup": {"compact_vs_baseline": 1.0227020263886901, "schedule_vs_baseline": 1.020903180339216, "compact_vs_schedule": 1.0017620143458428}}
+START 61/216 B=64 Sq=1 Sk=512
+BLOCK B=64 Sq=1 Sk=512 1/4
+BLOCK B=64 Sq=1 Sk=512 2/4
+BLOCK B=64 Sq=1 Sk=512 3/4
+BLOCK B=64 Sq=1 Sk=512 4/4
+RESULT {"batch": 64, "sq": 1, "sk": 512, "status": "passed", "wall_seconds": 13.029193001999374, "median_ms": {"baseline": 0.02864000014960766, "schedule_only": 0.029263999313116074, "compact": 0.029503999277949333}, "speedup": {"compact_vs_baseline": 0.9707158639680618, "schedule_vs_baseline": 0.9786769006918087, "compact_vs_schedule": 0.9918655107542445}}
+START 62/216 B=64 Sq=1 Sk=1024
+BLOCK B=64 Sq=1 Sk=1024 1/4
+BLOCK B=64 Sq=1 Sk=1024 2/4
+BLOCK B=64 Sq=1 Sk=1024 3/4
+BLOCK B=64 Sq=1 Sk=1024 4/4
+RESULT {"batch": 64, "sq": 1, "sk": 1024, "status": "passed", "wall_seconds": 14.728721606001272, "median_ms": {"baseline": 0.04339199885725975, "schedule_only": 0.04382399842143059, "compact": 0.04531199857592583}, "speedup": {"compact_vs_baseline": 0.9576271235211821, "schedule_vs_baseline": 0.99014239732266, "compact_vs_schedule": 0.9671610125074949}}
+START 63/216 B=64 Sq=1 Sk=2048
+BLOCK B=64 Sq=1 Sk=2048 1/4
+BLOCK B=64 Sq=1 Sk=2048 2/4
+BLOCK B=64 Sq=1 Sk=2048 3/4
+BLOCK B=64 Sq=1 Sk=2048 4/4
+RESULT {"batch": 64, "sq": 1, "sk": 2048, "status": "passed", "wall_seconds": 15.993156390999502, "median_ms": {"baseline": 0.07241600006818771, "schedule_only": 0.07295999675989151, "compact": 0.07585599645972252}, "speedup": {"compact_vs_baseline": 0.9546509629813993, "schedule_vs_baseline": 0.9925439046619743, "compact_vs_schedule": 0.9618224025127835}}
+START 64/216 B=64 Sq=1 Sk=4096
+BLOCK B=64 Sq=1 Sk=4096 1/4
+BLOCK B=64 Sq=1 Sk=4096 2/4
+BLOCK B=64 Sq=1 Sk=4096 3/4
+BLOCK B=64 Sq=1 Sk=4096 4/4
+RESULT {"batch": 64, "sq": 1, "sk": 4096, "status": "passed", "wall_seconds": 17.40757145200041, "median_ms": {"baseline": 0.1395680010318756, "schedule_only": 0.14022399485111237, "compact": 0.1432799994945526}, "speedup": {"compact_vs_baseline": 0.9740926962885833, "schedule_vs_baseline": 0.9953218147868824, "compact_vs_schedule": 0.9786711009616075}}
+START 65/216 B=64 Sq=1 Sk=8192
+BLOCK B=64 Sq=1 Sk=8192 1/4
+BLOCK B=64 Sq=1 Sk=8192 2/4
+BLOCK B=64 Sq=1 Sk=8192 3/4
+BLOCK B=64 Sq=1 Sk=8192 4/4
+RESULT {"batch": 64, "sq": 1, "sk": 8192, "status": "passed", "wall_seconds": 18.944302382000387, "median_ms": {"baseline": 0.27857600152492523, "schedule_only": 0.2788719981908798, "compact": 0.28435200452804565}, "speedup": {"compact_vs_baseline": 0.9796871380853911, "schedule_vs_baseline": 0.9989385930897515, "compact_vs_schedule": 0.9807280896568277}}
+START 66/216 B=64 Sq=1 Sk=16384
+BLOCK B=64 Sq=1 Sk=16384 1/4
+BLOCK B=64 Sq=1 Sk=16384 2/4
+BLOCK B=64 Sq=1 Sk=16384 3/4
+BLOCK B=64 Sq=1 Sk=16384 4/4
+RESULT {"batch": 64, "sq": 1, "sk": 16384, "status": "passed", "wall_seconds": 19.9871774610001, "median_ms": {"baseline": 0.5856319963932037, "schedule_only": 0.5719519853591919, "compact": 0.5714400112628937}, "speedup": {"compact_vs_baseline": 1.0248354767789982, "schedule_vs_baseline": 1.0239181109327222, "compact_vs_schedule": 1.0008959367321282}}
+START 67/216 B=64 Sq=1 Sk=32768
+BLOCK B=64 Sq=1 Sk=32768 1/4
+BLOCK B=64 Sq=1 Sk=32768 2/4
+BLOCK B=64 Sq=1 Sk=32768 3/4
+BLOCK B=64 Sq=1 Sk=32768 4/4
+RESULT {"batch": 64, "sq": 1, "sk": 32768, "status": "passed", "wall_seconds": 18.167083717000423, "median_ms": {"baseline": 1.1870560050010681, "schedule_only": 1.1374079585075378, "compact": 1.1412799954414368}, "speedup": {"compact_vs_baseline": 1.0401093594406916, "schedule_vs_baseline": 1.0436501662593223, "compact_vs_schedule": 0.9966072857236044}}
+START 68/216 B=64 Sq=1 Sk=65536
+BLOCK B=64 Sq=1 Sk=65536 1/4
+BLOCK B=64 Sq=1 Sk=65536 2/4
+BLOCK B=64 Sq=1 Sk=65536 3/4
+BLOCK B=64 Sq=1 Sk=65536 4/4
+RESULT {"batch": 64, "sq": 1, "sk": 65536, "status": "passed", "wall_seconds": 18.383748080999794, "median_ms": {"baseline": 2.3893920183181763, "schedule_only": 2.2801599502563477, "compact": 2.305567979812622}, "speedup": {"compact_vs_baseline": 1.036357218368537, "schedule_vs_baseline": 1.0479054410413393, "compact_vs_schedule": 0.9889797092175354}}
+START 69/216 B=64 Sq=1 Sk=131072
+BLOCK B=64 Sq=1 Sk=131072 1/4
+BLOCK B=64 Sq=1 Sk=131072 2/4
+BLOCK B=64 Sq=1 Sk=131072 3/4
+BLOCK B=64 Sq=1 Sk=131072 4/4
+RESULT {"batch": 64, "sq": 1, "sk": 131072, "status": "passed", "wall_seconds": 19.341134237000006, "median_ms": {"baseline": 4.73471999168396, "schedule_only": 4.549407958984375, "compact": 4.590191841125488}, "speedup": {"compact_vs_baseline": 1.0314862985166724, "schedule_vs_baseline": 1.0407332194365253, "compact_vs_schedule": 0.9911149939800526}}
+START 70/216 B=64 Sq=1 Sk=262144
+BLOCK B=64 Sq=1 Sk=262144 1/4
+BLOCK B=64 Sq=1 Sk=262144 2/4
+BLOCK B=64 Sq=1 Sk=262144 3/4
+BLOCK B=64 Sq=1 Sk=262144 4/4
+RESULT {"batch": 64, "sq": 1, "sk": 262144, "status": "passed", "wall_seconds": 19.304891949001103, "median_ms": {"baseline": 9.57428789138794, "schedule_only": 9.104383945465088, "compact": 9.182415962219238}, "speedup": {"compact_vs_baseline": 1.0426763425639882, "schedule_vs_baseline": 1.0516129316093827, "compact_vs_schedule": 0.9915020167812904}}
+START 71/216 B=64 Sq=1 Sk=524288
+BLOCK B=64 Sq=1 Sk=524288 1/4
+BLOCK B=64 Sq=1 Sk=524288 2/4
+BLOCK B=64 Sq=1 Sk=524288 3/4
+BLOCK B=64 Sq=1 Sk=524288 4/4
+RESULT {"batch": 64, "sq": 1, "sk": 524288, "status": "passed", "wall_seconds": 20.289621281999644, "median_ms": {"baseline": 19.342880249023438, "schedule_only": 18.177591800689697, "compact": 18.42398452758789}, "speedup": {"compact_vs_baseline": 1.04987497248815, "schedule_vs_baseline": 1.064105766105361, "compact_vs_schedule": 0.9866265233489939}}
+START 72/216 B=64 Sq=1 Sk=932032
+BLOCK B=64 Sq=1 Sk=932032 1/4
+BLOCK B=64 Sq=1 Sk=932032 2/4
+BLOCK B=64 Sq=1 Sk=932032 3/4
+BLOCK B=64 Sq=1 Sk=932032 4/4
+RESULT {"batch": 64, "sq": 1, "sk": 932032, "status": "passed", "wall_seconds": 21.343399215000318, "median_ms": {"baseline": 34.07508659362793, "schedule_only": 32.430463790893555, "compact": 32.570223808288574}, "speedup": {"compact_vs_baseline": 1.0462036366159815, "schedule_vs_baseline": 1.0507122813086682, "compact_vs_schedule": 0.9957089635546362}}
+START 73/216 B=2 Sq=4 Sk=512
+BLOCK B=2 Sq=4 Sk=512 1/4
+BLOCK B=2 Sq=4 Sk=512 2/4
+BLOCK B=2 Sq=4 Sk=512 3/4
+BLOCK B=2 Sq=4 Sk=512 4/4
+RESULT {"batch": 2, "sq": 4, "sk": 512, "status": "passed", "wall_seconds": 12.507432184000209, "median_ms": {"baseline": 0.014128000009804964, "schedule_only": 0.014399999752640724, "compact": 0.015135999768972397}, "speedup": {"compact_vs_baseline": 0.9334038203915838, "schedule_vs_baseline": 0.981111128645271, "compact_vs_schedule": 0.9513742053669679}}
+START 74/216 B=2 Sq=4 Sk=1024
+BLOCK B=2 Sq=4 Sk=1024 1/4
+BLOCK B=2 Sq=4 Sk=1024 2/4
+BLOCK B=2 Sq=4 Sk=1024 3/4
+BLOCK B=2 Sq=4 Sk=1024 4/4
+RESULT {"batch": 2, "sq": 4, "sk": 1024, "status": "passed", "wall_seconds": 13.453053383000224, "median_ms": {"baseline": 0.015936000272631645, "schedule_only": 0.01640000008046627, "compact": 0.016976000741124153}, "speedup": {"compact_vs_baseline": 0.9387370156050289, "schedule_vs_baseline": 0.971707328929389, "compact_vs_schedule": 0.9660697080872217}}
+START 75/216 B=2 Sq=4 Sk=2048
+BLOCK B=2 Sq=4 Sk=2048 1/4
+BLOCK B=2 Sq=4 Sk=2048 2/4
+BLOCK B=2 Sq=4 Sk=2048 3/4
+BLOCK B=2 Sq=4 Sk=2048 4/4
+RESULT {"batch": 2, "sq": 4, "sk": 2048, "status": "passed", "wall_seconds": 13.55741876799948, "median_ms": {"baseline": 0.01692800037562847, "schedule_only": 0.017503999173641205, "compact": 0.018144000321626663}, "speedup": {"compact_vs_baseline": 0.9329806038115649, "schedule_vs_baseline": 0.967093302947585, "compact_vs_schedule": 0.9647265687477633}}
+START 76/216 B=2 Sq=4 Sk=4096
+BLOCK B=2 Sq=4 Sk=4096 1/4
+BLOCK B=2 Sq=4 Sk=4096 2/4
+BLOCK B=2 Sq=4 Sk=4096 3/4
+BLOCK B=2 Sq=4 Sk=4096 4/4
+RESULT {"batch": 2, "sq": 4, "sk": 4096, "status": "passed", "wall_seconds": 14.054075813000964, "median_ms": {"baseline": 0.024032000452280045, "schedule_only": 0.024383999407291412, "compact": 0.025232000276446342}, "speedup": {"compact_vs_baseline": 0.9524413518144069, "schedule_vs_baseline": 0.9855643469665558, "compact_vs_schedule": 0.9663918492444483}}
+START 77/216 B=2 Sq=4 Sk=8192
+BLOCK B=2 Sq=4 Sk=8192 1/4
+BLOCK B=2 Sq=4 Sk=8192 2/4
+BLOCK B=2 Sq=4 Sk=8192 3/4
+BLOCK B=2 Sq=4 Sk=8192 4/4
+RESULT {"batch": 2, "sq": 4, "sk": 8192, "status": "passed", "wall_seconds": 14.643161973999668, "median_ms": {"baseline": 0.03776000067591667, "schedule_only": 0.03832000121474266, "compact": 0.0398080013692379}, "speedup": {"compact_vs_baseline": 0.9485530390153211, "schedule_vs_baseline": 0.985386207696399, "compact_vs_schedule": 0.9626205761828297}}
+START 78/216 B=2 Sq=4 Sk=16384
+BLOCK B=2 Sq=4 Sk=16384 1/4
+BLOCK B=2 Sq=4 Sk=16384 2/4
+BLOCK B=2 Sq=4 Sk=16384 3/4
+BLOCK B=2 Sq=4 Sk=16384 4/4
+RESULT {"batch": 2, "sq": 4, "sk": 16384, "status": "passed", "wall_seconds": 15.575765404999402, "median_ms": {"baseline": 0.06540799885988235, "schedule_only": 0.0660959966480732, "compact": 0.0692639984190464}, "speedup": {"compact_vs_baseline": 0.9443289494228257, "schedule_vs_baseline": 0.9895909310233406, "compact_vs_schedule": 0.9542619276495297}}
+START 79/216 B=2 Sq=4 Sk=32768
+BLOCK B=2 Sq=4 Sk=32768 1/4
+BLOCK B=2 Sq=4 Sk=32768 2/4
+BLOCK B=2 Sq=4 Sk=32768 3/4
+BLOCK B=2 Sq=4 Sk=32768 4/4
+RESULT {"batch": 2, "sq": 4, "sk": 32768, "status": "passed", "wall_seconds": 16.94925566299935, "median_ms": {"baseline": 0.12539200484752655, "schedule_only": 0.12592000514268875, "compact": 0.131632000207901}, "speedup": {"compact_vs_baseline": 0.9525951489719906, "schedule_vs_baseline": 0.995806859326571, "compact_vs_schedule": 0.9566063338991229}}
+START 80/216 B=2 Sq=4 Sk=65536
+BLOCK B=2 Sq=4 Sk=65536 1/4
+BLOCK B=2 Sq=4 Sk=65536 2/4
+BLOCK B=2 Sq=4 Sk=65536 3/4
+BLOCK B=2 Sq=4 Sk=65536 4/4
+RESULT {"batch": 2, "sq": 4, "sk": 65536, "status": "passed", "wall_seconds": 18.270779275000677, "median_ms": {"baseline": 0.252591997385025, "schedule_only": 0.25144800543785095, "compact": 0.2618879973888397}, "speedup": {"compact_vs_baseline": 0.9645039096999455, "schedule_vs_baseline": 1.0045496163120564, "compact_vs_schedule": 0.9601356608356207}}
+START 81/216 B=2 Sq=4 Sk=131072
+BLOCK B=2 Sq=4 Sk=131072 1/4
+BLOCK B=2 Sq=4 Sk=131072 2/4
+BLOCK B=2 Sq=4 Sk=131072 3/4
+BLOCK B=2 Sq=4 Sk=131072 4/4
+RESULT {"batch": 2, "sq": 4, "sk": 131072, "status": "passed", "wall_seconds": 18.950955062000503, "median_ms": {"baseline": 0.5555679798126221, "schedule_only": 0.5440479815006256, "compact": 0.5663999915122986}, "speedup": {"compact_vs_baseline": 0.9808756852718962, "schedule_vs_baseline": 1.021174599858309, "compact_vs_schedule": 0.9605367048964942}}
+START 82/216 B=2 Sq=4 Sk=262144
+BLOCK B=2 Sq=4 Sk=262144 1/4
+BLOCK B=2 Sq=4 Sk=262144 2/4
+BLOCK B=2 Sq=4 Sk=262144 3/4
+BLOCK B=2 Sq=4 Sk=262144 4/4
+RESULT {"batch": 2, "sq": 4, "sk": 262144, "status": "passed", "wall_seconds": 18.426667235000423, "median_ms": {"baseline": 1.1437600255012512, "schedule_only": 1.1217600107192993, "compact": 1.1662160158157349}, "speedup": {"compact_vs_baseline": 0.9807445704655529, "schedule_vs_baseline": 1.0196120512157008, "compact_vs_schedule": 0.9618801281293159}}
+START 83/216 B=2 Sq=4 Sk=524288
+BLOCK B=2 Sq=4 Sk=524288 1/4
+BLOCK B=2 Sq=4 Sk=524288 2/4
+BLOCK B=2 Sq=4 Sk=524288 3/4
+BLOCK B=2 Sq=4 Sk=524288 4/4
+RESULT {"batch": 2, "sq": 4, "sk": 524288, "status": "passed", "wall_seconds": 18.63483016600003, "median_ms": {"baseline": 2.3162880539894104, "schedule_only": 2.274176001548767, "compact": 2.365391969680786}, "speedup": {"compact_vs_baseline": 0.9792406855520007, "schedule_vs_baseline": 1.0185174992665318, "compact_vs_schedule": 0.9614372715806891}}
+START 84/216 B=2 Sq=4 Sk=932032
+BLOCK B=2 Sq=4 Sk=932032 1/4
+BLOCK B=2 Sq=4 Sk=932032 2/4
+BLOCK B=2 Sq=4 Sk=932032 3/4
+BLOCK B=2 Sq=4 Sk=932032 4/4
+RESULT {"batch": 2, "sq": 4, "sk": 932032, "status": "passed", "wall_seconds": 18.74679822700091, "median_ms": {"baseline": 4.155776023864746, "schedule_only": 4.082248091697693, "compact": 4.22599196434021}, "speedup": {"compact_vs_baseline": 0.9833847434950278, "schedule_vs_baseline": 1.0180116275433115, "compact_vs_schedule": 0.9659857676362242}}
+START 85/216 B=4 Sq=4 Sk=512
+BLOCK B=4 Sq=4 Sk=512 1/4
+BLOCK B=4 Sq=4 Sk=512 2/4
+BLOCK B=4 Sq=4 Sk=512 3/4
+BLOCK B=4 Sq=4 Sk=512 4/4
+RESULT {"batch": 4, "sq": 4, "sk": 512, "status": "passed", "wall_seconds": 13.567294421000042, "median_ms": {"baseline": 0.01643200032413006, "schedule_only": 0.016767999157309532, "compact": 0.01724799908697605}, "speedup": {"compact_vs_baseline": 0.9526902361989251, "schedule_vs_baseline": 0.9799619006401843, "compact_vs_schedule": 0.9721706890610304}}
+START 86/216 B=4 Sq=4 Sk=1024
+BLOCK B=4 Sq=4 Sk=1024 1/4
+BLOCK B=4 Sq=4 Sk=1024 2/4
+BLOCK B=4 Sq=4 Sk=1024 3/4
+BLOCK B=4 Sq=4 Sk=1024 4/4
+RESULT {"batch": 4, "sq": 4, "sk": 1024, "status": "passed", "wall_seconds": 13.678816109000763, "median_ms": {"baseline": 0.01744000054895878, "schedule_only": 0.017967999912798405, "compact": 0.018751999363303185}, "speedup": {"compact_vs_baseline": 0.9300341905454664, "schedule_vs_baseline": 0.9706144609081649, "compact_vs_schedule": 0.9581911541635911}}
+START 87/216 B=4 Sq=4 Sk=2048
+BLOCK B=4 Sq=4 Sk=2048 1/4
+BLOCK B=4 Sq=4 Sk=2048 2/4
+BLOCK B=4 Sq=4 Sk=2048 3/4
+BLOCK B=4 Sq=4 Sk=2048 4/4
+RESULT {"batch": 4, "sq": 4, "sk": 2048, "status": "passed", "wall_seconds": 13.934955302000162, "median_ms": {"baseline": 0.024320000782608986, "schedule_only": 0.024768000468611717, "compact": 0.025760000571608543}, "speedup": {"compact_vs_baseline": 0.9440993883134204, "schedule_vs_baseline": 0.9819121577226035, "compact_vs_schedule": 0.9614906800860027}}
+START 88/216 B=4 Sq=4 Sk=4096
+BLOCK B=4 Sq=4 Sk=4096 1/4
+BLOCK B=4 Sq=4 Sk=4096 2/4
+BLOCK B=4 Sq=4 Sk=4096 3/4
+BLOCK B=4 Sq=4 Sk=4096 4/4
+RESULT {"batch": 4, "sq": 4, "sk": 4096, "status": "passed", "wall_seconds": 14.726750375000847, "median_ms": {"baseline": 0.03807999938726425, "schedule_only": 0.03855999931693077, "compact": 0.039792001247406006}, "speedup": {"compact_vs_baseline": 0.95697623124061, "schedule_vs_baseline": 0.9875518688234063, "compact_vs_schedule": 0.9690389552710534}}
+START 89/216 B=4 Sq=4 Sk=8192
+BLOCK B=4 Sq=4 Sk=8192 1/4
+BLOCK B=4 Sq=4 Sk=8192 2/4
+BLOCK B=4 Sq=4 Sk=8192 3/4
+BLOCK B=4 Sq=4 Sk=8192 4/4
+RESULT {"batch": 4, "sq": 4, "sk": 8192, "status": "passed", "wall_seconds": 15.705391393001264, "median_ms": {"baseline": 0.06576000154018402, "schedule_only": 0.0660799965262413, "compact": 0.06932799890637398}, "speedup": {"compact_vs_baseline": 0.9485345398327671, "schedule_vs_baseline": 0.9951574606101832, "compact_vs_schedule": 0.9531502072558155}}
+START 90/216 B=4 Sq=4 Sk=16384
+BLOCK B=4 Sq=4 Sk=16384 1/4
+BLOCK B=4 Sq=4 Sk=16384 2/4
+BLOCK B=4 Sq=4 Sk=16384 3/4
+BLOCK B=4 Sq=4 Sk=16384 4/4
+RESULT {"batch": 4, "sq": 4, "sk": 16384, "status": "passed", "wall_seconds": 16.856524225000612, "median_ms": {"baseline": 0.12611199915409088, "schedule_only": 0.12615200132131577, "compact": 0.13183999806642532}, "speedup": {"compact_vs_baseline": 0.956553405670952, "schedule_vs_baseline": 0.9996829050129534, "compact_vs_schedule": 0.95685682017195}}
+START 91/216 B=4 Sq=4 Sk=32768
+BLOCK B=4 Sq=4 Sk=32768 1/4
+BLOCK B=4 Sq=4 Sk=32768 2/4
+BLOCK B=4 Sq=4 Sk=32768 3/4
+BLOCK B=4 Sq=4 Sk=32768 4/4
+RESULT {"batch": 4, "sq": 4, "sk": 32768, "status": "passed", "wall_seconds": 18.33453611099867, "median_ms": {"baseline": 0.25332799553871155, "schedule_only": 0.25171199440956116, "compact": 0.2634720057249069}, "speedup": {"compact_vs_baseline": 0.9614987172611165, "schedule_vs_baseline": 1.006420040224706, "compact_vs_schedule": 0.9553652340293622}}
+START 92/216 B=4 Sq=4 Sk=65536
+BLOCK B=4 Sq=4 Sk=65536 1/4
+BLOCK B=4 Sq=4 Sk=65536 2/4
+BLOCK B=4 Sq=4 Sk=65536 3/4
+BLOCK B=4 Sq=4 Sk=65536 4/4
+RESULT {"batch": 4, "sq": 4, "sk": 65536, "status": "passed", "wall_seconds": 18.17431414499879, "median_ms": {"baseline": 0.5270480066537857, "schedule_only": 0.5243040025234222, "compact": 0.5459039807319641}, "speedup": {"compact_vs_baseline": 0.9654591746099822, "schedule_vs_baseline": 1.005233612784104, "compact_vs_schedule": 0.9604326420562459}}
+START 93/216 B=4 Sq=4 Sk=131072
+BLOCK B=4 Sq=4 Sk=131072 1/4
+BLOCK B=4 Sq=4 Sk=131072 2/4
+BLOCK B=4 Sq=4 Sk=131072 3/4
+BLOCK B=4 Sq=4 Sk=131072 4/4
+RESULT {"batch": 4, "sq": 4, "sk": 131072, "status": "passed", "wall_seconds": 17.991993691999596, "median_ms": {"baseline": 1.0734080076217651, "schedule_only": 1.0650720000267029, "compact": 1.1090720295906067}, "speedup": {"compact_vs_baseline": 0.9678433672319675, "schedule_vs_baseline": 1.0078267080487078, "compact_vs_schedule": 0.9603271668656673}}
+START 94/216 B=4 Sq=4 Sk=262144
+BLOCK B=4 Sq=4 Sk=262144 1/4
+BLOCK B=4 Sq=4 Sk=262144 2/4
+BLOCK B=4 Sq=4 Sk=262144 3/4
+BLOCK B=4 Sq=4 Sk=262144 4/4
+RESULT {"batch": 4, "sq": 4, "sk": 262144, "status": "passed", "wall_seconds": 18.20906296100111, "median_ms": {"baseline": 2.1635599732398987, "schedule_only": 2.139056086540222, "compact": 2.2330880165100098}, "speedup": {"compact_vs_baseline": 0.9688646203122915, "schedule_vs_baseline": 1.0114554671351839, "compact_vs_schedule": 0.9578915254237288}}
+START 95/216 B=4 Sq=4 Sk=524288
+BLOCK B=4 Sq=4 Sk=524288 1/4
+BLOCK B=4 Sq=4 Sk=524288 2/4
+BLOCK B=4 Sq=4 Sk=524288 3/4
+BLOCK B=4 Sq=4 Sk=524288 4/4
+RESULT {"batch": 4, "sq": 4, "sk": 524288, "status": "passed", "wall_seconds": 18.620693600998493, "median_ms": {"baseline": 4.351047992706299, "schedule_only": 4.3127440214157104, "compact": 4.477328062057495}, "speedup": {"compact_vs_baseline": 0.9717956630381098, "schedule_vs_baseline": 1.0088815777380673, "compact_vs_schedule": 0.963240567061295}}
+START 96/216 B=4 Sq=4 Sk=932032
+BLOCK B=4 Sq=4 Sk=932032 1/4
+BLOCK B=4 Sq=4 Sk=932032 2/4
+BLOCK B=4 Sq=4 Sk=932032 3/4
+BLOCK B=4 Sq=4 Sk=932032 4/4
+RESULT {"batch": 4, "sq": 4, "sk": 932032, "status": "passed", "wall_seconds": 18.731301486999655, "median_ms": {"baseline": 7.736527919769287, "schedule_only": 7.660607814788818, "compact": 7.956272125244141}, "speedup": {"compact_vs_baseline": 0.9723810093451133, "schedule_vs_baseline": 1.0099104544725426, "compact_vs_schedule": 0.962838838868115}}
+START 97/216 B=8 Sq=4 Sk=512
+BLOCK B=8 Sq=4 Sk=512 1/4
+BLOCK B=8 Sq=4 Sk=512 2/4
+BLOCK B=8 Sq=4 Sk=512 3/4
+BLOCK B=8 Sq=4 Sk=512 4/4
+RESULT {"batch": 8, "sq": 4, "sk": 512, "status": "passed", "wall_seconds": 13.621015105998595, "median_ms": {"baseline": 0.01820800080895424, "schedule_only": 0.018672000616788864, "compact": 0.019231999292969704}, "speedup": {"compact_vs_baseline": 0.9467554845226211, "schedule_vs_baseline": 0.9751499682675984, "compact_vs_schedule": 0.970881931324449}}
+START 98/216 B=8 Sq=4 Sk=1024
+BLOCK B=8 Sq=4 Sk=1024 1/4
+BLOCK B=8 Sq=4 Sk=1024 2/4
+BLOCK B=8 Sq=4 Sk=1024 3/4
+BLOCK B=8 Sq=4 Sk=1024 4/4
+RESULT {"batch": 8, "sq": 4, "sk": 1024, "status": "passed", "wall_seconds": 13.980031503000646, "median_ms": {"baseline": 0.02502400055527687, "schedule_only": 0.025488000363111496, "compact": 0.026399999856948853}, "speedup": {"compact_vs_baseline": 0.9478788140481826, "schedule_vs_baseline": 0.9817953624755057, "compact_vs_schedule": 0.9654545644401848}}
+START 99/216 B=8 Sq=4 Sk=2048
+BLOCK B=8 Sq=4 Sk=2048 1/4
+BLOCK B=8 Sq=4 Sk=2048 2/4
+BLOCK B=8 Sq=4 Sk=2048 3/4
+BLOCK B=8 Sq=4 Sk=2048 4/4
+RESULT {"batch": 8, "sq": 4, "sk": 2048, "status": "passed", "wall_seconds": 14.534219400000438, "median_ms": {"baseline": 0.038784001022577286, "schedule_only": 0.039344001561403275, "compact": 0.04070400074124336}, "speedup": {"compact_vs_baseline": 0.9528301964499368, "schedule_vs_baseline": 0.9857665586467607, "compact_vs_schedule": 0.9665880710722848}}
+START 100/216 B=8 Sq=4 Sk=4096
+BLOCK B=8 Sq=4 Sk=4096 1/4
+BLOCK B=8 Sq=4 Sk=4096 2/4
+BLOCK B=8 Sq=4 Sk=4096 3/4
+BLOCK B=8 Sq=4 Sk=4096 4/4
+RESULT {"batch": 8, "sq": 4, "sk": 4096, "status": "passed", "wall_seconds": 15.566535124000438, "median_ms": {"baseline": 0.06646399945020676, "schedule_only": 0.06708799675107002, "compact": 0.07011199742555618}, "speedup": {"compact_vs_baseline": 0.9479689909102531, "schedule_vs_baseline": 0.990698823469441, "compact_vs_schedule": 0.9568689983808121}}
+START 101/216 B=8 Sq=4 Sk=8192
+BLOCK B=8 Sq=4 Sk=8192 1/4
+BLOCK B=8 Sq=4 Sk=8192 2/4
+BLOCK B=8 Sq=4 Sk=8192 3/4
+BLOCK B=8 Sq=4 Sk=8192 4/4
+RESULT {"batch": 8, "sq": 4, "sk": 8192, "status": "passed", "wall_seconds": 16.91928339900005, "median_ms": {"baseline": 0.12670399993658066, "schedule_only": 0.12718400359153748, "compact": 0.13259200006723404}, "speedup": {"compact_vs_baseline": 0.9555930966599212, "schedule_vs_baseline": 0.996225911738882, "compact_vs_schedule": 0.9592132521347118}}
+START 102/216 B=8 Sq=4 Sk=16384
+BLOCK B=8 Sq=4 Sk=16384 1/4
+BLOCK B=8 Sq=4 Sk=16384 2/4
+BLOCK B=8 Sq=4 Sk=16384 3/4
+BLOCK B=8 Sq=4 Sk=16384 4/4
+RESULT {"batch": 8, "sq": 4, "sk": 16384, "status": "passed", "wall_seconds": 18.38216154300062, "median_ms": {"baseline": 0.25414399802684784, "schedule_only": 0.2527199983596802, "compact": 0.2632319927215576}, "speedup": {"compact_vs_baseline": 0.9654753413490932, "schedule_vs_baseline": 1.005634693243156, "compact_vs_schedule": 0.9600656658288612}}
+START 103/216 B=8 Sq=4 Sk=32768
+BLOCK B=8 Sq=4 Sk=32768 1/4
+BLOCK B=8 Sq=4 Sk=32768 2/4
+BLOCK B=8 Sq=4 Sk=32768 3/4
+BLOCK B=8 Sq=4 Sk=32768 4/4
+RESULT {"batch": 8, "sq": 4, "sk": 32768, "status": "passed", "wall_seconds": 19.21178497300025, "median_ms": {"baseline": 0.5306240022182465, "schedule_only": 0.5162239968776703, "compact": 0.5377439856529236}, "speedup": {"compact_vs_baseline": 0.9867595293956991, "schedule_vs_baseline": 1.0278948778585908, "compact_vs_schedule": 0.9599809772876884}}
+START 104/216 B=8 Sq=4 Sk=65536
+BLOCK B=8 Sq=4 Sk=65536 1/4
+BLOCK B=8 Sq=4 Sk=65536 2/4
+BLOCK B=8 Sq=4 Sk=65536 3/4
+BLOCK B=8 Sq=4 Sk=65536 4/4
+RESULT {"batch": 8, "sq": 4, "sk": 65536, "status": "passed", "wall_seconds": 19.14660758699938, "median_ms": {"baseline": 1.0742320120334625, "schedule_only": 1.0287360548973083, "compact": 1.0744480192661285}, "speedup": {"compact_vs_baseline": 0.9997989598111842, "schedule_vs_baseline": 1.0442251021722921, "compact_vs_schedule": 0.9574553970511831}}
+START 105/216 B=8 Sq=4 Sk=131072
+BLOCK B=8 Sq=4 Sk=131072 1/4
+BLOCK B=8 Sq=4 Sk=131072 2/4
+BLOCK B=8 Sq=4 Sk=131072 3/4
+BLOCK B=8 Sq=4 Sk=131072 4/4
+RESULT {"batch": 8, "sq": 4, "sk": 131072, "status": "passed", "wall_seconds": 18.462263340999925, "median_ms": {"baseline": 2.1555439829826355, "schedule_only": 2.067919969558716, "compact": 2.154528021812439}, "speedup": {"compact_vs_baseline": 1.0004715469745165, "schedule_vs_baseline": 1.0423730196109176, "compact_vs_schedule": 0.9598018445910643}}
+START 106/216 B=8 Sq=4 Sk=262144
+BLOCK B=8 Sq=4 Sk=262144 1/4
+BLOCK B=8 Sq=4 Sk=262144 2/4
+BLOCK B=8 Sq=4 Sk=262144 3/4
+BLOCK B=8 Sq=4 Sk=262144 4/4
+RESULT {"batch": 8, "sq": 4, "sk": 262144, "status": "passed", "wall_seconds": 18.78451743900041, "median_ms": {"baseline": 4.351216077804565, "schedule_only": 4.131727933883667, "compact": 4.328912019729614}, "speedup": {"compact_vs_baseline": 1.0051523472810946, "schedule_vs_baseline": 1.05312260328685, "compact_vs_schedule": 0.9544495048762244}}
+START 107/216 B=8 Sq=4 Sk=524288
+BLOCK B=8 Sq=4 Sk=524288 1/4
+BLOCK B=8 Sq=4 Sk=524288 2/4
+BLOCK B=8 Sq=4 Sk=524288 3/4
+BLOCK B=8 Sq=4 Sk=524288 4/4
+RESULT {"batch": 8, "sq": 4, "sk": 524288, "status": "passed", "wall_seconds": 19.045943308999995, "median_ms": {"baseline": 8.704927921295166, "schedule_only": 8.26144027709961, "compact": 8.64844012260437}, "speedup": {"compact_vs_baseline": 1.006531559204897, "schedule_vs_baseline": 1.053681637743589, "compact_vs_schedule": 0.9552520639539075}}
+START 108/216 B=8 Sq=4 Sk=932032
+BLOCK B=8 Sq=4 Sk=932032 1/4
+BLOCK B=8 Sq=4 Sk=932032 2/4
+BLOCK B=8 Sq=4 Sk=932032 3/4
+BLOCK B=8 Sq=4 Sk=932032 4/4
+RESULT {"batch": 8, "sq": 4, "sk": 932032, "status": "passed", "wall_seconds": 19.389627087000918, "median_ms": {"baseline": 15.44484806060791, "schedule_only": 14.666608095169067, "compact": 15.353640079498291}, "speedup": {"compact_vs_baseline": 1.005940479302456, "schedule_vs_baseline": 1.0530620277291776, "compact_vs_schedule": 0.9552528272922968}}
+START 109/216 B=16 Sq=4 Sk=512
+BLOCK B=16 Sq=4 Sk=512 1/4
+BLOCK B=16 Sq=4 Sk=512 2/4
+BLOCK B=16 Sq=4 Sk=512 3/4
+BLOCK B=16 Sq=4 Sk=512 4/4
+RESULT {"batch": 16, "sq": 4, "sk": 512, "status": "passed", "wall_seconds": 13.338678195001194, "median_ms": {"baseline": 0.026496000587940216, "schedule_only": 0.02675200067460537, "compact": 0.027295999228954315}, "speedup": {"compact_vs_baseline": 0.9706917253952184, "schedule_vs_baseline": 0.9904306190113039, "compact_vs_schedule": 0.9800703923756015}}
+START 110/216 B=16 Sq=4 Sk=1024
+BLOCK B=16 Sq=4 Sk=1024 1/4
+BLOCK B=16 Sq=4 Sk=1024 2/4
+BLOCK B=16 Sq=4 Sk=1024 3/4
+BLOCK B=16 Sq=4 Sk=1024 4/4
+RESULT {"batch": 16, "sq": 4, "sk": 1024, "status": "passed", "wall_seconds": 14.581683569000234, "median_ms": {"baseline": 0.03993599861860275, "schedule_only": 0.040463998913764954, "compact": 0.04198399931192398}, "speedup": {"compact_vs_baseline": 0.9512194948817186, "schedule_vs_baseline": 0.9869513565308399, "compact_vs_schedule": 0.9637957216303753}}
+START 111/216 B=16 Sq=4 Sk=2048
+BLOCK B=16 Sq=4 Sk=2048 1/4
+BLOCK B=16 Sq=4 Sk=2048 2/4
+BLOCK B=16 Sq=4 Sk=2048 3/4
+BLOCK B=16 Sq=4 Sk=2048 4/4
+RESULT {"batch": 16, "sq": 4, "sk": 2048, "status": "passed", "wall_seconds": 15.627406100000371, "median_ms": {"baseline": 0.06750399991869926, "schedule_only": 0.06816799752414227, "compact": 0.07135999947786331}, "speedup": {"compact_vs_baseline": 0.9459641313427949, "schedule_vs_baseline": 0.9902593940036475, "compact_vs_schedule": 0.9552690305902926}}
+START 112/216 B=16 Sq=4 Sk=4096
+BLOCK B=16 Sq=4 Sk=4096 1/4
+BLOCK B=16 Sq=4 Sk=4096 2/4
+BLOCK B=16 Sq=4 Sk=4096 3/4
+BLOCK B=16 Sq=4 Sk=4096 4/4
+RESULT {"batch": 16, "sq": 4, "sk": 4096, "status": "passed", "wall_seconds": 16.946774095000364, "median_ms": {"baseline": 0.12812800705432892, "schedule_only": 0.1279520019888878, "compact": 0.13327999413013458}, "speedup": {"compact_vs_baseline": 0.9613446330829272, "schedule_vs_baseline": 1.001375555385655, "compact_vs_schedule": 0.9600240668074719}}
+START 113/216 B=16 Sq=4 Sk=8192
+BLOCK B=16 Sq=4 Sk=8192 1/4
+BLOCK B=16 Sq=4 Sk=8192 2/4
+BLOCK B=16 Sq=4 Sk=8192 3/4
+BLOCK B=16 Sq=4 Sk=8192 4/4
+RESULT {"batch": 16, "sq": 4, "sk": 8192, "status": "passed", "wall_seconds": 18.343714055999953, "median_ms": {"baseline": 0.2550880014896393, "schedule_only": 0.25489600002765656, "compact": 0.26417599618434906}, "speedup": {"compact_vs_baseline": 0.9655987113667666, "schedule_vs_baseline": 1.0007532541191777, "compact_vs_schedule": 0.9648719176203402}}
+START 114/216 B=16 Sq=4 Sk=16384
+BLOCK B=16 Sq=4 Sk=16384 1/4
+BLOCK B=16 Sq=4 Sk=16384 2/4
+BLOCK B=16 Sq=4 Sk=16384 3/4
+BLOCK B=16 Sq=4 Sk=16384 4/4
+RESULT {"batch": 16, "sq": 4, "sk": 16384, "status": "passed", "wall_seconds": 19.352381806000267, "median_ms": {"baseline": 0.5380159914493561, "schedule_only": 0.5130879878997803, "compact": 0.5335040092468262}, "speedup": {"compact_vs_baseline": 1.008457260159862, "schedule_vs_baseline": 1.0485842665146254, "compact_vs_schedule": 0.9617322063317421}}
+START 115/216 B=16 Sq=4 Sk=32768
+BLOCK B=16 Sq=4 Sk=32768 1/4
+BLOCK B=16 Sq=4 Sk=32768 2/4
+BLOCK B=16 Sq=4 Sk=32768 3/4
+BLOCK B=16 Sq=4 Sk=32768 4/4
+RESULT {"batch": 16, "sq": 4, "sk": 32768, "status": "passed", "wall_seconds": 17.868872306000412, "median_ms": {"baseline": 1.0793599486351013, "schedule_only": 1.0181120038032532, "compact": 1.059552013874054}, "speedup": {"compact_vs_baseline": 1.0186946317893573, "schedule_vs_baseline": 1.06015835645101, "compact_vs_schedule": 0.9608891215077935}}
+START 116/216 B=16 Sq=4 Sk=65536
+BLOCK B=16 Sq=4 Sk=65536 1/4
+BLOCK B=16 Sq=4 Sk=65536 2/4
+BLOCK B=16 Sq=4 Sk=65536 3/4
+BLOCK B=16 Sq=4 Sk=65536 4/4
+RESULT {"batch": 16, "sq": 4, "sk": 65536, "status": "passed", "wall_seconds": 18.25872338499903, "median_ms": {"baseline": 2.16376793384552, "schedule_only": 2.0338399410247803, "compact": 2.1155359745025635}, "speedup": {"compact_vs_baseline": 1.0227989312988628, "schedule_vs_baseline": 1.0638830963046548, "compact_vs_schedule": 0.9613828200217712}}
+START 117/216 B=16 Sq=4 Sk=131072
+BLOCK B=16 Sq=4 Sk=131072 1/4
+BLOCK B=16 Sq=4 Sk=131072 2/4
+BLOCK B=16 Sq=4 Sk=131072 3/4
+BLOCK B=16 Sq=4 Sk=131072 4/4
+RESULT {"batch": 16, "sq": 4, "sk": 131072, "status": "passed", "wall_seconds": 18.735304143001485, "median_ms": {"baseline": 4.324264049530029, "schedule_only": 4.0558881759643555, "compact": 4.21235203742981}, "speedup": {"compact_vs_baseline": 1.0265675829336676, "schedule_vs_baseline": 1.0661694459813018, "compact_vs_schedule": 0.962855938897044}}
+START 118/216 B=16 Sq=4 Sk=262144
+BLOCK B=16 Sq=4 Sk=262144 1/4
+BLOCK B=16 Sq=4 Sk=262144 2/4
+BLOCK B=16 Sq=4 Sk=262144 3/4
+BLOCK B=16 Sq=4 Sk=262144 4/4
+RESULT {"batch": 16, "sq": 4, "sk": 262144, "status": "passed", "wall_seconds": 18.980580419000034, "median_ms": {"baseline": 8.704751968383789, "schedule_only": 8.091511964797974, "compact": 8.405279636383057}, "speedup": {"compact_vs_baseline": 1.0356290742195462, "schedule_vs_baseline": 1.0757880611502162, "compact_vs_schedule": 0.9626701686132}}
+START 119/216 B=16 Sq=4 Sk=524288
+BLOCK B=16 Sq=4 Sk=524288 1/4
+BLOCK B=16 Sq=4 Sk=524288 2/4
+BLOCK B=16 Sq=4 Sk=524288 3/4
+BLOCK B=16 Sq=4 Sk=524288 4/4
+RESULT {"batch": 16, "sq": 4, "sk": 524288, "status": "passed", "wall_seconds": 19.631016294999426, "median_ms": {"baseline": 17.370448112487793, "schedule_only": 16.19918441772461, "compact": 16.79213571548462}, "speedup": {"compact_vs_baseline": 1.0344394785036124, "schedule_vs_baseline": 1.0723038681800316, "compact_vs_schedule": 0.9646887502693758}}
+START 120/216 B=16 Sq=4 Sk=932032
+BLOCK B=16 Sq=4 Sk=932032 1/4
+BLOCK B=16 Sq=4 Sk=932032 2/4
+BLOCK B=16 Sq=4 Sk=932032 3/4
+BLOCK B=16 Sq=4 Sk=932032 4/4
+RESULT {"batch": 16, "sq": 4, "sk": 932032, "status": "passed", "wall_seconds": 20.35303132700028, "median_ms": {"baseline": 30.931943893432617, "schedule_only": 28.786744117736816, "compact": 29.832168102264404}, "speedup": {"compact_vs_baseline": 1.0368654328910387, "schedule_vs_baseline": 1.0745204031036648, "compact_vs_schedule": 0.9649564865368188}}
+START 121/216 B=32 Sq=4 Sk=512
+BLOCK B=32 Sq=4 Sk=512 1/4
+BLOCK B=32 Sq=4 Sk=512 2/4
+BLOCK B=32 Sq=4 Sk=512 3/4
+BLOCK B=32 Sq=4 Sk=512 4/4
+RESULT {"batch": 32, "sq": 4, "sk": 512, "status": "passed", "wall_seconds": 13.986471296999298, "median_ms": {"baseline": 0.04737599939107895, "schedule_only": 0.047968000173568726, "compact": 0.0490880012512207}, "speedup": {"compact_vs_baseline": 0.9651238221866045, "schedule_vs_baseline": 0.9876584226912178, "compact_vs_schedule": 0.9771838117441353}}
+START 122/216 B=32 Sq=4 Sk=1024
+BLOCK B=32 Sq=4 Sk=1024 1/4
+BLOCK B=32 Sq=4 Sk=1024 2/4
+BLOCK B=32 Sq=4 Sk=1024 3/4
+BLOCK B=32 Sq=4 Sk=1024 4/4
+RESULT {"batch": 32, "sq": 4, "sk": 1024, "status": "passed", "wall_seconds": 15.70805123899845, "median_ms": {"baseline": 0.07430399954319, "schedule_only": 0.07499199733138084, "compact": 0.07791999727487564}, "speedup": {"compact_vs_baseline": 0.9535934566459286, "schedule_vs_baseline": 0.9908257172408589, "compact_vs_schedule": 0.9624229973575873}}
+START 123/216 B=32 Sq=4 Sk=2048
+BLOCK B=32 Sq=4 Sk=2048 1/4
+BLOCK B=32 Sq=4 Sk=2048 2/4
+BLOCK B=32 Sq=4 Sk=2048 3/4
+BLOCK B=32 Sq=4 Sk=2048 4/4
+RESULT {"batch": 32, "sq": 4, "sk": 2048, "status": "passed", "wall_seconds": 16.97314640500008, "median_ms": {"baseline": 0.1340159997344017, "schedule_only": 0.13396800309419632, "compact": 0.1395680010318756}, "speedup": {"compact_vs_baseline": 0.9602200987588416, "schedule_vs_baseline": 1.0003582694307358, "compact_vs_schedule": 0.9598762044574937}}
+START 124/216 B=32 Sq=4 Sk=4096
+BLOCK B=32 Sq=4 Sk=4096 1/4
+BLOCK B=32 Sq=4 Sk=4096 2/4
+BLOCK B=32 Sq=4 Sk=4096 3/4
+BLOCK B=32 Sq=4 Sk=4096 4/4
+RESULT {"batch": 32, "sq": 4, "sk": 4096, "status": "passed", "wall_seconds": 18.281570117998854, "median_ms": {"baseline": 0.2619200050830841, "schedule_only": 0.2603999972343445, "compact": 0.27083198726177216}, "speedup": {"compact_vs_baseline": 0.9670940561017477, "schedule_vs_baseline": 1.005837203782194, "compact_vs_schedule": 0.961481691535407}}
+START 125/216 B=32 Sq=4 Sk=8192
+BLOCK B=32 Sq=4 Sk=8192 1/4
+BLOCK B=32 Sq=4 Sk=8192 2/4
+BLOCK B=32 Sq=4 Sk=8192 3/4
+BLOCK B=32 Sq=4 Sk=8192 4/4
+RESULT {"batch": 32, "sq": 4, "sk": 8192, "status": "passed", "wall_seconds": 19.359178403999977, "median_ms": {"baseline": 0.5133599936962128, "schedule_only": 0.513839989900589, "compact": 0.5348320007324219}, "speedup": {"compact_vs_baseline": 0.9598528004928568, "schedule_vs_baseline": 0.9990658644445539, "compact_vs_schedule": 0.9607502714813521}}
+START 126/216 B=32 Sq=4 Sk=16384
+BLOCK B=32 Sq=4 Sk=16384 1/4
+BLOCK B=32 Sq=4 Sk=16384 2/4
+BLOCK B=32 Sq=4 Sk=16384 3/4
+BLOCK B=32 Sq=4 Sk=16384 4/4
+RESULT {"batch": 32, "sq": 4, "sk": 16384, "status": "passed", "wall_seconds": 19.258702675999302, "median_ms": {"baseline": 1.0248639583587646, "schedule_only": 1.0196320414543152, "compact": 1.0620959997177124}, "speedup": {"compact_vs_baseline": 0.9649447494681804, "schedule_vs_baseline": 1.0051311813396793, "compact_vs_schedule": 0.9600187193298125}}
+START 127/216 B=32 Sq=4 Sk=32768
+BLOCK B=32 Sq=4 Sk=32768 1/4
+BLOCK B=32 Sq=4 Sk=32768 2/4
+BLOCK B=32 Sq=4 Sk=32768 3/4
+BLOCK B=32 Sq=4 Sk=32768 4/4
+RESULT {"batch": 32, "sq": 4, "sk": 32768, "status": "passed", "wall_seconds": 18.36447600899919, "median_ms": {"baseline": 2.0479040145874023, "schedule_only": 2.0352319478988647, "compact": 2.116047978401184}, "speedup": {"compact_vs_baseline": 0.967796588494525, "schedule_vs_baseline": 1.0062263501227071, "compact_vs_schedule": 0.9618080349182908}}
+START 128/216 B=32 Sq=4 Sk=65536
+BLOCK B=32 Sq=4 Sk=65536 1/4
+BLOCK B=32 Sq=4 Sk=65536 2/4
+BLOCK B=32 Sq=4 Sk=65536 3/4
+BLOCK B=32 Sq=4 Sk=65536 4/4
+RESULT {"batch": 32, "sq": 4, "sk": 65536, "status": "passed", "wall_seconds": 18.825190765001025, "median_ms": {"baseline": 4.0796799659729, "schedule_only": 4.0641279220581055, "compact": 4.217967987060547}, "speedup": {"compact_vs_baseline": 0.9672145399130879, "schedule_vs_baseline": 1.0038266620079517, "compact_vs_schedule": 0.9635274460417015}}
+START 129/216 B=32 Sq=4 Sk=131072
+BLOCK B=32 Sq=4 Sk=131072 1/4
+BLOCK B=32 Sq=4 Sk=131072 2/4
+BLOCK B=32 Sq=4 Sk=131072 3/4
+BLOCK B=32 Sq=4 Sk=131072 4/4
+RESULT {"batch": 32, "sq": 4, "sk": 131072, "status": "passed", "wall_seconds": 18.93270195600053, "median_ms": {"baseline": 8.160607814788818, "schedule_only": 8.105664253234863, "compact": 8.415735960006714}, "speedup": {"compact_vs_baseline": 0.9696843928528276, "schedule_vs_baseline": 1.0067784156655673, "compact_vs_schedule": 0.9631557230115851}}
+START 130/216 B=32 Sq=4 Sk=262144
+BLOCK B=32 Sq=4 Sk=262144 1/4
+BLOCK B=32 Sq=4 Sk=262144 2/4
+BLOCK B=32 Sq=4 Sk=262144 3/4
+BLOCK B=32 Sq=4 Sk=262144 4/4
+RESULT {"batch": 32, "sq": 4, "sk": 262144, "status": "passed", "wall_seconds": 19.72804809199988, "median_ms": {"baseline": 16.3591046333313, "schedule_only": 16.256128311157227, "compact": 16.821080207824707}, "speedup": {"compact_vs_baseline": 0.9725359151263954, "schedule_vs_baseline": 1.0063346154879569, "compact_vs_schedule": 0.9664140536940856}}
+START 131/216 B=32 Sq=4 Sk=524288
+BLOCK B=32 Sq=4 Sk=524288 1/4
+BLOCK B=32 Sq=4 Sk=524288 2/4
+BLOCK B=32 Sq=4 Sk=524288 3/4
+BLOCK B=32 Sq=4 Sk=524288 4/4
+RESULT {"batch": 32, "sq": 4, "sk": 524288, "status": "passed", "wall_seconds": 20.765862978998484, "median_ms": {"baseline": 32.76699256896973, "schedule_only": 32.50853633880615, "compact": 33.843807220458984}, "speedup": {"compact_vs_baseline": 0.9681828157076161, "schedule_vs_baseline": 1.0079504111618538, "compact_vs_schedule": 0.9605460794361916}}
+START 132/216 B=32 Sq=4 Sk=932032
+BLOCK B=32 Sq=4 Sk=932032 1/4
+BLOCK B=32 Sq=4 Sk=932032 2/4
+BLOCK B=32 Sq=4 Sk=932032 3/4
+BLOCK B=32 Sq=4 Sk=932032 4/4
+RESULT {"batch": 32, "sq": 4, "sk": 932032, "status": "passed", "wall_seconds": 24.469533655001214, "median_ms": {"baseline": 58.3719367980957, "schedule_only": 57.8042631149292, "compact": 60.0577917098999}, "speedup": {"compact_vs_baseline": 0.9719294555492904, "schedule_vs_baseline": 1.009820619666716, "compact_vs_schedule": 0.9624773317364709}}
+START 133/216 B=64 Sq=4 Sk=512
+BLOCK B=64 Sq=4 Sk=512 1/4
+BLOCK B=64 Sq=4 Sk=512 2/4
+BLOCK B=64 Sq=4 Sk=512 3/4
+BLOCK B=64 Sq=4 Sk=512 4/4
+RESULT {"batch": 64, "sq": 4, "sk": 512, "status": "passed", "wall_seconds": 15.037614478998876, "median_ms": {"baseline": 0.08588799834251404, "schedule_only": 0.08716800063848495, "compact": 0.08972799777984619}, "speedup": {"compact_vs_baseline": 0.9572039995057746, "schedule_vs_baseline": 0.9853156859559103, "compact_vs_schedule": 0.9714693606822437}}
+START 134/216 B=64 Sq=4 Sk=1024
+BLOCK B=64 Sq=4 Sk=1024 1/4
+BLOCK B=64 Sq=4 Sk=1024 2/4
+BLOCK B=64 Sq=4 Sk=1024 3/4
+BLOCK B=64 Sq=4 Sk=1024 4/4
+RESULT {"batch": 64, "sq": 4, "sk": 1024, "status": "passed", "wall_seconds": 17.01834837899878, "median_ms": {"baseline": 0.14507199823856354, "schedule_only": 0.14553599804639816, "compact": 0.15030399709939957}, "speedup": {"compact_vs_baseline": 0.9651905540650659, "schedule_vs_baseline": 0.9968117866777765, "compact_vs_schedule": 0.9682776297036984}}
+START 135/216 B=64 Sq=4 Sk=2048
+BLOCK B=64 Sq=4 Sk=2048 1/4
+BLOCK B=64 Sq=4 Sk=2048 2/4
+BLOCK B=64 Sq=4 Sk=2048 3/4
+BLOCK B=64 Sq=4 Sk=2048 4/4
+RESULT {"batch": 64, "sq": 4, "sk": 2048, "status": "passed", "wall_seconds": 18.111744759999056, "median_ms": {"baseline": 0.27246399223804474, "schedule_only": 0.2725600004196167, "compact": 0.28089600801467896}, "speedup": {"compact_vs_baseline": 0.9699817173044567, "schedule_vs_baseline": 0.9996477539572052, "compact_vs_schedule": 0.9703235099210572}}
+START 136/216 B=64 Sq=4 Sk=4096
+BLOCK B=64 Sq=4 Sk=4096 1/4
+BLOCK B=64 Sq=4 Sk=4096 2/4
+BLOCK B=64 Sq=4 Sk=4096 3/4
+BLOCK B=64 Sq=4 Sk=4096 4/4
+RESULT {"batch": 64, "sq": 4, "sk": 4096, "status": "passed", "wall_seconds": 19.071400619999622, "median_ms": {"baseline": 0.5261119902133942, "schedule_only": 0.5255920141935349, "compact": 0.546520009636879}, "speedup": {"compact_vs_baseline": 0.9626582392892725, "schedule_vs_baseline": 1.0009893149169269, "compact_vs_schedule": 0.9617068083980143}}
+START 137/216 B=64 Sq=4 Sk=8192
+BLOCK B=64 Sq=4 Sk=8192 1/4
+BLOCK B=64 Sq=4 Sk=8192 2/4
+BLOCK B=64 Sq=4 Sk=8192 3/4
+BLOCK B=64 Sq=4 Sk=8192 4/4
+RESULT {"batch": 64, "sq": 4, "sk": 8192, "status": "passed", "wall_seconds": 19.295739032999336, "median_ms": {"baseline": 1.038591980934143, "schedule_only": 1.0334399938583374, "compact": 1.077951967716217}, "speedup": {"compact_vs_baseline": 0.963486325958045, "schedule_vs_baseline": 1.0049852793644756, "compact_vs_schedule": 0.9587069042118972}}
+START 138/216 B=64 Sq=4 Sk=16384
+BLOCK B=64 Sq=4 Sk=16384 1/4
+BLOCK B=64 Sq=4 Sk=16384 2/4
+BLOCK B=64 Sq=4 Sk=16384 3/4
+BLOCK B=64 Sq=4 Sk=16384 4/4
+RESULT {"batch": 64, "sq": 4, "sk": 16384, "status": "passed", "wall_seconds": 18.34084491199974, "median_ms": {"baseline": 2.0582879781723022, "schedule_only": 2.048640012741089, "compact": 2.1352319717407227}, "speedup": {"compact_vs_baseline": 0.9639645740665391, "schedule_vs_baseline": 1.0047094488886334, "compact_vs_schedule": 0.9594461116423614}}
+START 139/216 B=64 Sq=4 Sk=32768
+BLOCK B=64 Sq=4 Sk=32768 1/4
+BLOCK B=64 Sq=4 Sk=32768 2/4
+BLOCK B=64 Sq=4 Sk=32768 3/4
+BLOCK B=64 Sq=4 Sk=32768 4/4
+RESULT {"batch": 64, "sq": 4, "sk": 32768, "status": "passed", "wall_seconds": 18.700010366001152, "median_ms": {"baseline": 4.101632118225098, "schedule_only": 4.079160094261169, "compact": 4.258080005645752}, "speedup": {"compact_vs_baseline": 0.9632585843353761, "schedule_vs_baseline": 1.0055089830858914, "compact_vs_schedule": 0.957981082753881}}
+START 140/216 B=64 Sq=4 Sk=65536
+BLOCK B=64 Sq=4 Sk=65536 1/4
+BLOCK B=64 Sq=4 Sk=65536 2/4
+BLOCK B=64 Sq=4 Sk=65536 3/4
+BLOCK B=64 Sq=4 Sk=65536 4/4
+RESULT {"batch": 64, "sq": 4, "sk": 65536, "status": "passed", "wall_seconds": 18.942113204000634, "median_ms": {"baseline": 8.220992088317871, "schedule_only": 8.124399900436401, "compact": 8.494351863861084}, "speedup": {"compact_vs_baseline": 0.967818642325589, "schedule_vs_baseline": 1.0118891473912162, "compact_vs_schedule": 0.9564472994109615}}
+START 141/216 B=64 Sq=4 Sk=131072
+BLOCK B=64 Sq=4 Sk=131072 1/4
+BLOCK B=64 Sq=4 Sk=131072 2/4
+BLOCK B=64 Sq=4 Sk=131072 3/4
+BLOCK B=64 Sq=4 Sk=131072 4/4
+RESULT {"batch": 64, "sq": 4, "sk": 131072, "status": "passed", "wall_seconds": 19.61445652799921, "median_ms": {"baseline": 16.418975830078125, "schedule_only": 16.30024766921997, "compact": 16.950640201568604}, "speedup": {"compact_vs_baseline": 0.9686345550865224, "schedule_vs_baseline": 1.0072838255753838, "compact_vs_schedule": 0.9616302083806577}}
+START 142/216 B=64 Sq=4 Sk=262144
+BLOCK B=64 Sq=4 Sk=262144 1/4
+BLOCK B=64 Sq=4 Sk=262144 2/4
+BLOCK B=64 Sq=4 Sk=262144 3/4
+BLOCK B=64 Sq=4 Sk=262144 4/4
+RESULT {"batch": 64, "sq": 4, "sk": 262144, "status": "passed", "wall_seconds": 20.835374303000208, "median_ms": {"baseline": 32.97811985015869, "schedule_only": 32.57623863220215, "compact": 33.905776023864746}, "speedup": {"compact_vs_baseline": 0.9726401727819732, "schedule_vs_baseline": 1.0123366366047943, "compact_vs_schedule": 0.960787289141331}}
+START 143/216 B=64 Sq=4 Sk=524288
+BLOCK B=64 Sq=4 Sk=524288 1/4
+BLOCK B=64 Sq=4 Sk=524288 2/4
+BLOCK B=64 Sq=4 Sk=524288 3/4
+BLOCK B=64 Sq=4 Sk=524288 4/4
+RESULT {"batch": 64, "sq": 4, "sk": 524288, "status": "passed", "wall_seconds": 26.850191124000048, "median_ms": {"baseline": 66.08169555664062, "schedule_only": 65.25266456604004, "compact": 67.80757522583008}, "speedup": {"compact_vs_baseline": 0.9745473914464352, "schedule_vs_baseline": 1.012704936972521, "compact_vs_schedule": 0.9623211617392153}}
+START 144/216 B=64 Sq=4 Sk=932032
+BLOCK B=64 Sq=4 Sk=932032 1/4
+BLOCK B=64 Sq=4 Sk=932032 2/4
+BLOCK B=64 Sq=4 Sk=932032 3/4
+BLOCK B=64 Sq=4 Sk=932032 4/4
+RESULT {"batch": 64, "sq": 4, "sk": 932032, "status": "passed", "wall_seconds": 43.73381038000116, "median_ms": {"baseline": 119.41146278381348, "schedule_only": 116.44343185424805, "compact": 120.43201446533203}, "speedup": {"compact_vs_baseline": 0.9915259103980832, "schedule_vs_baseline": 1.025489036885142, "compact_vs_schedule": 0.966881043808894}}
+START 145/216 B=2 Sq=128 Sk=512
+BLOCK B=2 Sq=128 Sk=512 1/4
+BLOCK B=2 Sq=128 Sk=512 2/4
+BLOCK B=2 Sq=128 Sk=512 3/4
+BLOCK B=2 Sq=128 Sk=512 4/4
+RESULT {"batch": 2, "sq": 128, "sk": 512, "status": "passed", "wall_seconds": 15.044526237001264, "median_ms": {"baseline": 0.084927998483181, "schedule_only": 0.08852800354361534, "compact": 0.0907839983701706}, "speedup": {"compact_vs_baseline": 0.9354952415390229, "schedule_vs_baseline": 0.9593348441585411, "compact_vs_schedule": 0.9751498626734145}}
+START 146/216 B=2 Sq=128 Sk=1024
+BLOCK B=2 Sq=128 Sk=1024 1/4
+BLOCK B=2 Sq=128 Sk=1024 2/4
+BLOCK B=2 Sq=128 Sk=1024 3/4
+BLOCK B=2 Sq=128 Sk=1024 4/4
+RESULT {"batch": 2, "sq": 128, "sk": 1024, "status": "passed", "wall_seconds": 16.748752516999957, "median_ms": {"baseline": 0.14044799655675888, "schedule_only": 0.14367999881505966, "compact": 0.1488640010356903}, "speedup": {"compact_vs_baseline": 0.9434651465741964, "schedule_vs_baseline": 0.9775055520256448, "compact_vs_schedule": 0.965176253596813}}
+START 147/216 B=2 Sq=128 Sk=2048
+BLOCK B=2 Sq=128 Sk=2048 1/4
+BLOCK B=2 Sq=128 Sk=2048 2/4
+BLOCK B=2 Sq=128 Sk=2048 3/4
+BLOCK B=2 Sq=128 Sk=2048 4/4
+RESULT {"batch": 2, "sq": 128, "sk": 2048, "status": "passed", "wall_seconds": 17.903954589999557, "median_ms": {"baseline": 0.2636000066995621, "schedule_only": 0.26367999613285065, "compact": 0.275504007935524}, "speedup": {"compact_vs_baseline": 0.9567919126652132, "schedule_vs_baseline": 0.9996966420112952, "compact_vs_schedule": 0.957082251211966}}
+START 148/216 B=2 Sq=128 Sk=4096
+BLOCK B=2 Sq=128 Sk=4096 1/4
+BLOCK B=2 Sq=128 Sk=4096 2/4
+BLOCK B=2 Sq=128 Sk=4096 3/4
+BLOCK B=2 Sq=128 Sk=4096 4/4
+RESULT {"batch": 2, "sq": 128, "sk": 4096, "status": "passed", "wall_seconds": 19.035267383000246, "median_ms": {"baseline": 0.5115039944648743, "schedule_only": 0.5086559951305389, "compact": 0.5339840054512024}, "speedup": {"compact_vs_baseline": 0.9579013401958864, "schedule_vs_baseline": 1.0055990676638038, "compact_vs_schedule": 0.9525678483585628}}
+START 149/216 B=2 Sq=128 Sk=8192
+BLOCK B=2 Sq=128 Sk=8192 1/4
+BLOCK B=2 Sq=128 Sk=8192 2/4
+BLOCK B=2 Sq=128 Sk=8192 3/4
+BLOCK B=2 Sq=128 Sk=8192 4/4
+RESULT {"batch": 2, "sq": 128, "sk": 8192, "status": "passed", "wall_seconds": 19.848909521000678, "median_ms": {"baseline": 1.0051279962062836, "schedule_only": 0.9975520074367523, "compact": 1.0535919964313507}, "speedup": {"compact_vs_baseline": 0.9540011689636777, "schedule_vs_baseline": 1.0075945802454933, "compact_vs_schedule": 0.9468105403378035}}
+START 150/216 B=2 Sq=128 Sk=16384
+BLOCK B=2 Sq=128 Sk=16384 1/4
+BLOCK B=2 Sq=128 Sk=16384 2/4
+BLOCK B=2 Sq=128 Sk=16384 3/4
+BLOCK B=2 Sq=128 Sk=16384 4/4
+RESULT {"batch": 2, "sq": 128, "sk": 16384, "status": "passed", "wall_seconds": 18.07683552799972, "median_ms": {"baseline": 1.992576003074646, "schedule_only": 1.9657439589500427, "compact": 2.076464056968689}, "speedup": {"compact_vs_baseline": 0.9596005268607893, "schedule_vs_baseline": 1.0136498163977241, "compact_vs_schedule": 0.9466785386209476}}
+START 151/216 B=2 Sq=128 Sk=32768
+BLOCK B=2 Sq=128 Sk=32768 1/4
+BLOCK B=2 Sq=128 Sk=32768 2/4
+BLOCK B=2 Sq=128 Sk=32768 3/4
+BLOCK B=2 Sq=128 Sk=32768 4/4
+RESULT {"batch": 2, "sq": 128, "sk": 32768, "status": "passed", "wall_seconds": 18.638992782998685, "median_ms": {"baseline": 3.9605599641799927, "schedule_only": 3.9290080070495605, "compact": 4.129048109054565}, "speedup": {"compact_vs_baseline": 0.959194434062152, "schedule_vs_baseline": 1.008030514845941, "compact_vs_schedule": 0.9515529737795164}}
+START 152/216 B=2 Sq=128 Sk=65536
+BLOCK B=2 Sq=128 Sk=65536 1/4
+BLOCK B=2 Sq=128 Sk=65536 2/4
+BLOCK B=2 Sq=128 Sk=65536 3/4
+BLOCK B=2 Sq=128 Sk=65536 4/4
+RESULT {"batch": 2, "sq": 128, "sk": 65536, "status": "passed", "wall_seconds": 18.842229969000982, "median_ms": {"baseline": 7.886559963226318, "schedule_only": 7.787071943283081, "compact": 8.225032091140747}, "speedup": {"compact_vs_baseline": 0.9588485340648093, "schedule_vs_baseline": 1.0127760499283756, "compact_vs_schedule": 0.946752773362502}}
+START 153/216 B=2 Sq=128 Sk=131072
+BLOCK B=2 Sq=128 Sk=131072 1/4
+BLOCK B=2 Sq=128 Sk=131072 2/4
+BLOCK B=2 Sq=128 Sk=131072 3/4
+BLOCK B=2 Sq=128 Sk=131072 4/4
+RESULT {"batch": 2, "sq": 128, "sk": 131072, "status": "passed", "wall_seconds": 19.18078283000068, "median_ms": {"baseline": 15.750672101974487, "schedule_only": 15.559687852859497, "compact": 16.41638469696045}, "speedup": {"compact_vs_baseline": 0.9594482824766393, "schedule_vs_baseline": 1.012274298232782, "compact_vs_schedule": 0.9478145243355821}}
+START 154/216 B=2 Sq=128 Sk=262144
+BLOCK B=2 Sq=128 Sk=262144 1/4
+BLOCK B=2 Sq=128 Sk=262144 2/4
+BLOCK B=2 Sq=128 Sk=262144 3/4
+BLOCK B=2 Sq=128 Sk=262144 4/4
+RESULT {"batch": 2, "sq": 128, "sk": 262144, "status": "passed", "wall_seconds": 20.547749845, "median_ms": {"baseline": 31.527567386627197, "schedule_only": 31.13982391357422, "compact": 32.529279708862305}, "speedup": {"compact_vs_baseline": 0.9692058252995316, "schedule_vs_baseline": 1.0124516912532686, "compact_vs_schedule": 0.9572859956407352}}
+START 155/216 B=2 Sq=128 Sk=524288
+BLOCK B=2 Sq=128 Sk=524288 1/4
+BLOCK B=2 Sq=128 Sk=524288 2/4
+BLOCK B=2 Sq=128 Sk=524288 3/4
+BLOCK B=2 Sq=128 Sk=524288 4/4
+RESULT {"batch": 2, "sq": 128, "sk": 524288, "status": "passed", "wall_seconds": 25.797687354001027, "median_ms": {"baseline": 63.1376314163208, "schedule_only": 62.329423904418945, "compact": 64.9561767578125}, "speedup": {"compact_vs_baseline": 0.9720035040197624, "schedule_vs_baseline": 1.0129667091603674, "compact_vs_schedule": 0.9595611536191956}}
+START 156/216 B=2 Sq=128 Sk=932032
+BLOCK B=2 Sq=128 Sk=932032 1/4
+BLOCK B=2 Sq=128 Sk=932032 2/4
+BLOCK B=2 Sq=128 Sk=932032 3/4
+BLOCK B=2 Sq=128 Sk=932032 4/4
+RESULT {"batch": 2, "sq": 128, "sk": 932032, "status": "passed", "wall_seconds": 41.37425117899875, "median_ms": {"baseline": 112.40041732788086, "schedule_only": 110.75255393981934, "compact": 115.63932037353516}, "speedup": {"compact_vs_baseline": 0.9719913344769575, "schedule_vs_baseline": 1.0148787845466474, "compact_vs_schedule": 0.9577413079052115}}
+START 157/216 B=4 Sq=128 Sk=512
+BLOCK B=4 Sq=128 Sk=512 1/4
+BLOCK B=4 Sq=128 Sk=512 2/4
+BLOCK B=4 Sq=128 Sk=512 3/4
+BLOCK B=4 Sq=128 Sk=512 4/4
+RESULT {"batch": 4, "sq": 128, "sk": 512, "status": "passed", "wall_seconds": 16.782914645000346, "median_ms": {"baseline": 0.1598079949617386, "schedule_only": 0.16344000399112701, "compact": 0.1696239970624447}, "speedup": {"compact_vs_baseline": 0.9421308171561805, "schedule_vs_baseline": 0.9777777230745441, "compact_vs_schedule": 0.9635429350893016}}
+START 158/216 B=4 Sq=128 Sk=1024
+BLOCK B=4 Sq=128 Sk=1024 1/4
+BLOCK B=4 Sq=128 Sk=1024 2/4
+BLOCK B=4 Sq=128 Sk=1024 3/4
+BLOCK B=4 Sq=128 Sk=1024 4/4
+RESULT {"batch": 4, "sq": 128, "sk": 1024, "status": "passed", "wall_seconds": 18.06593628599876, "median_ms": {"baseline": 0.2820799946784973, "schedule_only": 0.28433600068092346, "compact": 0.29583999514579773}, "speedup": {"compact_vs_baseline": 0.9534883697502796, "schedule_vs_baseline": 0.9920657039663514, "compact_vs_schedule": 0.9611141338100523}}
+START 159/216 B=4 Sq=128 Sk=2048
+BLOCK B=4 Sq=128 Sk=2048 1/4
+BLOCK B=4 Sq=128 Sk=2048 2/4
+BLOCK B=4 Sq=128 Sk=2048 3/4
+BLOCK B=4 Sq=128 Sk=2048 4/4
+RESULT {"batch": 4, "sq": 128, "sk": 2048, "status": "passed", "wall_seconds": 18.34545186899959, "median_ms": {"baseline": 0.5310079753398895, "schedule_only": 0.5313839763402939, "compact": 0.5535200089216232}, "speedup": {"compact_vs_baseline": 0.9593293228449103, "schedule_vs_baseline": 0.9992924118581935, "compact_vs_schedule": 0.9600086135558945}}
+START 160/216 B=4 Sq=128 Sk=4096
+BLOCK B=4 Sq=128 Sk=4096 1/4
+BLOCK B=4 Sq=128 Sk=4096 2/4
+BLOCK B=4 Sq=128 Sk=4096 3/4
+BLOCK B=4 Sq=128 Sk=4096 4/4
+RESULT {"batch": 4, "sq": 128, "sk": 4096, "status": "passed", "wall_seconds": 17.846680987999207, "median_ms": {"baseline": 1.029856026172638, "schedule_only": 1.020695984363556, "compact": 1.0752559900283813}, "speedup": {"compact_vs_baseline": 0.9577775299307609, "schedule_vs_baseline": 1.0089743096371577, "compact_vs_schedule": 0.9492585894235425}}
+START 161/216 B=4 Sq=128 Sk=8192
+BLOCK B=4 Sq=128 Sk=8192 1/4
+BLOCK B=4 Sq=128 Sk=8192 2/4
+BLOCK B=4 Sq=128 Sk=8192 3/4
+BLOCK B=4 Sq=128 Sk=8192 4/4
+RESULT {"batch": 4, "sq": 128, "sk": 8192, "status": "passed", "wall_seconds": 18.015840143998503, "median_ms": {"baseline": 2.021615982055664, "schedule_only": 2.0076799988746643, "compact": 2.1081440448760986}, "speedup": {"compact_vs_baseline": 0.958955336552669, "schedule_vs_baseline": 1.0069413368608597, "compact_vs_schedule": 0.9523447905537504}}
+START 162/216 B=4 Sq=128 Sk=16384
+BLOCK B=4 Sq=128 Sk=16384 1/4
+BLOCK B=4 Sq=128 Sk=16384 2/4
+BLOCK B=4 Sq=128 Sk=16384 3/4
+BLOCK B=4 Sq=128 Sk=16384 4/4
+RESULT {"batch": 4, "sq": 128, "sk": 16384, "status": "passed", "wall_seconds": 18.559333102999517, "median_ms": {"baseline": 3.983952045440674, "schedule_only": 3.965391993522644, "compact": 4.176952123641968}, "speedup": {"compact_vs_baseline": 0.9537940410882628, "schedule_vs_baseline": 1.0046805087487813, "compact_vs_schedule": 0.9493505973118839}}
+START 163/216 B=4 Sq=128 Sk=32768
+BLOCK B=4 Sq=128 Sk=32768 1/4
+BLOCK B=4 Sq=128 Sk=32768 2/4
+BLOCK B=4 Sq=128 Sk=32768 3/4
+BLOCK B=4 Sq=128 Sk=32768 4/4
+RESULT {"batch": 4, "sq": 128, "sk": 32768, "status": "passed", "wall_seconds": 18.94364919200052, "median_ms": {"baseline": 7.915168046951294, "schedule_only": 7.878463983535767, "compact": 8.320720195770264}, "speedup": {"compact_vs_baseline": 0.9512599703779094, "schedule_vs_baseline": 1.0046587841858807, "compact_vs_schedule": 0.9468488061334748}}
+START 164/216 B=4 Sq=128 Sk=65536
+BLOCK B=4 Sq=128 Sk=65536 1/4
+BLOCK B=4 Sq=128 Sk=65536 2/4
+BLOCK B=4 Sq=128 Sk=65536 3/4
+BLOCK B=4 Sq=128 Sk=65536 4/4
+RESULT {"batch": 4, "sq": 128, "sk": 65536, "status": "passed", "wall_seconds": 19.41267499999958, "median_ms": {"baseline": 15.795392036437988, "schedule_only": 15.683319807052612, "compact": 16.481167793273926}, "speedup": {"compact_vs_baseline": 0.9583903419079437, "schedule_vs_baseline": 1.007145950651021, "compact_vs_schedule": 0.9515903244097229}}
+START 165/216 B=4 Sq=128 Sk=131072
+BLOCK B=4 Sq=128 Sk=131072 1/4
+BLOCK B=4 Sq=128 Sk=131072 2/4
+BLOCK B=4 Sq=128 Sk=131072 3/4
+BLOCK B=4 Sq=128 Sk=131072 4/4
+RESULT {"batch": 4, "sq": 128, "sk": 131072, "status": "passed", "wall_seconds": 20.39759953400062, "median_ms": {"baseline": 31.635255336761475, "schedule_only": 31.238183975219727, "compact": 32.81270408630371}, "speedup": {"compact_vs_baseline": 0.9641160708228947, "schedule_vs_baseline": 1.012711089795, "compact_vs_schedule": 0.9520149236422973}}
+START 166/216 B=4 Sq=128 Sk=262144
+BLOCK B=4 Sq=128 Sk=262144 1/4
+BLOCK B=4 Sq=128 Sk=262144 2/4
+BLOCK B=4 Sq=128 Sk=262144 3/4
+BLOCK B=4 Sq=128 Sk=262144 4/4
+RESULT {"batch": 4, "sq": 128, "sk": 262144, "status": "passed", "wall_seconds": 25.860572199999297, "median_ms": {"baseline": 63.0898323059082, "schedule_only": 62.45979976654053, "compact": 65.23641777038574}, "speedup": {"compact_vs_baseline": 0.9670952891369216, "schedule_vs_baseline": 1.010087008631513, "compact_vs_schedule": 0.9574376077236775}}
+START 167/216 B=4 Sq=128 Sk=524288
+BLOCK B=4 Sq=128 Sk=524288 1/4
+BLOCK B=4 Sq=128 Sk=524288 2/4
+BLOCK B=4 Sq=128 Sk=524288 3/4
+BLOCK B=4 Sq=128 Sk=524288 4/4
+RESULT {"batch": 4, "sq": 128, "sk": 524288, "status": "passed", "wall_seconds": 45.609997843999736, "median_ms": {"baseline": 126.74012756347656, "schedule_only": 124.80921745300293, "compact": 130.28985595703125}, "speedup": {"compact_vs_baseline": 0.9727551437717041, "schedule_vs_baseline": 1.0154708934955121, "compact_vs_schedule": 0.9579350329020565}}
+START 168/216 B=4 Sq=128 Sk=932032
+BLOCK B=4 Sq=128 Sk=932032 1/4
+BLOCK B=4 Sq=128 Sk=932032 2/4
+BLOCK B=4 Sq=128 Sk=932032 3/4
+BLOCK B=4 Sq=128 Sk=932032 4/4
+RESULT {"batch": 4, "sq": 128, "sk": 932032, "status": "passed", "wall_seconds": 77.46884078300172, "median_ms": {"baseline": 225.72092056274414, "schedule_only": 221.67515182495117, "compact": 231.8517837524414}, "speedup": {"compact_vs_baseline": 0.9735569720859104, "schedule_vs_baseline": 1.0182508896666405, "compact_vs_schedule": 0.9561071656953207}}
+START 169/216 B=8 Sq=128 Sk=512
+BLOCK B=8 Sq=128 Sk=512 1/4
+BLOCK B=8 Sq=128 Sk=512 2/4
+BLOCK B=8 Sq=128 Sk=512 3/4
+BLOCK B=8 Sq=128 Sk=512 4/4
+RESULT {"batch": 8, "sq": 128, "sk": 512, "status": "passed", "wall_seconds": 17.852400059999127, "median_ms": {"baseline": 0.3179679960012436, "schedule_only": 0.32308800518512726, "compact": 0.3348719999194145}, "speedup": {"compact_vs_baseline": 0.9495209993005124, "schedule_vs_baseline": 0.984152896109684, "compact_vs_schedule": 0.9648104507479782}}
+START 170/216 B=8 Sq=128 Sk=1024
+BLOCK B=8 Sq=128 Sk=1024 1/4
+BLOCK B=8 Sq=128 Sk=1024 2/4
+BLOCK B=8 Sq=128 Sk=1024 3/4
+BLOCK B=8 Sq=128 Sk=1024 4/4
+RESULT {"batch": 8, "sq": 128, "sk": 1024, "status": "passed", "wall_seconds": 18.508213830000386, "median_ms": {"baseline": 0.5653440058231354, "schedule_only": 0.5694639831781387, "compact": 0.5917919874191284}, "speedup": {"compact_vs_baseline": 0.9553086520969375, "schedule_vs_baseline": 0.9927651660566661, "compact_vs_schedule": 0.9622705195141884}}
+START 171/216 B=8 Sq=128 Sk=2048
+BLOCK B=8 Sq=128 Sk=2048 1/4
+BLOCK B=8 Sq=128 Sk=2048 2/4
+BLOCK B=8 Sq=128 Sk=2048 3/4
+BLOCK B=8 Sq=128 Sk=2048 4/4
+RESULT {"batch": 8, "sq": 128, "sk": 2048, "status": "passed", "wall_seconds": 17.94678138100062, "median_ms": {"baseline": 1.0666640102863312, "schedule_only": 1.0625759959220886, "compact": 1.1143839955329895}, "speedup": {"compact_vs_baseline": 0.957178149149715, "schedule_vs_baseline": 1.0038472677530186, "compact_vs_schedule": 0.9535097418676387}}
+START 172/216 B=8 Sq=128 Sk=4096
+BLOCK B=8 Sq=128 Sk=4096 1/4
+BLOCK B=8 Sq=128 Sk=4096 2/4
+BLOCK B=8 Sq=128 Sk=4096 3/4
+BLOCK B=8 Sq=128 Sk=4096 4/4
+RESULT {"batch": 8, "sq": 128, "sk": 4096, "status": "passed", "wall_seconds": 18.300273793000088, "median_ms": {"baseline": 2.0703680515289307, "schedule_only": 2.0529839992523193, "compact": 2.1557600498199463}, "speedup": {"compact_vs_baseline": 0.9603889132753213, "schedule_vs_baseline": 1.0084676998373794, "compact_vs_schedule": 0.9523249117747539}}
+START 173/216 B=8 Sq=128 Sk=8192
+BLOCK B=8 Sq=128 Sk=8192 1/4
+BLOCK B=8 Sq=128 Sk=8192 2/4
+BLOCK B=8 Sq=128 Sk=8192 3/4
+BLOCK B=8 Sq=128 Sk=8192 4/4
+RESULT {"batch": 8, "sq": 128, "sk": 8192, "status": "passed", "wall_seconds": 18.461241052000332, "median_ms": {"baseline": 4.060920000076294, "schedule_only": 4.02782416343689, "compact": 4.230535984039307}, "speedup": {"compact_vs_baseline": 0.9599067388617119, "schedule_vs_baseline": 1.00821680274423, "compact_vs_schedule": 0.9520836552703499}}
+START 174/216 B=8 Sq=128 Sk=16384
+BLOCK B=8 Sq=128 Sk=16384 1/4
+BLOCK B=8 Sq=128 Sk=16384 2/4
+BLOCK B=8 Sq=128 Sk=16384 3/4
+BLOCK B=8 Sq=128 Sk=16384 4/4
+RESULT {"batch": 8, "sq": 128, "sk": 16384, "status": "passed", "wall_seconds": 18.964044233000095, "median_ms": {"baseline": 8.023255825042725, "schedule_only": 7.926463961601257, "compact": 8.364352226257324}, "speedup": {"compact_vs_baseline": 0.9592202250708869, "schedule_vs_baseline": 1.0122112286021059, "compact_vs_schedule": 0.9476482753462425}}
+START 175/216 B=8 Sq=128 Sk=32768
+BLOCK B=8 Sq=128 Sk=32768 1/4
+BLOCK B=8 Sq=128 Sk=32768 2/4
+BLOCK B=8 Sq=128 Sk=32768 3/4
+BLOCK B=8 Sq=128 Sk=32768 4/4
+RESULT {"batch": 8, "sq": 128, "sk": 32768, "status": "passed", "wall_seconds": 19.51991342600013, "median_ms": {"baseline": 15.812384128570557, "schedule_only": 15.740776062011719, "compact": 16.625216484069824}, "speedup": {"compact_vs_baseline": 0.9511084648865704, "schedule_vs_baseline": 1.0045492081379428, "compact_vs_schedule": 0.9468012688493067}}
+START 176/216 B=8 Sq=128 Sk=65536
+BLOCK B=8 Sq=128 Sk=65536 1/4
+BLOCK B=8 Sq=128 Sk=65536 2/4
+BLOCK B=8 Sq=128 Sk=65536 3/4
+BLOCK B=8 Sq=128 Sk=65536 4/4
+RESULT {"batch": 8, "sq": 128, "sk": 65536, "status": "passed", "wall_seconds": 20.742473606000203, "median_ms": {"baseline": 31.566720008850098, "schedule_only": 31.371631622314453, "compact": 33.016767501831055}, "speedup": {"compact_vs_baseline": 0.9560814821468958, "schedule_vs_baseline": 1.0062186241660724, "compact_vs_schedule": 0.9501727151385924}}
+START 177/216 B=8 Sq=128 Sk=131072
+BLOCK B=8 Sq=128 Sk=131072 1/4
+BLOCK B=8 Sq=128 Sk=131072 2/4
+BLOCK B=8 Sq=128 Sk=131072 3/4
+BLOCK B=8 Sq=128 Sk=131072 4/4
+RESULT {"batch": 8, "sq": 128, "sk": 131072, "status": "passed", "wall_seconds": 25.774809053000354, "median_ms": {"baseline": 63.319607734680176, "schedule_only": 62.65454292297363, "compact": 65.92624092102051}, "speedup": {"compact_vs_baseline": 0.9604613709211318, "schedule_vs_baseline": 1.0106147899366875, "compact_vs_schedule": 0.9503733573712119}}
+START 178/216 B=8 Sq=128 Sk=262144
+BLOCK B=8 Sq=128 Sk=262144 1/4
+BLOCK B=8 Sq=128 Sk=262144 2/4
+BLOCK B=8 Sq=128 Sk=262144 3/4
+BLOCK B=8 Sq=128 Sk=262144 4/4
+RESULT {"batch": 8, "sq": 128, "sk": 262144, "status": "passed", "wall_seconds": 45.71884440999929, "median_ms": {"baseline": 126.82208061218262, "schedule_only": 125.18452644348145, "compact": 130.7851791381836}, "speedup": {"compact_vs_baseline": 0.9696976480659656, "schedule_vs_baseline": 1.0130811228450067, "compact_vs_schedule": 0.9571767020421735}}
+START 179/216 B=8 Sq=128 Sk=524288
+BLOCK B=8 Sq=128 Sk=524288 1/4
+BLOCK B=8 Sq=128 Sk=524288 2/4
+BLOCK B=8 Sq=128 Sk=524288 3/4
+BLOCK B=8 Sq=128 Sk=524288 4/4
+RESULT {"batch": 8, "sq": 128, "sk": 524288, "status": "passed", "wall_seconds": 85.15510004799944, "median_ms": {"baseline": 254.38776016235352, "schedule_only": 249.17319869995117, "compact": 260.99461364746094}, "speedup": {"compact_vs_baseline": 0.9746858626974132, "schedule_vs_baseline": 1.020927457245037, "compact_vs_schedule": 0.9547062876804133}}
+START 180/216 B=8 Sq=128 Sk=932032
+BLOCK B=8 Sq=128 Sk=932032 1/4
+BLOCK B=8 Sq=128 Sk=932032 2/4
+BLOCK B=8 Sq=128 Sk=932032 3/4
+BLOCK B=8 Sq=128 Sk=932032 4/4
+RESULT {"batch": 8, "sq": 128, "sk": 932032, "status": "passed", "wall_seconds": 149.66402291899976, "median_ms": {"baseline": 451.7728576660156, "schedule_only": 443.64612579345703, "compact": 464.5657272338867}, "speedup": {"compact_vs_baseline": 0.9724627349416362, "schedule_vs_baseline": 1.0183180499052573, "compact_vs_schedule": 0.9549695549755919}}
+START 181/216 B=16 Sq=128 Sk=512
+BLOCK B=16 Sq=128 Sk=512 1/4
+BLOCK B=16 Sq=128 Sk=512 2/4
+BLOCK B=16 Sq=128 Sk=512 3/4
+BLOCK B=16 Sq=128 Sk=512 4/4
+RESULT {"batch": 16, "sq": 128, "sk": 512, "status": "passed", "wall_seconds": 18.951307535000524, "median_ms": {"baseline": 0.6327920109033585, "schedule_only": 0.6379919946193695, "compact": 0.6663520038127899}, "speedup": {"compact_vs_baseline": 0.9496362392288085, "schedule_vs_baseline": 0.9918494530341037, "compact_vs_schedule": 0.9574398980851747}}
+START 182/216 B=16 Sq=128 Sk=1024
+BLOCK B=16 Sq=128 Sk=1024 1/4
+BLOCK B=16 Sq=128 Sk=1024 2/4
+BLOCK B=16 Sq=128 Sk=1024 3/4
+BLOCK B=16 Sq=128 Sk=1024 4/4
+RESULT {"batch": 16, "sq": 128, "sk": 1024, "status": "passed", "wall_seconds": 17.96450743799869, "median_ms": {"baseline": 1.129855990409851, "schedule_only": 1.1324639916419983, "compact": 1.1859039664268494}, "speedup": {"compact_vs_baseline": 0.9527381831887519, "schedule_vs_baseline": 0.9976970559316718, "compact_vs_schedule": 0.954937350495701}}
+START 183/216 B=16 Sq=128 Sk=2048
+BLOCK B=16 Sq=128 Sk=2048 1/4
+BLOCK B=16 Sq=128 Sk=2048 2/4
+BLOCK B=16 Sq=128 Sk=2048 3/4
+BLOCK B=16 Sq=128 Sk=2048 4/4
+RESULT {"batch": 16, "sq": 128, "sk": 2048, "status": "passed", "wall_seconds": 18.320560793999903, "median_ms": {"baseline": 2.13591992855072, "schedule_only": 2.1240960359573364, "compact": 2.219576060771942}, "speedup": {"compact_vs_baseline": 0.9623098601125986, "schedule_vs_baseline": 1.0055665527326567, "compact_vs_schedule": 0.9569827650865008}}
+START 184/216 B=16 Sq=128 Sk=4096
+BLOCK B=16 Sq=128 Sk=4096 1/4
+BLOCK B=16 Sq=128 Sk=4096 2/4
+BLOCK B=16 Sq=128 Sk=4096 3/4
+BLOCK B=16 Sq=128 Sk=4096 4/4
+RESULT {"batch": 16, "sq": 128, "sk": 4096, "status": "passed", "wall_seconds": 18.70146016399849, "median_ms": {"baseline": 4.12990403175354, "schedule_only": 4.105752110481262, "compact": 4.304143905639648}, "speedup": {"compact_vs_baseline": 0.9595181114511983, "schedule_vs_baseline": 1.0058824596864049, "compact_vs_schedule": 0.9539067931956372}}
+START 185/216 B=16 Sq=128 Sk=8192
+BLOCK B=16 Sq=128 Sk=8192 1/4
+BLOCK B=16 Sq=128 Sk=8192 2/4
+BLOCK B=16 Sq=128 Sk=8192 3/4
+BLOCK B=16 Sq=128 Sk=8192 4/4
+RESULT {"batch": 16, "sq": 128, "sk": 8192, "status": "passed", "wall_seconds": 18.935425929999838, "median_ms": {"baseline": 8.15998363494873, "schedule_only": 8.087279796600342, "compact": 8.500495910644531}, "speedup": {"compact_vs_baseline": 0.9599420693480479, "schedule_vs_baseline": 1.0089899002108165, "compact_vs_schedule": 0.951389175597773}}
+START 186/216 B=16 Sq=128 Sk=16384
+BLOCK B=16 Sq=128 Sk=16384 1/4
+BLOCK B=16 Sq=128 Sk=16384 2/4
+BLOCK B=16 Sq=128 Sk=16384 3/4
+BLOCK B=16 Sq=128 Sk=16384 4/4
+RESULT {"batch": 16, "sq": 128, "sk": 16384, "status": "passed", "wall_seconds": 19.575063850999868, "median_ms": {"baseline": 15.89518404006958, "schedule_only": 15.92572808265686, "compact": 16.763360023498535}, "speedup": {"compact_vs_baseline": 0.9482099064738833, "schedule_vs_baseline": 0.9980820944305496, "compact_vs_schedule": 0.9500319780958293}}
+START 187/216 B=16 Sq=128 Sk=32768
+BLOCK B=16 Sq=128 Sk=32768 1/4
+BLOCK B=16 Sq=128 Sk=32768 2/4
+BLOCK B=16 Sq=128 Sk=32768 3/4
+BLOCK B=16 Sq=128 Sk=32768 4/4
+RESULT {"batch": 16, "sq": 128, "sk": 32768, "status": "passed", "wall_seconds": 20.855290969000635, "median_ms": {"baseline": 31.629279613494873, "schedule_only": 31.531119346618652, "compact": 33.36771202087402}, "speedup": {"compact_vs_baseline": 0.9479007608825073, "schedule_vs_baseline": 1.00311312344472, "compact_vs_schedule": 0.9449589869060713}}
+START 188/216 B=16 Sq=128 Sk=65536
+BLOCK B=16 Sq=128 Sk=65536 1/4
+BLOCK B=16 Sq=128 Sk=65536 2/4
+BLOCK B=16 Sq=128 Sk=65536 3/4
+BLOCK B=16 Sq=128 Sk=65536 4/4
+RESULT {"batch": 16, "sq": 128, "sk": 65536, "status": "passed", "wall_seconds": 25.849603632999788, "median_ms": {"baseline": 63.25290393829346, "schedule_only": 62.76697540283203, "compact": 66.25549507141113}, "speedup": {"compact_vs_baseline": 0.9546816285972742, "schedule_vs_baseline": 1.007741786701411, "compact_vs_schedule": 0.9473474665788985}}
+START 189/216 B=16 Sq=128 Sk=131072
+BLOCK B=16 Sq=128 Sk=131072 1/4
+BLOCK B=16 Sq=128 Sk=131072 2/4
+BLOCK B=16 Sq=128 Sk=131072 3/4
+BLOCK B=16 Sq=128 Sk=131072 4/4
+RESULT {"batch": 16, "sq": 128, "sk": 131072, "status": "passed", "wall_seconds": 45.407200741999986, "median_ms": {"baseline": 126.80467987060547, "schedule_only": 125.5424633026123, "compact": 131.76530838012695}, "speedup": {"compact_vs_baseline": 0.9623525450628425, "schedule_vs_baseline": 1.0100541006985873, "compact_vs_schedule": 0.9527732666965535}}
+START 190/216 B=16 Sq=128 Sk=262144
+BLOCK B=16 Sq=128 Sk=262144 1/4
+BLOCK B=16 Sq=128 Sk=262144 2/4
+BLOCK B=16 Sq=128 Sk=262144 3/4
+BLOCK B=16 Sq=128 Sk=262144 4/4
+RESULT {"batch": 16, "sq": 128, "sk": 262144, "status": "passed", "wall_seconds": 84.4305001140001, "median_ms": {"baseline": 254.4899444580078, "schedule_only": 250.17638778686523, "compact": 261.9639892578125}, "speedup": {"compact_vs_baseline": 0.9714691900173764, "schedule_vs_baseline": 1.0172420615282745, "compact_vs_schedule": 0.9550029700481218}}
+START 191/216 B=16 Sq=128 Sk=524288
+BLOCK B=16 Sq=128 Sk=524288 1/4
+BLOCK B=16 Sq=128 Sk=524288 2/4
+BLOCK B=16 Sq=128 Sk=524288 3/4
+BLOCK B=16 Sq=128 Sk=524288 4/4
+RESULT {"batch": 16, "sq": 128, "sk": 524288, "status": "passed", "wall_seconds": 168.80081970900028, "median_ms": {"baseline": 508.9564437866211, "schedule_only": 500.6188735961914, "compact": 523.6533508300781}, "speedup": {"compact_vs_baseline": 0.9719339005084948, "schedule_vs_baseline": 1.0166545262877063, "compact_vs_schedule": 0.9560119739568682}}
+START 192/216 B=16 Sq=128 Sk=932032
+BLOCK B=16 Sq=128 Sk=932032 1/4
+BLOCK B=16 Sq=128 Sk=932032 2/4
+BLOCK B=16 Sq=128 Sk=932032 3/4
+BLOCK B=16 Sq=128 Sk=932032 4/4
+RESULT {"batch": 16, "sq": 128, "sk": 932032, "status": "passed", "wall_seconds": 300.0524246639998, "median_ms": {"baseline": 905.2394256591797, "schedule_only": 889.6206970214844, "compact": 931.4590301513672}, "speedup": {"compact_vs_baseline": 0.9718510383780093, "schedule_vs_baseline": 1.0175566156340428, "compact_vs_schedule": 0.955083013019817}}
+START 193/216 B=32 Sq=128 Sk=512
+BLOCK B=32 Sq=128 Sk=512 1/4
+BLOCK B=32 Sq=128 Sk=512 2/4
+BLOCK B=32 Sq=128 Sk=512 3/4
+BLOCK B=32 Sq=128 Sk=512 4/4
+RESULT {"batch": 32, "sq": 128, "sk": 512, "status": "passed", "wall_seconds": 18.40895941800045, "median_ms": {"baseline": 1.259119987487793, "schedule_only": 1.2665200233459473, "compact": 1.3182079792022705}, "speedup": {"compact_vs_baseline": 0.9551755165749828, "schedule_vs_baseline": 0.994157189999567, "compact_vs_schedule": 0.9607892254698664}}
+START 194/216 B=32 Sq=128 Sk=1024
+BLOCK B=32 Sq=128 Sk=1024 1/4
+BLOCK B=32 Sq=128 Sk=1024 2/4
+BLOCK B=32 Sq=128 Sk=1024 3/4
+BLOCK B=32 Sq=128 Sk=1024 4/4
+RESULT {"batch": 32, "sq": 128, "sk": 1024, "status": "passed", "wall_seconds": 18.629228722000335, "median_ms": {"baseline": 2.2479039430618286, "schedule_only": 2.244391977787018, "compact": 2.3428800106048584}, "speedup": {"compact_vs_baseline": 0.9594618302631256, "schedule_vs_baseline": 1.0015647735821411, "compact_vs_schedule": 0.9579628353257348}}
+START 195/216 B=32 Sq=128 Sk=2048
+BLOCK B=32 Sq=128 Sk=2048 1/4
+BLOCK B=32 Sq=128 Sk=2048 2/4
+BLOCK B=32 Sq=128 Sk=2048 3/4
+BLOCK B=32 Sq=128 Sk=2048 4/4
+RESULT {"batch": 32, "sq": 128, "sk": 2048, "status": "passed", "wall_seconds": 18.87901629099906, "median_ms": {"baseline": 4.220255970954895, "schedule_only": 4.208119988441467, "compact": 4.400112152099609}, "speedup": {"compact_vs_baseline": 0.9591246370711501, "schedule_vs_baseline": 1.0028839440288684, "compact_vs_schedule": 0.9563665295289056}}
+START 196/216 B=32 Sq=128 Sk=4096
+BLOCK B=32 Sq=128 Sk=4096 1/4
+BLOCK B=32 Sq=128 Sk=4096 2/4
+BLOCK B=32 Sq=128 Sk=4096 3/4
+BLOCK B=32 Sq=128 Sk=4096 4/4
+RESULT {"batch": 32, "sq": 128, "sk": 4096, "status": "passed", "wall_seconds": 19.154665344000023, "median_ms": {"baseline": 8.188752174377441, "schedule_only": 8.08619213104248, "compact": 8.526768207550049}, "speedup": {"compact_vs_baseline": 0.9603582477035895, "schedule_vs_baseline": 1.0126833547450893, "compact_vs_schedule": 0.9483302388685247}}
+START 197/216 B=32 Sq=128 Sk=8192
+BLOCK B=32 Sq=128 Sk=8192 1/4
+BLOCK B=32 Sq=128 Sk=8192 2/4
+BLOCK B=32 Sq=128 Sk=8192 3/4
+BLOCK B=32 Sq=128 Sk=8192 4/4
+RESULT {"batch": 32, "sq": 128, "sk": 8192, "status": "passed", "wall_seconds": 19.73922573100026, "median_ms": {"baseline": 16.104983806610107, "schedule_only": 15.962183952331543, "compact": 16.748831748962402}, "speedup": {"compact_vs_baseline": 0.9615586357303887, "schedule_vs_baseline": 1.0089461351093945, "compact_vs_schedule": 0.9530326766414862}}
+START 198/216 B=32 Sq=128 Sk=16384
+BLOCK B=32 Sq=128 Sk=16384 1/4
+BLOCK B=32 Sq=128 Sk=16384 2/4
+BLOCK B=32 Sq=128 Sk=16384 3/4
+BLOCK B=32 Sq=128 Sk=16384 4/4
+RESULT {"batch": 32, "sq": 128, "sk": 16384, "status": "passed", "wall_seconds": 20.829224064998925, "median_ms": {"baseline": 31.608744144439697, "schedule_only": 31.38926410675049, "compact": 33.14633560180664}, "speedup": {"compact_vs_baseline": 0.953612022884269, "schedule_vs_baseline": 1.0069922008028855, "compact_vs_schedule": 0.9469904753223948}}
+START 199/216 B=32 Sq=128 Sk=32768
+BLOCK B=32 Sq=128 Sk=32768 1/4
+BLOCK B=32 Sq=128 Sk=32768 2/4
+BLOCK B=32 Sq=128 Sk=32768 3/4
+BLOCK B=32 Sq=128 Sk=32768 4/4
+RESULT {"batch": 32, "sq": 128, "sk": 32768, "status": "passed", "wall_seconds": 25.977469883000595, "median_ms": {"baseline": 62.82932758331299, "schedule_only": 62.33615970611572, "compact": 65.8289966583252}, "speedup": {"compact_vs_baseline": 0.954432404756501, "schedule_vs_baseline": 1.0079114253993557, "compact_vs_schedule": 0.9469407536265746}}
+START 200/216 B=32 Sq=128 Sk=65536
+BLOCK B=32 Sq=128 Sk=65536 1/4
+BLOCK B=32 Sq=128 Sk=65536 2/4
+BLOCK B=32 Sq=128 Sk=65536 3/4
+BLOCK B=32 Sq=128 Sk=65536 4/4
+RESULT {"batch": 32, "sq": 128, "sk": 65536, "status": "passed", "wall_seconds": 45.49889614300082, "median_ms": {"baseline": 125.17694473266602, "schedule_only": 123.99101638793945, "compact": 131.0186996459961}, "speedup": {"compact_vs_baseline": 0.9554128156582677, "schedule_vs_baseline": 1.0095646312069584, "compact_vs_schedule": 0.9463612196041864}}
+START 201/216 B=32 Sq=128 Sk=131072
+BLOCK B=32 Sq=128 Sk=131072 1/4
+BLOCK B=32 Sq=128 Sk=131072 2/4
+BLOCK B=32 Sq=128 Sk=131072 3/4
+BLOCK B=32 Sq=128 Sk=131072 4/4
+RESULT {"batch": 32, "sq": 128, "sk": 131072, "status": "passed", "wall_seconds": 84.57441170499987, "median_ms": {"baseline": 250.97335052490234, "schedule_only": 247.18429565429688, "compact": 260.15867614746094}, "speedup": {"compact_vs_baseline": 0.9646933719121777, "schedule_vs_baseline": 1.015328865697458, "compact_vs_schedule": 0.9501289724974998}}
+START 202/216 B=32 Sq=128 Sk=262144
+BLOCK B=32 Sq=128 Sk=262144 1/4
+BLOCK B=32 Sq=128 Sk=262144 2/4
+BLOCK B=32 Sq=128 Sk=262144 3/4
+BLOCK B=32 Sq=128 Sk=262144 4/4
+RESULT {"batch": 32, "sq": 128, "sk": 262144, "status": "passed", "wall_seconds": 166.89335561100052, "median_ms": {"baseline": 503.63612365722656, "schedule_only": 493.955078125, "compact": 518.0255126953125}, "speedup": {"compact_vs_baseline": 0.972222624783059, "schedule_vs_baseline": 1.0195990404005457, "compact_vs_schedule": 0.9535342681385076}}
+START 203/216 B=32 Sq=128 Sk=524288
+BLOCK B=32 Sq=128 Sk=524288 1/4
+BLOCK B=32 Sq=128 Sk=524288 2/4
+BLOCK B=32 Sq=128 Sk=524288 3/4
+BLOCK B=32 Sq=128 Sk=524288 4/4
+RESULT {"batch": 32, "sq": 128, "sk": 524288, "status": "passed", "wall_seconds": 333.862519499, "median_ms": {"baseline": 1008.6382446289062, "schedule_only": 989.8798522949219, "compact": 1035.1708374023438}, "speedup": {"compact_vs_baseline": 0.9743688753442684, "schedule_vs_baseline": 1.0189501708621458, "compact_vs_schedule": 0.9562478158474064}}
+START 204/216 B=32 Sq=128 Sk=932032
+BLOCK B=32 Sq=128 Sk=932032 1/4
+BLOCK B=32 Sq=128 Sk=932032 2/4
+BLOCK B=32 Sq=128 Sk=932032 3/4
+BLOCK B=32 Sq=128 Sk=932032 4/4
+RESULT {"batch": 32, "sq": 128, "sk": 932032, "status": "passed", "wall_seconds": 593.3600155000004, "median_ms": {"baseline": 1794.783447265625, "schedule_only": 1756.761474609375, "compact": 1837.68896484375}, "speedup": {"compact_vs_baseline": 0.9766524594754951, "schedule_vs_baseline": 1.0216432186189104, "compact_vs_schedule": 0.9559623571874385}}
+START 205/216 B=64 Sq=128 Sk=512
+BLOCK B=64 Sq=128 Sk=512 1/4
+BLOCK B=64 Sq=128 Sk=512 2/4
+BLOCK B=64 Sq=128 Sk=512 3/4
+BLOCK B=64 Sq=128 Sk=512 4/4
+RESULT {"batch": 64, "sq": 128, "sk": 512, "status": "passed", "wall_seconds": 19.369220951999523, "median_ms": {"baseline": 2.526416063308716, "schedule_only": 2.5235840678215027, "compact": 2.6214159727096558}, "speedup": {"compact_vs_baseline": 0.9637600783736958, "schedule_vs_baseline": 1.0011222116684457, "compact_vs_schedule": 0.962679747927595}}
+START 206/216 B=64 Sq=128 Sk=1024
+BLOCK B=64 Sq=128 Sk=1024 1/4
+BLOCK B=64 Sq=128 Sk=1024 2/4
+BLOCK B=64 Sq=128 Sk=1024 3/4
+BLOCK B=64 Sq=128 Sk=1024 4/4
+RESULT {"batch": 64, "sq": 128, "sk": 1024, "status": "passed", "wall_seconds": 18.86570712899993, "median_ms": {"baseline": 4.465208053588867, "schedule_only": 4.4668800830841064, "compact": 4.659991979598999}, "speedup": {"compact_vs_baseline": 0.9582008023054809, "schedule_vs_baseline": 0.9996256829231724, "compact_vs_schedule": 0.9585596075357387}}
+START 207/216 B=64 Sq=128 Sk=2048
+BLOCK B=64 Sq=128 Sk=2048 1/4
+BLOCK B=64 Sq=128 Sk=2048 2/4
+BLOCK B=64 Sq=128 Sk=2048 3/4
+BLOCK B=64 Sq=128 Sk=2048 4/4
+RESULT {"batch": 64, "sq": 128, "sk": 2048, "status": "passed", "wall_seconds": 19.215238550999857, "median_ms": {"baseline": 8.388304233551025, "schedule_only": 8.330992221832275, "compact": 8.778640270233154}, "speedup": {"compact_vs_baseline": 0.9555357065939141, "schedule_vs_baseline": 1.0068793740520556, "compact_vs_schedule": 0.9490071315578592}}
+START 208/216 B=64 Sq=128 Sk=4096
+BLOCK B=64 Sq=128 Sk=4096 1/4
+BLOCK B=64 Sq=128 Sk=4096 2/4
+BLOCK B=64 Sq=128 Sk=4096 3/4
+BLOCK B=64 Sq=128 Sk=4096 4/4
+RESULT {"batch": 64, "sq": 128, "sk": 4096, "status": "passed", "wall_seconds": 19.667800471999726, "median_ms": {"baseline": 16.26325559616089, "schedule_only": 16.138256072998047, "compact": 16.900383949279785}, "speedup": {"compact_vs_baseline": 0.9623009539291533, "schedule_vs_baseline": 1.0077455409430507, "compact_vs_schedule": 0.9549047004749134}}
+START 209/216 B=64 Sq=128 Sk=8192
+BLOCK B=64 Sq=128 Sk=8192 1/4
+BLOCK B=64 Sq=128 Sk=8192 2/4
+BLOCK B=64 Sq=128 Sk=8192 3/4
+BLOCK B=64 Sq=128 Sk=8192 4/4
+RESULT {"batch": 64, "sq": 128, "sk": 8192, "status": "passed", "wall_seconds": 20.939387053000246, "median_ms": {"baseline": 32.15067195892334, "schedule_only": 31.68273639678955, "compact": 33.45177459716797}, "speedup": {"compact_vs_baseline": 0.9611051236021786, "schedule_vs_baseline": 1.0147694175235824, "compact_vs_schedule": 0.9471167607195289}}
+START 210/216 B=64 Sq=128 Sk=16384
+BLOCK B=64 Sq=128 Sk=16384 1/4
+BLOCK B=64 Sq=128 Sk=16384 2/4
+BLOCK B=64 Sq=128 Sk=16384 3/4
+BLOCK B=64 Sq=128 Sk=16384 4/4
+RESULT {"batch": 64, "sq": 128, "sk": 16384, "status": "passed", "wall_seconds": 26.11842850999892, "median_ms": {"baseline": 63.18080806732178, "schedule_only": 62.32601547241211, "compact": 65.7705192565918}, "speedup": {"compact_vs_baseline": 0.9606250457113357, "schedule_vs_baseline": 1.0137148602943826, "compact_vs_schedule": 0.9476284538557225}}
+START 211/216 B=64 Sq=128 Sk=32768
+BLOCK B=64 Sq=128 Sk=32768 1/4
+BLOCK B=64 Sq=128 Sk=32768 2/4
+BLOCK B=64 Sq=128 Sk=32768 3/4
+BLOCK B=64 Sq=128 Sk=32768 4/4
+RESULT {"batch": 64, "sq": 128, "sk": 32768, "status": "passed", "wall_seconds": 45.59813135100012, "median_ms": {"baseline": 125.02908706665039, "schedule_only": 124.03884887695312, "compact": 130.9660301208496}, "speedup": {"compact_vs_baseline": 0.9546680688975541, "schedule_vs_baseline": 1.0079832907082167, "compact_vs_schedule": 0.9471070380807574}}
+START 212/216 B=64 Sq=128 Sk=65536
+BLOCK B=64 Sq=128 Sk=65536 1/4
+BLOCK B=64 Sq=128 Sk=65536 2/4
+BLOCK B=64 Sq=128 Sk=65536 3/4
+BLOCK B=64 Sq=128 Sk=65536 4/4
+RESULT {"batch": 64, "sq": 128, "sk": 65536, "status": "passed", "wall_seconds": 85.56583706099991, "median_ms": {"baseline": 249.04537963867188, "schedule_only": 247.0619239807129, "compact": 260.9536437988281}, "speedup": {"compact_vs_baseline": 0.9543663618303929, "schedule_vs_baseline": 1.0080281721521518, "compact_vs_schedule": 0.946765564887745}}
+START 213/216 B=64 Sq=128 Sk=131072
+BLOCK B=64 Sq=128 Sk=131072 1/4
+BLOCK B=64 Sq=128 Sk=131072 2/4
+BLOCK B=64 Sq=128 Sk=131072 3/4
+BLOCK B=64 Sq=128 Sk=131072 4/4
+RESULT {"batch": 64, "sq": 128, "sk": 131072, "status": "passed", "wall_seconds": 166.55983580099928, "median_ms": {"baseline": 500.3781967163086, "schedule_only": 492.80628204345703, "compact": 518.723876953125}, "speedup": {"compact_vs_baseline": 0.9646330522809649, "schedule_vs_baseline": 1.01536489072634, "compact_vs_schedule": 0.950035855180019}}
+START 214/216 B=64 Sq=128 Sk=262144
+BLOCK B=64 Sq=128 Sk=262144 1/4
+BLOCK B=64 Sq=128 Sk=262144 2/4
+BLOCK B=64 Sq=128 Sk=262144 3/4
+BLOCK B=64 Sq=128 Sk=262144 4/4
+RESULT {"batch": 64, "sq": 128, "sk": 262144, "status": "passed", "wall_seconds": 332.2081624799994, "median_ms": {"baseline": 1002.8522338867188, "schedule_only": 983.5449981689453, "compact": 1030.9295959472656}, "speedup": {"compact_vs_baseline": 0.9727650053205155, "schedule_vs_baseline": 1.0196302515428552, "compact_vs_schedule": 0.9540370186629659}}
+START 215/216 B=64 Sq=128 Sk=524288
+BLOCK B=64 Sq=128 Sk=524288 1/4
+BLOCK B=64 Sq=128 Sk=524288 2/4
+BLOCK B=64 Sq=128 Sk=524288 3/4
+BLOCK B=64 Sq=128 Sk=524288 4/4
+RESULT {"batch": 64, "sq": 128, "sk": 524288, "status": "passed", "wall_seconds": 664.141731781001, "median_ms": {"baseline": 2008.9071350097656, "schedule_only": 1965.9752502441406, "compact": 2059.07470703125}, "speedup": {"compact_vs_baseline": 0.9756358660275054, "schedule_vs_baseline": 1.0218374492559321, "compact_vs_schedule": 0.9547857800063315}}
+START 216/216 B=64 Sq=128 Sk=932032
+BLOCK B=64 Sq=128 Sk=932032 1/4
+BLOCK B=64 Sq=128 Sk=932032 2/4
+BLOCK B=64 Sq=128 Sk=932032 3/4
+BLOCK B=64 Sq=128 Sk=932032 4/4
+RESULT {"batch": 64, "sq": 128, "sk": 932032, "status": "passed", "wall_seconds": 1182.6991326049992, "median_ms": {"baseline": 3583.4652099609375, "schedule_only": 3495.2285766601562, "compact": 3658.8522338867188}, "speedup": {"compact_vs_baseline": 0.9793959911177667, "schedule_vs_baseline": 1.025244882091544, "compact_vs_schedule": 0.955280058672184}}

@@ -1,0 +1,20 @@
+{
+  "baseline": {
+    "kernels": [
+      "void flashinfer::mla::hopper::BatchMLAPageAttentionHopperKernel<flashinfer::mla::hopper::HopperKernelTraits<false, 2u, 512u, 64u, 64u, 64u, __nv_bfloat16, __nv_bfloat16, __nv_bfloat16, int>, flashinfer::MLAParams<__nv_bfloat16, __nv_bfloat16, __nv_bfloat16, int>, false>(flashinfer::MLAParams<__nv_bfloat16, __nv_bfloat16, __nv_bfloat16, int>)"
+    ],
+    "memory_operations": []
+  },
+  "schedule_only": {
+    "kernels": [
+      "void flashinfer::mla::hopper::BatchMLAPageAttentionHopperKernel<flashinfer::mla::hopper::HopperKernelTraits<false, 2u, 512u, 64u, 64u, 64u, __nv_bfloat16, __nv_bfloat16, __nv_bfloat16, int>, flashinfer::SM90PartitionMLAParams<__nv_bfloat16, __nv_bfloat16, __nv_bfloat16, int>, false>(flashinfer::SM90PartitionMLAParams<__nv_bfloat16, __nv_bfloat16, __nv_bfloat16, int>)"
+    ],
+    "memory_operations": []
+  },
+  "compact": {
+    "kernels": [
+      "void flashinfer::mla::hopper::BatchMLAPageAttentionHopperKernel<flashinfer::mla::hopper::HopperKernelTraits<false, 2u, 512u, 64u, 64u, 64u, __nv_bfloat16, __nv_bfloat16, __nv_bfloat16, int>, flashinfer::SM90PartitionMLAParams<__nv_bfloat16, __nv_bfloat16, __nv_bfloat16, int>, false>(flashinfer::SM90PartitionMLAParams<__nv_bfloat16, __nv_bfloat16, __nv_bfloat16, int>)"
+    ],
+    "memory_operations": []
+  }
+}

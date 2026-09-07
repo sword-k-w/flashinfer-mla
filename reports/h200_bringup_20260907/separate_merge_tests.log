@@ -1,0 +1,33 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.1.1, pluggy-1.6.0 -- /workspace/flashinfer-mla/.venv/bin/python
+cachedir: .pytest_cache
+hypothesis profile 'default'
+rootdir: /workspace/flashinfer-mla
+configfile: pytest.ini
+plugins: hypothesis-6.155.3
+collecting ... collected 11 items
+
+tests/attention/test_sm90_mla_separate_merge.py::test_separate_matches_fused_and_reference[q_lens0-kv_lens0-False-False-dtype0-split] PASSED [  9%]
+tests/attention/test_sm90_mla_separate_merge.py::test_separate_matches_fused_and_reference[q_lens1-kv_lens1-True-True-dtype1-split] PASSED [ 18%]
+tests/attention/test_sm90_mla_separate_merge.py::test_separate_matches_fused_and_reference[q_lens2-kv_lens2-False-False-dtype2-direct] PASSED [ 27%]
+tests/attention/test_sm90_mla_separate_merge.py::test_separate_matches_fused_and_reference[q_lens3-kv_lens3-False-True-dtype3-mixed] PASSED [ 36%]
+tests/attention/test_sm90_mla_separate_merge.py::test_separate_matches_fused_and_reference[q_lens4-kv_lens4-True-False-dtype4-mixed] PASSED [ 45%]
+tests/attention/test_sm90_mla_separate_merge.py::test_separate_matches_fused_and_reference[q_lens5-kv_lens5-True-True-dtype5-split] PASSED [ 54%]
+tests/attention/test_sm90_mla_separate_merge.py::test_cuda_graph_replay[False-False] PASSED [ 63%]
+tests/attention/test_sm90_mla_separate_merge.py::test_cuda_graph_replay[False-True] PASSED [ 72%]
+tests/attention/test_sm90_mla_separate_merge.py::test_cuda_graph_replay[True-False] PASSED [ 81%]
+tests/attention/test_sm90_mla_separate_merge.py::test_cuda_graph_replay[True-True] PASSED [ 90%]
+tests/attention/test_sm90_mla_separate_merge.py::test_invalid_experimental_modes PASSED [100%]
+
+=============================== warnings summary ===============================
+tests/conftest.py:16
+tests/conftest.py:16
+  /workspace/flashinfer-mla/tests/conftest.py:16: DeprecationWarning: tcgen05.OperandMajorMode is deprecated, use cute.nvgpu.OperandMajorMode instead
+    from cutlass.cute.nvgpu.tcgen05 import OperandMajorMode
+
+flashinfer/cute_dsl/utils.py:135
+  /workspace/flashinfer-mla/flashinfer/cute_dsl/utils.py:135: DeprecationWarning: Arch from arch.py is deprecated. Use Arch from enums.py instead.
+    from cutlass.base_dsl.arch import Arch
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================= 11 passed, 3 warnings in 55.38s ========================

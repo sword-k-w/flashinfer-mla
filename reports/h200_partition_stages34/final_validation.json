@@ -1,0 +1,23 @@
+{
+  "finished_utc": "2026-09-07T13:11:15.251593+00:00",
+  "matrix_status": "passed",
+  "complete_configurations": 216,
+  "source_manifest_matches": true,
+  "csv_matches_json": true,
+  "case_wall_seconds": 8242.764937785008,
+  "artifact_sha256": {
+    "matrix.json": "64586dfe9f13f458582dc61de42d0cd1da12873c5049bdc0e01bcc5588f6acce",
+    "matrix.csv": "93a64b7f4d07f3a09eaaf52d40b2a6cb9791d305073015de04397089484d5a2c",
+    "summary.json": "7fb9d3f676b58cd9e36d0b907f4469062ee9b0ae99c314687d8eed03c4a64eab",
+    "RESULTS.md": "6d6eae131df2ad8c08b864e9b9bfe8bdbd23decc482b3abbb4a5d6790c3d3473",
+    "README.md": "9615448876f13a2da344e4240349bfc6658f80ee80743b0b375db4698569700a",
+    "speedup.png": "98e13f70a9c47f0319428c3ae93b1eac463a2014db3799989aa289203d0e445c",
+    "speedup.pdf": "16324118e148cd76321a184d0bc4892f99cffba4bede939f76ba4603c072bdf4",
+    "ablation.png": "3b6667969e1c5e10fedc567a829ce05a54b04af22bf2244ed769604f936d1f61",
+    "ablation.pdf": "922e5df3ac76e45b9ae8fad42843259449f36dac7b56af00c86a4a9ca1b099ac",
+    "analyze.py": "57d88fc6664a02f21e39bf50672ac80b86dcf2e61565bde82f60053716808ef1"
+  },
+  "gpu": "NVIDIA H200, 580.173.02, 0 MiB, 143156 MiB, 0 %, 32",
+  "system_memory": "               total        used        free      shared  buff/cache   available\nMem:           196Gi       2.9Gi       187Gi       2.5Mi       7.6Gi       193Gi\nSwap:             0B          0B          0B\n",
+  "disk": "Filesystem      Size  Used Avail Use% Mounted on\noverlay         116G   63G   54G  54% /\n/dev/vda1       116G   63G   54G  54% /workspace\n"
+}

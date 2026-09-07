@@ -1,0 +1,12 @@
+{
+  "repositories": {
+    "/workspace/flashinfer-mla": "88607b17a97dbcbca1abda946fef5d778e8a4cb9",
+    "/workspace/vllm-fa": "3af25a9cfc193db6826fc67d16b4b75c8fc7bfeb"
+  },
+  "source_sha256": {
+    "/workspace/flashinfer-mla/benchmarks/profile_cute_dsl_localized_mla_ltc_target.py": "9ae5f6a2eba00d07eebdd91a29b62994976579002fdec561ec36d9b16093cabc",
+    "/workspace/vllm-fa/hopper/setup.py": "ba0b7970b3efb37e633bb5e3df61c9bc2bffe3e6288a6daad96995c5ef9c69bd",
+    "/workspace/vllm-fa/hopper/exp_h200/mla_baseline/run_mla_baseline.py": "2ba15efcded061e39a554056a38ec180c15856498b1816fe3684acff65f5ce0c",
+    "/workspace/vllm-fa/hopper/exp_h200/mla_partition_aware/run_partition_aware_mla.py": "e1d93deb61c1b4d4a32322369b3896330baa75d41ee0947c82dfd2c1968191ef"
+  }
+}

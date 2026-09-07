@@ -1,0 +1,38 @@
+{
+  "argv": [
+    "/usr/local/cuda-13.2/bin/ncu",
+    "--export",
+    "/workspace/flashinfer-mla/reports/h200_mla_b64_sk32768_ncu_20260907/data/decode_sq1/ltc/compact_02",
+    "--devices",
+    "0",
+    "--profile-from-start",
+    "off",
+    "--launch-count",
+    "1",
+    "--kernel-name-base",
+    "demangled",
+    "--cache-control",
+    "all",
+    "--clock-control",
+    "boost",
+    "--replay-mode",
+    "kernel",
+    "--metrics",
+    "lts__t_requests_srcunit_ltcfabric.sum",
+    "/workspace/flashinfer-mla/.venv/bin/python",
+    "-P",
+    "/workspace/flashinfer-mla/reports/h200_mla_b64_sk32768_ncu_20260907/target.py",
+    "--mode",
+    "compact",
+    "--seqlen-q",
+    "1"
+  ],
+  "environment": {
+    "MAX_JOBS": "4",
+    "FLASHINFER_NVCC_THREADS": "1",
+    "OMP_NUM_THREADS": "4",
+    "FLASHINFER_CUDA_ARCH_LIST": "9.0a",
+    "PYTHONPATH": "/workspace/flashinfer-mla"
+  },
+  "cwd": "/workspace/flashinfer-mla"
+}

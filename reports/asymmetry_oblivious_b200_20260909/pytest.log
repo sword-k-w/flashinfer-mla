@@ -1,0 +1,53 @@
+........................................................                 [100%]
+=============================== warnings summary ===============================
+tests/conftest.py:16
+tests/conftest.py:16
+  /workspace/flashinfer-mla/tests/conftest.py:16: DeprecationWarning: tcgen05.OperandMajorMode is deprecated, use cute.nvgpu.OperandMajorMode instead
+    from cutlass.cute.nvgpu.tcgen05 import OperandMajorMode
+
+flashinfer/cute_dsl/utils.py:135
+tests/attention/test_cute_dsl_mla_localized.py::test_localized_mla_matches_modular[1-128-2]
+  /workspace/flashinfer-mla/flashinfer/cute_dsl/utils.py:135: DeprecationWarning: Arch from arch.py is deprecated. Use Arch from enums.py instead.
+    from cutlass.base_dsl.arch import Arch
+
+flashinfer/cute_dsl/attention/roles/mla_compute.py:30
+  /workspace/flashinfer-mla/flashinfer/cute_dsl/attention/roles/mla_compute.py:30: DeprecationWarning: Arch from arch.py is deprecated. Use Arch from enums.py instead.
+    from cutlass.base_dsl.arch import Arch
+
+flashinfer/cute_dsl/attention/monolithic/mla_decode_fp16.py:68
+flashinfer/cute_dsl/attention/monolithic/mla_decode_fp16.py:68
+  /workspace/flashinfer-mla/flashinfer/cute_dsl/attention/monolithic/mla_decode_fp16.py:68: DeprecationWarning: tcgen05.OperandMajorMode is deprecated, use cute.nvgpu.OperandMajorMode instead
+    from cutlass.cute.nvgpu.tcgen05 import OperandMajorMode
+
+flashinfer/cute_dsl/attention/monolithic/mla_decode_fp16.py:74
+  /workspace/flashinfer-mla/flashinfer/cute_dsl/attention/monolithic/mla_decode_fp16.py:74: DeprecationWarning: Arch from arch.py is deprecated. Use Arch from enums.py instead.
+    from cutlass.base_dsl.arch import Arch
+
+flashinfer/cute_dsl/attention/monolithic/mla_decode_fp8.py:39
+flashinfer/cute_dsl/attention/monolithic/mla_decode_fp8.py:39
+  /workspace/flashinfer-mla/flashinfer/cute_dsl/attention/monolithic/mla_decode_fp8.py:39: DeprecationWarning: tcgen05.OperandMajorMode is deprecated, use cute.nvgpu.OperandMajorMode instead
+    from cutlass.cute.nvgpu.tcgen05 import OperandMajorMode
+
+tests/attention/test_cute_dsl_mla_localized.py: 40 warnings
+  /workspace/flashinfer-mla/.venv/lib/python3.12/site-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/_mlir_helpers/op.py:360: DeprecationWarning: make_trivial_tiled_mma with ab_dtype is deprecated, use the overload with separate a_dtype and b_dtype instead
+    res_or_list = opFunc(*args, **kwargs, loc=loc)
+
+tests/attention/test_cute_dsl_mla_localized.py: 16 warnings
+  /workspace/flashinfer-mla/.venv/lib/python3.12/site-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/_mlir_helpers/op.py:360: DeprecationWarning: FastDivmodDivisor is deprecated in favor of cute.FastDivmodDivisorV2 / cute.fast_divmod_create_divisor_v2. V2 additionally carries the scalar divisor across kernel boundaries (2 MLIR values per object instead of 1), so '.divisor' is readable inside kernels; arithmetic (divmod, //, %) is unchanged.
+    res_or_list = opFunc(*args, **kwargs, loc=loc)
+
+tests/attention/test_cute_dsl_mla_localized.py::test_localized_mla_matches_modular[1-128-2]
+tests/attention/test_cute_dsl_mla_localized.py::test_localized_mla_matches_modular[1-128-2]
+tests/attention/test_cute_dsl_mla_localized.py::test_localized_mla_matches_modular[1-128-2]
+tests/attention/test_cute_dsl_mla_localized.py::test_localized_mla_matches_modular[1-128-2]
+  /workspace/flashinfer-mla/.venv/lib/python3.12/site-packages/nvidia_cutlass_dsl/dsl_packages/cutlass/base_dsl/ast_preprocessor.py:658: DeprecationWarning: Arch from arch.py is deprecated. Use Arch from enums.py instead.
+    exec_globals[alias] = getattr(module, attr)
+
+tests/attention/test_cute_dsl_mla_localized.py::test_localized_mla_matches_modular[1-128-2]
+tests/attention/test_cute_dsl_mla_localized.py::test_localized_mla_matches_modular[1-128-2]
+tests/attention/test_cute_dsl_mla_localized.py::test_localized_mla_matches_modular[1-128-64]
+  /workspace/flashinfer-mla/flashinfer/cute_dsl/attention/roles/mla_compute.py:267: DSLOptimizationWarning: This static loop has 64 iterations, which may be very slow to compile, consider using `cutlass.range(..., unroll_full=True)` instead.
+    for i in cutlass.range_constexpr(cute.size(tTR_rAcc)):
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+56 passed, 73 warnings in 22.22s

@@ -132,32 +132,16 @@ def _recover_cluster_metadata(
     return sm_cluster_rank, [len(owner_pairs[0]), len(owner_pairs[1])]
 
 
-def _choose_work_cut(
-    total_work: int,
-    partition_clusters: tuple[int, int] | list[int],
-    *,
-    tiles_per_work: int = 1,
-) -> int:
-    """Choose a proportional prefix/suffix cut at split-work granularity.
+def _choose_work_cut(total_work: int) -> int:
+    """Bisect split work without accounting for physical partition sizes.
 
     A split work unit owns all of its query tiles so that its KV interval has
-    exactly one physical owner.  ``tiles_per_work`` is therefore used only to
-    keep both owners within one persistent wave when that is possible.
+    exactly one physical owner. This experiment deliberately ignores SM counts
+    and persistent-wave balance. P1 receives the extra unit for odd totals.
     """
     if total_work < 2:
         raise ValueError("split-granular placement requires at least two work units")
-    if tiles_per_work < 1:
-        raise ValueError("tiles_per_work must be positive")
-    p0_clusters, p1_clusters = partition_clusters
-    total_clusters = p0_clusters + p1_clusters
-    target = round(total_work * p0_clusters / total_clusters)
-    if total_work * tiles_per_work <= total_clusters:
-        # If possible, keep both owners within one persistent wave.
-        lower = max(1, total_work - p1_clusters // tiles_per_work)
-        upper = min(total_work - 1, p0_clusters // tiles_per_work)
-        if lower <= upper:
-            return min(upper, max(lower, target))
-    return min(total_work - 1, max(1, target))
+    return total_work // 2
 
 
 def _prefix_page_count(
@@ -243,11 +227,7 @@ class LocalizedMLAKVCache:
             expected_sm_count,
         )
         self.total_work = batch_size * self.split_kv
-        self.work_p0 = _choose_work_cut(
-            self.total_work,
-            cluster_count_host,
-            tiles_per_work=seq_len_q,
-        )
+        self.work_p0 = _choose_work_cut(self.total_work)
         total_pages = batch_size * self.pages_per_batch
         while True:
             p0_pages = _prefix_page_count(

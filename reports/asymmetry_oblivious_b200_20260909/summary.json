@@ -1,0 +1,109 @@
+{
+  "sq1": {
+    "all": {
+      "count": 72,
+      "wins": 44,
+      "ties": 3,
+      "geomean_speedup": 0.977643307685308,
+      "median_speedup": 1.034985576327978,
+      "min_speedup": 0.7217409972217198,
+      "max_speedup": 1.0997837335790928,
+      "max_block_latency_spread": 0.03946742571062445,
+      "geomean_latency_increase_pct": 2.2867943900341414
+    },
+    "Sk >= 16384": {
+      "count": 42,
+      "wins": 29,
+      "ties": 1,
+      "geomean_speedup": 0.9699194881504718,
+      "median_speedup": 1.0582845542353219,
+      "min_speedup": 0.7217409972217198,
+      "max_speedup": 1.0997837335790928,
+      "max_block_latency_spread": 0.03946742571062445,
+      "geomean_latency_increase_pct": 3.1013411130534463
+    },
+    "Sk >= 65536": {
+      "count": 30,
+      "wins": 20,
+      "ties": 0,
+      "geomean_speedup": 0.9585651561428817,
+      "median_speedup": 1.0707564602232238,
+      "min_speedup": 0.7217409972217198,
+      "max_speedup": 1.0997837335790928,
+      "max_block_latency_spread": 0.03946742571062445,
+      "geomean_latency_increase_pct": 4.322590237250612
+    },
+    "B=2, Sk >= 65536": {
+      "count": 5,
+      "wins": 5,
+      "ties": 0,
+      "geomean_speedup": 1.0568907950877524,
+      "median_speedup": 1.0590127060845305,
+      "min_speedup": 1.0381266995728387,
+      "max_speedup": 1.073973890144009,
+      "max_block_latency_spread": 0.013880826935259938,
+      "geomean_latency_increase_pct": -5.382845167369332
+    },
+    "B=4, Sk >= 65536": {
+      "count": 5,
+      "wins": 0,
+      "ties": 0,
+      "geomean_speedup": 0.7637376304866944,
+      "median_speedup": 0.7504377866392055,
+      "min_speedup": 0.7217409972217198,
+      "max_speedup": 0.836705445933752,
+      "max_block_latency_spread": 0.034173653721756514,
+      "geomean_latency_increase_pct": 30.935017482737702
+    },
+    "B=8, Sk >= 65536": {
+      "count": 5,
+      "wins": 0,
+      "ties": 0,
+      "geomean_speedup": 0.7519863300907564,
+      "median_speedup": 0.7464106392224522,
+      "min_speedup": 0.7276198779659808,
+      "max_speedup": 0.7828663866554663,
+      "max_block_latency_spread": 0.01902197278950868,
+      "geomean_latency_increase_pct": 32.981140744847195
+    },
+    "B=16, Sk >= 65536": {
+      "count": 5,
+      "wins": 5,
+      "ties": 0,
+      "geomean_speedup": 1.080533895350941,
+      "median_speedup": 1.0781697384938438,
+      "min_speedup": 1.0701506948629589,
+      "max_speedup": 1.0903905024684917,
+      "max_block_latency_spread": 0.02945591375847556,
+      "geomean_latency_increase_pct": -7.4531577118906345
+    },
+    "B=32, Sk >= 65536": {
+      "count": 5,
+      "wins": 5,
+      "ties": 0,
+      "geomean_speedup": 1.0806032956999752,
+      "median_speedup": 1.0789606134839431,
+      "min_speedup": 1.0713622255834887,
+      "max_speedup": 1.0899622712378891,
+      "max_block_latency_spread": 0.016357942119455515,
+      "geomean_latency_increase_pct": -7.459101413138236
+    },
+    "B=64, Sk >= 65536": {
+      "count": 5,
+      "wins": 5,
+      "ties": 0,
+      "geomean_speedup": 1.094563335659411,
+      "median_speedup": 1.0985359634476355,
+      "min_speedup": 1.0784697519238848,
+      "max_speedup": 1.0997837335790928,
+      "max_block_latency_spread": 0.03946742571062445,
+      "geomean_latency_increase_pct": -8.639366273167026
+    }
+  },
+  "resources": {
+    "sample_count": 29,
+    "min_available_host_gib": 215.91549682617188,
+    "max_aggregate_rss_gib": 1.5662918090820312,
+    "min_tmp_free_gib": 25.53155517578125
+  }
+}

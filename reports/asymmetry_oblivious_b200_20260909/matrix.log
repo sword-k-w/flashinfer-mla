@@ -1,0 +1,179 @@
+START B=2 Sq=1 Sk=512
+DONE  B=2 Sk=512 standard=0.016448 ms localized=0.018464 ms speedup=0.89081x
+START B=4 Sq=1 Sk=512
+DONE  B=4 Sk=512 standard=0.017488 ms localized=0.018464 ms speedup=0.94714x
+START B=8 Sq=1 Sk=512
+DONE  B=8 Sk=512 standard=0.018464 ms localized=0.020480 ms speedup=0.90156x
+START B=16 Sq=1 Sk=512
+DONE  B=16 Sk=512 standard=0.020512 ms localized=0.022528 ms speedup=0.91051x
+START B=32 Sq=1 Sk=512
+DONE  B=32 Sk=512 standard=0.026528 ms localized=0.026656 ms speedup=0.99520x
+START B=64 Sq=1 Sk=512
+DONE  B=64 Sk=512 standard=0.024608 ms localized=0.024384 ms speedup=1.00919x
+START B=2 Sq=1 Sk=1,024
+DONE  B=2 Sk=1,024 standard=0.018256 ms localized=0.018464 ms speedup=0.98873x
+START B=4 Sq=1 Sk=1,024
+DONE  B=4 Sk=1,024 standard=0.018464 ms localized=0.020512 ms speedup=0.90016x
+START B=8 Sq=1 Sk=1,024
+DONE  B=8 Sk=1,024 standard=0.020512 ms localized=0.020576 ms speedup=0.99689x
+START B=16 Sq=1 Sk=1,024
+DONE  B=16 Sk=1,024 standard=0.023584 ms localized=0.024608 ms speedup=0.95839x
+START B=32 Sq=1 Sk=1,024
+DONE  B=32 Sk=1,024 standard=0.030720 ms localized=0.030656 ms speedup=1.00209x
+START B=64 Sq=1 Sk=1,024
+DONE  B=64 Sk=1,024 standard=0.034720 ms localized=0.032576 ms speedup=1.06582x
+START B=2 Sq=1 Sk=2,048
+DONE  B=2 Sk=2,048 standard=0.018464 ms localized=0.020512 ms speedup=0.90016x
+START B=4 Sq=1 Sk=2,048
+DONE  B=4 Sk=2,048 standard=0.020544 ms localized=0.022560 ms speedup=0.91064x
+START B=8 Sq=1 Sk=2,048
+DONE  B=8 Sk=2,048 standard=0.022560 ms localized=0.024608 ms speedup=0.91678x
+START B=16 Sq=1 Sk=2,048
+DONE  B=16 Sk=2,048 standard=0.028672 ms localized=0.026720 ms speedup=1.07305x
+START B=32 Sq=1 Sk=2,048
+DONE  B=32 Sk=2,048 standard=0.040928 ms localized=0.038912 ms speedup=1.05181x
+START B=64 Sq=1 Sk=2,048
+DONE  B=64 Sk=2,048 standard=0.051248 ms localized=0.048992 ms speedup=1.04605x
+START B=2 Sq=1 Sk=4,096
+DONE  B=2 Sk=4,096 standard=0.022560 ms localized=0.022560 ms speedup=1.00000x
+START B=4 Sq=1 Sk=4,096
+DONE  B=4 Sk=4,096 standard=0.023488 ms localized=0.024608 ms speedup=0.95449x
+START B=8 Sq=1 Sk=4,096
+DONE  B=8 Sk=4,096 standard=0.027600 ms localized=0.026720 ms speedup=1.03293x
+START B=16 Sq=1 Sk=4,096
+DONE  B=16 Sk=4,096 standard=0.036960 ms localized=0.036832 ms speedup=1.00348x
+START B=32 Sq=1 Sk=4,096
+DONE  B=32 Sk=4,096 standard=0.057344 ms localized=0.055296 ms speedup=1.03704x
+START B=64 Sq=1 Sk=4,096
+DONE  B=64 Sk=4,096 standard=0.079952 ms localized=0.077664 ms speedup=1.02946x
+START B=2 Sq=1 Sk=8,192
+DONE  B=2 Sk=8,192 standard=0.024608 ms localized=0.024608 ms speedup=1.00000x
+START B=4 Sq=1 Sk=8,192
+DONE  B=4 Sk=8,192 standard=0.028672 ms localized=0.028640 ms speedup=1.00112x
+START B=8 Sq=1 Sk=8,192
+DONE  B=8 Sk=8,192 standard=0.036896 ms localized=0.034880 ms speedup=1.05780x
+START B=16 Sq=1 Sk=8,192
+DONE  B=16 Sk=8,192 standard=0.055296 ms localized=0.053216 ms speedup=1.03909x
+START B=32 Sq=1 Sk=8,192
+DONE  B=32 Sk=8,192 standard=0.087120 ms localized=0.083968 ms speedup=1.03754x
+START B=64 Sq=1 Sk=8,192
+DONE  B=64 Sk=8,192 standard=0.141376 ms localized=0.134944 ms speedup=1.04766x
+START B=2 Sq=1 Sk=16,384
+DONE  B=2 Sk=16,384 standard=0.028704 ms localized=0.028704 ms speedup=1.00000x
+START B=4 Sq=1 Sk=16,384
+DONE  B=4 Sk=16,384 standard=0.036928 ms localized=0.036896 ms speedup=1.00087x
+START B=8 Sq=1 Sk=16,384
+DONE  B=8 Sk=16,384 standard=0.053312 ms localized=0.063456 ms speedup=0.84014x
+START B=16 Sq=1 Sk=16,384
+DONE  B=16 Sk=16,384 standard=0.085520 ms localized=0.081952 ms speedup=1.04354x
+START B=32 Sq=1 Sk=16,384
+DONE  B=32 Sk=16,384 standard=0.148464 ms localized=0.140384 ms speedup=1.05756x
+START B=64 Sq=1 Sk=16,384
+DONE  B=64 Sk=16,384 standard=0.272464 ms localized=0.255872 ms speedup=1.06484x
+START B=2 Sq=1 Sk=32,768
+DONE  B=2 Sk=32,768 standard=0.038912 ms localized=0.036896 ms speedup=1.05464x
+START B=4 Sq=1 Sk=32,768
+DONE  B=4 Sk=32,768 standard=0.055328 ms localized=0.055296 ms speedup=1.00058x
+START B=8 Sq=1 Sk=32,768
+DONE  B=8 Sk=32,768 standard=0.083904 ms localized=0.106464 ms speedup=0.78810x
+START B=16 Sq=1 Sk=32,768
+DONE  B=16 Sk=32,768 standard=0.146480 ms localized=0.139200 ms speedup=1.05230x
+START B=32 Sq=1 Sk=32,768
+DONE  B=32 Sk=32,768 standard=0.279632 ms localized=0.263120 ms speedup=1.06275x
+START B=64 Sq=1 Sk=32,768
+DONE  B=64 Sk=32,768 standard=0.547456 ms localized=0.509840 ms speedup=1.07378x
+START B=2 Sq=1 Sk=65,536
+DONE  B=2 Sk=65,536 standard=0.055328 ms localized=0.053296 ms speedup=1.03813x
+START B=4 Sq=1 Sk=65,536
+DONE  B=4 Sk=65,536 standard=0.084032 ms localized=0.100432 ms speedup=0.83671x
+START B=8 Sq=1 Sk=65,536
+DONE  B=8 Sk=65,536 standard=0.140224 ms localized=0.192512 ms speedup=0.72839x
+START B=16 Sq=1 Sk=65,536
+DONE  B=16 Sk=65,536 standard=0.279472 ms localized=0.261152 ms speedup=1.07015x
+START B=32 Sq=1 Sk=65,536
+DONE  B=32 Sk=65,536 standard=0.552192 ms localized=0.514432 ms speedup=1.07340x
+START B=64 Sq=1 Sk=65,536
+DONE  B=64 Sk=65,536 standard=1.125368 ms localized=1.025488 ms speedup=1.09740x
+START B=2 Sq=1 Sk=131,072
+DONE  B=2 Sk=131,072 standard=0.086048 ms localized=0.082016 ms speedup=1.04916x
+START B=4 Sq=1 Sk=131,072
+DONE  B=4 Sk=131,072 standard=0.140352 ms localized=0.191520 ms speedup=0.73283x
+START B=8 Sq=1 Sk=131,072
+DONE  B=8 Sk=131,072 standard=0.265232 ms localized=0.364520 ms speedup=0.72762x
+START B=16 Sq=1 Sk=131,072
+DONE  B=16 Sk=131,072 standard=0.554576 ms localized=0.514368 ms speedup=1.07817x
+START B=32 Sq=1 Sk=131,072
+DONE  B=32 Sk=131,072 standard=1.106880 ms localized=1.033152 ms speedup=1.07136x
+START B=64 Sq=1 Sk=131,072
+DONE  B=64 Sk=131,072 standard=2.260464 ms localized=2.057248 ms speedup=1.09878x
+START B=2 Sq=1 Sk=262,144
+DONE  B=2 Sk=262,144 standard=0.147584 ms localized=0.139360 ms speedup=1.05901x
+START B=4 Sq=1 Sk=262,144
+DONE  B=4 Sk=262,144 standard=0.265312 ms localized=0.367600 ms speedup=0.72174x
+START B=8 Sq=1 Sk=262,144
+DONE  B=8 Sk=262,144 standard=0.527360 ms localized=0.706528 ms speedup=0.74641x
+START B=16 Sq=1 Sk=262,144
+DONE  B=16 Sk=262,144 standard=1.109984 ms localized=1.030208 ms speedup=1.07744x
+START B=32 Sq=1 Sk=262,144
+DONE  B=32 Sk=262,144 standard=2.251304 ms localized=2.065488 ms speedup=1.08996x
+START B=64 Sq=1 Sk=262,144
+DONE  B=64 Sk=262,144 standard=4.490256 ms localized=4.163544 ms speedup=1.07847x
+START B=2 Sq=1 Sk=524,288
+DONE  B=2 Sk=524,288 standard=0.278544 ms localized=0.261656 ms speedup=1.06454x
+START B=4 Sq=1 Sk=524,288
+DONE  B=4 Sk=524,288 standard=0.527936 ms localized=0.703504 ms speedup=0.75044x
+START B=8 Sq=1 Sk=524,288
+DONE  B=8 Sk=524,288 standard=1.083680 ms localized=1.395680 ms speedup=0.77645x
+START B=16 Sq=1 Sk=524,288
+DONE  B=16 Sk=524,288 standard=2.247792 ms localized=2.061456 ms speedup=1.09039x
+START B=32 Sq=1 Sk=524,288
+DONE  B=32 Sk=524,288 standard=4.501536 ms localized=4.172104 ms speedup=1.07896x
+START B=64 Sq=1 Sk=524,288
+DONE  B=64 Sk=524,288 standard=9.118720 ms localized=8.291376 ms speedup=1.09978x
+START B=2 Sq=1 Sk=1,048,576
+DONE  B=2 Sk=1,048,576 standard=0.549952 ms localized=0.512072 ms speedup=1.07397x
+START B=4 Sq=1 Sk=1,048,576
+DONE  B=4 Sk=1,048,576 standard=1.085568 ms localized=1.387424 ms speedup=0.78243x
+START B=8 Sq=1 Sk=1,048,576
+DONE  B=8 Sk=1,048,576 standard=2.187216 ms localized=2.793856 ms speedup=0.78287x
+START B=16 Sq=1 Sk=1,048,576
+DONE  B=16 Sk=1,048,576 standard=4.490504 ms localized=4.132464 ms speedup=1.08664x
+START B=32 Sq=1 Sk=1,048,576
+DONE  B=32 Sk=1,048,576 standard=9.045552 ms localized=8.302696 ms speedup=1.08947x
+START B=64 Sq=1 Sk=1,048,576
+DONE  B=64 Sk=1,048,576 standard=18.174944 ms localized=16.544696 ms speedup=1.09854x
+/workspace/flashinfer-mla/reports/asymmetry_oblivious_b200_20260909/sq1/post_flops.json
+START B=2 Sq=4 Sk=512
+DONE  B=2 Sk=512 standard=0.018432 ms localized=0.018464 ms speedup=0.99827x
+START B=4 Sq=4 Sk=512
+DONE  B=4 Sk=512 standard=0.020448 ms localized=0.020480 ms speedup=0.99844x
+START B=8 Sq=4 Sk=512
+Traceback (most recent call last):
+  File "/workspace/flashinfer-mla/reports/asymmetry_oblivious_b200_20260909/run_matrix.py", line 125, in <module>
+    metadata["commands"].append(sys.argv.copy())
+^^
+  File "/workspace/flashinfer-mla/reports/asymmetry_oblivious_b200_20260909/run_matrix.py", line 114, in main
+    "--seqlen-ks",
+^^^^^^^^^^^^
+  File "/workspace/flashinfer-mla/benchmarks/bench_cute_dsl_localized_mla.py", line 482, in main
+    row = run_case(batch_size, seqlen_k, device, args)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/flashinfer-mla/reports/asymmetry_oblivious_b200_20260909/run_matrix.py", line 66, in checked_run_case
+    row = original_run_case(batch_size, seqlen_k, device, case_args)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/flashinfer-mla/benchmarks/bench_cute_dsl_localized_mla.py", line 421, in run_case
+    timing = paired_timing(case, args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/flashinfer-mla/benchmarks/bench_cute_dsl_localized_mla.py", line 265, in paired_timing
+    block[mode] = benchmark_cold_l2_block(calls[mode], args)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/flashinfer-mla/benchmarks/bench_cute_dsl_localized_mla.py", line 134, in benchmark_cold_l2_block
+    for value in do_bench(
+                 ^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/triton/testing.py", line 172, in do_bench
+    fn()
+  File "/workspace/flashinfer-mla/benchmarks/localized_mla_benchmark.py", line 242, in localized_call
+    return self.localized_kernel(
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 3, in wrapper
+KeyboardInterrupt

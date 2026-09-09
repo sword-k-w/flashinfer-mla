@@ -1,0 +1,88 @@
+{
+  "branch": "asymmetry-oblivious",
+  "base_commit": "c6a64e32a7e3ebf0de35d5cfd41aab44afbe3b33",
+  "work_policy": "equal split-work counts; physical topology retained",
+  "baseline": "unchanged standard modular MLA with ordinary cudaMalloc KV",
+  "source_sha256": {
+    "flashinfer/cute_dsl/attention/experimental/localized_mla.py": "e915195c10e8bf17571c99e85ed3736c8e883e6fd66b69426f81095ecf0051c5",
+    "flashinfer/cute_dsl/attention/mla_decode.py": "3e6c73ad83df5aabc7e2852d122e1dc04dc9ba8618f44a1be116158d179fb522",
+    "flashinfer/cute_dsl/attention/scheduler/mla_persistent.py": "d8210d9bb952cf00602a7af4a518917e219e21ebe5d8de2ea6936da16ae0d6c7",
+    "benchmarks/bench_cute_dsl_localized_mla.py": "b8d75b63ca269cf087c99af663a5133e6dffe4df39f72ed2b8bd86336a89ed8d",
+    "benchmarks/localized_mla_benchmark.py": "2b2bd864becd2f1fc88119b79d7dcfbec231ee35bf90346157c05ca40483391c"
+  },
+  "build_environment": {
+    "MAX_JOBS": "4",
+    "FLASHINFER_NVCC_THREADS": "1",
+    "NVCC_THREADS": "1",
+    "OMP_NUM_THREADS": "4",
+    "TORCH_CUDA_ARCH_LIST": "10.0a"
+  },
+  "commands": [
+    [
+      "bench_cute_dsl_localized_mla.py",
+      "--expected-partition-sm-counts",
+      "70",
+      "78",
+      "--seqlen-q",
+      "1",
+      "--seqlen-ks",
+      "512",
+      "1024",
+      "2048",
+      "4096",
+      "8192",
+      "16384",
+      "32768",
+      "65536",
+      "131072",
+      "262144",
+      "524288",
+      "1048576",
+      "--data-initialization",
+      "random",
+      "--timing-warmup-ms",
+      "500",
+      "--timing-repeat-ms",
+      "1000",
+      "--output",
+      "/workspace/flashinfer-mla/reports/asymmetry_oblivious_b200_20260909/sq1/post_flops.json"
+    ],
+    [
+      "bench_cute_dsl_localized_mla.py",
+      "--expected-partition-sm-counts",
+      "70",
+      "78",
+      "--seqlen-q",
+      "4",
+      "--seqlen-ks",
+      "512",
+      "1024",
+      "2048",
+      "4096",
+      "8192",
+      "16384",
+      "32768",
+      "65536",
+      "131072",
+      "262144",
+      "524288",
+      "1048576",
+      "--data-initialization",
+      "random",
+      "--timing-warmup-ms",
+      "500",
+      "--timing-repeat-ms",
+      "1000",
+      "--output",
+      "/workspace/flashinfer-mla/reports/asymmetry_oblivious_b200_20260909/sq4/post_flops.json"
+    ]
+  ],
+  "final_scope": {
+    "seqlen_q": [
+      1
+    ],
+    "completed_points": 72,
+    "excluded": "interrupted_sq4/post_flops.json",
+    "reason": "User narrowed performance measurements to Sq=1; Sq=4 stopped during its first timing point."
+  }
+}

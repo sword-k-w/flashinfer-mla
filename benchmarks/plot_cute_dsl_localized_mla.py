@@ -81,7 +81,10 @@ def save_figure(fig, path: Path, *, tight_rect=None) -> None:
     print(path)
 
 
-def plot_timing_matrix(document: dict, output_dir: Path) -> Path:
+def plot_timing_matrix(
+    document: dict, output_dir: Path, *, color_span: float | None = None
+) -> Path:
+    """Plot timings, optionally sharing a symmetric color range with another run."""
     rows = document["results"]
     batches = document["batch_sizes"]
     seqlen_ks = document["seqlen_ks"]
@@ -123,7 +126,11 @@ def plot_timing_matrix(document: dict, output_dir: Path) -> Path:
     color_map = plt.get_cmap("RdYlGn").copy()
     color_map.set_bad("#E8E8E8")
     finite = speedups[np.isfinite(speedups)]
-    span = max(0.10, float(np.max(np.abs(finite - 1.0))))
+    span = (
+        max(0.10, float(np.max(np.abs(finite - 1.0))))
+        if color_span is None
+        else color_span
+    )
     image = axis.imshow(
         speedups,
         cmap=color_map,
